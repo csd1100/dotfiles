@@ -1,2 +1,2 @@
 # dotfiles
-dot files for linux
+![screenshot](screenshot/1.png)

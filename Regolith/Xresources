@@ -1,0 +1,30 @@
+gnome.gtk.theme:	WhiteSur-dark-solid-alt
+gnome.wm.theme:	WhiteSur-dark-solid-alt
+gnome.icon.theme:	McMojave-circle
+rofi.icon-theme:	McMojave-circle
+rofi.font:	OverpassMono Nerd Font 16
+rofi.theme:	/home/chaitanya/.config/regolith/rofi.rasi
+gnome.wallpaper:	/home/chaitanya/Pictures/wallhaven-ne78w4.jpg
+i3-wm.workspace.01.name: 1:  :Terminal  
+i3-wm.workspace.02.name: 2:  :Browser  
+i3-wm.workspace.03.name: 3:  :Music  
+i3-wm.workspace.04.name: 4:   :Files  
+i3-wm.workspace.05.name: 5:  :Text Editor  
+i3-wm.workspace.06.name: 6:  :Book Reader  
+i3-wm.workspace.07.name: 7:  :IDE  
+i3-wm.workspace.08.name: 8
+i3-wm.workspace.09.name: 9
+i3-wm.workspace.10.name: 10
+i3-wm.workspace.11.name: 11
+i3-wm.workspace.12.name: 12 
+i3-wm.workspace.13.name: 13
+i3-wm.workspace.14.name: 14
+i3-wm.workspace.15.name: 15 
+i3-wm.workspace.16.name: 16
+i3-wm.workspace.17.name: 17
+i3-wm.workspace.18.name: 18
+i3-wm.workspace.19.name: 19 
+i3-wm.workspace.20.name: 20
+i3-wm.gaps.inner.size:	10
+i3-wm.gaps.outer.size:	50
+
