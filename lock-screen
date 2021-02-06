@@ -1,3 +1,0 @@
-#!/bin/zsh
-i3lock -n -i /home/chaitanya/Pictures/Wallz/ --bar-indicator -k --keyhlcolor=ff5555 --verifcolor=ffffff -C --timecolor=ffffff  --datecolor=ffffff 
-feh --bg-scale --randomize /home/chaitanya/Pictures/Wallz/

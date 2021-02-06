@@ -1,0 +1,3 @@
+#!/bin/zsh
+i3lock -n -i $(xgetres i3.wallpaperPath) --bar-indicator -k --keyhlcolor=ff5555 --verifcolor=ffffff -C --timecolor=ffffff  --datecolor=ffffff 
+feh --bg-scale --randomize $(xgetres i3.wallpaperPath)
