@@ -1,0 +1,50 @@
+color0:                                 #263238
+color1:                                 #FF5252
+color2:                                 #64FFDA
+color3:                                 #FFFF00
+color4:                                 #00E5FF
+color5:                                 #7C4DFF
+color6:                                 #18FFFF
+color7:                                 #D3D7CF
+color8:                                 #5F717A
+color9:                                 #FF1744
+color10:                               #1DE9B6     
+color11:                                 #FFEA00   
+color12:                                 #00B0FF   
+color13:                                  #651FFF  
+color14:                                  #00E5FF  
+color15:                                  #EEEEEC  
+
+background:                          #DDC5BA   
+background.alt:                       #eadcd5          
+foreground:                             #697080
+foreground.alt:                      #2d3036
+alert:                                          #FF1744                
+primary:                                   #FFEA00 
+secondary:                              #1DE9B6
+
+transparent:                        #00000000
+
+i3.font :                                       Iosevka NF 14
+i3.innerGap :                              0
+i3.outerGap :                              0
+i3.leftGap :                                  0
+i3.rightGap :                               0
+i3.topGap :                                 35
+i3.bottomGap :                          35
+i3.wallpaperPath:                      "/home/chaitanya/Pictures/Wallpaper/Sand dunes/jonatan-pie-6tm54xn1k_o-unsplash.jpg"
+i3.brightnessStep:                  20
+i3.term:                                        kitty          
+
+rofi.theme:                                 /home/chaitanya/.config/rofi/rofi.rasi
+
+polybar.padding :                       5
+polybar.margin :                         2
+polybar.height :                          35
+polybar.width :                            100%
+polybar.x.off :                              0
+polybar.y.off :                              0
+polybar.radius :                            0
+polybar.font.0 :                            "Product Sans:pixelsize=15:antialias=true;2"
+polybar.font.1 :                            "Iosevka NF:pixelsize=30;6"
+polybar.font.2  :                            "Iosevka NF:pixelsize=20;5"
