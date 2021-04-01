@@ -15,10 +15,10 @@ color13:                                  #651FFF
 color14:                                  #00E5FF  
 color15:                                  #EEEEEC  
 
-background:                          #DDC5BA   
-background.alt:                       #eadcd5          
-foreground:                             #697080
-foreground.alt:                      #2d3036
+background:                          #FFFFFF   
+background.alt:                       #EEEEEC          
+foreground:                             #263238
+foreground.alt:                      #5F717A
 alert:                                          #FF1744                
 primary:                                   #FFEA00 
 secondary:                              #1DE9B6
@@ -26,21 +26,21 @@ secondary:                              #1DE9B6
 transparent:                        #00000000
 
 i3.font :                                       Iosevka NF 14
-i3.innerGap :                              0
-i3.outerGap :                              0
+i3.innerGap :                              5
+i3.outerGap :                              10
 i3.leftGap :                                  0
 i3.rightGap :                               0
-i3.topGap :                                 35
-i3.bottomGap :                          35
-i3.wallpaperPath:                      "/home/chaitanya/Pictures/Wallpaper/Sand dunes/jonatan-pie-6tm54xn1k_o-unsplash.jpg"
+i3.topGap :                                 50
+i3.bottomGap :                          50
+i3.wallpaperPath:                     /home/chaitanya/Pictures/Wallpaper/OneColor
 i3.brightnessStep:                  20
 i3.term:                                        kitty          
 
-rofi.theme:                                 /home/chaitanya/.config/rofi/rofi.rasi
+rofi.theme:                                 /home/chaitanya/.config/rofi/sidebar.rasi
 
 polybar.padding :                       5
 polybar.margin :                         2
-polybar.height :                          35
+polybar.height :                          50
 polybar.width :                            100%
 polybar.x.off :                              0
 polybar.y.off :                              0

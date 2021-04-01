@@ -23,6 +23,8 @@ gaps right $rightGap
 gaps top $topGap
 gaps bottom $bottomGap
 
+exec programming/git-repos/dotfiles/bin/multiMonitors
+
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 
@@ -34,12 +36,12 @@ bindsym F9 exec /home/chaitanya/programming/git-repos/dotfiles/bin/lock-screen
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-#picom
-exec --no-startup-id picom
+#numlock on
+exec_always --no-startup-id numlockx on
 
 #wallpaper
 set_from_resource $wallpaperPath i3.wallpaperPath
-exec --no-startup-id feh --bg-scale --randomize $wallpaperPath
+exec --no-startup-id feh --bg-fill --randomize $wallpaperPath
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -228,6 +230,7 @@ bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~
 
 # OSX-like area selection screenshots
 bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
+
 
 # Polybar
 exec --no-startup-id xrdb ~/.Xresources;/home/chaitanya/.config/polybar/launch.sh

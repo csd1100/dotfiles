@@ -1,9 +1,19 @@
 * {
-    background:                     #263238;
-    background-alt:                #44545c ;
-    foreground:                   #b3c3cb;
-    border:               			 #44545c ;
-    border-alt:               		 #44545c ;
-    selected:               		#44545c;
-    urgent:                         #DA4453FF;
+   bkg: #FFFFFF;
+   border:#697080;
+   text:#697080;
+   dark-text: #2d3036;
+   main:#FFFFFF;
+   highlight:#697080;
+   urgent:#ff1744;
+   selected:#651FFF;
+   background-color: #FFFFFF;
+   border-color:     @border;
+   text-color:       @text;
+   dark-text-color:  @dark-text;
+   main-color:       @main;
+   highlight:        @highlight;
+   urgent-color:     @urgent;
+   selected-color:   @selected;
+   selected-border-color:   @selected;
 }

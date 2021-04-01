@@ -1,17 +1,18 @@
 /* global settings and color variables */
 @import "styles/colors.rasi"
-
 window {
    background-color: @background-color;
-   width: 800px;
-   height:600px;
+   width: 450px;
+   height:800px;
    padding: 20px;
    fullscreen: false;
    border:  2px;
    border-color: @border-color;
    font: "Fira Code 18";
+   location: south west;
+   y-offset:  -55px;
+   x-offset:  5px;
 }
-
 mainbox {
    background-color: @background-color;
    spacing:0px;
@@ -58,7 +59,8 @@ element normal.active {
 }
 
 element selected.normal {
-    background-color: @border-color;
+   border: 2px;
+    border-color: @selected-border-color;
     text-color:       @selected-color;
 }
 
@@ -103,7 +105,7 @@ button {
 }
 
 button selected {
-    text-color:       @main-color;
+    text-color:       @selected;
 }
 
 inputbar {
