@@ -1,0 +1,21 @@
+#!/bin/bash
+SERVICE=$1
+
+if pgrep -x "$SERVICE" >/dev/null
+then
+    echo "$SERVICE is running"
+else
+    echo "$SERVICE stopped"
+    echo "starting $SERVICE"
+    case $SERVICE in 
+        chrome)
+            /opt/google/chrome/chrome
+        ;;
+        spotify)
+            flatpak run com.spotify.Client
+        ;;
+        *)
+            $SERVICE
+        ;;
+    esac
+fi

@@ -1,0 +1,10 @@
+polybar.padding :                       5
+polybar.margin :                         2
+polybar.height :                          50
+polybar.width :                            100%
+polybar.x.off :                              0
+polybar.y.off :                              0
+polybar.radius :                            0
+polybar.font.0 :                            "Product Sans:pixelsize=15:antialias=true;2"
+polybar.font.1 :                            "Iosevka NF:pixelsize=30;6"
+polybar.font.2  :                            "Iosevka NF:pixelsize=20;5"

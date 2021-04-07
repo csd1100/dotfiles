@@ -1,0 +1,29 @@
+#!/bin/bash
+
+[[ -z "${CONFIG}" ]] && CONFIG='/home/chaitanya/.config' || CONFIG="${CONFIG}"
+
+# Terminate already running bar instances
+if pgrep -x polybar >/dev/null
+then
+  killall -q polybar
+fi
+
+# Wait until the processes have been shut down
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1;echo 12; done
+
+# Launch Polybar, using default config location ~/.config/polybar/config
+if type "xrandr"; then
+echo "NOT FUcked"
+  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+  echo "NOT FUcked in for"
+  echo $m
+    MONITOR="$m" polybar  -c=$CONFIG/polybar/config.top.ini --reload  top 2> ~/top.log &
+    MONITOR="$m" polybar  -c=$CONFIG/polybar/config.bottom.ini --reload bottom 2> ~/bottom.log &
+  done
+else
+  echo "NOT FUcked"
+  polybar  -c=$CONFIG/polybar/config.top.ini --reload  top &
+  polybar  -c=$CONFIG/polybar/config.bottom.ini --reload bottom &
+fi
+echo "FUCKED"
+echo "Polybar launched..."

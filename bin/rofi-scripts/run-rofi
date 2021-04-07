@@ -1,0 +1,14 @@
+#!/bin/bash
+MODI=$1
+THEME=$(xgetres rofi.theme)
+case $MODI in 
+    run)
+        echo run
+        rofi -rnow -run-command "zsh -i -c '{cmd}'" -show run -theme $THEME
+    ;;
+    apps)
+        rofi -show drun -theme $THEME
+    ;;
+    *)
+    ;;
+esac

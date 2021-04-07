@@ -1,0 +1,26 @@
+color0:                                 #263238
+color1:                                 #FF5252
+color2:                                 #64FFDA
+color3:                                 #FFFF00
+color4:                                 #00E5FF
+color5:                                 #7C4DFF
+color6:                                 #18FFFF
+color7:                                 #D3D7CF
+color8:                                 #5F717A
+color9:                                 #FF1744
+color10:                               #1DE9B6     
+color11:                                 #FFEA00   
+color12:                                 #00B0FF   
+color13:                                  #651FFF  
+color14:                                  #00E5FF  
+color15:                                  #EEEEEC  
+
+background:                          #000   
+background.alt:                       #222          
+foreground:                             #FFF
+foreground.alt:                      #DDD
+alert:                                          #FF1744                
+primary:                                   #FFEA00 
+secondary:                              #1DE9B6
+
+transparent:                        #00000000

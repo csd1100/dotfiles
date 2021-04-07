@@ -1,0 +1,10 @@
+i3.font :                                       Iosevka NF 14
+i3.innerGap :                              5
+i3.outerGap :                              10
+i3.leftGap :                                  0
+i3.rightGap :                               0
+i3.topGap :                                 50
+i3.bottomGap :                          50
+i3.wallpaperPath:                     /home/chaitanya/Pictures/Wallpaper/OneColor
+i3.brightnessStep:                  20
+i3.term:                                        kitty        

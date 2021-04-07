@@ -1,13 +1,13 @@
 * {
-   bkg: #FFFFFF;
-   border:#697080;
-   text:#697080;
-   dark-text: #2d3036;
-   main:#FFFFFF;
-   highlight:#697080;
+   bkg: #000;
+   border:#333;
+   text:#FFF;
+   dark-text: #FFF;
+   main:#DDD;
+   highlight:#333;
    urgent:#ff1744;
    selected:#651FFF;
-   background-color: #FFFFFF;
+   background-color: @bkg;
    border-color:     @border;
    text-color:       @text;
    dark-text-color:  @dark-text;
