@@ -1,4 +1,5 @@
 #!/bin/bash
 xrdb ~/.Xresources
-./home/chaitanya/programming/git-repos/dotfiles/bin/reloader
 i3-msg restart
+$(xgetres script.loc)/polybar-scripts/polybar-launch
+wal -i $(xgetres i3.wallpaperPath)

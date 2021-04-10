@@ -1,5 +1,5 @@
 /* global settings and color variables */
-@import "styles/colors.rasi"
+@import "~/.cache/wal/colors-rofi-light"
 window {
    background-color: @background-color;
    width: 450px;

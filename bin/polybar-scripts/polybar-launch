@@ -9,21 +9,17 @@ then
 fi
 
 # Wait until the processes have been shut down
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1;echo 12; done
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1;echo ; done
 
 # Launch Polybar, using default config location ~/.config/polybar/config
 if type "xrandr"; then
-echo "NOT FUcked"
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-  echo "NOT FUcked in for"
   echo $m
-    MONITOR="$m" polybar  -c=$CONFIG/polybar/config.top.ini --reload  top 2> ~/top.log &
-    MONITOR="$m" polybar  -c=$CONFIG/polybar/config.bottom.ini --reload bottom 2> ~/bottom.log &
+    MONITOR="$m" polybar  -c=$CONFIG/polybar/config.top.ini --reload  top &
+    MONITOR="$m" polybar  -c=$CONFIG/polybar/config.bottom.ini --reload bottom &
   done
 else
-  echo "NOT FUcked"
   polybar  -c=$CONFIG/polybar/config.top.ini --reload  top &
   polybar  -c=$CONFIG/polybar/config.bottom.ini --reload bottom &
 fi
-echo "FUCKED"
 echo "Polybar launched..."
