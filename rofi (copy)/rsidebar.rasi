@@ -9,7 +9,6 @@ window {
    border:  2px;
    border-color: @border-color;
    font: "Fira Code 18";
-   location: south west;
+   location: south east;
    y-offset:  -55px;
-   x-offset:  5px;
 }

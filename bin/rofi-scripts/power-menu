@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEME=$(xgetres rofi.theme)
+THEME=$(xgetres rofi.power.theme)
 OPTIONS="Lock
 Logout
 Power Off

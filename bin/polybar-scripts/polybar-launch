@@ -13,13 +13,21 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1;echo ; done
 
 # Launch Polybar, using default config location ~/.config/polybar/config
 if type "xrandr"; then
+  # available polybar configs
+  avail_outputs=($(find $CONFIG/polybar -maxdepth 1 -type f -name '*.ini'))
+  # for all monitors
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
   echo $m
-    MONITOR="$m" polybar  -c=$CONFIG/polybar/config.top.ini --reload  top &
-    MONITOR="$m" polybar  -c=$CONFIG/polybar/config.bottom.ini --reload bottom &
+    # available polybar configs
+    for u in "${avail_outputs[@]}"
+    do
+      polybar -c=$u --reload $(echo $u | sed 's/.*\///' | sed -e 's/config.\(.*\).ini/\1/') &
+    done
   done
 else
-  polybar  -c=$CONFIG/polybar/config.top.ini --reload  top &
-  polybar  -c=$CONFIG/polybar/config.bottom.ini --reload bottom &
+    for u in "${avail_outputs[@]}"
+    do
+      polybar -c=$u --reload $(echo $u | sed 's/.*\///' | sed -e 's/config.\(.*\).ini/\1/') &
+    done
 fi
 echo "Polybar launched..."

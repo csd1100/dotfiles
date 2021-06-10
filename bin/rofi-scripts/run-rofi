@@ -1,6 +1,6 @@
 #!/bin/bash
 MODI=$1
-THEME=$(xgetres rofi.theme)
+THEME=$(xgetres rofi.start.theme)
 case $MODI in 
     run)
         echo run
@@ -8,6 +8,9 @@ case $MODI in
     ;;
     apps)
         rofi -show drun -theme $THEME
+    ;;
+    windows)
+        rofi -show window -theme $THEME
     ;;
     *)
     ;;

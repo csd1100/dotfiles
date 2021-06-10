@@ -1,10 +1,12 @@
 #!/bin/bash
-THEME=$(xgetres rofi.theme)
+THEME=$(xgetres rofi.display.theme)
 avail_outputs=($(xrandr | grep ' connected' | sed -En "s/ .*//p"))
-avail_outputs+=("Main Only")
-avail_outputs+=("All")
-avail_outputs+=("Replicate")
-selected=$(( IFS=$'\n'; echo "${avail_outputs[*]}" ) | rofi -dmenu -p Outputs)
+if [[ ${#avail_outputs[@]} > 1 ]]; then
+    avail_outputs+=("Main Only")
+    avail_outputs+=("All")
+    avail_outputs+=("Replicate")
+fi
+selected=$(( IFS=$'\n'; echo "${avail_outputs[*]}" ) | rofi -dmenu -p Outputs -theme $THEME)
 
 case $selected in
     "All")

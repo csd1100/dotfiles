@@ -1,0 +1,42 @@
+#!/bin/bash
+THEME=$(xgetres rofi.audio.theme)
+function func(){
+    arg=($(pactl list $1 | grep "Name" | sed -n -e 's/^.*: //p'))
+    test=()
+    for u in "${arg[@]}"
+    do
+        test+=("$(pactl list $1 | grep $u -A 1 | grep "Description" | sed -n -e 's/^.*://p')")
+    done
+
+    selected=$(( IFS=$'\n'; echo "${test[*]}" ) | rofi -dmenu -p Outputs -theme $THEME)
+
+    if [ -z "$selected" ]
+    then
+        echo "EMPTY"
+    else
+        echo "$selected"
+        abc=($(pactl list $1 | grep "$selected" -B 1 | sed -n -e 's/^.*://p'))
+        
+        if [ "$1" == "sinks" ]
+        then
+            pactl set-default-sink ${abc[0]}
+        else
+            pactl set-default-source ${abc[0]}
+        fi
+    fi
+
+}
+
+audio+=("Speakers")
+audio+=("Mic")
+ip=$(( IFS=$'\n'; echo "${audio[*]}" ) | rofi -dmenu -p Outputs -theme $THEME)
+case $ip in
+    "Mic")
+        func 'sources'
+    ;;
+    "Speakers")
+        func 'sinks'
+    ;;
+    *)
+    ;;
+esac

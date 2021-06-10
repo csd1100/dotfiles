@@ -1,0 +1,17 @@
+#!/bin/bash
+THEME=$(xgetres rofi.display.theme)
+
+menu=($(seq 0 10 100))
+
+selected=$(( IFS=$'\n'; echo "${menu[*]}" ) | rofi -dmenu -p Level -theme $THEME)
+
+case $selected in
+    *)
+        if [ -z "$selected" ]
+        then
+            echo "EMPTY"
+        else
+            light -S $selected
+        fi
+    ;;
+esac
