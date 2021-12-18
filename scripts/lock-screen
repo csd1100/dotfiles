@@ -1,3 +1,0 @@
-#!/bin/bash
-i3lock -n -i $(eval "set -- $(sed 1d "$HOME/.fehbg")"; echo $4) --bar-indicator --bar-color=$(xgetres color0 | sed -e "s/#//") -k --keyhlcolor=$(xgetres color1 | sed -e "s/#//") --verifcolor=$(xgetres color1 | sed -e "s/#//") -C --bshlcolor=$(xgetres color3 | sed -e "s/#//") --wrongcolor=$(xgetres color3 | sed -e "s/#//") --timecolor=$(xgetres color7 | sed -e "s/#//")  --datecolor=$(xgetres color7 | sed -e "s/#//")
-wal -i $(eval "set -- $(sed 1d "$HOME/.fehbg")"; echo $4)
