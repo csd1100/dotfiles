@@ -1,6 +1,6 @@
 #!/bin/bash
 MODI=$1
-THEME=$(xgetres rofi.start.theme)
+THEME=$(xrdb -get rofi.start.theme)
 case $MODI in 
     run)
         echo run

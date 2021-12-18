@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[[ -z "${CONFIG}" ]] && CONFIG='/home/chaitanya/.config' || CONFIG="${CONFIG}"
+[[ -z "${CONFIG}" ]] && CONFIG='$CONFIG' || CONFIG="${CONFIG}"
 
 # Terminate already running bar instances
 if pgrep -x polybar >/dev/null
@@ -14,7 +14,7 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1;echo ; done
 # Launch Polybar, using default config location ~/.config/polybar/config
 if type "xrandr"; then
   # available polybar configs
-  avail_outputs=($(find $CONFIG/polybar -maxdepth 1 -type f -name '*.ini'))
+  avail_outputs=($(find $CONFIG/polybar/ -maxdepth 1 -type f -name '*.ini'))
   # for all monitors
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
   echo $m

@@ -1,5 +1,5 @@
 #!/bin/bash
-THEME=$(xgetres rofi.display.theme)
+THEME=$(xrdb -get rofi.display.theme)
 
 menu=($(seq 0 10 100))
 

@@ -1,0 +1,13 @@
+## Aliases
+
+alias zshrc="source $HOME/.zshrc"
+alias zshconfig="vim $HOME/.zshrc"
+
+
+## Git
+
+alias gh="git history"
+
+## DistroBased
+
+alias zypper="sudo zypper"

@@ -44,7 +44,7 @@ configuration {
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-/*	theme: "/home/chaitanya/.config/rofi/sidebar.rasi"; */
+/*	theme: "$CONFIG/rofi/sidebar.rasi"; */
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/

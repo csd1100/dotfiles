@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEME=$(xgetres rofi.power.theme)
+THEME=$(xrdb -get rofi.power.theme)
 OPTIONS="Lock
 Logout
 Power Off
@@ -9,7 +9,7 @@ SELECTED=$(( IFS=$'\n'; echo "$OPTIONS" ) | rofi -dmenu -p "Power Menu" -theme $
 
 case $SELECTED in
     "Lock")
-        $(xgetres script.loc)/lock-screen
+        $(xrdb -get script.loc)/lock-screen
     ;;
     "Logout")
         i3-msg exit

@@ -1,5 +1,5 @@
 #!/bin/bash
-THEME=$(xgetres rofi.audio.theme)
+THEME=$(xrdb -get rofi.audio.theme)
 function func(){
     arg=($(pactl list $1 | grep "Name" | sed -n -e 's/^.*: //p'))
     test=()

@@ -8,19 +8,19 @@ color6:                                 #18FFFF
 color7:                                 #D3D7CF
 color8:                                 #263238
 color9:                                 #FF1744
-color10:                               #1DE9B6     
-color11:                                 #FFEA00   
-color12:                                 #00B0FF   
-color13:                                  #651FFF  
-color14:                                  #00E5FF  
-color15:                                  #EEEEEC  
+color10:                                #1DE9B6     
+color11:                                #FFEA00   
+color12:                                #00B0FF   
+color13:                                #651FFF  
+color14:                                #00E5FF  
+color15:                                #EEEEEC  
 
-background:                          #EEEEEC   
-background.alt:                       #FFF          
+background:                             #EEEEEC   
+background.alt:                         #FFF          
 foreground:                             #263238
-foreground.alt:                      #263238
-alert:                                          #FF1744                
-primary:                                   #FFEA00 
+foreground.alt:                         #263238
+alert:                                  #FF1744                
+primary:                                #FFEA00 
 secondary:                              #1DE9B6
 
-transparent:                        #00000000
+transparent:                            #00000000

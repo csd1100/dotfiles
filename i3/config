@@ -12,6 +12,7 @@ set_from_resource $brightnessStep i3.brightnessStep
 set_from_resource $wallpaperPath i3.wallpaperPath
 set_from_resource $rofiTheme rofi.theme
 set_from_resource $scripts script.loc
+set_from_resource $config echo $CONFIG
 
 # Start for multiple monitors
 exec $scripts/multi-monitors
@@ -145,7 +146,7 @@ set $ws19 "19"
 bindsym $mod+1 workspace number $ws1 ;exec $scripts/running kitty
 bindsym $mod+2 workspace number $ws2 ;exec $scripts/running chrome
 bindsym $mod+3 workspace number $ws3 ;exec $scripts/running rhythmbox
-bindsym $mod+4 workspace number $ws4 ;exec $scripts/running nautilus
+bindsym $mod+4 workspace number $ws4 ;exec $scripts/running nautilus 
 bindsym $mod+5 workspace number $ws5 ;exec $scripts/running code
 bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7 ;exec $scripts/running ebook-viewer
@@ -225,8 +226,9 @@ bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~
 bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
 
 #pywal
-exec --no-startup-id wal -i $wallpaperPath
-
+exec --no-startup-id wal -i $wallpaperPath -n
+exec feh --bg-fill "$(< "${HOME}/.cache/wal/wal")" 
+ 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock -- $scripts/lock-screen
@@ -243,13 +245,13 @@ exec_always picom
 exec_always xrdb ~/.Xresources
 
 # Polybar
-exec $scripts/polybar-scripts/polybar-launch
+exec $config/polybar/polybar-scripts/polybar-launch
 
 # start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id $scripts/rofi-scripts/run-rofi apps
-bindsym $mod+Shift+d exec --no-startup-id $scripts/rofi-scripts/run-rofi run
-bindsym $mod+w exec --no-startup-id $scripts/rofi-scripts/run-rofi windows
-bindsym $mod+x exec --no-startup-id $scripts/rofi-scripts/power-menu
+bindsym $mod+d exec --no-startup-id $config/rofi/rofi-scripts/run-rofi apps
+bindsym $mod+Shift+d exec --no-startup-id $config/rofi/rofi-scripts/run-rofi run
+bindsym $mod+w exec --no-startup-id $config/rofi/rofi-scripts/run-rofi windows
+bindsym $mod+x exec --no-startup-id $config/rofi/rofi-scripts/power-menu
 
 # start rofi Menu
-bindsym $mod+m exec --no-startup-id $scripts/rofi-scripts/right-bar
+bindsym $mod+m exec --no-startup-id $config/rofi/rofi-scripts/right-bar
