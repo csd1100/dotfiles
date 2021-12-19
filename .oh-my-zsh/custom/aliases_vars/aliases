@@ -2,7 +2,7 @@
 
 alias zshrc="source $HOME/.zshrc"
 alias zshconfig="vim $HOME/.zshrc"
-
+alias cmus='screen -q -r -D cmus || screen -S cmus $(which --skip-alias cmus)'
 
 ## Git
 

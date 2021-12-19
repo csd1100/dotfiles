@@ -2,7 +2,7 @@ i3-gaps
 polybar
 rofi
 feh
-xbacklight
+light - https://github.com/haikarainen/light
 playerctl
 cmus
 ranger
@@ -18,3 +18,4 @@ scrot
 nm-applet
 picom
 zscroll
+xdotool

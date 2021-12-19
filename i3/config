@@ -8,14 +8,11 @@ set_from_resource $rightGap i3.rightGap
 set_from_resource $topGap i3.topGap
 set_from_resource $bottomGap i3.bottomGap 
 set_from_resource $brightnessStep i3.brightnessStep
-# set_from_resource $volumeStep i3.volumeStep
+set_from_resource $volumeStep i3.volumeStep
 set_from_resource $wallpaperPath i3.wallpaperPath
 set_from_resource $rofiTheme rofi.theme
 set_from_resource $scripts script.loc
-set_from_resource $config echo $CONFIG
-
-# Start for multiple monitors
-exec $scripts/multi-monitors
+set_from_resource $config xdg.config.home
 
 # Mod key Windows key
 set $mod Mod4
@@ -245,7 +242,7 @@ exec_always picom
 exec_always xrdb ~/.Xresources
 
 # Polybar
-exec $config/polybar/polybar-scripts/polybar-launch
+exec $config/polybar/polybar-scripts/polybar-launch &
 
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id $config/rofi/rofi-scripts/run-rofi apps
