@@ -2,7 +2,6 @@
 
 alias zshrc="source $HOME/.zshrc"
 alias zshconfig="vim $HOME/.zshrc"
-alias cmus='screen -q -r -D cmus || screen -S cmus $(which --skip-alias cmus)'
 
 ## Git
 
@@ -11,3 +10,8 @@ alias gh="git history"
 ## DistroBased
 
 alias zypper="sudo zypper"
+alias pacman="yay"
+
+## Temp
+
+alias dotfiles="/home/shared/dotfiles"
