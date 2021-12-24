@@ -97,7 +97,7 @@ keys = [
 ]
 
 for i in groups:
-    keys.append(Key([mod], i.name, lazy.group[i.name].toscreen()))
+    keys.append(Key([mod], i.name, lazy.group[i.name].toscreen(toggle=False)))
     keys.append(Key([mod, 'shift'], i.name,
                     lazy.window.togroup(i.name)))
 

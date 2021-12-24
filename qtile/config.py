@@ -7,16 +7,18 @@ from qcolors import *
 from screens import screens  # NOQA
 
 layouts = [
-    layout.Max(),
+    layout.Stack(
+        border_focus=background,
+        margin=10
+    ),
     layout.xmonad.MonadTall(
         border_focus=background,
-        border_width=10,
         margin=10,
         single_margin=10
     )
 ]
 
-widget_defaults = {'font': 'Space Mono', 'fontsize': 20, 'padding': 3, 'foreground': get_formatted_hex(foreground),
+widget_defaults = {'font': 'Space Mono', 'fontsize': 15, 'padding': 3, 'foreground': get_formatted_hex(foreground),
                    'background': background}
 dgroups_key_binder = None
 dgroups_app_rules = []
