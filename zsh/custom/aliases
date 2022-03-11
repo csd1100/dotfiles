@@ -1,0 +1,7 @@
+#!/bin/zsh
+# zsh
+alias zshrc="source $HOME/.zshrc"
+alias zshconfig="code $HOME/.zshrc"
+
+# git
+alias gh="git history"
