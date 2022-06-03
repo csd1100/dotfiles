@@ -1,0 +1,10 @@
+i3.font :           Iosevka NF 14
+i3.innerGap :       0
+i3.outerGap :       0
+i3.leftGap :        0
+i3.rightGap :       0
+i3.topGap :         0
+i3.bottomGap :      60
+i3.wallpaperPath :  /home/cdeshpande/Pictures/Wallpaper/Arts
+i3.brightnessStep : 20
+i3.term :           kitty 

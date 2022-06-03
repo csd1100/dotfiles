@@ -1,0 +1,19 @@
+* {
+   bkg: #000;
+   border:#333;
+   text:#FFF;
+   dark-text: #FFF;
+   main:#DDD;
+   highlight:#333;
+   urgent:#ff1744;
+   selected:#651FFF;
+   background-color: @bkg;
+   border-color:     @border;
+   text-color:       @text;
+   dark-text-color:  @dark-text;
+   main-color:       @main;
+   highlight:        @highlight;
+   urgent-color:     @urgent;
+   selected-color:   @selected;
+   selected-border-color:   @selected;
+}

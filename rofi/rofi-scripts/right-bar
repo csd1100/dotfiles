@@ -1,0 +1,34 @@
+#!/bin/bash
+THEME=$(xrdb -get rofi.menu.theme)
+ROFI_SCRIPTS="$CONFIG/rofi/rofi-scripts"
+menu=("Audio Input/Output")
+menu+=("Display Output")
+menu+=("Audio Controls")
+menu+=("Brightness Controls")
+menu+=("Music Controls")
+menu+=("Power Menu")
+
+selected=$(( IFS=$'\n'; echo "${menu[*]}" ) | rofi -dmenu -p Menu -theme $THEME)
+
+case $selected in
+    "Audio Input/Output")
+        $ROFI_SCRIPTS/audio
+    ;;
+    "Display Output")
+        $ROFI_SCRIPTS/display-outputs
+    ;;
+    "Audio Controls")
+        $ROFI_SCRIPTS/audio-controls
+    ;;
+    "Brightness Controls")
+        $ROFI_SCRIPTS/brightness-controls
+    ;;
+    "Music Controls")
+        $ROFI_SCRIPTS/music-controls
+    ;;
+    "Power Menu")
+        $ROFI_SCRIPTS/power-menu
+    ;;
+    *)
+    ;;
+esac
