@@ -1,0 +1,20 @@
+import:
+  - ~/.config/alacritty/theme.yml
+  - ~/.config/alacritty/misc.yml
+  - ~/.config/alacritty/keymaps.yml
+  # - ~/.config/alacritty/theme.yml
+
+#env:
+  #TERM: alacritty
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+# Shell
+#shell:
+#  program: /bin/bash
+#  args:
+#    - --login
+
+# Offer IPC using `alacritty msg` (unix only)
+#ipc_socket: true
