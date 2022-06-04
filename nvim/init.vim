@@ -1,5 +1,6 @@
 " enable line-numbers
 set number
+set relativenumber
 " set indent usint Tab to 4 spaces
 set expandtab
 set tabstop=4
