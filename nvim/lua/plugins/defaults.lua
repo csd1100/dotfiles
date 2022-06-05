@@ -1,0 +1,8 @@
+require('tabby').setup() 
+require('nvim-tree').setup()
+require('colorizer').setup()
+require('tidy').setup()
+require('numbers').setup()
+require('spellsitter').setup()
+require('regexplainer').setup()
+require('nvim_comment').setup()
