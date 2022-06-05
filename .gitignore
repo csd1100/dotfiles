@@ -1,3 +1,4 @@
 .vscode/*
 *~
 nvim/plugin/*
+.DS_Store
