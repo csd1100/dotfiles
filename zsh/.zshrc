@@ -17,3 +17,4 @@ source $ZSH_CUSTOM/aliases
 source $ZSH_CUSTOM/env-vars
 source $ZSH_CUSTOM/functions
 source $ZSH_CUSTOM/misc
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
