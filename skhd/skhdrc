@@ -16,6 +16,8 @@ cmd - 5 : yabai -m space --focus 5
 cmd - 6 : yabai -m space --focus 6
 cmd - 7 : yabai -m space --focus 7
 cmd - 8 : yabai -m space --focus 8
+cmd - 9 : yabai -m space --focus 9
+cmd - 0 : yabai -m space --focus 0
 cmd + shift - down : yabai -m space --focus next
 cmd + shift - up : yabai -m space --focus prev
 
@@ -36,11 +38,8 @@ cmd + shift - 5 : yabai -m window --space 5; yabai -m space --focus 5
 cmd + shift - 6 : yabai -m window --space 6; yabai -m space --focus 6
 cmd + shift - 7 : yabai -m window --space 7; yabai -m space --focus 7
 cmd + shift - 8 : yabai -m window --space 8; yabai -m space --focus 8
-
-# create desktop and follow focus
-
-cmd + shift - n : yabai -m space --create && \
-                  yabai -m space --focus next
+cmd + shift - 9 : yabai -m window --space 8; yabai -m space --focus 9
+cmd + shift - 0 : yabai -m window --space 8; yabai -m space --focus 0
 
 cmd + shift - d : yabai -m space --destroy
 
