@@ -16,16 +16,6 @@ db.custom_header =
      '', ''}
 
 db.custom_center = {{
-    icon = '  ',
-    desc = 'Recently latest session     ',
-    shortcut = 'SPC s l',
-    action = 'SessionLoad'
-}, {
-    icon = '  ',
-    desc = 'Recently opened files       ',
-    action = 'DashboardFindHistory',
-    shortcut = 'SPC f h'
-}, {
     icon = '  ',
     desc = 'New  File                   ',
     action = 'DashboardNewFile',
@@ -35,6 +25,10 @@ db.custom_center = {{
     desc = 'File Browser                ',
     action = 'NvimTreeOpen',
     shortcut = 'SPC f b'
+}, {   icon = '  ',
+    desc = 'Recently opened files       ',
+    action = 'Telescope oldfiles',
+    shortcut = 'SPC f h'
 }}
 
 db.custom_footer = {[[                               __                ]],
