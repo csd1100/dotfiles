@@ -6,5 +6,8 @@ alias zshconfig="code $HOME/.zshrc"
 # neovim
 alias nv="nvim"
 
+# general
+alias :q="exit"
+
 # git
 alias gh="git history"
