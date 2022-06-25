@@ -10,17 +10,26 @@ return require('packer').startup(function()
     use 'nvim-lua/plenary.nvim'
 
     -- lua line --
-    use 'nvim-lualine/lualine.nvim'
+    use{
+        'nvim-lualine/lualine.nvim',
+        config = require('plugins/lualine-conf').setup()
+    }
 
     -- cursor line --
-    use 'yamatsum/nvim-cursorline'
+    use {
+        'yamatsum/nvim-cursorline',
+        config = require('plugins/cursorline-conf').setup()
+    }
 
     -- tab line --
-    use 'nanozuki/tabby.nvim'
+    use {
+        'nanozuki/tabby.nvim',
+        config = require('tabby').setup()
+    }
 
     -- file tree --
     use 'kyazdani42/nvim-tree.lua'
-        
+
     -- icons -- 
     use 'kyazdani42/nvim-web-devicons'
 
@@ -28,13 +37,19 @@ return require('packer').startup(function()
     use 'f-person/git-blame.nvim'
 
     -- colorizer --
-    use 'norcalli/nvim-colorizer.lua'
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = require('colorizer').setup()
+    }
 
     -- create dirs when saving if not present -- 
     use 'jghauser/mkdir.nvim'
 
     -- clean trailing white-spaces --
-    use 'mcauley-penney/tidy.nvim'
+    use {
+        'mcauley-penney/tidy.nvim',
+        config = require('tidy').setup()
+    }
 
     -- colorschemes --
     use 'tanvirtin/monokai.nvim'
@@ -42,13 +57,16 @@ return require('packer').startup(function()
     use 'sainnhe/sonokai'
 
     -- disable relative numbers when in insert mode --
-    use 'nkakouros-original/numbers.nvim'
-
+    use {
+        'nkakouros-original/numbers.nvim',
+        config = require('numbers').setup()
+    }
 
     -- tree-sitter - tree-sitter is syntax parser kind-of -- 
     use {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
+        run = ':TSUpdate',
+        config = require('nvim-tree').setup()
     }
 
     -- plugins that use tree-sitter --
@@ -56,10 +74,16 @@ return require('packer').startup(function()
     use 'jghauser/follow-md-links.nvim'
 
     -- spell-check --
-    use 'lewis6991/spellsitter.nvim'
+    use {
+        'lewis6991/spellsitter.nvim',
+        config = require('spellsitter').setup()
+    }
 
     -- regex explainer -- 
-    use 'bennypowers/nvim-regexplainer'
+    use {
+        'bennypowers/nvim-regexplainer',
+        config = require('regexplainer').setup()
+    }
     use 'MunifTanjim/nui.nvim'
 
     -- markdown preview --
@@ -69,8 +93,9 @@ return require('packer').startup(function()
     }
 
     -- commentor --
-    use 'terrortylor/nvim-comment'
+    use {
+        'terrortylor/nvim-comment',
+        config = require('nvim_comment').setup()
+    }
 
-    -- vim be good --
-    use 'ThePrimeagen/vim-be-good'
 end)

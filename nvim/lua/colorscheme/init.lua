@@ -14,10 +14,10 @@ g.sonokai_style = 'atlantis'
 g.sonokai_better_performance = 1
 
 -- set monokai --
-require('monokai').setup { palette = require('monokai').pro }
+-- require('monokai').setup { palette = require('monokai').pro }
 
 -- set everforest --
 -- vim.cmd('colorscheme everforest')
 
 -- set sonokai --
--- vim.cmd('colorscheme sonokai')
+vim.cmd('colorscheme sonokai')
