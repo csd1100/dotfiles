@@ -21,3 +21,12 @@ map('i', 'kk', '<Esc>')
 
 -- Clear search highlighting with <leader> and c
 map('n', '<leader>c', ':nohl<CR>')
+
+-- autocomplete brackets and quotes
+map('i', '"', '""<left>')
+map('i', '\'', '\'\'<left>')
+map('i', '(', '()<left>')
+map('i', '[', '[]<left>')
+map('i', '{', '{}<left>')
+map('i', '<', '<><left>')
+map('i', '{<CR>', '{<CR>}<ESC>O')
