@@ -26,6 +26,12 @@ return require('packer').startup(function()
         config = require('tabby').setup()
     }
 
+    -- indent line --
+    use {
+        'lukas-reineke/indent-blankline.nvim',
+        config = require('indent_blankline').setup()
+    }
+
     -- file tree --
     use {
         'kyazdani42/nvim-tree.lua',
