@@ -15,6 +15,7 @@ map('', '<up>', '<nop>')
 map('', '<down>', '<nop>')
 map('', '<left>', '<nop>')
 map('', '<right>', '<nop>')
+map('', '<C-l>', '<nop>')
 
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')

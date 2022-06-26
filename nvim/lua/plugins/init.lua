@@ -1,9 +1,8 @@
 -- packer config --
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
-
-    -- dashboard --
-    use 'glepnir/dashboard-nvim'
+--     -- dashboard --
+    use {'glepnir/dashboard-nvim'}
 
     -- fzf telescope --
     use 'nvim-telescope/telescope.nvim'
@@ -42,7 +41,7 @@ return require('packer').startup(function()
         config = require('colorizer').setup()
     }
 
-    -- create dirs when saving if not present -- 
+    -- create dirs when saving if not present --
     use 'jghauser/mkdir.nvim'
 
     -- clean trailing white-spaces --
