@@ -3,6 +3,9 @@
 alias zshrc="source $HOME/.zshrc"
 alias zshconfig="code $HOME/.zshrc"
 
+# generic
+alias :q="exit"
+
 # neovim
 alias nv="nvim"
 
