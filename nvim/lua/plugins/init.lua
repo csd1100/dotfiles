@@ -27,7 +27,10 @@ return require('packer').startup(function()
     }
 
     -- file tree --
-    use 'kyazdani42/nvim-tree.lua'
+    use {
+        'kyazdani42/nvim-tree.lua',
+        config = require('nvim-tree').setup()
+    }
 
     -- icons -- 
     use 'kyazdani42/nvim-web-devicons'
@@ -65,7 +68,7 @@ return require('packer').startup(function()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        config = require('nvim-tree').setup()
+        config = require('plugins/treesitter-conf').setup()
     }
 
     -- plugins that use tree-sitter --
@@ -78,7 +81,7 @@ return require('packer').startup(function()
         config = require('spellsitter').setup()
     }
 
-    -- regex explainer -- 
+    -- regex explainer --
     use {
         'bennypowers/nvim-regexplainer',
         config = require('regexplainer').setup()
