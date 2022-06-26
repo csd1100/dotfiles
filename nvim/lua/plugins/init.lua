@@ -32,7 +32,7 @@ return require('packer').startup(function()
         config = require('nvim-tree').setup()
     }
 
-    -- icons -- 
+    -- icons --
     use 'kyazdani42/nvim-web-devicons'
 
     -- git blame --
@@ -64,7 +64,7 @@ return require('packer').startup(function()
         config = require('numbers').setup()
     }
 
-    -- tree-sitter - tree-sitter is syntax parser kind-of -- 
+    -- tree-sitter - tree-sitter is syntax parser kind-of --
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -100,4 +100,12 @@ return require('packer').startup(function()
         config = require('nvim_comment').setup()
     }
 
+    -- lsp --
+    use 'neovim/nvim-lspconfig'
+    use 'williamboman/nvim-lsp-installer'
+    use 'udalov/kotlin-vim'
+    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+    use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+    use 'L3MON4D3/LuaSnip' -- Snippets plugin
 end)

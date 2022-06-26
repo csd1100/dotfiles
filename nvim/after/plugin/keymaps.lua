@@ -23,6 +23,12 @@ map('n','<leader>te',':tabedit')
 -- Global splkey: g --
 map('n','<leader>gc',':Telescope colorscheme<CR>')
 
+-- diagnostic splkey: d --
+map('n', '<leader>do', 'vim.diagnostic.open_float')
+map('n', '<leader>d<up>', 'vim.diagnostic.goto_prev')
+map('n', '<leader>d<down>', 'vim.diagnostic.goto_next')
+map('n', '<leader>dq', 'vim.diagnostic.setloclist')
+
 -- markdown preview --
 map('n','<leader>mdp',':Glow<CR>')
 
