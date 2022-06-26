@@ -3,7 +3,7 @@ local function map(mode, lhs, rhs, opts)
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- Use an on_attach function to only map the following keys
@@ -12,7 +12,7 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  map('n', '<leader>lD', vim.lsp.buf.declaration, bufopts)
+  map('n', '<leader>ldc', vim.lsp.buf.declaration, bufopts)
   map('n', '<leader>ld', vim.lsp.buf.definition, bufopts)
   map('n', 'K', vim.lsp.buf.hover, bufopts)
   map('n', '<leader>li', vim.lsp.buf.implementation, bufopts)
@@ -22,7 +22,7 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
-  map('n', '<leader>lD', vim.lsp.buf.type_definition, bufopts)
+  map('n', '<leader>ltd', vim.lsp.buf.type_definition, bufopts)
   map('n', '<leader>lrn', vim.lsp.buf.rename, bufopts)
   map('n', '<leader>lca', vim.lsp.buf.code_action, bufopts)
   map('n', '<leader>lr', vim.lsp.buf.references, bufopts)
