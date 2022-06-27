@@ -12,6 +12,7 @@ function M.setup()
     }
     local packer = require "packer"
     packer.init(conf)
+    require('plugins.plugin_specification')
     vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
 end
 
