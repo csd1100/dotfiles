@@ -1,117 +1,15 @@
--- packer config --
-return require('packer').startup(function()
-    use 'wbthomason/packer.nvim'
---     -- dashboard --
-    use {'glepnir/dashboard-nvim'}
+local fn = vim.fn
 
-    -- fzf telescope --
-    use 'nvim-telescope/telescope.nvim'
-    use 'nvim-lua/plenary.nvim'
+-- Auto install packer.nvim
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
-    -- lua line --
-    use{
-        'nvim-lualine/lualine.nvim',
-        config = require('plugins/lualine-conf').setup()
-    }
+if fn.isdirectory(install_path) == 0 then
+    fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    require('plugins.plugin_specification')
+    vim.cmd 'autocmd User PackerComplete ++once lua require("plugins.config")'
+    require('packer').sync()
+else
+    require('plugins.config')
+end
 
-    -- cursor line --
-    use {
-        'yamatsum/nvim-cursorline',
-        config = require('plugins/cursorline-conf').setup()
-    }
-
-    -- tab line --
-    use {
-        'nanozuki/tabby.nvim',
-        config = require('tabby').setup()
-    }
-
-    -- indent line --
-    use {
-        'lukas-reineke/indent-blankline.nvim',
-        config = require('indent_blankline').setup()
-    }
-
-    -- file tree --
-    use {
-        'kyazdani42/nvim-tree.lua',
-        config = require('nvim-tree').setup()
-    }
-
-    -- icons --
-    use 'kyazdani42/nvim-web-devicons'
-
-    -- git blame --
-    use 'f-person/git-blame.nvim'
-
-    -- colorizer --
-    use {
-        'norcalli/nvim-colorizer.lua',
-        config = require('colorizer').setup()
-    }
-
-    -- create dirs when saving if not present --
-    use 'jghauser/mkdir.nvim'
-
-    -- clean trailing white-spaces --
-    use {
-        'mcauley-penney/tidy.nvim',
-        config = require('tidy').setup()
-    }
-
-    -- colorschemes --
-    use 'tanvirtin/monokai.nvim'
-    use 'sainnhe/everforest'
-    use 'sainnhe/sonokai'
-
-    -- disable relative numbers when in insert mode --
-    use {
-        'nkakouros-original/numbers.nvim',
-        config = require('numbers').setup()
-    }
-
-    -- tree-sitter - tree-sitter is syntax parser kind-of --
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-        config = require('plugins/treesitter-conf').setup()
-    }
-
-    -- plugins that use tree-sitter --
-    -- open links in markdown files --
-    use 'jghauser/follow-md-links.nvim'
-
-    -- spell-check --
-    use {
-        'lewis6991/spellsitter.nvim',
-        config = require('spellsitter').setup()
-    }
-
-    -- regex explainer --
-    use {
-        'bennypowers/nvim-regexplainer',
-        config = require('regexplainer').setup()
-    }
-    use 'MunifTanjim/nui.nvim'
-
-    -- markdown preview --
-    use {
-        'ellisonleao/glow.nvim',
-        branch = 'main'
-    }
-
-    -- commentor --
-    use {
-        'terrortylor/nvim-comment',
-        config = require('nvim_comment').setup()
-    }
-
-    -- lsp --
-    use 'neovim/nvim-lspconfig'
-    use 'williamboman/nvim-lsp-installer'
-    use 'udalov/kotlin-vim'
-    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-    use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-    use 'L3MON4D3/LuaSnip' -- Snippets plugin
-end)
