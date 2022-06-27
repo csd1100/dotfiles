@@ -23,17 +23,17 @@ function M.setup()
         icon = '  ',
         desc = 'New  File                   ',
         action = 'DashboardNewFile',
-        shortcut = 'SPC f f'
+        shortcut = 'SPC g n'
     }, {
         icon = '  ',
         desc = 'File Browser                ',
         action = 'NvimTreeOpen',
-        shortcut = 'SPC f b'
+        shortcut = 'SPC f o'
     }, {
         icon = '  ',
         desc = 'Recently opened files       ',
         action = 'Telescope oldfiles',
-        shortcut = 'SPC f h'
+        shortcut = 'SPC g h'
     }}
 
     db.custom_footer = {'',

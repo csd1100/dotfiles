@@ -6,13 +6,13 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-
 -- Comment Toggle --
 map('n','<leader>/',':CommentToggle<CR>')
 
 -- NvimTree splkey: f --
 map('n','<leader>ft',':NvimTreeToggle<CR>')
 map('n','<leader>ff',':NvimTreeFocus<CR>')
+map('n', '<leader>fo', ':NvimTreeOpen<CR>')
 
 --- Tabs splkey: t --
 map('n','<leader>tt',':tabnew<CR>')
@@ -22,6 +22,8 @@ map('n','<leader>te',':tabedit')
 
 -- Global splkey: g --
 map('n','<leader>gc',':Telescope colorscheme<CR>')
+map('n', '<leader>gh', ':Telescope oldfiles<CR>')
+map('n', '<leader>gn', ':DashboardNewFile<CR>')
 
 -- diagnostic splkey: d --
 map('n', '<leader>do', 'vim.diagnostic.open_float')
