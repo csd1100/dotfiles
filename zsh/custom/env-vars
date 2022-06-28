@@ -15,3 +15,18 @@ export EDITOR=nvim
 # RUST
 export RUSTUP_HOME="/Users/cdeshpande/.rustup"
 export CARGO_HOME="/Users/cdeshpande/.cargo"
+
+# spaceship prompt zsh
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  venv          # virtualenv section
+  conda         # conda virtualenv section
+  pyenv         # Pyenv section
+  exec_time     # Execution time
+  line_sep      # Line break
+  exit_code     # Exit code section
+  char          # Prompt character
+)
