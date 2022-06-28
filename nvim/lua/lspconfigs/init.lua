@@ -9,7 +9,7 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
-function if_successful(plugin)
+local function if_successful(plugin)
     local status, plug = pcall(require, plugin)
     if not status then
         print('failed to load ' .. plugin)
@@ -53,7 +53,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = if_successful('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local servers = {'bashls', 'emmet_ls', 'eslint', 'rust_analyzer', 'grammarly', 'jsonls', 'kotlin_language_server',
-                 'pyright', 'tsserver', 'marksman', 'sumneko_lua', 'jdtls'}
+                 'pyright', 'tsserver', 'marksman', 'sumneko_lua'}
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {

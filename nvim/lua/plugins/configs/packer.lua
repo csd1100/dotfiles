@@ -1,4 +1,4 @@
-function if_successful(plugin)
+local function if_successful(plugin)
     local status, plug = pcall(require, plugin)
     if not status then
         print('failed to load ' .. plugin)

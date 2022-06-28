@@ -1,4 +1,4 @@
-function if_successful(plugin)
+local function if_successful(plugin)
     local status, plug = pcall(require, plugin)
     if not status then
         print('failed to load ' .. plugin)
@@ -19,6 +19,6 @@ if fn.isdirectory(install_path) == 0 then
     vim.cmd 'autocmd User PackerComplete ++once lua require("plugins.config")'
     if_successful('packer').sync()
 else
-    if_successful('plugins.config')
+    require('plugins.config')
 end
 

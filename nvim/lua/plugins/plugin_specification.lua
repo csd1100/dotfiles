@@ -1,4 +1,4 @@
-function if_successful(plugin)
+local function if_successful(plugin)
     local status, plug = pcall(require, plugin)
     if not status then
         print('failed to load ' .. plugin)
@@ -8,7 +8,7 @@ function if_successful(plugin)
 end
 
 -- packer config --
-vim.cmd 'autocmd BufWritePost plugin_specification.lua source <afile> | PackerCompile'
+vim.cmd 'autocmd BufWritePost plugin_specification.lua source <afile> | PackerSync'
 return if_successful('packer').startup(function()
     use 'wbthomason/packer.nvim'
     --     -- dashboard --
@@ -87,6 +87,8 @@ return if_successful('packer').startup(function()
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
     use 'sbdchd/neoformat' -- Formatting plugin --
     use 'mfussenegger/nvim-jdtls'
+    use 'mfussenegger/nvim-dap'
+    use 'rcarriga/nvim-dap-ui'
     -- testing plugin --
     use 'klen/nvim-test'
 end)
