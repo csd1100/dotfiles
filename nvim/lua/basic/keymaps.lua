@@ -10,7 +10,7 @@ end
 -- Change leader to <Space>
 -----------------------------------------------------------
 map('n', '<Space>', '<nop>')
-vim.g.mapleader=" "
+vim.g.mapleader=' '
 
 -----------------------------------------------------------
 -- Neovim shortcuts

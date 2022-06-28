@@ -1,11 +1,11 @@
 local M = {}
 
 function M.setup()
-    local lspi = require("nvim-lsp-installer")
+    local lspi = require('nvim-lsp-installer')
     local conf = {
-        ensure_installed = {"jdtls", "sumneko_lua", "marksman", "yamlls",
-            "lemminx", "jsonls", "eslint", "tsserver", "html", "emmet_ls",
-            "grammarly", "bashls"},
+        ensure_installed = {'jdtls', 'sumneko_lua', 'marksman', 'yamlls',
+            'lemminx', 'jsonls', 'eslint', 'tsserver', 'html', 'emmet_ls',
+            'grammarly', 'bashls'},
 
         automatic_installation = false,
         

@@ -1,4 +1,5 @@
 -- packer config --
+vim.cmd 'autocmd BufWritePost plugin_specification.lua source <afile> | PackerCompile'
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
     --     -- dashboard --
@@ -75,5 +76,8 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
-    use 'sbdchd/neoformat'
+    use 'sbdchd/neoformat' -- Formatting plugin --
+
+    -- testing plugin --
+    use 'klen/nvim-test'
 end)

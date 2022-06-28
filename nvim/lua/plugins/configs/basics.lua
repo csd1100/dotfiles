@@ -8,5 +8,5 @@ set.spell = true
 g.gitblame_ignored_filetypes = {'dashboard', 'NvimTree'}
 
 -- glow setup --
-g.glow_binary_path = vim.env.HOME .. "/bin"
-g.glow_border = "rounded"
+g.glow_binary_path = vim.env.HOME .. '/bin'
+g.glow_border = 'rounded'
