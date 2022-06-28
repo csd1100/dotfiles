@@ -9,6 +9,15 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
+function if_successful(plugin)
+    local status, plug = pcall(require, plugin)
+    if not status then
+        print('failed to load ' .. plugin)
+        return
+    end
+    return plug
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -36,12 +45,12 @@ local on_attach = function(client, bufnr)
     map('n', '<leader>lf', vim.lsp.buf.formatting, bufopts)
 end
 
-require('lspconfigs.nvim-lsp-installer-conf').setup()
+if_successful('lspconfigs.nvim-lsp-installer-conf').setup()
 
-local lspconfig = require('lspconfig')
+local lspconfig = if_successful('lspconfig')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = if_successful('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local servers = {'bashls', 'emmet_ls', 'eslint', 'rust_analyzer', 'grammarly', 'jsonls', 'kotlin_language_server',
                  'pyright', 'tsserver', 'marksman', 'sumneko_lua', 'jdtls'}
@@ -53,6 +62,6 @@ for _, lsp in ipairs(servers) do
     }
 end
 
-require('lspconfigs.lua.sumneko_lua').setup()
-require('lspconfigs.java.jdtls').setup()
-require('lspconfigs.snippets').setup()
+if_successful('lspconfigs.lua.sumneko_lua').setup()
+if_successful('lspconfigs.java.jdtls').setup()
+if_successful('lspconfigs.snippets').setup()

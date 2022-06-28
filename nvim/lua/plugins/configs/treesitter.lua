@@ -1,12 +1,16 @@
 local M = {}
 
 function M.setup()
-    local ts = require('nvim-treesitter.configs')
+    local status, ts = pcall(require, 'nvim-treesitter.configs')
+    if not status then
+        print('failed to load ' .. 'nvim-treesitter.configs')
+        return
+    end
 
     local conf = {
-      highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
+        highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false
         }
     }
 

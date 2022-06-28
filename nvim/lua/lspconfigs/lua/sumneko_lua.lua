@@ -1,6 +1,12 @@
 local M = {}
 
 function M.setup()
+    local status, lspconfig = pcall(require, 'lspconfig')
+    if not status then
+        print('failed to load ' .. 'lspconfig')
+        return
+    end
+
     local settings = {
         Lua = {
             runtime = {
@@ -22,7 +28,7 @@ function M.setup()
         }
     }
 
-    require('lspconfig')['sumneko_lua'].setup(settings)
+    lspconfig['sumneko_lua'].setup(settings)
 end
 
 return M

@@ -1,6 +1,15 @@
+function if_successful(plugin)
+    local status, plug = pcall(require, plugin)
+    if not status then
+        print('failed to load ' .. plugin)
+        return
+    end
+    return plug
+end
+
 -- packer config --
 vim.cmd 'autocmd BufWritePost plugin_specification.lua source <afile> | PackerCompile'
-return require('packer').startup(function()
+return if_successful('packer').startup(function()
     use 'wbthomason/packer.nvim'
     --     -- dashboard --
     use 'glepnir/dashboard-nvim'
@@ -77,7 +86,7 @@ return require('packer').startup(function()
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
     use 'sbdchd/neoformat' -- Formatting plugin --
-
+    use 'mfussenegger/nvim-jdtls'
     -- testing plugin --
     use 'klen/nvim-test'
 end)

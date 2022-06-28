@@ -1,5 +1,11 @@
-local set= vim.opt
+local set = vim.opt
 local g = vim.g
+
+local status, monokai = pcall(require, 'monokai')
+if not status then
+    print('failed to load ' .. 'monokai')
+    return
+end
 
 -- vim opts for colors and background --
 set.termguicolors = true
@@ -13,7 +19,7 @@ g.everforest_ui_contrast = 'high'
 g.sonokai_style = 'atlantis'
 g.sonokai_better_performance = 1
 -- set monokai --
--- require('monokai').setup { palette = require('monokai').pro }
+-- monokai.setup { palette = monokai.pro }
 
 -- set everforest --
 -- vim.cmd('colorscheme everforest')

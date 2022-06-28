@@ -1,7 +1,11 @@
 local M = {}
 
 function M.setup()
-    local db = require('dashboard')
+    local status, db = pcall(require, 'dashboard')
+    if not status then
+        print('failed to load ' .. 'dashboard')
+        return
+    end
 
     db.custom_header = {[[                                    .--.      ]],
                         [[              +   /\               / /  `     ]],

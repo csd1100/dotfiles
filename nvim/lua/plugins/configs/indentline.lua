@@ -2,7 +2,11 @@ local M = {}
 local set = vim.opt
 
 function M.setup()
-    local ib = require('indent_blankline')
+    local status, ib = pcall(require, 'indent_blankline')
+    if not status then
+        print('failed to load ' .. 'indent_blankline')
+        return
+    end
 
     set.list = true
     set.listchars:append('space:⋅')

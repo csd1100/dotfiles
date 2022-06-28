@@ -2,7 +2,11 @@ local M = {}
 
 function M.setup()
 
-    local t = require('nvim-test')
+    local status, t = pcall(require, 'nvim-test')
+    if not status then
+        return
+    end
+
     conf = {
         run = true, -- run tests (using for debug)
         commands_create = true, -- create commands (TestFile, TestLast, ...)

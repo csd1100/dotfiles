@@ -1,7 +1,12 @@
 local M = {}
 
 function M.setup()
-    local ll = require('lualine')
+    local status, ll = pcall(require, 'lualine')
+    if not status then
+        print('failed to load ' .. 'lualine')
+        return
+    end
+
     local conf = {
         options = {
             icons_enabled = true,
