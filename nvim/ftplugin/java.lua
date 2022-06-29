@@ -43,5 +43,5 @@ config['on_attach'] = function(client, bufnr)
 
 end
 
+print("loaded java ftplugin")
 jdtls_lib.start_or_attach(config)
-

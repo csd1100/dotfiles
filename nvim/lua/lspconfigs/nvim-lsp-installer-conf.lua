@@ -8,7 +8,7 @@ function M.setup()
     end
 
     local conf = {
-        ensure_installed = {'jdtls', 'sumneko_lua', 'marksman', 'yamlls', 'lemminx', 'jsonls', 'eslint', 'tsserver',
+        ensure_installed = {'jdtls@1.8.0-202112170540', 'sumneko_lua', 'marksman', 'yamlls', 'lemminx', 'jsonls', 'eslint', 'tsserver',
                             'html', 'emmet_ls', 'grammarly', 'bashls'},
 
         automatic_installation = false,

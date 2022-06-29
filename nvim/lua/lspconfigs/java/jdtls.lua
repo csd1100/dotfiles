@@ -12,6 +12,26 @@ end
 local M = {}
 
 function M.setup()
+    local bufopts = {
+        noremap = true,
+        silent = true,
+        buffer = bufnr
+    }
+    map('n', '<leader>ldc', vim.lsp.buf.declaration, bufopts)
+    map('n', '<leader>ld', vim.lsp.buf.definition, bufopts)
+    map('n', 'K', vim.lsp.buf.hover, bufopts)
+    map('n', '<leader>li', vim.lsp.buf.implementation, bufopts)
+    map('n', '<leader>lk', vim.lsp.buf.signature_help, bufopts)
+    map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    map('n', '<leader>wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+    map('n', '<leader>ltd', vim.lsp.buf.type_definition, bufopts)
+    map('n', '<leader>lrn', vim.lsp.buf.rename, bufopts)
+    map('n', '<leader>lca', vim.lsp.buf.code_action, bufopts)
+    map('n', '<leader>lr', vim.lsp.buf.references, bufopts)
+    map('n', '<leader>lf', vim.lsp.buf.formatting, bufopts)
     map('n', '<leader>joi', '<Cmd>lua require("jdtls").organize_imports()<CR>')
     map('n', '<leader>jev', '<Cmd>lua require("jdtls").extract_variable()<CR>')
     map('n', '<leader>jvt', '<Cmd>lua require("jdtls").extract_variable(true)<CR>')
