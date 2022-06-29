@@ -36,8 +36,8 @@ return if_successful('packer').startup(function()
     -- icons --
     use 'kyazdani42/nvim-web-devicons'
 
-    -- git blame --
-    use 'f-person/git-blame.nvim'
+    -- git --
+    use 'lewis6991/gitsigns.nvim'
 
     -- colorizer --
     use 'norcalli/nvim-colorizer.lua'
@@ -70,7 +70,6 @@ return if_successful('packer').startup(function()
 
     -- regex explainer --
     use 'bennypowers/nvim-regexplainer'
-
     use 'MunifTanjim/nui.nvim'
 
     -- markdown preview --

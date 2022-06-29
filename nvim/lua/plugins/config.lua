@@ -8,10 +8,10 @@ local function if_successful(plugin)
 end
 
 -- config --
-require('lspconfigs')
-require('plugins.configs.keymaps')
-require('plugins.configs.basics')
-require('plugins.configs.colorscheme')
+if_successful('lspconfigs')
+if_successful('plugins.configs.keymaps')
+if_successful('plugins.configs.basics')
+if_successful('plugins.configs.colorscheme')
 
 -- plguins using default config --
 if_successful('tidy').setup()
@@ -22,11 +22,15 @@ if_successful('colorizer').setup()
 if_successful('spellsitter').setup()
 if_successful('regexplainer').setup()
 if_successful('nvim_comment').setup()
+
 -- plugins with configs --
-require('plugins.configs.dapui').setup()
-require('plugins.configs.packer').setup()
-require('plugins.configs.lualine').setup()
-require('plugins.configs.dashboard').setup()
-require('plugins.configs.indentline').setup()
-require('plugins.configs.treesitter').setup()
-require('plugins.configs.cursorline').setup()
+if_successful('plugins.configs.dapui').setup()
+if_successful('plugins.configs.packer').setup()
+if_successful('plugins.configs.numbers').setup()
+if_successful('plugins.configs.lualine').setup()
+if_successful('plugins.configs.gitsigns').setup()
+if_successful('plugins.configs.dashboard').setup()
+if_successful('plugins.configs.indentline').setup()
+if_successful('plugins.configs.treesitter').setup()
+if_successful('plugins.configs.cursorline').setup()
+if_successful('plugins.configs.regexplainer').setup()

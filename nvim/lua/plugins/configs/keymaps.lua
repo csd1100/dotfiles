@@ -46,6 +46,3 @@ map('n', '<leader>dot', ':lua require"dap".step_out()<CR>')
 
 -- markdown preview --
 map('n', '<leader>mdp', ':Glow<CR>')
-
--- git splkey: v --
-map('n', '<leader>vb', ':GitBlameToggle<CR>')

@@ -1,3 +1,4 @@
+local cmd = vim.cmd
 local M = {}
 
 function M.setup()
@@ -49,6 +50,12 @@ function M.setup()
                         '╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
                         ''}
 
+    cmd [[
+        highlight DashboardHeader ctermfg=110 guifg=#72cce8
+        highlight DashboardCenter ctermfg=107 guifg=#9dd274
+        highlight DashboardShortcut ctermfg=203 guifg=#ff6578
+        highlight DashboardFooter ctermfg=179 guifg=#eacb64
+    ]]
 end
 
 return M
