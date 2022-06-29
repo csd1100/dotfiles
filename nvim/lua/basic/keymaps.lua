@@ -37,3 +37,14 @@ map('i', '[', '[]<left>')
 map('i', '{', '{}<left>')
 map('i', '<', '<><left>')
 map('i', '{<CR>', '{<CR>}<ESC>O')
+
+-- add brackets and quotes in visual mode
+map('v', '"', [[<ESC>`>a"<ESC>`<i"<ESC>]])
+map('v', "'", [[<ESC>`>a'<ESC>`<i'<ESC>]])
+map('v', '(', [[<ESC>`>a)<ESC>`<i(<ESC>]])
+map('v', '[', [[<ESC>`>a]<ESC>`<i[<ESC>]])
+map('v', '{', [[<ESC>`>a}<ESC>`<i{<ESC>]])
+map('v', '<', [[<ESC>`>a><ESC>`<i<<ESC>]])
+
+-- add blank line in normal mode
+map('n','<leader><CR>','i<CR><Esc>')

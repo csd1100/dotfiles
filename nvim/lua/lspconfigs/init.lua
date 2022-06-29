@@ -52,7 +52,7 @@ local lspconfig = if_successful('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = if_successful('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local servers = {'bashls', 'emmet_ls', 'eslint', 'rust_analyzer', 'grammarly', 'jsonls', 'kotlin_language_server',
+local servers = {'bashls', 'emmet_ls', 'eslint', 'rust_analyzer', 'jsonls', 'kotlin_language_server',
                  'pyright', 'tsserver', 'marksman', 'sumneko_lua'}
 
 for _, lsp in ipairs(servers) do
