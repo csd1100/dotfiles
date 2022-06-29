@@ -10,41 +10,41 @@ end
 local M = {}
 
 function M.setup()
-    local dap = if_successful("dap")
-    local dapui = if_successful("dapui")
+    local dap = if_successful('dap')
+    local dapui = if_successful('dapui')
 
     local config = {
         icons = {
-            expanded = "▾",
-            collapsed = "▸"
+            expanded = '▾',
+            collapsed = '▸'
         },
         mappings = {
-            expand = {"<CR>", "<2-LeftMouse>"},
-            open = "o",
-            remove = "d",
-            edit = "e",
-            repl = "r",
-            toggle = "t"
+            expand = {'<CR>', '<2-LeftMouse>'},
+            open = 'o',
+            remove = 'd',
+            edit = 'e',
+            repl = 'r',
+            toggle = 't'
         },
-        expand_lines = vim.fn.has("nvim-0.7"),
+        expand_lines = vim.fn.has('nvim-0.7'),
         layouts = {{
             elements = {{
-                id = "scopes",
+                id = 'scopes',
                 size = 0.25
-            }, "breakpoints", "stacks", "watches"},
+            }, 'breakpoints', 'stacks', 'watches'},
             size = 40, -- 40 columns
-            position = "left"
+            position = 'left'
         }, {
-            elements = {"repl", "console"},
+            elements = {'repl', 'console'},
             size = 0.25, -- 25% of total lines
-            position = "bottom"
+            position = 'bottom'
         }},
         floating = {
             max_height = nil,
             max_width = nil, 
-            border = "single",
+            border = 'single',
             mappings = {
-                close = {"q", "<Esc>"}
+                close = {'q', '<Esc>'}
             }
         },
         windows = {
@@ -58,19 +58,19 @@ function M.setup()
     dapui.setup(config)
 
     vim.fn.sign_define('DapBreakpoint', {
-        text = "",
+        text = '',
         texthl = 'DiagnosticSignError',
         linehl = '',
         numhl = ''
     })
 
-    dap.listeners.after.event_initialized["dapui_config"] = function()
+    dap.listeners.after.event_initialized['dapui_config'] = function()
         dapui.open()
     end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
+    dap.listeners.before.event_terminated['dapui_config'] = function()
         dapui.close()
     end
-    dap.listeners.before.event_exited["dapui_config"] = function()
+    dap.listeners.before.event_exited['dapui_config'] = function()
         dapui.close()
     end
 

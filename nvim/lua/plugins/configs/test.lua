@@ -23,7 +23,7 @@ function M.setup()
         },
         runners = { -- setup tests runners
             javascriptreact = 'nvim-test.runners.jest',
-            javascript = 'nvim-test.runners.jest',
+            javascript = 'nvim-test.runners.mocha',
             python = 'nvim-test.runners.pytest',
             rust = 'nvim-test.runners.cargo-test',
             typescript = 'nvim-test.runners.jest',
@@ -32,6 +32,12 @@ function M.setup()
     }
 
     t.setup(conf)
+    local test_runners = {'mocha'}
+
+    for _, runner in ipairs(test_runners) do
+        require('plugins.configs.test-runner.' .. runner).setup()
+    end
+
 end
 
 return M
