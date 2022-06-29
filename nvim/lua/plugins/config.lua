@@ -23,7 +23,6 @@ if_successful('spellsitter').setup()
 if_successful('regexplainer').setup()
 if_successful('nvim_comment').setup()
 -- plugins with configs --
-require('plugins.configs.test').setup()
 require('plugins.configs.dapui').setup()
 require('plugins.configs.packer').setup()
 require('plugins.configs.lualine').setup()

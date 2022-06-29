@@ -27,6 +27,9 @@ map('n', '<leader>te', ':tabedit')
 map('n', '<leader>gc', ':Telescope colorscheme<CR>')
 map('n', '<leader>gh', ':Telescope oldfiles<CR>')
 map('n', '<leader>gn', ':DashboardNewFile<CR>')
+-- Added this mapping temporarily as test requires tree-sitter parsers installed
+-- And on 1st setup startup fails if not installed
+map('n', '<leader>get', ':lua require("plugins.configs.test").setup()<CR>')
 
 -- lsp diagnostic splkey: l --
 map('n', '<leader>lo', 'vim.diagnostic.open_float')
