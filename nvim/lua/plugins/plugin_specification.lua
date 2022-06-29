@@ -52,6 +52,8 @@ return if_successful('packer').startup(function()
     use 'tanvirtin/monokai.nvim'
     use 'sainnhe/everforest'
     use 'sainnhe/sonokai'
+    use 'frenzyexists/aquarium-vim'
+    use 'sts10/vim-pink-moon'
 
     -- disable relative numbers when in insert mode --
     use 'nkakouros-original/numbers.nvim'
