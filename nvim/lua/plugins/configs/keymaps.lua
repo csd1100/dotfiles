@@ -17,16 +17,14 @@ map('n', '<leader>ft', ':NvimTreeToggle<CR>')
 map('n', '<leader>ff', ':NvimTreeFocus<CR>')
 map('n', '<leader>fo', ':NvimTreeOpen<CR>')
 
---- Tabs splkey: t --
-map('n', '<leader>tt', ':tabnew<CR>')
-map('n', '<leader>tp', ':tabprevious<CR>')
-map('n', '<leader>tn', ':tabnext<CR>')
-map('n', '<leader>te', ':tabedit')
-
 -- Global splkey: g --
 map('n', '<leader>gc', ':Telescope colorscheme<CR>')
 map('n', '<leader>gh', ':Telescope oldfiles<CR>')
+map('n', '<leader>gb', ':Telescope buffers<CR>')
+map('n', '<leader>gp', ':Telescope projects<CR>')
 map('n', '<leader>gn', ':DashboardNewFile<CR>')
+map('n', '<leader>gss', ':SessionSave<CR>')
+map('n', '<leader>gsl', ':SessionLoad<CR>')
 -- Added this mapping temporarily as test requires tree-sitter parsers installed
 -- And on 1st setup startup fails if not installed
 map('n', '<leader>get', ':lua require("plugins.configs.test").setup()<CR>')

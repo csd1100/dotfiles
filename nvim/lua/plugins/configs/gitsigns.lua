@@ -4,7 +4,6 @@ local function map(mode, l, r, opts)
     vim.keymap.set(mode, l, r, opts)
 end
 
-
 local M = {}
 
 function M.setup()
@@ -15,6 +14,7 @@ function M.setup()
     end
 
     local config = {
+        numhl     = true,
         on_attach = function(bufnr)
             local gs = package.loaded.gitsigns
 
@@ -44,8 +44,8 @@ function M.setup()
             })
 
             -- git splkey: v --
-            map({'n', 'v'}, '<leader>vs', ':Gitsigns stage_hunk<CR>')
-            map({'n', 'v'}, '<leader>vr', ':Gitsigns reset_hunk<CR>')
+            map({ 'n', 'v' }, '<leader>vs', ':Gitsigns stage_hunk<CR>')
+            map({ 'n', 'v' }, '<leader>vr', ':Gitsigns reset_hunk<CR>')
             map('n', '<leader>vS', gs.stage_buffer)
             map('n', '<leader>vu', gs.undo_stage_hunk)
             map('n', '<leader>vR', gs.reset_buffer)
@@ -63,7 +63,7 @@ function M.setup()
             map('n', '<leader>vdd', gs.toggle_deleted)
 
             -- Text object
-            map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+            map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end
     }
 

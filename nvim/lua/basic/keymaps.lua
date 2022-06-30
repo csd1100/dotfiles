@@ -1,16 +1,19 @@
 local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    local options = {
+        noremap = true,
+        silent = true
+    }
+    if opts then
+        options = vim.tbl_extend('force', options, opts)
+    end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 -----------------------------------------------------------
 -- Change leader to <Space>
 -----------------------------------------------------------
 map('n', '<Space>', '<nop>')
-vim.g.mapleader=' '
+vim.g.mapleader = ' '
 
 -----------------------------------------------------------
 -- Neovim shortcuts
@@ -47,7 +50,22 @@ map('v', '{', [[<ESC>`>a}<ESC>`<i{<ESC>]])
 map('v', '<', [[<ESC>`>a><ESC>`<i<<ESC>]])
 
 -- add blank line in normal mode
-map('n','<leader><CR>','i<CR><Esc>')
+map('n', '<leader><CR>', 'i<CR><Esc>')
 
--- mapping :Q to exit for convenience --
-map('n',':Q',':q<CR>')
+-- mapping exit for convenience --
+map('n', ':Q', ':q<CR>')
+map('n', 'qq', ':q<CR>')
+
+--- Tabs splkey: t --
+map('n', '<leader>tt', ':tabnew<CR>')
+map('n', '<leader>tp', ':tabprevious<CR>')
+map('n', '<leader>tn', ':tabnext<CR>')
+map('n', '<leader>te', ':tabedit')
+
+-- win navigation --
+map('', '<C-h>', ':wincmd h<CR>')
+map('', '<C-j>', ':wincmd j<CR>')
+map('', '<C-k>', ':wincmd k<CR>')
+map('', '<C-l>', ':wincmd l<CR>')
+map('', '<C-+>', ':res +3<CR>')
+map('', '<C-->', ':res -3<CR>')

@@ -1,6 +1,14 @@
 local set = vim.opt
-local home = os.getenv 'HOME'
 
+local home = os.getenv('HOME')
+if not home then
+    home = vim.fn.getcwd()
+end
+
+local bkp_dir = os.getenv('NVIM_BACKUP_DIR')
+if not bkp_dir then
+    bkp_dir = home .. '/.nvim/backups'
+end
 -- enable line-numbers --
 set.number = true
 set.relativenumber = true
@@ -16,7 +24,7 @@ set.hlsearch = true
 -- create backup of file before overwrite --
 set.backup = true
 local project = vim.fn.fnamemodify(vim.fn.getcwd(), ':~:s?\\~??')
-set.backupdir = home .. '/.nvim/backups/' .. project
+set.backupdir = bkp_dir .. '/' .. project
 
 -- show command --
 set.showcmd = true
