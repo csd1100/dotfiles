@@ -42,12 +42,12 @@ function M.setup()
         action = 'Telescope oldfiles',
         shortcut = 'SPC g h  '
     }, {
-        icon = '  ',
+        icon = '  ',
         desc = 'Load Last Session               ',
         action = 'SessionLoad',
         shortcut = 'SPC g s l'
     }, {
-        icon = '  ',
+        icon = '  ',
         desc = 'Open Projects                   ',
         action = 'Telescope projects',
         shortcut = 'SPC g p  '
