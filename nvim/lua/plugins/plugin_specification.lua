@@ -61,7 +61,7 @@ return if_successful('packer').startup(function()
     use { 'sainnhe/sonokai' }
     use { 'frenzyexists/aquarium-vim' }
     use { 'sts10/vim-pink-moon' }
-
+    use { 'morhetz/gruvbox' }
     -- disable relative numbers when in insert mode --
     use { 'nkakouros-original/numbers.nvim' }
 

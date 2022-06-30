@@ -37,3 +37,6 @@ vim.cmd('colorscheme orange-moon')
 
 -- set sonokai --
 -- vim.cmd('colorscheme sonokai')
+
+-- set gruvbox --
+-- vim.cmd('colorscheme gruvbox')
