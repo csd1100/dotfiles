@@ -48,3 +48,6 @@ map('v', '<', [[<ESC>`>a><ESC>`<i<<ESC>]])
 
 -- add blank line in normal mode
 map('n','<leader><CR>','i<CR><Esc>')
+
+-- mapping :Q to exit for convenience --
+map('n',':Q',':q<CR>')

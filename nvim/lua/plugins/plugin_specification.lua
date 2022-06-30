@@ -92,4 +92,7 @@ return if_successful('packer').startup(function()
     use 'rcarriga/nvim-dap-ui'
     -- testing plugin --
     use 'klen/nvim-test'
+
+    -- kitty conf highlight --
+    use 'fladson/vim-kitty'
 end)
