@@ -13,7 +13,7 @@ return if_successful('packer').startup(function()
     use { 'wbthomason/packer.nvim' }
 
     -- fast loading plugins --
-     use {'lewis6991/impatient.nvim'}
+    use { 'lewis6991/impatient.nvim' }
 
     -- dashboard --
     use { 'glepnir/dashboard-nvim' }
@@ -86,6 +86,9 @@ return if_successful('packer').startup(function()
     use { 'williamboman/nvim-lsp-installer' }
     use { 'hrsh7th/nvim-cmp' } -- Autocompletion plugin
     use { 'hrsh7th/cmp-nvim-lsp' } -- LSP source for nvim-cmp
+    use { 'hrsh7th/cmp-vsnip' } -- LSP source for nvim-cmp
+    use { 'hrsh7th/cmp-path' } -- LSP source for nvim-cmp
+    use { 'hrsh7th/cmp-buffer' } -- LSP source for nvim-cmp
     use { 'saadparwaiz1/cmp_luasnip' } -- Snippets source for nvim-cmp
     use { 'L3MON4D3/LuaSnip' } -- Snippets plugin
     use { 'sbdchd/neoformat' } -- Formatting plugin --
@@ -95,6 +98,10 @@ return if_successful('packer').startup(function()
 
     -- testing plugin --
     use { 'klen/nvim-test' }
+
+    -- rust lsp conf---
+    use "simrat39/rust-tools.nvim"
+    use "Saecki/crates.nvim"
 
     -- kitty conf highlight --
     use { 'fladson/vim-kitty', ft = 'kitty' }

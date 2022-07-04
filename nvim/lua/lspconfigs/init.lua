@@ -63,5 +63,6 @@ for _, lsp in ipairs(servers) do
 end
 
 if_successful('lspconfigs.lua.sumneko_lua').setup()
+if_successful('lspconfigs.rust.rust-analyzer').setup()
 if_successful('lspconfigs.java.jdtls').setup()
 if_successful('lspconfigs.snippets').setup()
