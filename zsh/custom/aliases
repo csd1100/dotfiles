@@ -11,6 +11,13 @@ alias nv="nvim"
 
 # general
 alias :q="exit"
+alias :Q="exit"
 
 # git
 alias gh="git history"
+
+# source overrides
+if [ -f "$ZSH_CUSTOM/overrides/aliases" ]
+then
+    source $ZSH_CUSTOM/overrides/aliases
+fi

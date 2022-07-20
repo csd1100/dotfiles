@@ -2,3 +2,7 @@
 *~
 nvim/plugin/*
 .DS_Store
+zsh/custom/overrides/env-vars
+zsh/custom/overrides/aliases
+zsh/custom/overrides/functions
+zsh/custom/overrides/misc

@@ -1,3 +1,10 @@
 #!/bin/zsh
 # zsh-completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+
+# source overrides
+if [ -f "$ZSH_CUSTOM/overrides/misc" ]
+then
+    source $ZSH_CUSTOM/overrides/misc
+fi
