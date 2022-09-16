@@ -8,8 +8,7 @@ function M.setup()
     end
 
     local conf = {
-        ensure_installed = {'bash', 'json', 'markdown', 'yaml', 'lua', 'rust', 'java', 'javascript', 'typescript',
-                            'python', 'regex'},
+        ensure_installed = {'bash', 'json', 'markdown', 'yaml', 'lua', 'regex'},
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false
