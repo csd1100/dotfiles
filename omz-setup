@@ -1,70 +1,81 @@
 #!/bin/bash
 
+function log(){
+    printf  "\n[$(date)] $1 \n\n"
+}
+
 readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 readonly CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 
 if ! command -v zsh &> /dev/null; then
-    echo "zsh could not be found, please install zsh to use oh-my-zsh"
+    log "zsh could not be found, please install zsh to use oh-my-zsh"
 fi
 
 if ! command -v wget &> /dev/null; then
-    echo "wget could not be found, please install wget to install oh-my-zsh"
+    log "wget could not be found, please install wget to install oh-my-zsh"
 fi
 
 if [ -d "$HOME/.oh-my-zsh" ]; then
-    echo "oh-my-zsh already installed, upgrading oh-my-zsh"
+    log "oh-my-zsh already installed, upgrading oh-my-zsh"
     $HOME/.oh-my-zsh/tools/upgrade.sh
 else
-    echo "Installing oh-my-zsh..."
-    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &
+    log "Installing oh-my-zsh... "
+    RUNZSH=no sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-echo "Installing custom plugins and prompt themes......"
+log "Installing custom plugins and prompt themes...... "
 if [ -d "$CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    echo "zsh-syntax-highlighting already installed"
+    log "zsh-syntax-highlighting already installed"
 else
-    echo "Installing zsh-syntax-highlighting..."
+    log "Installing zsh-syntax-highlighting..."
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $CUSTOM/plugins/zsh-syntax-highlighting
 fi
 
 if [ -d "$CUSTOM/plugins/zsh-autosuggestions" ]; then
-    echo "zsh-autosuggestions already installed"
+    log "zsh-autosuggestions already installed"
 else
-    echo "Installing zsh-autosuggestions..."
+    log "Installing zsh-autosuggestions..."
     git clone https://github.com/zsh-users/zsh-autosuggestions $CUSTOM/plugins/zsh-autosuggestions
 fi
 
 if [ -d "$CUSTOM/plugins/zsh-completions" ]; then
-    echo "zsh-completions already installed"
+    log "zsh-completions already installed"
 else
-    echo "Installing zsh-completions..."
+    log "Installing zsh-completions..."
     git clone https://github.com/zsh-users/zsh-completions $CUSTOM/plugins/zsh-completions
 fi
 
 if [ -d "$CUSTOM/plugins/zsh-history-substring-search" ]; then
-    echo "zsh-history-substring-search already installed"
+    log "zsh-history-substring-search already installed"
 else
-    echo "Installing zsh-history-substring-search..."
+    log "Installing zsh-history-substring-search..."
     git clone https://github.com/zsh-users/zsh-history-substring-search $CUSTOM/plugins/zsh-history-substring-search
 fi
 
 if [ -d "$CUSTOM/themes/spaceship-prompt" ]; then
-    echo "spaceship-prompt already installed"
+    log "spaceship-prompt already installed"
 else
-    echo "Installing spaceship-prompt..."
+    log "Installing spaceship-prompt..."
     git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$CUSTOM/themes/spaceship-prompt" --depth=1
     ln -s "$CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$CUSTOM/themes/spaceship.zsh-theme"
 fi
 
-echo "script directory: $SCRIPT_DIR"
-echo "Linking env-vars, aliases, functions and etc to ZSH_CUSTOM ..."
+log "script directory: $SCRIPT_DIR"
+log "Linking env-vars, aliases, functions and etc to ZSH_CUSTOM ..."
 if [ -e "$CUSTOM/overrides" ]; then
-    echo "env-vars, overrides already linked"
+    log "env-vars, overrides already linked"
 else
-    echo "Installing spaceship-prompt..."
+    log "Installing spaceship-prompt..."
     ln -s $SCRIPT_DIR/zsh/custom/aliases $CUSTOM/aliases
     ln -s $SCRIPT_DIR/zsh/custom/env-vars $CUSTOM/env-vars
     ln -s $SCRIPT_DIR/zsh/custom/functions $CUSTOM/functions
     ln -s $SCRIPT_DIR/zsh/custom/misc $CUSTOM/misc
     ln -s $SCRIPT_DIR/zsh/custom/overrides $CUSTOM/overrides
+fi
+
+log "zsh setup complete linking zshrc "
+if [ -e "$HOME/.zshrc" ]; then
+    rm $HOME/.zshrc
+else
+    ln -s $SCRIPT_DIR/zsh/.zshrc $HOME/.zshrc
 fi
