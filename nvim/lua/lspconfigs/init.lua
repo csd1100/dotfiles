@@ -1,3 +1,5 @@
+local utils = require 'basic.utils'
+
 local function map(mode, lhs, rhs, opts)
     local options = {
         noremap = true,
@@ -45,7 +47,7 @@ local on_attach = function(client, bufnr)
     map('n', '<leader>lf', vim.lsp.buf.formatting, bufopts)
 end
 
-if_successful('lspconfigs.nvim-lsp-installer-conf').setup()
+utils.if_successful_then_setup('lspconfigs.nvim-lsp-installer-conf')
 
 local lspconfig = if_successful('lspconfig')
 
@@ -62,7 +64,7 @@ for _, lsp in ipairs(servers) do
     }
 end
 
-if_successful('lspconfigs.lua.sumneko_lua').setup()
-if_successful('lspconfigs.rust.rust-analyzer').setup()
-if_successful('lspconfigs.java.jdtls').setup()
-if_successful('lspconfigs.snippets').setup()
+utils.if_successful_then_setup('lspconfigs.lua.sumneko_lua')
+utils.if_successful_then_setup('lspconfigs.rust.rust-analyzer')
+utils.if_successful_then_setup('lspconfigs.java.jdtls')
+utils.if_successful_then_setup('lspconfigs.snippets')

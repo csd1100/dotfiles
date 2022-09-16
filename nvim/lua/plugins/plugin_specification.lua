@@ -103,6 +103,4 @@ return if_successful('packer').startup(function()
     use "simrat39/rust-tools.nvim"
     use "Saecki/crates.nvim"
 
-    -- kitty conf highlight --
-    use { 'fladson/vim-kitty', ft = 'kitty' }
 end)
