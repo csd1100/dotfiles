@@ -1,0 +1,31 @@
+Shortcuts:
+  General:
+    Search: <Ctrl+ F>
+    Replace: <Ctrl + H>
+    Search String in Files: <Ctrl+Shift+F>
+    Search Files: <Shift> <Shift>
+    Settings: <Ctrl+,>
+    Files Explorer: <Ctrl+Shift+E>
+    Debug Menu: <Ctrl+Shift+D>
+    Extensions: <Ctrl+Shift+X>
+    Test: <Ctrl+Shift+T>
+    Panel: <Ctrl+Shift+O>
+  VS CODE:
+    Activity Bar: <Ctrl+Shift+A>
+    Hide Primary Side Bar: <Ctrl+Shift+K>
+  Editor:
+    # leader for nvim instead of alt
+    Navigate Forward: <Alt+l>
+    Navigate Backward: <Alt+h>
+    All Definitionsin file: <Ctrl+G>
+    Go to Definitions: <Alt+o>
+    Implementations: <Alt+j>
+    Peek Implementation: <Alt+Shift+j>
+    # All Usage: <Ctrl+Shift+G>
+  Debug:
+    # leader for nvim
+    Add breakpoint: <Alt+D>
+    Step Into: <Alt+Right>
+    Step Over: <Alt+Down>
+    Step Out: <Alt+Up>
+    Let it go: <Alt+X>
