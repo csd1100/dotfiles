@@ -1,5 +1,10 @@
 local M = {}
 
+local function getCustomModes()
+    local modesModule = require('basic.keymaps-utils')
+    return modesModule.getActiveModes(modesModule.Modes)
+end
+
 function M.setup()
     local status, ll = pcall(require, 'lualine')
     if not status then
@@ -24,7 +29,7 @@ function M.setup()
             globalstatus = false
         },
         sections = {
-            lualine_a = {'mode'},
+            lualine_a = {'mode', getCustomModes},
             lualine_b = {'branch', 'diff', 'diagnostics'},
             lualine_c = {'filename'},
             lualine_x = {'encoding', 'fileformat', 'filetype'},

@@ -1,14 +1,5 @@
-local function map(mode, lhs, rhs, opts)
-    local options = {
-        noremap = true,
-        silent = true
-    }
-    if opts then
-        options = vim.tbl_extend('force', options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
+local utilsModule = require('basic.keymaps-utils')
+local map = utilsModule.map
 -----------------------------------------------------------
 -- Change leader to <Space>
 -----------------------------------------------------------
@@ -19,12 +10,13 @@ vim.g.mapleader = ' '
 -- Neovim shortcuts
 -----------------------------------------------------------
 
--- Disable arrow keys
+-- Disable keys
 map('', '<up>', '<nop>')
 map('', '<down>', '<nop>')
 map('', '<left>', '<nop>')
 map('', '<right>', '<nop>')
 map('', '<C-l>', '<nop>')
+map('n', '<C-S-E>', '<nop>')
 
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')

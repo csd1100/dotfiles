@@ -1,18 +1,11 @@
-local function map(mode, lhs, rhs, opts)
-    local options = {
-        noremap = true,
-        silent = true
-    }
-    if opts then
-        options = vim.tbl_extend('force', options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local utilsModule = require('basic.keymaps-utils')
+local map = utilsModule.map
 
 -- Comment Toggle --
 map('n', '<leader>/', ':CommentToggle<CR>')
 
 -- NvimTree splkey: f --
+map('n', '<leader>f', ":lua require('basic.keymaps-utils').Modes.FILES:toggle()<CR>")
 map('n', '<leader>ft', ':NvimTreeToggle<CR>')
 map('n', '<leader>ff', ':NvimTreeFocus<CR>')
 map('n', '<leader>fo', ':NvimTreeOpen<CR>')
@@ -36,6 +29,7 @@ map('n', '<leader>l<down>', 'vim.diagnostic.goto_next')
 map('n', '<leader>lq', 'vim.diagnostic.setloclist')
 
 -- dap splkey: d --
+map('n', '<leader>d', ":lua require('basic.keymaps-utils').Modes.DEBUG:toggle()<CR>")
 map('n', '<leader>db', ':lua require"dap".toggle_breakpoint()<CR>')
 map('n', '<leader>ds', ':lua require"dap".continue()<CR>')
 map('n', '<leader>do', ':lua require"dap".step_over()<CR>')
