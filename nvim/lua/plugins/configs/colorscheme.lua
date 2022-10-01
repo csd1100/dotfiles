@@ -24,7 +24,9 @@ g.sonokai_better_performance = 1
 g.aquarium_style = "dark"
 
 -- set monokai --
--- monokai.setup { palette = monokai.pro }
+monokai.setup {
+    palette = monokai.pro
+}
 
 -- set everforest --
 -- vim.cmd('colorscheme everforest')
@@ -33,7 +35,7 @@ g.aquarium_style = "dark"
 -- vim.cmd('colorscheme aquarium')
 
 -- set moon schemes --
-vim.cmd('colorscheme orange-moon')
+-- vim.cmd('colorscheme orange-moon')
 
 -- set sonokai --
 -- vim.cmd('colorscheme sonokai')

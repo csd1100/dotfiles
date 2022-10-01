@@ -24,7 +24,7 @@ Shortcuts:
     # All Usage: <Ctrl+Shift+G>
   Debug:
     # leader for nvim
-    Add breakpoint: <Alt+D>
+    Add breakpoint: <Alt+b>
     Step Into: <Alt+Right>
     Step Over: <Alt+Down>
     Step Out: <Alt+Up>

@@ -31,11 +31,11 @@ function M.setup()
             elements = {{
                 id = 'scopes',
                 size = 0.25
-            }, 'breakpoints', 'stacks', 'watches'},
+            }, 'watches'},
             size = 40, -- 40 columns
             position = 'left'
         }, {
-            elements = {'repl', 'console'},
+            elements = {'console'},
             size = 0.25, -- 25% of total lines
             position = 'bottom'
         }},

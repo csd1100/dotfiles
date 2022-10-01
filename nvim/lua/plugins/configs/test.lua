@@ -22,12 +22,8 @@ function M.setup()
             keep_one = true -- keep only one terminal for testing
         },
         runners = { -- setup tests runners
-            javascriptreact = 'nvim-test.runners.jest',
             javascript = 'nvim-test.runners.mocha',
-            python = 'nvim-test.runners.pytest',
-            rust = 'nvim-test.runners.cargo-test',
-            typescript = 'nvim-test.runners.jest',
-            typescriptreact = 'nvim-test.runners.jest'
+            rust = 'nvim-test.runners.cargo-test'
         }
     }
 

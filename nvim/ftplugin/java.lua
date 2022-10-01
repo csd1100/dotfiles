@@ -1,3 +1,6 @@
+local utils = require('basic.utils')
+local keymapUtils = require('basic.keymaps-utils')
+
 local function if_successful(plugin)
     local status, plug = pcall(require, plugin)
     if not status then
@@ -36,6 +39,8 @@ config['init_options'] = {
     bundles = bundles
 }
 config['on_attach'] = function(client, bufnr)
+    utils.if_successful_then_setup('lspconfigs.java.jdtls')
+    keymapUtils.Modes.LSP:toggle()
     jdtls_lib.setup_dap({
         hotcodereplace = 'auto'
     })
