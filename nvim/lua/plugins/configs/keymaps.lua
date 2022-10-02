@@ -10,11 +10,12 @@ map('n', '<C-S-E>', ':NvimTreeOpen<CR>')
 map('n', '<C-S-K>', ':NvimTreeClose<CR>')
 
 -- Global splkey: g --
-map('n', '<leader>gc', ':Telescope colorscheme<CR>')
-map('n', '<leader>gh', ':Telescope oldfiles<CR>')
-map('n', '<leader>gb', ':Telescope buffers<CR>')
+map('n', '<leader>c', ':Telescope colorscheme<CR>')
+map('n', '<leader>h', ':Telescope oldfiles<CR>')
+map('n', '<leader><leader>', ':Telescope find_files<CR>')
+map('n', '<leader>b', ':Telescope buffers<CR>')
 map('n', '<leader>gp', ':Telescope projects<CR>')
-map('n', '<leader>gn', ':DashboardNewFile<CR>')
+map('n', '<leader><S-n>', ':DashboardNewFile<CR>')
 map('n', '<leader>gss', ':SessionSave<CR>')
 map('n', '<leader>gsl', ':SessionLoad<CR>')
 -- Added this mapping temporarily as test requires tree-sitter parsers installed
@@ -32,3 +33,6 @@ map('n', '<leader>d', ":lua require('basic.keymaps-utils').Modes.DEBUG:toggle()<
 
 -- markdown preview --
 map('n', '<leader>mdp', ':Glow<CR>')
+
+-- ToggleTerm --
+map('n', '<C-S-t>','<Esc>:ToggleTerm size=10 direction=float <CR>')

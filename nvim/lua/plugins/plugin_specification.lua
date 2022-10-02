@@ -153,6 +153,10 @@ return if_successful('packer').startup(function()
         commit = 'e9889bbd9919544697d497537acacd9c67d0de99'
     }
 
+    use {
+        'akinsho/toggleterm.nvim',
+        commit = '2a787c426ef00cb3488c11b14f5dcf892bbd0bda'
+    }
     -- markdown preview --
     use {
         'ellisonleao/glow.nvim',
@@ -215,11 +219,11 @@ return if_successful('packer').startup(function()
     use {
         'mfussenegger/nvim-dap',
         commit = 'd9b315a81622457cddf6875c6ac7134baa9932ce'
-    } -- debugger -- 
+    } -- debugger --
     use {
         'rcarriga/nvim-dap-ui',
         commit = 'ebebd429f88bcf656d4c78dec201a8be73a76156'
-    } -- debugger ui -- 
+    } -- debugger ui --
     use {
         'simrat39/rust-tools.nvim',
         commit = '86a2b4e31f504c00715d0dd082a6b8b5d4afbf03'
