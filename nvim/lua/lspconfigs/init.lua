@@ -17,43 +17,14 @@ end
 local on_attached = function(client, bufnr)
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = {
-        noremap = true,
-        silent = true,
-        buffer = bufnr
-    }
+
+    local lsp_keymaps = require('lspconfigs.keymaps')
 
     local lspTogggle = function(self)
         if self.value then
-            map('n', '<leader>ldc', vim.lsp.buf.declaration, bufopts)
-            map('n', '<leader>ld', vim.lsp.buf.definition, bufopts)
-            map('n', 'K', vim.lsp.buf.hover, bufopts)
-            map('n', '<leader>li', vim.lsp.buf.implementation, bufopts)
-            map('n', '<leader>lk', vim.lsp.buf.signature_help, bufopts)
-            map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-            map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-            map('n', '<leader>wl', function()
-                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-            end, bufopts)
-            map('n', '<leader>ltd', vim.lsp.buf.type_definition, bufopts)
-            map('n', '<leader>lrn', vim.lsp.buf.rename, bufopts)
-            map('n', '<leader>lca', vim.lsp.buf.code_action, bufopts)
-            map('n', '<leader>lr', vim.lsp.buf.references, bufopts)
-            map('n', '<leader>lf', vim.lsp.buf.formatting, bufopts)
+            lsp_keymaps.map_lsp_keys()
         else
-            unmap('n', '<leader>ldc')
-            unmap('n', '<leader>ld')
-            unmap('n', 'K')
-            unmap('n', '<leader>li')
-            unmap('n', '<leader>lk')
-            unmap('n', '<leader>wa')
-            unmap('n', '<leader>wr')
-            unmap('n', '<leader>wl')
-            unmap('n', '<leader>ltd')
-            unmap('n', '<leader>lrn')
-            unmap('n', '<leader>lca')
-            unmap('n', '<leader>lr')
-            unmap('n', '<leader>lf')
+            lsp_keymaps.unmap_lsp_keys()
         end
     end
 

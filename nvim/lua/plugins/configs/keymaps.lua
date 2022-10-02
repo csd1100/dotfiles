@@ -5,10 +5,9 @@ local map = utilsModule.map
 map('n', '<leader>/', ':CommentToggle<CR>')
 
 -- NvimTree splkey: f --
-map('n', '<leader>f', ":lua require('basic.keymaps-utils').Modes.FILES:toggle()<CR>")
-map('n', '<leader>ft', ':NvimTreeToggle<CR>')
-map('n', '<leader>ff', ':NvimTreeFocus<CR>')
-map('n', '<leader>fo', ':NvimTreeOpen<CR>')
+map('n', '<leader><S-f>', ':NvimTreeFocus<CR>')
+map('n', '<C-S-E>', ':NvimTreeOpen<CR>')
+map('n', '<C-S-K>', ':NvimTreeClose<CR>')
 
 -- Global splkey: g --
 map('n', '<leader>gc', ':Telescope colorscheme<CR>')
@@ -30,11 +29,6 @@ map('n', '<leader>lq', 'vim.diagnostic.setloclist')
 
 -- dap splkey: d --
 map('n', '<leader>d', ":lua require('basic.keymaps-utils').Modes.DEBUG:toggle()<CR>")
-map('n', '<leader>db', ':lua require"dap".toggle_breakpoint()<CR>')
-map('n', '<leader>ds', ':lua require"dap".continue()<CR>')
-map('n', '<leader>do', ':lua require"dap".step_over()<CR>')
-map('n', '<leader>di', ':lua require"dap".step_into()<CR>')
-map('n', '<leader>dot', ':lua require"dap".step_out()<CR>')
 
 -- markdown preview --
 map('n', '<leader>mdp', ':Glow<CR>')

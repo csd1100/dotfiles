@@ -20,6 +20,7 @@ map('n', '<C-S-E>', '<nop>')
 
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')
+map('i', 'jj', '<Esc><CR>i')
 
 -- Clear search highlighting with <leader> and c
 map('n', '<leader>c', ':nohl<CR>')

@@ -66,20 +66,7 @@ local debugToggleFn = function(self)
     end
 end
 
-local filesToggleFn = function(self)
-    if self.value then
-        M.map('n', '<leader><S-f>', ':NvimTreeFocus<CR>')
-        M.map('n', '<C-S-E>', ':NvimTreeOpen<CR>')
-        M.map('n', '<C-S-K>', ':NvimTreeClose<CR>')
-    else
-        M.unmap('n', '<leader><S-f>')
-        M.unmap('n', '<C-S-K>')
-        M.unmap('n', '<C-S-E>')
-    end
-end
-
 local Mode = M.getModeClass()
 Mode.new('DEBUG', debugToggleFn)
-Mode.new('FILES', filesToggleFn)
 
 return M

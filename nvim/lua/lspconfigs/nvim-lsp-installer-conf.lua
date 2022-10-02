@@ -22,4 +22,9 @@ function M.setup()
     lspi.setup(conf)
 end
 
+function M.lsp_setup(lsp_name)
+    vim.cmd(string.format(':TSInstall %s', lsp_name))
+    vim.cmd(string.format(':LspInstall %s', lsp_name))
+end
+
 return M
