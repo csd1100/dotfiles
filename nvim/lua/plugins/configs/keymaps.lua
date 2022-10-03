@@ -10,14 +10,15 @@ map('n', '<C-S-E>', ':NvimTreeOpen<CR>')
 map('n', '<C-S-K>', ':NvimTreeClose<CR>')
 
 -- Global splkey: g --
-map('n', '<leader>c', ':Telescope colorscheme<CR>')
+map('n', '<leader>cs', ':Telescope colorscheme<CR>')
 map('n', '<leader>h', ':Telescope oldfiles<CR>')
 map('n', '<leader><leader>', ':Telescope find_files<CR>')
 map('n', '<leader>b', ':Telescope buffers<CR>')
 map('n', '<leader>gp', ':Telescope projects<CR>')
-map('n', '<leader><S-n>', ':DashboardNewFile<CR>')
 map('n', '<leader>gss', ':SessionSave<CR>')
 map('n', '<leader>gsl', ':SessionLoad<CR>')
+map('n', '<C-S-n>', ':DashboardNewFile<CR>')
+map('n', '<C-S-f>', ':Telescope live_grep<CR>')
 -- Added this mapping temporarily as test requires tree-sitter parsers installed
 -- And on 1st setup startup fails if not installed
 map('n', '<leader>get', ':lua require("plugins.configs.test").setup()<CR>')

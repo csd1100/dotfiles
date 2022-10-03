@@ -17,13 +17,15 @@ Shortcuts:
     # leader for nvim instead of alt
     Navigate Forward: <Alt+l>
     Navigate Backward: <Alt+h>
-    All Definitionsin file: <Ctrl+G>
-    Go to Definitions: <Ctrl+o>
-    Peek Definitions: <Ctrl+Shift+i>
+    All Symbols in file: <Ctrl+G>
+    Go to Definitions: <Ctrl+d>
+    Peek Definitions: <Ctrl+Shift+o>
     Implementations: <Ctrl+i>
-    Formatting Selection: <Ctrl+Shift+n>
-    Formatting File: <Ctrl+Shift+m>
-    All Usage: <Ctrl+Shift+G>
+    References of Symbol: <Ctrl+Shift+u>
+    Formatting Selection: <Ctrl+Shift+;>
+    Formatting File: <Ctrl+Shift+'>
+    Incoming calls: <Ctrl+Shift->
+    Outgoing calls: <Ctrl+Shift+=>
   Debug:
     # leader for nvim
     Start Debug: <Alt+Shift+D>
