@@ -40,7 +40,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = if_successful('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local servers = {'bashls', 'emmet_ls', 'eslint', 'rust_analyzer', 'jsonls', 'kotlin_language_server', 'pyright',
-                 'tsserver', 'marksman', 'sumneko_lua'}
+                 'tsserver', 'marksman', 'sumneko_lua', 'vuels'}
 
 utils.if_successful_then_setup('lspconfigs.lua.sumneko_lua')
 utils.if_successful_then_setup('lspconfigs.rust.rust-analyzer')
@@ -52,4 +52,3 @@ for _, lsp in ipairs(servers) do
         capabilities = capabilities
     }
 end
-

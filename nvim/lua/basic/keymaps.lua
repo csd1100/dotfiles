@@ -18,6 +18,10 @@ map('', '<right>', '<nop>')
 map('', '<C-l>', '<nop>')
 map('n', '<C-S-E>', '<nop>')
 
+-- Clipboard Copy and Paste --
+map('v', '<C-S-y>', '"+y')
+map('n', '<C-S-p>', '"+p')
+
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')
 map('i', 'jj', '<Esc><CR>i')
@@ -33,15 +37,7 @@ map('i', '[', '[]<left>')
 map('i', '{', '{}<left>')
 map('i', '<', '<><left>')
 map('i', '{<CR>', '{<CR>}<ESC>O')
-
--- add brackets and quotes in visual mode
-map('v', '"', [[<ESC>`>a"<ESC>`<i"<ESC>]])
-map('v', "'", [[<ESC>`>a'<ESC>`<i'<ESC>]])
-map('v', '(', [[<ESC>`>a)<ESC>`<i(<ESC>]])
-map('v', '[', [[<ESC>`>a]<ESC>`<i[<ESC>]])
-map('v', '{', [[<ESC>`>a}<ESC>`<i{<ESC>]])
-map('v', '<', [[<ESC>`>a><ESC>`<i<<ESC>]])
-
+map('n', '<leader>\'', ":lua require('basic.keymaps-utils').Modes.COMPL:toggle()<CR>")
 -- add blank line in normal mode
 map('n', '<leader><CR>', 'i<CR><Esc>')
 

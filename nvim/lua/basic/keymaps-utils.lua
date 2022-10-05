@@ -66,7 +66,27 @@ local debugToggleFn = function(self)
     end
 end
 
+local completionToggleFn = function(self)
+    if self.value then
+        -- add brackets and quotes in visual mode
+        M.map('v', '"', [[<ESC>`>a"<ESC>`<i"<ESC>]])
+        M.map('v', "'", [[<ESC>`>a'<ESC>`<i'<ESC>]])
+        M.map('v', '(', [[<ESC>`>a)<ESC>`<i(<ESC>]])
+        M.map('v', '[', [[<ESC>`>a]<ESC>`<i[<ESC>]])
+        M.map('v', '{', [[<ESC>`>a}<ESC>`<i{<ESC>]])
+        M.map('v', '<', [[<ESC>`>a><ESC>`<i<<ESC>]])
+    else
+        M.unmap('v', '"')
+        M.unmap('v', "'")
+        M.unmap('v', '(')
+        M.unmap('v', '[')
+        M.unmap('v', '{')
+        M.unmap('v', '<')
+    end
+end
+
 local Mode = M.getModeClass()
 Mode.new('DEBUG', debugToggleFn)
+Mode.new('COMPL', completionToggleFn)
 
 return M
