@@ -29,6 +29,7 @@ map('n', '<leader>lo', 'vim.diagnostic.open_float')
 map('n', '<leader>l<up>', 'vim.diagnostic.goto_prev')
 map('n', '<leader>l<down>', 'vim.diagnostic.goto_next')
 map('n', '<leader>lq', 'vim.diagnostic.setloclist')
+map('n', '<leader>li', ':lua require("lspconfigs.nvim-lsp-installer-conf").lsp_setup(\'')
 
 -- dap splkey: d --
 map('n', '<leader>d', ":lua require('basic.keymaps-utils').Modes.DEBUG:toggle()<CR>")
