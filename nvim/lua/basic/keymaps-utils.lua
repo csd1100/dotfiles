@@ -22,6 +22,7 @@ function M.getModeClass()
         M.Modes[this.id] = this
         return this
     end
+
     return Mode
 end
 
@@ -75,6 +76,13 @@ local completionToggleFn = function(self)
         M.map('v', '[', [[<ESC>`>a]<ESC>`<i[<ESC>]])
         M.map('v', '{', [[<ESC>`>a}<ESC>`<i{<ESC>]])
         M.map('v', '<', [[<ESC>`>a><ESC>`<i<<ESC>]])
+        M.map('i', '"', '""<left>')
+        M.map('i', '\'', '\'\'<left>')
+        M.map('i', '(', '()<left>')
+        M.map('i', '[', '[]<left>')
+        M.map('i', '{', '{}<left>')
+        M.map('i', '<', '<><left>')
+        M.map('i', '{<CR>', '{<CR>}<ESC>O')
     else
         M.unmap('v', '"')
         M.unmap('v', "'")
@@ -82,11 +90,20 @@ local completionToggleFn = function(self)
         M.unmap('v', '[')
         M.unmap('v', '{')
         M.unmap('v', '<')
+        M.unmap('i', '"')
+        M.unmap('i', "'")
+        M.unmap('i', '(')
+        M.unmap('i', '[')
+        M.unmap('i', '{')
+        M.unmap('i', '<')
+        M.unmap('i', '{<CR>')
     end
 end
 
 local Mode = M.getModeClass()
 Mode.new('DEBUG', debugToggleFn)
-Mode.new('COMPL', completionToggleFn)
+local COMPL = Mode.new('COMPL', completionToggleFn)
+-- enable quotes completion by default --
+COMPL:toggle()
 
 return M

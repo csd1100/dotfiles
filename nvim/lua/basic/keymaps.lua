@@ -24,22 +24,15 @@ map('n', '<C-S-p>', '"+p')
 
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')
-map('i', 'jj', '<Esc><CR>i')
+map('i', 'jj', '<Esc><CR>')
 
 -- Clear search highlighting with <leader> and c
 map('n', '<leader>c', ':nohl<CR>')
 
 -- autocomplete brackets and quotes
-map('i', '"', '""<left>')
-map('i', '\'', '\'\'<left>')
-map('i', '(', '()<left>')
-map('i', '[', '[]<left>')
-map('i', '{', '{}<left>')
-map('i', '<', '<><left>')
-map('i', '{<CR>', '{<CR>}<ESC>O')
 map('n', '<leader>\'', ":lua require('basic.keymaps-utils').Modes.COMPL:toggle()<CR>")
 -- add blank line in normal mode
-map('n', '<leader><CR>', 'i<CR><Esc>')
+map('n', '<leader><CR>', '$w')
 
 -- mapping exit for convenience --
 map('n', ':Q', ':q<CR>')
@@ -50,6 +43,10 @@ map('n', '<leader>tt', ':tabnew<CR>')
 map('n', '<leader>tp', ':tabprevious<CR>')
 map('n', '<leader>tn', ':tabnext<CR>')
 map('n', '<leader>te', ':tabedit')
+
+-- fast navigation --
+map('n', '<S-s>', '15j')
+map('n', '<S-w>', '15k')
 
 -- win navigation --
 map('', '<C-h>', ':wincmd h<CR>')

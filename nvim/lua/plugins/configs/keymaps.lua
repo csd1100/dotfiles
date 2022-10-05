@@ -3,6 +3,7 @@ local map = utilsModule.map
 
 -- Comment Toggle --
 map('n', '<leader>/', ':CommentToggle<CR>')
+map('v', '<leader>/', ":'<,'>CommentToggle<CR>")
 
 -- NvimTree splkey: f --
 map('n', '<leader><S-f>', ':NvimTreeFocus<CR>')

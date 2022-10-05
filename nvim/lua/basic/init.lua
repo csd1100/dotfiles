@@ -32,4 +32,6 @@ set.showcmd = true
 -- set.encoding --
 set.encoding = 'utf-8'
 
+-- set show tabline always
+set.showtabline = 2
 require('basic.keymaps')

@@ -10,6 +10,7 @@ end
 
 -- fast loading --
 if_successful('impatient')
+utils.if_successful_then_setup('plugins.configs.packer')
 
 -- config --
 if_successful('lspconfigs')
@@ -19,18 +20,16 @@ if_successful('plugins.configs.colorscheme')
 
 -- plguins using default config --
 utils.if_successful_then_setup('tidy')
-utils.if_successful_then_setup('tabby')
-utils.if_successful_then_setup('project_nvim')
 utils.if_successful_then_setup('numbers')
 utils.if_successful_then_setup('nvim-tree')
 utils.if_successful_then_setup('colorizer')
 utils.if_successful_then_setup('spellsitter')
 utils.if_successful_then_setup('regexplainer')
+utils.if_successful_then_setup('project_nvim')
 utils.if_successful_then_setup('nvim_comment')
 
 -- plugins with configs --
 utils.if_successful_then_setup('plugins.configs.dapui')
-utils.if_successful_then_setup('plugins.configs.packer')
 utils.if_successful_then_setup('plugins.configs.numbers')
 utils.if_successful_then_setup('plugins.configs.lualine')
 utils.if_successful_then_setup('plugins.configs.projects')
@@ -41,3 +40,4 @@ utils.if_successful_then_setup('plugins.configs.toggleterm')
 utils.if_successful_then_setup('plugins.configs.treesitter')
 utils.if_successful_then_setup('plugins.configs.cursorline')
 utils.if_successful_then_setup('plugins.configs.regexplainer')
+utils.if_successful_then_setup('plugins.configs.tabby')
