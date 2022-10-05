@@ -32,11 +32,13 @@ map('n', '<leader>c', ':nohl<CR>')
 -- autocomplete brackets and quotes
 map('n', '<leader>\'', ":lua require('basic.keymaps-utils').Modes.COMPL:toggle()<CR>")
 -- add blank line in normal mode
-map('n', '<leader><CR>', '$w')
+map('n', '<leader><CR>', 'i<CR><Esc>')
+map('n', '<leader>j', '$wi<CR><Esc>')
 
 -- mapping exit for convenience --
 map('n', ':Q', ':q<CR>')
 map('n', 'qq', ':q<CR>')
+map('n', 'zx', ':SessionSave<CR>:wqa<CR>')
 
 --- Tabs splkey: t --
 map('n', '<leader>tt', ':tabnew<CR>')
