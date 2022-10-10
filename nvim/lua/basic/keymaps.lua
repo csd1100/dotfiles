@@ -33,22 +33,28 @@ map('n', '<leader>c', ':nohl<CR>')
 map('n', '<leader>\'', ":lua require('basic.keymaps-utils').Modes.COMPL:toggle()<CR>")
 -- add blank line in normal mode
 map('n', '<leader><CR>', 'i<CR><Esc>')
-map('n', '<leader>j', '$wi<CR><Esc>')
+map('n', '<leader>j', 'o<Esc>j')
 
--- mapping exit for convenience --
+-- mappings for convenience --
+map('n', ':W', ':w<CR>')
 map('n', ':Q', ':q<CR>')
 map('n', 'qq', ':q<CR>')
 map('n', 'zx', ':SessionSave<CR>:wqa<CR>')
 
 --- Tabs splkey: t --
 map('n', '<leader>tt', ':tabnew<CR>')
-map('n', '<leader>tp', ':tabprevious<CR>')
-map('n', '<leader>tn', ':tabnext<CR>')
+map('n', '<C-Right>', ':tabprevious<CR>')
+map('n', '<C-Left>', ':tabnext<CR>')
 map('n', '<leader>te', ':tabedit')
+
+-- Buffer --
+map('n', 'bk', ':bd<CR>')
 
 -- fast navigation --
 map('n', '<S-s>', '15j')
 map('n', '<S-w>', '15k')
+map('v', '<S-s>', '10j')
+map('v', '<S-w>', '10k')
 
 -- win navigation --
 map('', '<C-h>', ':wincmd h<CR>')

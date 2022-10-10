@@ -30,6 +30,7 @@ utils.if_successful_then_setup('nvim_comment')
 
 -- plugins with configs --
 utils.if_successful_then_setup('plugins.configs.dapui')
+utils.if_successful_then_setup('plugins.configs.test')
 utils.if_successful_then_setup('plugins.configs.numbers')
 utils.if_successful_then_setup('plugins.configs.lualine')
 utils.if_successful_then_setup('plugins.configs.projects')

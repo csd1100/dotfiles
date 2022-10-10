@@ -20,9 +20,6 @@ map('n', '<leader>gss', ':SessionSave<CR>')
 map('n', '<leader>gsl', ':SessionLoad<CR>')
 map('n', '<C-S-n>', ':DashboardNewFile<CR>')
 map('n', '<C-S-f>', ':Telescope live_grep<CR>')
--- Added this mapping temporarily as test requires tree-sitter parsers installed
--- And on 1st setup startup fails if not installed
-map('n', '<leader>get', ':lua require("plugins.configs.test").setup()<CR>')
 
 -- lsp diagnostic splkey: l --
 map('n', '<leader>lo', 'vim.diagnostic.open_float')

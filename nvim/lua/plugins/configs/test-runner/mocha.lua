@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+local function setupMocha()
     require('nvim-test.runners.mocha'):setup{
         command = vim.fn.fnamemodify(vim.fn.getcwd(), ':p') .. '/node_modules/.bin/mocha', -- a command to run the test runner
         args = {'--collectCoverage=true'}, -- default arguments
@@ -11,7 +11,13 @@ function M.setup()
         filename_modifier = nil,
         working_directory = nil
     }
+end
 
+function M.setup()
+    local status, _ = pcall(setupMocha)
+    if not status then
+        print('Mocha setup did not complete successfully. Make sure to install javascript and typescript tree-sitter parser')
+    end
 end
 
 return M
