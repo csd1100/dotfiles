@@ -239,4 +239,10 @@ return if_successful('packer').startup(function()
         commit = '32f162c27045fc712664b9ddbd33d3c550cb2bfc'
     }
 
+    -- refactoring --
+    use {
+        'ThePrimeagen/refactoring.nvim',
+        commit = 'c9ca8e3bbf7218101f16e6a03b15bf72b99b2cae'
+    }
+
 end)
