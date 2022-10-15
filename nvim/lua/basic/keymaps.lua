@@ -39,6 +39,7 @@ map('n', '<leader>j', 'o<Esc>j')
 map('n', ':W', ':w<CR>')
 map('n', ':Q', ':q<CR>')
 map('n', 'qq', ':q<CR>')
+map('n', 'wq', ':wq<CR>')
 map('n', 'zx', ':SessionSave<CR>:wqa<CR>')
 
 --- Tabs splkey: t --

@@ -28,10 +28,7 @@ function M.setup()
     }
 
     local test_runners = {'mocha'}
-
-    print('setting up and enabling nvim-test')
     t.setup(conf)
-
     for _, runner in ipairs(test_runners) do
         require('plugins.configs.test-runner.' .. runner).setup()
     end

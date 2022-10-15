@@ -31,7 +31,7 @@ function M.setup()
         icon = '  ',
         desc = 'Recently opened files           ',
         action = 'Telescope oldfiles',
-        shortcut = 'SPC  h        '
+        shortcut = 'SPC  h         '
     }, {
         icon = '  ',
         desc = 'Open Projects                   ',
@@ -41,12 +41,12 @@ function M.setup()
         icon = '  ',
         desc = 'New  File                       ',
         action = 'DashboardNewFile',
-        shortcut = 'Ctrl Shift n  '
+        shortcut = 'Ctrl Shift n   '
     }, {
         icon = '  ',
         desc = 'File Browser                    ',
         action = 'NvimTreeOpen',
-        shortcut = 'Ctrl Shift e  '
+        shortcut = 'Ctrl Shift e   '
     }}
 
     db.custom_footer = {[[]]}
