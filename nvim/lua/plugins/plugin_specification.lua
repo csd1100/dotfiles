@@ -115,12 +115,8 @@ return if_successful('packer').startup(function()
         commit = '7b0ad56a0aaa12f205b586b143edb8296d3d5821'
     }
     use {
-        'frenzyexists/aquarium-vim',
-        commit = '1f9417b11146580b47f2ecae26b9f3a75bf5e526'
-    }
-    use {
-        'sts10/vim-pink-moon',
-        commit = 'ab1980d1f216aea8060d935b7220bdc42d05a92b'
+        'sainnhe/gruvbox-material',
+        commit = '2807579bd0a9981575dbb518aa65d3206f04ea02'
     }
     use {
         'morhetz/gruvbox',

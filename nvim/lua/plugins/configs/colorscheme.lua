@@ -20,25 +20,22 @@ g.everforest_ui_contrast = 'high'
 g.sonokai_style = 'atlantis'
 g.sonokai_better_performance = 1
 
--- aqurarium conf --
-g.aquarium_style = "dark"
+-- grubbox-material conf --
+g.gruvbox_material_background = 'hard'
 
 -- set monokai --
-monokai.setup {
-    palette = monokai.pro
-}
+-- monokai.setup {
+--     palette = monokai.pro
+-- }
 
 -- set everforest --
 -- vim.cmd('colorscheme everforest')
 
--- set aquarium --
--- vim.cmd('colorscheme aquarium')
-
--- set moon schemes --
--- vim.cmd('colorscheme orange-moon')
-
 -- set sonokai --
 -- vim.cmd('colorscheme sonokai')
+
+-- set everforest --
+vim.cmd('colorscheme gruvbox-material')
 
 -- set gruvbox --
 -- vim.cmd('colorscheme gruvbox')
