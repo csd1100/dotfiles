@@ -76,6 +76,5 @@ fi
 log "zsh setup complete linking zshrc "
 if [ -e "$HOME/.zshrc" ]; then
     rm $HOME/.zshrc
-else
-    ln -s $SCRIPT_DIR/zsh/.zshrc $HOME/.zshrc
 fi
+ln -s $SCRIPT_DIR/zsh/.zshrc $HOME/.zshrc

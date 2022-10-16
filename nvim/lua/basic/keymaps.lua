@@ -39,7 +39,8 @@ map('n', '<leader>j', 'o<Esc>j')
 map('n', ':W', ':w<CR>')
 map('n', ':Q', ':q<CR>')
 map('n', 'qq', ':q<CR>')
-map('n', 'wq', ':wq<CR>')
+map('n', 'sx', ':wq<CR>')
+map('n', 'sw', ':w<CR>')
 map('n', 'zx', ':SessionSave<CR>:wqa<CR>')
 
 --- Tabs splkey: t --
@@ -49,7 +50,7 @@ map('n', '<C-Left>', ':tabnext<CR>')
 map('n', '<leader>te', ':tabedit')
 
 -- Buffer --
-map('n', 'bk', ':bd<CR>')
+map('n', 'qb', ':bd<CR>')
 
 -- fast navigation --
 map('n', '<S-s>', '15j')
