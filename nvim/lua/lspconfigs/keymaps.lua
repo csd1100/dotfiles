@@ -23,7 +23,7 @@ function M.map_lsp_keys()
     map('n', '<leader>ltd', vim.lsp.buf.type_definition, bufopts)
     map('n', '<leader>lrn', vim.lsp.buf.rename, bufopts)
     map('n', '<leader>lca', vim.lsp.buf.code_action, bufopts)
-    map('n', '<leader>lf', vim.lsp.buf.formatting, bufopts)
+    map('n', '<leader>lf', vim.lsp.buf.format, bufopts)
 
     map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
