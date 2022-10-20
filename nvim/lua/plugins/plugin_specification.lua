@@ -234,4 +234,9 @@ return if_successful('packer').startup(function()
         'klen/nvim-test',
         commit = '32f162c27045fc712664b9ddbd33d3c550cb2bfc'
     }
+
+    -- Game --
+    use {
+        'seandewar/killersheep.nvim',
+    }
 end)
