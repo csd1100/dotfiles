@@ -20,7 +20,7 @@ map('n', '<C-S-E>', '<nop>')
 
 -- Clipboard Copy and Paste --
 map('v', '<C-S-y>', '"+y')
-map('n', '<C-S-p>', '"+p')
+map('n', '<C-p>', '"+p')
 
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')

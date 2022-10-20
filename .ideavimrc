@@ -7,7 +7,7 @@ map <left> <nop>
 map <right> <nop>
 
 vnoremap <C-S-y> "+y
-nnoremap <C-S-p> "+p
+nnoremap <C-p> "+p
 
 inoremap kk <Esc>
 inoremap jj <Esc><CR>
@@ -81,4 +81,4 @@ set hlsearch = true
 set showcmd = true
 set encoding = 'utf-8'
 set showtabline = 2
-set compatible
+set showmode
