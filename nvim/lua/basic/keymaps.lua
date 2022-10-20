@@ -24,7 +24,9 @@ map('n', '<C-S-p>', '"+p')
 
 -- Map Esc to kk
 map('i', 'kk', '<Esc>')
-map('i', 'jj', '<Esc><CR>')
+map('i', 'lll', '<Esc>l')
+map('i', 'hhh', '<Esc>h')
+map('i', 'jj', '<Esc>')
 
 -- Clear search highlighting with <leader> and c
 map('n', '<leader>c', ':nohl<CR>')
@@ -41,7 +43,12 @@ map('n', ':Q', ':q<CR>')
 map('n', 'qq', ':q<CR>')
 map('n', 'sx', ':wq<CR>')
 map('n', 'sw', ':w<CR>')
+map('n', 'zz', ':wqa<CR>')
 map('n', 'zx', ':SessionSave<CR>:wqa<CR>')
+map('n', '55', 'q5')
+map('n', ',', '@5')
+map('n', '<C-f>','/')
+map('n', '<C-S-h>',':s/')
 
 --- Tabs splkey: t --
 map('n', '<leader>tt', ':tabnew<CR>')

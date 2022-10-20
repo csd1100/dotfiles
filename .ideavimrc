@@ -1,0 +1,84 @@
+nnoremap <Space> <nop>
+let mapleader =" "
+
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+vnoremap <C-S-y> "+y
+nnoremap <C-S-p> "+p
+
+inoremap kk <Esc>
+inoremap jj <Esc><CR>
+inoremap lll <Esc>l
+inoremap hhh <Esc>h
+
+nnoremap <leader>c :nohl<CR>
+nnoremap <leader><CR> i<CR><Esc>
+nnoremap <leader>j o<Esc>j
+
+nnoremap :W :w<CR>
+nnoremap :Q :q<CR>
+nnoremap qq :q<CR>
+nnoremap zz :wqa<CR>
+nnoremap sx :wq<CR>
+nnoremap sw :w<CR>
+nnoremap qb :bd<CR>
+nnoremap 55 @5
+nnoremap , @@
+
+nnoremap <S-s> 15j
+nnoremap <S-w> 15k
+nnoremap <S-s> 10j
+nnoremap <S-w> 10k
+
+vnoremap " <ESC>`>a"<ESC>`<i"
+noremap ' <ESC>`>a'<ESC>`<i'
+vnoremap ` <ESC>`>a`<ESC>`<i`
+vnoremap ( <ESC>`>a)<ESC>`<i(
+vnoremap [ <ESC>`>a]<ESC>`<i[
+vnoremap { <ESC>`>a}<ESC>`<i{
+vnoremap < <ESC>`>a><ESC>`<i<
+
+nmap <C-S-p> <Action>(SearchEverywhere)
+nmap <leader><leader> <Action>(GotoFile)
+nmap <C-left> <Action>(Back)
+nmap <C-right> <Action>(Forward)
+nmap <C-f> <Action>(Find)
+nmap <C-S-h> <Action>(Replace)
+nmap <C-S-f> <Action>(FindInPath)
+nmap <C-,> <Action>(ShowSettings)
+nmap <C-S-e> <Action>(ActivateProjectToolWindow)
+nmap <C-S-d> <Action>(ActivateDebugToolWindow)
+nmap <C-S-e> <Action>(ActivateProjectToolWindow)
+nmap <C-S-l> <Action>(ActivateTODOToolWindow)
+nmap <C-g> <Action>(GoToSymbol)
+nmap <C-i> <Action>(GoToImplementation)
+nmap <C-S-u> <Action>(FindUsages)
+nmap <leader>lf <Action>(ReformatCode)
+nmap <leader>rm <Action>(RefactoringMenu)
+vmap <C-S-m> <Action>(ExtractMethod)
+vmap <C-S-e> <Action>(ExtractClass)
+vmap <C-S-v> <Action>(IntroduceVariable)
+vmap <C-S-f> <Action>(IntroduceField)
+vmap <C-S-r> <Action>(RenameElement)
+vmap <C-S-s> <Action>(ChangeSignature)
+nmap <leader><S-d> <Action>(Debug)
+nmap <leader><x> <Action>(Resume)
+nmap <leader>b <Action>(ToggleLineBreakpoint)
+nmap <leader><down> <Action>(StepInto)
+nmap <leader><right> <Action>(StepOver)
+nmap <leader><left> <Action>(StepOut)
+
+set number = true
+set relativenumber = true
+set expandtab = true
+set tabstop = 4
+set softtabstop = -1
+set shiftwidth = 0
+set hlsearch = true
+set showcmd = true
+set encoding = 'utf-8'
+set showtabline = 2
+set compatible
