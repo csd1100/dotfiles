@@ -44,4 +44,5 @@ Shortcuts:
     Step Into: <Leader> <Down>
     Step Over: <Leader> <Right>
     Step Out: <Leader> <Left>
-    Let it go: <Leader> <X>
+    Let it go: <Leader> <Shift+s>
+    Stop: <Leader> <Shift+x>

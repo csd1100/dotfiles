@@ -65,11 +65,14 @@ vmap <C-S-f> <Action>(IntroduceField)
 vmap <C-S-r> <Action>(RenameElement)
 vmap <C-S-s> <Action>(ChangeSignature)
 nmap <leader><S-d> <Action>(Debug)
-nmap <leader><x> <Action>(Resume)
+nmap <leader><S-r> <Action>(Run)
+nmap <leader><S-s> <Action>(Resume)
+nmap <leader><S-x> <Action>(Stop)
 nmap <leader>b <Action>(ToggleLineBreakpoint)
-nmap <leader><down> <Action>(StepInto)
-nmap <leader><right> <Action>(StepOver)
-nmap <leader><left> <Action>(StepOut)
+nmap <C-down> <Action>(StepInto)
+nmap <C-right> <Action>(StepOver)
+nmap <C-left> <Action>(StepOut)
+vmap .. <Action>(EvaluateExpression)
 
 set number = true
 set relativenumber = true
