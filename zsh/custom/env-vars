@@ -2,9 +2,6 @@
 # PATH
 export PATH="$HOME/bin:$PATH"
 
-# TERM for tmux since it zsh-auto-suggestions fails
-export TERM=xterm-256color
-
 # default editor
 export EDITOR=nvim
 
