@@ -19,7 +19,7 @@ end
 
 local workspace_dir = os.getenv('NVIM_JAVA_WORKSPACE_DIR')
 if not workspace_dir then
-    workspace_dir = home .. '/programming/java/workspace' .. '/' .. project_name
+    workspace_dir = home .. '/work/java/workspace' .. '/' .. project_name
 end
 print(workspace_dir)
 

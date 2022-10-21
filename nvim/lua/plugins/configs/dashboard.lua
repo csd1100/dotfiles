@@ -25,7 +25,7 @@ function M.setup()
     db.custom_center = { {
         icon = '  ',
         desc = 'Load Last Session               ',
-        action = 'SessionLoad<CR>',
+        action = 'SessionManager load_last_session<CR>',
         shortcut = 'SPC g s l      '
     }, {
         icon = '  ',
@@ -56,19 +56,6 @@ function M.setup()
         highlight DashboardShortcut ctermfg=203 guifg=#ff6578
         highlight DashboardFooter ctermfg=179 guifg=#eacb64
     ]]
-
-    -- session mgmt --
-    local home = os.getenv('HOME')
-    if not home then
-        home = vim.fn.getcwd()
-    end
-
-    local session_dir = os.getenv('NVIM_SESSIONS_DIR')
-    if not session_dir then
-        session_dir = home .. '/.nvim/sessions'
-    end
-    local sessionsfile = session_dir
-    db.session_directory = sessionsfile
 end
 
 return M

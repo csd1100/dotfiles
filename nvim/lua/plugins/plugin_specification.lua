@@ -42,6 +42,13 @@ return if_successful('packer').startup(function()
         'ahmedkhalf/project.nvim',
         commit = '090bb11ee7eb76ebb9d0be1c6060eac4f69a240f'
     }
+
+    -- Sessions Management --
+    use {
+        'Shatur/neovim-session-manager',
+        commit = '4005dac93f5cd1257792259ef4df6af0e3afc213'
+    }
+
     -- lua line --
     use {
         'nvim-lualine/lualine.nvim',
