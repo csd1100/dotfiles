@@ -21,8 +21,14 @@ map('n', '<C-S-E>', '<nop>')
 -- Clipboard Copy and Paste --
 map('v', '<C-S-y>', '"+y')
 map('n', '<C-p>', '"+p')
+-- yank text in reg 6
+map('v', '""', '"6y')
+-- replace current word with text from reg 6
+map('n', 'cp', 'h"6p<Esc>lde')
+-- replace from current pos to end of the line with text from reg 6
+map('n', '[]', 'h"6p<Esc>ld$')
 
--- Map Esc to kk
+-- Map Esc --
 map('i', 'kk', '<Esc>')
 map('i', 'lll', '<Esc>l')
 map('i', 'hhh', '<Esc>h')
