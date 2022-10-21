@@ -17,6 +17,11 @@ alias :Q="exit"
 alias gh="git history"
 alias gcv="git commit -v"
 
+#tmux
+alias tm="tmux"
+alias tps="tmux list-sessions"
+alias tkl="tmux kill-server"
+
 # source overrides
 if [ -f "$ZSH_CUSTOM/overrides/aliases" ]
 then
