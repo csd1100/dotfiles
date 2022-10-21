@@ -1,0 +1,14 @@
+new_tab Home
+launch tmux new -As Home
+
+new_tab work:1
+cd ~/work
+launch tmux new -As work:1
+
+new_tab work:2
+cd ~/work
+launch tmux new -As work:2
+
+new_tab dotfiles
+cd ~/dotfiles/
+launch tmux new -As dotfiles 'nvim; $SHELL'
