@@ -1,7 +1,0 @@
-## CONFIGS
-export CONFIG="$HOME/.config"
-export PATH="$PATH:$HOME/.local/share/bin"
-
-## Homes
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
-

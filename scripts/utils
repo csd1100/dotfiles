@@ -1,0 +1,42 @@
+#!/bin/bash
+
+readonly BLACK=$(tput setaf 0)
+readonly RED=$(tput setaf 1)
+readonly GREEN=$(tput setaf 2)
+readonly YELLOW=$(tput setaf 3)
+readonly LIME_YELLOW=$(tput setaf 190)
+readonly POWDER_BLUE=$(tput setaf 153)
+readonly BLUE=$(tput setaf 4)
+readonly MAGENTA=$(tput setaf 5)
+readonly CYAN=$(tput setaf 6)
+readonly WHITE=$(tput setaf 7)
+readonly BRIGHT=$(tput bold)
+readonly NORMAL=$(tput sgr0)
+readonly BLINK=$(tput blink)
+readonly REVERSE=$(tput smso)
+readonly UNDERLINE=$(tput smul)
+
+# log
+function log(){
+    printf "\n${YELLOW}=>${NORMAL} $1"
+}
+
+function link(){
+    SOURCE_DIR=${3:-"$SCRIPT_DIR"}
+    if [ -L "$1/$2" ]; then
+        log "${BLUE}$1/$2 ${NORMAL}is already linked"
+    else
+        log "Linking ${BLUE}$SOURCE_DIR/$2 ->${GREEN} $1/$2 ${NORMAL}"
+        ln -s $SOURCE_DIR/$2 $1/$2
+    fi
+}
+
+function unlink(){
+    SOURCE_DIR=${3:-"$SCRIPT_DIR"}
+    if [ -L "$1/$2" ]; then
+        log "Unlinking ${BLUE}$SOURCE_DIR/$2 ${NORMAL}-> ${GREEN}$1/$2 ${NORMAL}"
+        rm $1/$2
+    else
+        log "${BLUE}$1/$2 ${NORMAL}not linked"
+    fi
+}

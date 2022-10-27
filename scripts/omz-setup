@@ -60,20 +60,8 @@ else
     ln -s "$CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$CUSTOM/themes/spaceship.zsh-theme"
 fi
 
-log "script directory: $SCRIPT_DIR"
-log "Linking env-vars, aliases, functions and etc to ZSH_CUSTOM ..."
-if [ -e "$CUSTOM/overrides" ]; then
-    log "env-vars, overrides already linked"
-else
-    log "Installing spaceship-prompt..."
-    ln -s $SCRIPT_DIR/zsh/custom/aliases $CUSTOM/aliases
-    ln -s $SCRIPT_DIR/zsh/custom/env-vars $CUSTOM/env-vars
-    ln -s $SCRIPT_DIR/zsh/custom/functions $CUSTOM/functions
-    ln -s $SCRIPT_DIR/zsh/custom/misc $CUSTOM/misc
-    ln -s $SCRIPT_DIR/zsh/custom/overrides $CUSTOM/overrides
-fi
-
 log "zsh setup complete linking zshrc "
+log "script directory: $SCRIPT_DIR"
 if [ -e "$HOME/.zshrc" ]; then
     mv $HOME/.zshrc $HOME/.zshrc.bkp
 fi
