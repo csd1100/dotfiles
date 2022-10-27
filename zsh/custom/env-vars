@@ -1,0 +1,26 @@
+#!/bin/zsh
+# PATH
+export PATH="$HOME/bin:$PATH"
+
+# default editor
+export EDITOR=nvim
+
+# spaceship prompt zsh
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  user          # Username section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  venv          # virtualenv section
+  conda         # conda virtualenv section
+  exec_time     # Execution time
+  line_sep      # Line break
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+# source overrides
+if [ -f "$ZSH_CUSTOM/overrides/env-vars" ]
+then
+    source $ZSH_CUSTOM/overrides/env-vars
+fi

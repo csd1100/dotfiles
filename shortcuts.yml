@@ -1,0 +1,48 @@
+Shortcuts:
+  General:
+    Search: <Ctrl + F>
+    Replace: <Ctrl + Shift + H>
+    Search String in Files: <Ctrl+Shift+F>
+    Search Files: <Space> <Space>
+    Settings: <Ctrl+,>
+    Files Explorer: <Ctrl+Shift+E>
+    Debug Menu: <Ctrl+Shift+D>
+    Extensions: <Ctrl+Shift+X>
+    Test: <Ctrl+Shift+T>
+    Panel: <Ctrl+Shift+O>
+
+  VS CODE:
+    Activity Bar: <Ctrl+Shift+A>
+    Hide Primary Side Bar: <Ctrl+Shift+K>
+
+  Editor:
+    # leader for nvim instead of alt
+    Navigate Forward: <Ctrl+O>
+    Navigate Backward: n<Tab>
+    All Symbols in file: <Ctrl+G>
+    Go to Definitions: <Ctrl+D>
+    Implementations: <Ctrl+I>
+    Peek Definitions: <Ctrl+Shift+O>
+    References of Symbol: <Ctrl+Shift+U>
+    Formatting Selection: v<Leader>lf
+    Formatting File: <Leader>lf
+    Incoming calls:
+    Outgoing calls:
+
+  Refactoring:
+    Extract Method: v<Ctrl+Shift+M>
+    Extract Class: v<Ctrl+Shift+e>
+    Introduce Variable: v<Ctrl+Shift+v>
+    Introduce Field: v<Ctrl+Shift+v>
+    Rename: v<Ctrl+Shift+R>
+    Change Signature: v<Ctrl+Shift+s>
+
+  Debug:
+    # leader for nvim
+    Start Debug: <Leader> <Shift+D>
+    Add breakpoint: <Leader> <b>
+    Step Into: <Leader> <Down>
+    Step Over: <Leader> <Right>
+    Step Out: <Leader> <Left>
+    Let it go: <Leader> <Shift+s>
+    Stop: <Leader> <Shift+x>

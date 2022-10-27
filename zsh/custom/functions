@@ -1,0 +1,9 @@
+#!/bin/zsh
+# make directory and change current directory to created directory
+mcd () { md -p $1; cd $1 }
+
+# source overrides
+if [ -f "$ZSH_CUSTOM/overrides/functions" ]
+then
+    source $ZSH_CUSTOM/overrides/functions
+fi

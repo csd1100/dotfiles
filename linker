@@ -1,0 +1,53 @@
+#!/bin/bash
+
+readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+function log(){
+    printf  "\n[$(date)] $1 \n\n"
+}
+
+readonly CONFIG_DIR="$HOME/.config"
+
+if [ -d "$HOME/.config" ]; then
+    log "XDCONFIG Dir: $CONFIG_DIR"
+else
+    mkdir $CONFIG_DIR
+fi
+
+log "XDCONFIG Dir -> $CONFIG_DIR"
+log "Config Dir -> $SCRIPT_DIR"
+
+## declare an array variable
+declare -a utils=("kitty" "neofetch" "nvim" "skhd" "yabai")
+
+## now loop through the above array
+for util in "${utils[@]}"
+do
+    if [ -L "$CONFIG_DIR/$util" ]; then
+        log "$util already linked"
+    else
+        log "Linking $SCRIPT_DIR/$util -> $CONFIG_DIR/$util"
+        ln -s $SCRIPT_DIR/$util $CONFIG_DIR/$util
+    fi
+done
+
+if [ -e "$HOME/dotfiles" ]; then
+    log "$HOME/dotfiles already linked"
+else
+    log "Linking $SCRIPT_DIR -> $HOME/dotfiles"
+    ln -s $SCRIPT_DIR "$HOME/dotfiles"
+fi
+
+if [ -e "$HOME/.tmux.conf" ]; then
+    log "$HOME/.tmux.conf already linked"
+else
+    log "Linking $SCRIPT_DIR/.tmux.conf -> $HOME/.tmux.conf"
+    ln -s $SCRIPT_DIR/.tmux.conf "$HOME/.tmux.conf"
+fi
+
+if [ -e "$HOME/.ideavimrc" ]; then
+    log "$HOME/.ideavimrc already linked"
+else
+    log "Linking $SCRIPT_DIR/.ideavimrc -> $HOME/.ideavimrc"
+    ln -s $SCRIPT_DIR/.ideavimrc "$HOME/.ideavimrc"
+fi

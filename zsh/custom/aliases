@@ -1,0 +1,29 @@
+#!/bin/zsh
+# zsh
+alias zshrc="source $HOME/.zshrc"
+alias zshconfig="code $HOME/.zshrc"
+
+# generic
+alias :q="exit"
+
+# neovim
+alias nv="nvim"
+
+# general
+alias :q="exit"
+alias :Q="exit"
+
+# git
+alias gh="git history"
+alias gcv="git commit -v"
+
+#tmux
+alias tm="tmux"
+alias tps="tmux list-sessions"
+alias tkl="tmux kill-server"
+
+# source overrides
+if [ -f "$ZSH_CUSTOM/overrides/aliases" ]
+then
+    source $ZSH_CUSTOM/overrides/aliases
+fi

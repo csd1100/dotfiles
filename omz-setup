@@ -1,0 +1,80 @@
+#!/bin/bash
+
+function log(){
+    printf  "\n[$(date)] $1 \n\n"
+}
+
+readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+readonly CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+
+if ! command -v zsh &> /dev/null; then
+    log "zsh could not be found, please install zsh to use oh-my-zsh"
+fi
+
+if ! command -v wget &> /dev/null; then
+    log "wget could not be found, please install wget to install oh-my-zsh"
+fi
+
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    log "oh-my-zsh already installed, upgrading oh-my-zsh"
+    $HOME/.oh-my-zsh/tools/upgrade.sh
+else
+    log "Installing oh-my-zsh... "
+    RUNZSH=no sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+log "Installing custom plugins and prompt themes...... "
+if [ -d "$CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+    log "zsh-syntax-highlighting already installed"
+else
+    log "Installing zsh-syntax-highlighting..."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $CUSTOM/plugins/zsh-syntax-highlighting
+fi
+
+if [ -d "$CUSTOM/plugins/zsh-autosuggestions" ]; then
+    log "zsh-autosuggestions already installed"
+else
+    log "Installing zsh-autosuggestions..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions $CUSTOM/plugins/zsh-autosuggestions
+fi
+
+if [ -d "$CUSTOM/plugins/zsh-completions" ]; then
+    log "zsh-completions already installed"
+else
+    log "Installing zsh-completions..."
+    git clone https://github.com/zsh-users/zsh-completions $CUSTOM/plugins/zsh-completions
+fi
+
+if [ -d "$CUSTOM/plugins/zsh-history-substring-search" ]; then
+    log "zsh-history-substring-search already installed"
+else
+    log "Installing zsh-history-substring-search..."
+    git clone https://github.com/zsh-users/zsh-history-substring-search $CUSTOM/plugins/zsh-history-substring-search
+fi
+
+if [ -d "$CUSTOM/themes/spaceship-prompt" ]; then
+    log "spaceship-prompt already installed"
+else
+    log "Installing spaceship-prompt..."
+    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$CUSTOM/themes/spaceship-prompt" --depth=1
+    ln -s "$CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$CUSTOM/themes/spaceship.zsh-theme"
+fi
+
+log "script directory: $SCRIPT_DIR"
+log "Linking env-vars, aliases, functions and etc to ZSH_CUSTOM ..."
+if [ -e "$CUSTOM/overrides" ]; then
+    log "env-vars, overrides already linked"
+else
+    log "Installing spaceship-prompt..."
+    ln -s $SCRIPT_DIR/zsh/custom/aliases $CUSTOM/aliases
+    ln -s $SCRIPT_DIR/zsh/custom/env-vars $CUSTOM/env-vars
+    ln -s $SCRIPT_DIR/zsh/custom/functions $CUSTOM/functions
+    ln -s $SCRIPT_DIR/zsh/custom/misc $CUSTOM/misc
+    ln -s $SCRIPT_DIR/zsh/custom/overrides $CUSTOM/overrides
+fi
+
+log "zsh setup complete linking zshrc "
+if [ -e "$HOME/.zshrc" ]; then
+    mv $HOME/.zshrc $HOME/.zshrc.bkp
+fi
+ln -s $SCRIPT_DIR/zsh/.zshrc $HOME/.zshrc
