@@ -46,6 +46,13 @@ else
         log "$HOME/.tmux.conf not linked"
 fi
 
+if [ -e "$HOME/.ideavimrc" ]; then
+    log "Unlinking $SCRIPTS_DIR/.ideavimrc -> $HOME/.ideavimrc"
+    rm "$HOME/.ideavimrc"
+else
+        log "$HOME/.ideavimrc not linked"
+fi
+
 if [ -e "$CUSTOM/overrides" ]; then
     rm $CUSTOM/aliases
     rm $CUSTOM/env-vars

@@ -44,3 +44,10 @@ else
     log "Linking $SCRIPT_DIR/.tmux.conf -> $HOME/.tmux.conf"
     ln -s $SCRIPT_DIR/.tmux.conf "$HOME/.tmux.conf"
 fi
+
+if [ -e "$HOME/.ideavimrc" ]; then
+    log "$HOME/.ideavimrc already linked"
+else
+    log "Linking $SCRIPT_DIR/.ideavimrc -> $HOME/.ideavimrc"
+    ln -s $SCRIPT_DIR/.ideavimrc "$HOME/.ideavimrc"
+fi
