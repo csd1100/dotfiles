@@ -4,7 +4,7 @@ function log(){
     printf  "\n[$(date)] $1 \n\n"
 }
 
-readonly SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+readonly SCRIPT_DIR=$(dirname $PWD)
 readonly CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 
 if ! command -v zsh &> /dev/null; then
