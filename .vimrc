@@ -11,9 +11,9 @@ nnoremap <C-p> "+p
 " yank text in reg 6
 vnoremap "" "6y
 " replace current word with text from reg 6
-nnoremap cp h"6p<Esc>lde
+vnoremap cp de"6P
 " replace from current pos to end of the line with text from reg 6
-nnoremap [] h"6p<Esc>ld$
+nnoremap [] d$"6P
 
 inoremap kk <Esc>
 inoremap jj <Esc><CR>

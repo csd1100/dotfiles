@@ -1,12 +1,11 @@
 source ~/.vimrc
 
 vnoremap " <ESC>`>a"<ESC>`<i"
-noremap ' <ESC>`>a'<ESC>`<i'
+vnoremap ' <ESC>`>a'<ESC>`<i'
 vnoremap ` <ESC>`>a`<ESC>`<i`
 vnoremap ( <ESC>`>a)<ESC>`<i(
 vnoremap [ <ESC>`>a]<ESC>`<i[
 vnoremap { <ESC>`>a}<ESC>`<i{
-vnoremap < <ESC>`>a><ESC>`<i<
 
 set showmode
 
