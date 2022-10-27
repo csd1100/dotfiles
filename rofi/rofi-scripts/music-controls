@@ -1,0 +1,26 @@
+#!/bin/bash
+THEME=$(xrdb -get rofi.media.theme)
+
+menu=("Play/Pause")
+menu+=("Next")
+menu+=("Previous")
+menu+=("Stop")
+
+selected=$(( IFS=$'\n'; echo "${menu[*]}" ) | rofi -dmenu -p "$(playerctl metadata --format "{{ title }} - {{ artist }}")" -theme $THEME)
+
+case $selected in
+    "Play/Pause")
+        playerctl play-pause
+    ;;
+    "Next")
+        playerctl next
+    ;;
+    "Previous")
+        playerctl previous
+    ;;
+    "Stop")
+        playerctl stop
+    ;;
+    *)
+    ;;
+esac

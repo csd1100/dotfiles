@@ -1,0 +1,8 @@
+#include ".xres/colors.xres"
+#include ".xres/rofi.xres"
+#include ".xres/polybar.xres"
+#include ".xres/i3.xres"
+#include ".xres/general.xres"
+
+
+

@@ -1,0 +1,15 @@
+/* global settings and color variables */
+@import "~/.cache/wal/colors-rofi-light"
+window {
+   background-color: @background-color;
+   width: 450px;
+   height:800px;
+   padding: 20px;
+   fullscreen: false;
+   border:  2px;
+   border-color: @border-color;
+   font: "Fira Code 18";
+   location: south west;
+   y-offset:  -55px;
+   x-offset:  5px;
+}
