@@ -1,14 +1,14 @@
 new_tab Home
-launch tmux new -As Home
+launch zsh
 
 new_tab work:1
 cd ~/work
-launch tmux new -As work:1
+launch zsh
 
 new_tab work:2
 cd ~/work
-launch tmux new -As work:2
+launch zsh
 
 new_tab dotfiles
 cd ~/dotfiles/
-launch tmux new -As dotfiles 'nvim; $SHELL'
+launch zsh -i -c 'nvim; zsh'
