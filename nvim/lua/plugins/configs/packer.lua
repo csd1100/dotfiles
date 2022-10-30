@@ -17,6 +17,9 @@ local conf = {
                 border = 'rounded'
             }
         end
+    },
+    profile = {
+        enable = true,
     }
 }
 packer.init(conf)

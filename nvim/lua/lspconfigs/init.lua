@@ -10,9 +10,15 @@ if not status then
     return
 end
 
-local status, _ = pcall(require, 'mason')
+local status, mason = pcall(require, 'mason')
 if not status then
     print('failed to load mason')
+    return
+end
+
+local status, lspi = pcall(require, 'mason-lspconfig')
+if not status then
+    print('failed to load mason-lspconfig')
     return
 end
 
@@ -20,6 +26,20 @@ local utils = require 'basic.utils'
 local keymapUtils = require 'basic.keymaps-utils'
 local map = keymapUtils.map
 local unmap = keymapUtils.unmap
+
+local conf = {
+    ensure_installed = { 'sumneko_lua', 'bashls' },
+
+    automatic_installation = false,
+
+    -- debugging issues with server installations.
+    log_level = vim.log.levels.INFO,
+
+    -- Limit for the maximum amount of servers to be installed at the same time. Once this limit is reached, any further
+    -- servers that are requested to be installed will be put in a queue.
+    max_concurrent_installers = 4
+}
+lspi.setup(conf)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -38,19 +58,14 @@ local on_attached = function(client, bufnr)
     LSP_MODE:toggle()
 end
 
-utils.if_successful_then_setup('lspconfigs.nvim-lsp-installer-conf')
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cnl.update_capabilities(capabilities)
 
-utils.if_successful_then_setup('lspconfigs.lua.sumneko_lua')
-utils.if_successful_then_setup('lspconfigs.rust.rust-analyzer')
-utils.if_successful_then_setup('lspconfigs.snippets')
+require('lspconfigs.lua.sumneko_lua')
+require('lspconfigs.rust.rust-analyzer')
+require('lspconfigs.snippets')
 
-local servers = { 'bashls', 'emmet_ls', 'eslint', 'rust_analyzer','jdtls', 'jsonls', 'kotlin_language_server', 'pyright',
-    'tsserver', 'marksman', 'sumneko_lua', 'vuels' }
-
-for _, lsp in ipairs(servers) do
+for _, lsp in ipairs(lspi.get_installed_servers()) do
     lspconfig[lsp].setup {
         on_attach = on_attached,
         capabilities = capabilities
