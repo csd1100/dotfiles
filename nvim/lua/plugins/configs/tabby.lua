@@ -1,40 +1,36 @@
-local M = {}
+local status, tt = pcall(require, 'tabby.tabline')
+if not status then
+    print('failed to load ' .. 'tabby.tabline')
+    return
+end
 
-function M.setup()
+local status, util = pcall(require, 'tabby.util')
+if not status then
+    print('failed to load ' .. 'tabby.util')
+    return
+end
 
-    local status, tt = pcall(require, 'tabby.tabline')
-    if not status then
-        print('failed to load ' .. 'tabby.tabline')
-        return
-    end
+local hl_tabline_fill = util.extract_nvim_hl('lualine_c_normal')
+local hl_tabline = util.extract_nvim_hl('lualine_b_normal')
+local hl_tabline_sel = util.extract_nvim_hl('lualine_a_normal')
 
-    local status, util = pcall(require, 'tabby.util')
-    if not status then
-        print('failed to load ' .. 'tabby.util')
-        return
-    end
+local function tab_label(tabid, active)
+    local icon = active and '' or ''
+    local number = vim.api.nvim_tabpage_get_number(tabid)
+    local name = util.get_tab_name(tabid)
+    return string.format(' %s %d: %s ', icon, number, name)
+end
 
-    local hl_tabline_fill = util.extract_nvim_hl('lualine_c_normal')
-    local hl_tabline = util.extract_nvim_hl('lualine_b_normal')
-    local hl_tabline_sel = util.extract_nvim_hl('lualine_a_normal')
-
-    local function tab_label(tabid, active)
-        local icon = active and '' or ''
-        local number = vim.api.nvim_tabpage_get_number(tabid)
-        local name = util.get_tab_name(tabid)
-        return string.format(' %s %d: %s ', icon, number, name)
-    end
-
-    local theme = {
-        fill = hl_tabline_fill,
-        head = hl_tabline,
-        current_tab = hl_tabline_sel,
-        tab = hl_tabline,
-        win = hl_tabline,
-        tail = hl_tabline
-    }
-    tt.set(function(line)
-        return {
+local theme = {
+    fill = hl_tabline_fill,
+    head = hl_tabline,
+    current_tab = hl_tabline_sel,
+    tab = hl_tabline,
+    win = hl_tabline,
+    tail = hl_tabline
+}
+tt.set(function(line)
+    return {
         {
             { '  ', hl = theme.head },
             line.sep('', theme.head, theme.fill),
@@ -70,9 +66,4 @@ function M.setup()
         hl = theme.fill,
     }
 
-    end)
-
-
-end
-
-return M
+end)

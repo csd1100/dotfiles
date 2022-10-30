@@ -1,16 +1,19 @@
+local status, lspconfig = pcall(require, 'lspconfig')
+if not status then
+    print('failed to load lspconfig')
+    return
+end
+
+local status, cnl = pcall(require, 'cmp_nvim_lsp')
+if not status then
+    print('failed to load cmp_nvim_lsp')
+    return
+end
+
 local utils = require 'basic.utils'
 local keymapUtils = require 'basic.keymaps-utils'
 local map = keymapUtils.map
 local unmap = keymapUtils.unmap
-
-local function if_successful(plugin)
-    local status, plug = pcall(require, plugin)
-    if not status then
-        print('failed to load ' .. plugin)
-        return
-    end
-    return plug
-end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -34,13 +37,11 @@ end
 
 utils.if_successful_then_setup('lspconfigs.nvim-lsp-installer-conf')
 
-local lspconfig = if_successful('lspconfig')
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = if_successful('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = cnl.update_capabilities(capabilities)
 
-local servers = {'bashls', 'emmet_ls', 'eslint', 'rust_analyzer', 'jsonls', 'kotlin_language_server', 'pyright',
-                 'tsserver', 'marksman', 'sumneko_lua', 'vuels'}
+local servers = { 'bashls', 'emmet_ls', 'eslint', 'rust_analyzer', 'jsonls', 'kotlin_language_server', 'pyright',
+    'tsserver', 'marksman', 'sumneko_lua', 'vuels' }
 
 utils.if_successful_then_setup('lspconfigs.lua.sumneko_lua')
 utils.if_successful_then_setup('lspconfigs.rust.rust-analyzer')

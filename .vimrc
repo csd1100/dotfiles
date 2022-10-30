@@ -27,6 +27,7 @@ nnoremap <leader>j o<Esc>j
 nnoremap :W :w<CR>
 nnoremap :Q :q<CR>
 nnoremap qq :q<CR>
+nnoremap qa :qa<CR>
 nnoremap zz :wqa<CR>
 nnoremap sx :wq<CR>
 nnoremap sw :w<CR>

@@ -1,13 +1,14 @@
+local status, t = pcall(require, 'nvim-test')
+if not status then
+    print('failed to load nvim-test')
+    return
+end
+
 local M = {}
 
 function M.setup()
 
-    local status, t = pcall(require, 'nvim-test')
-    if not status then
-        return
-    end
-
-    conf = {
+    local conf = {
         run = true, -- run tests (using for debug)
         commands_create = true, -- create commands (TestFile, TestLast, ...)
         filename_modifier = ':.', -- modify filenames before tests run(:h filename-modifiers)
@@ -27,8 +28,9 @@ function M.setup()
         }
     }
 
-    local test_runners = {'mocha'}
     t.setup(conf)
+
+    local test_runners = {'mocha'}
     for _, runner in ipairs(test_runners) do
         require('plugins.configs.test-runner.' .. runner).setup()
     end

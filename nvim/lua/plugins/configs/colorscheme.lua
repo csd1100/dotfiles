@@ -1,12 +1,6 @@
 local set = vim.opt
 local g = vim.g
 
-local status, monokai = pcall(require, 'monokai')
-if not status then
-    print('failed to load ' .. 'monokai')
-    return
-end
-
 -- vim opts for colors and background --
 set.termguicolors = true
 set.background = 'dark'
@@ -24,6 +18,11 @@ g.sonokai_better_performance = 1
 g.gruvbox_material_background = 'hard'
 
 -- set monokai --
+-- local status, monokai = pcall(require, 'monokai')
+-- if not status then
+--     print('failed to load ' .. 'monokai')
+--     return
+-- end
 -- monokai.setup {
 --     palette = monokai.pro
 -- }

@@ -1,15 +1,12 @@
-local function if_successful(plugin)
-    local status, plug = pcall(require, plugin)
-    if not status then
-        print('failed to load ' .. plugin)
-        return
-    end
-    return plug
+local status, packer = pcall(require, 'packer')
+if not status then
+    print('failed to load packer')
+    return
 end
 
 -- packer config --
 vim.cmd 'autocmd BufWritePost plugin_specification.lua source <afile> | PackerSync'
-return if_successful('packer').startup(function()
+return packer.startup(function()
     use {
         'wbthomason/packer.nvim',
         commit = '6afb67460283f0e990d35d229fd38fdc04063e0a'
@@ -217,7 +214,8 @@ return if_successful('packer').startup(function()
     } -- Formatting plugin --
     use {
         'mfussenegger/nvim-jdtls',
-        commit = '774a7714f9dcdfaa8d6d86831809ab941b2b7f26'
+        commit = '774a7714f9dcdfaa8d6d86831809ab941b2b7f26',
+        ft = { 'java' }
     } -- java lsp --
     use {
         'mfussenegger/nvim-dap',
@@ -229,11 +227,12 @@ return if_successful('packer').startup(function()
     } -- debugger ui --
     use {
         'simrat39/rust-tools.nvim',
-        commit = '86a2b4e31f504c00715d0dd082a6b8b5d4afbf03'
+        commit = '86a2b4e31f504c00715d0dd082a6b8b5d4afbf03',
     } -- rust --
     use {
         'Saecki/crates.nvim',
-        commit = '003442e2448870f6f2fab6ec7ac7b4de21e6d1d4'
+        commit = '003442e2448870f6f2fab6ec7ac7b4de21e6d1d4',
+        ft = { 'rust' }
     } -- rust --
 
     -- testing plugin --
