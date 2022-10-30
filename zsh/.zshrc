@@ -8,8 +8,6 @@ plugins=(
 	zsh-completions
 	zsh-syntax-highlighting
 	kubectl
-	minikube
-	helm
 )
 
 source $ZSH/oh-my-zsh.sh

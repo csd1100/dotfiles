@@ -13,6 +13,7 @@ SPACESHIP_PROMPT_ORDER=(
   git           # Git section (git_branch + git_status)
   venv          # virtualenv section
   conda         # conda virtualenv section
+  async
   exec_time     # Execution time
   line_sep      # Line break
   exit_code     # Exit code section
