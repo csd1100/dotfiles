@@ -4,32 +4,25 @@ local unmap = keymapUtils.unmap
 
 local M = {}
 
-local bufopts = {
-    noremap = true,
-    silent = true,
-    buffer = bufnr
-}
-
 function M.map_lsp_keys()
-    map('n', 'K', vim.lsp.buf.hover, bufopts)
-    map('n', '<C-g>', ':Telescope lsp_document_symbols<CR>', bufopts)
-    map('n', '<C-i>', ':Telescope lsp_implementations<CR>', bufopts)
-    map('n', '<C-d>', vim.lsp.buf.definition, bufopts)
-    map('n', '<C-S-u>', ':Telescope lsp_references<CR>', bufopts)
-    map('n', '<C-S-->', ':Telescope lsp_incoming_calls<CR>', bufopts)
-    map('n', '<C-S-=>', ':Telescope lsp_outgoing_calls<CR>', bufopts)
+    map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover Info (LSP)' })
+    map('n', '<C-g>', ':Telescope lsp_document_symbols<CR>', { buffer = bufnr, desc = 'All symbols (LSP)' })
+    map('n', '<C-i>', ':Telescope lsp_implementations<CR>', { buffer = bufnr, desc = 'Implementation (LSP)' })
+    map('n', '<C-d>', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Definition (LSP)' })
+    map('n', '<C-S-u>', ':Telescope lsp_references<CR>', { buffer = bufnr, desc = 'All Usages (LSP)' })
+    map('n', '<C-S-->', ':Telescope lsp_incoming_calls<CR>', { buffer = bufnr, desc = 'Incoming Calls (LSP)' })
+    map('n', '<C-S-=>', ':Telescope lsp_outgoing_calls<CR>', { buffer = bufnr, desc = 'Outgoing Calls (LSP)' })
+    map('n', '<leader>lk', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature Help (LSP)' })
+    map('n', '<leader>ltd', vim.lsp.buf.type_definition, { buffer = bufnr, desc = 'Type Definition (LSP)' })
+    map('n', '<leader>lrn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename (LSP)' })
+    map('n', '<leader>lca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Actions (LSP)' })
+    map('n', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format (LSP)' })
 
-    map('n', '<leader>lk', vim.lsp.buf.signature_help, bufopts)
-    map('n', '<leader>ltd', vim.lsp.buf.type_definition, bufopts)
-    map('n', '<leader>lrn', vim.lsp.buf.rename, bufopts)
-    map('n', '<leader>lca', vim.lsp.buf.code_action, bufopts)
-    map('n', '<leader>lf', vim.lsp.buf.format, bufopts)
-
-    map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add Workspace Folder (LSP)' })
+    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = bufnr, desc = 'Remove Workspace Folder (LSP)' })
     map('n', '<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
+    end, { buffer = bufnr, desc = 'List Workspace Folders (LSP)' })
 end
 
 function M.unmap_lsp_keys()

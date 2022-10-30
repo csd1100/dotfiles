@@ -7,21 +7,22 @@ map('n', '<Space>', '<nop>')
 vim.g.mapleader = ' '
 
 -- autocomplete brackets and quotes
-map('n', '<leader>\'', ":lua require('basic.keymaps-utils').Modes.COMPL:toggle()<CR>")
+map('n', '<leader>\'', ":lua require('basic.keymaps-utils').Modes.COMPL:toggle()<CR>",
+    { desc = 'Enable Quotes and brackets completion' })
 
-map('n', '<C-f>','/')
-map('n', '<C-S-h>',':s/')
+map('n', '<C-f>', '/', { desc = 'Find using /' })
+map('n', '<C-S-h>', ':s/', { desc = 'Substitution using :s' })
 
 --- Tabs splkey: t --
-map('n', '<leader>tt', ':tabnew<CR>')
-map('n', '<C-Right>', ':tabprevious<CR>')
-map('n', '<C-Left>', ':tabnext<CR>')
-map('n', '<leader>te', ':tabedit')
+map('n', '<leader>tt', ':tabnew<CR>', { desc = 'New Tab' })
+map('n', '<C-Right>', ':tabprevious<CR>', { desc = 'Previous Tab' })
+map('n', '<C-Left>', ':tabnext<CR>', { desc = 'Next Tab' })
+map('n', '<leader>te', ':tabedit', { desc = 'Open file in new Tab' })
 
 -- win navigation --
-map('', '<C-h>', ':wincmd h<CR>')
-map('', '<C-j>', ':wincmd j<CR>')
-map('', '<C-k>', ':wincmd k<CR>')
-map('', '<C-l>', ':wincmd l<CR>')
-map('', '<C-+>', ':res +3<CR>')
-map('', '<C-->', ':res -3<CR>')
+map('', '<C-h>', ':wincmd h<CR>', { desc = 'Window Left' })
+map('', '<C-j>', ':wincmd j<CR>', { desc = 'Window Down' })
+map('', '<C-k>', ':wincmd k<CR>', { desc = 'Window Up' })
+map('', '<C-l>', ':wincmd l<CR>', { desc = 'Window Right' })
+map('', '<C-+>', ':res +3<CR>', { desc = 'Resize Window By +3' })
+map('', '<C-->', ':res -3<CR>', { desc = 'Resize Window By -3' })

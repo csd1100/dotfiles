@@ -24,6 +24,11 @@ return packer.startup(function()
         commit = '1c4802a654c9127c745cbe2ffff9909a3a9ff965'
     }
 
+    -- which key --
+    use {
+        'folke/which-key.nvim',
+        commit = '61553aeb3d5ca8c11eea8be6eadf478062982ac9'
+    }
     -- fzf telescope --
     use {
         'nvim-telescope/telescope.nvim',

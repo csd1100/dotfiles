@@ -21,6 +21,7 @@ if_successful('plugins.configs.colorscheme')
 -- plguins using default config --
 utils.if_successful_then_setup('tidy')
 utils.if_successful_then_setup('nvim-tree')
+utils.if_successful_then_setup('which-key')
 utils.if_successful_then_setup('colorizer')
 utils.if_successful_then_setup('spellsitter')
 utils.if_successful_then_setup('project_nvim')

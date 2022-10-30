@@ -32,7 +32,10 @@ nnoremap zz :wqa<CR>
 nnoremap sx :wq<CR>
 nnoremap sw :w<CR>
 nnoremap qb :bd<CR>
+" quit all buffers except current along with empty buffer
+nnoremap qx :%bd\|e#\|bd#<CR>
 nnoremap 55 q5
+nnoremap ., @5
 nnoremap , @@
 
 nnoremap <S-s> 15j
@@ -45,6 +48,7 @@ set relativenumber
 set expandtab
 set hlsearch
 set showcmd
+set timeoutlen=1500
 set encoding=utf-8
 set showtabline=2
 set tabstop=4
