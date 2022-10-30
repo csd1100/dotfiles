@@ -238,6 +238,10 @@ return packer.startup(function()
         commit = '003442e2448870f6f2fab6ec7ac7b4de21e6d1d4',
         ft = { 'rust' }
     } -- rust --
+    use {
+        'mfussenegger/nvim-jdtls',
+        commit = 'f39efa0e823bcc876d18a7b44d3b61191c42e61c',
+    } -- java --
 
     -- testing plugin --
     use {

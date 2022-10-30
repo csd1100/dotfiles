@@ -65,9 +65,24 @@ require('lspconfigs.lua.sumneko_lua')
 require('lspconfigs.rust.rust-analyzer')
 require('lspconfigs.snippets')
 
-for _, lsp in ipairs(lspi.get_installed_servers()) do
-    lspconfig[lsp].setup {
-        on_attach = on_attached,
-        capabilities = capabilities
-    }
-end
+lspi.setup_handlers {
+    function(server_name) -- default handler (optional)
+        lspconfig[server_name].setup {
+            on_attach = on_attached,
+            capabilities = capabilities
+        }
+    end,
+    ["jdtls"] = function(server_name)
+        local status, _ = pcall(require, 'jdtls')
+        if not status then
+            print('failed to load nvim-jdtls. loading mason config')
+            lspconfig[server_name].setup {
+                on_attach = on_attached,
+                capabilities = capabilities
+            }
+            return
+        else
+            require('lspconfigs.java.jdtls')
+        end
+    end
+}

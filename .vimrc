@@ -40,8 +40,8 @@ nnoremap , @@
 
 nnoremap <S-s> 15j
 nnoremap <S-w> 15k
-nnoremap <S-s> 10j
-nnoremap <S-w> 10k
+vnoremap <S-s> 10j
+vnoremap <S-w> 10k
 
 set number
 set relativenumber
