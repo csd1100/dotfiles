@@ -176,8 +176,12 @@ return packer.startup(function()
         commit = '51775b12cfbf1b6462c7b13cd020cc09e6767aea'
     }
     use {
-        'williamboman/nvim-lsp-installer',
-        commit = 'ae913cb4fd62d7a84fb1582e11f2e15b4d597123'
+        'williamboman/mason.nvim',
+        commit = '311a14ffd7aa62561b73405c63478756c265585c'
+    }
+    use {
+        'williamboman/mason-lspconfig.nvim',
+        commit = 'a910b4d50f7a32d2f9057d636418a16843094b7c'
     }
     use {
         'hrsh7th/nvim-cmp',
@@ -212,11 +216,6 @@ return packer.startup(function()
         'sbdchd/neoformat',
         commit = '0ae951121da29a157d80db70c32679b428afffdc'
     } -- Formatting plugin --
-    use {
-        'mfussenegger/nvim-jdtls',
-        commit = '774a7714f9dcdfaa8d6d86831809ab941b2b7f26',
-        ft = { 'java' }
-    } -- java lsp --
     use {
         'mfussenegger/nvim-dap',
         commit = 'd9b315a81622457cddf6875c6ac7134baa9932ce'

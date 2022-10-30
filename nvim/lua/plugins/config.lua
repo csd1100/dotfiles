@@ -27,10 +27,12 @@ utils.if_successful_then_setup('project_nvim')
 utils.if_successful_then_setup('nvim_comment')
 
 -- plugins with configs --
+require('plugins.configs.mason')
 require('plugins.configs.test')
 require('plugins.configs.dapui')
 require('plugins.configs.numbers')
 require('plugins.configs.lualine')
+require('plugins.configs.tabby')
 require('plugins.configs.projects')
 require('plugins.configs.gitsigns')
 require('plugins.configs.dashboard')
@@ -40,7 +42,6 @@ require('plugins.configs.treesitter')
 require('plugins.configs.cursorline')
 require('plugins.configs.regexplainer')
 require('plugins.configs.sessions_manager')
-require('plugins.configs.tabby')
 
 -- lsp --
 if_successful('lspconfigs')

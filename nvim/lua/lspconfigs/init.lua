@@ -10,6 +10,12 @@ if not status then
     return
 end
 
+local status, _ = pcall(require, 'mason')
+if not status then
+    print('failed to load mason')
+    return
+end
+
 local utils = require 'basic.utils'
 local keymapUtils = require 'basic.keymaps-utils'
 local map = keymapUtils.map
@@ -18,9 +24,6 @@ local unmap = keymapUtils.unmap
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attached = function(client, bufnr)
-    -- Mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-
     local lsp_keymaps = require('lspconfigs.keymaps')
 
     local lspTogggle = function(self)
@@ -40,12 +43,12 @@ utils.if_successful_then_setup('lspconfigs.nvim-lsp-installer-conf')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cnl.update_capabilities(capabilities)
 
-local servers = { 'bashls', 'emmet_ls', 'eslint', 'rust_analyzer', 'jsonls', 'kotlin_language_server', 'pyright',
-    'tsserver', 'marksman', 'sumneko_lua', 'vuels' }
-
 utils.if_successful_then_setup('lspconfigs.lua.sumneko_lua')
 utils.if_successful_then_setup('lspconfigs.rust.rust-analyzer')
 utils.if_successful_then_setup('lspconfigs.snippets')
+
+local servers = { 'bashls', 'emmet_ls', 'eslint', 'rust_analyzer','jdtls', 'jsonls', 'kotlin_language_server', 'pyright',
+    'tsserver', 'marksman', 'sumneko_lua', 'vuels' }
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {

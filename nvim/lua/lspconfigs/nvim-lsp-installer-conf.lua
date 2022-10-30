@@ -1,14 +1,14 @@
 local M = {}
 
 function M.setup()
-    local status, lspi = pcall(require, 'nvim-lsp-installer')
+    local status, lspi = pcall(require, 'mason-lspconfig')
     if not status then
-        print('failed to load ' .. 'nvim-lsp-installer')
+        print('failed to load mason-lspconfig')
         return
     end
 
     local conf = {
-        ensure_installed = { 'sumneko_lua', 'bashls'},
+        ensure_installed = { 'sumneko_lua', 'bashls' },
 
         automatic_installation = false,
 
