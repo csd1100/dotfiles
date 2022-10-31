@@ -30,12 +30,12 @@ Shortcuts:
     Outgoing calls:
 
   Refactoring:
-    Extract Method: v<Ctrl+Shift+M>
-    Extract Class: v<Ctrl+Shift+e>
-    Introduce Variable: v<Ctrl+Shift+v>
-    Introduce Field: v<Ctrl+Shift+v>
-    Rename: v<Ctrl+Shift+R>
-    Change Signature: v<Ctrl+Shift+s>
+    Extract Method: v<leader>lem
+    Extract Class: v<leader>leC
+    Introduce Variable: v<leader>lev
+    Introduce Field: v<leader>lec
+    Rename: v<leader>lrn
+    Change Signature: v<leader>lcs
 
   Debug:
     # leader for nvim

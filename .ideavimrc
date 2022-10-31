@@ -8,6 +8,8 @@ vnoremap [ <ESC>`>a]<ESC>`<i[
 vnoremap { <ESC>`>a}<ESC>`<i{
 
 set showmode
+set which-key
+set timeoutlen=5000
 
 nmap <C-S-p> <Action>(SearchEverywhere)
 nmap <leader><leader> <Action>(GotoFile)
@@ -27,18 +29,18 @@ nmap <C-d> <Action>(GotoImplementation)
 nmap <C-S-u> <Action>(FindUsages)
 nmap <leader>lf <Action>(ReformatCode)
 nmap <leader>rm <Action>(RefactoringMenu)
-vmap <C-S-m> <Action>(ExtractMethod)
-vmap <C-S-e> <Action>(ExtractClass)
-vmap <C-S-v> <Action>(IntroduceVariable)
-vmap <C-S-f> <Action>(IntroduceField)
-vmap <C-S-r> <Action>(RenameElement)
-vmap <C-S-s> <Action>(ChangeSignature)
+vmap <leader>lem <Action>(ExtractMethod)
+vmap <leader>leC <Action>(ExtractClass)
+vmap <leader>lev <Action>(IntroduceVariable)
+vmap <leader>lec <Action>(IntroduceField)
+vmap <leader>lrn <Action>(RenameElement)
+vmap <leader>lcs <Action>(ChangeSignature)
 nmap <leader><S-d> <Action>(Debug)
 nmap <leader><S-r> <Action>(Run)
 nmap <leader><S-s> <Action>(Resume)
 nmap <leader><S-x> <Action>(Stop)
 nmap <leader>b <Action>(ToggleLineBreakpoint)
-nmap <C-down> <Action>(StepInto)
-nmap <C-right> <Action>(StepOver)
-nmap <C-left> <Action>(StepOut)
+nmap <leader><down> <Action>(StepInto)
+nmap <leader><right> <Action>(StepOver)
+nmap <leader><left> <Action>(StepOut)
 vmap .. <Action>(EvaluateExpression)
