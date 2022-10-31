@@ -1,9 +1,4 @@
-local set = vim.opt
 local g = vim.g
-
--- vim opts for colors and background --
-set.termguicolors = true
-set.background = 'dark'
 
 -- everforest conf --
 g.everforest_better_performance = 1
@@ -18,14 +13,14 @@ g.sonokai_better_performance = 1
 g.gruvbox_material_background = 'hard'
 
 -- set monokai --
--- local status, monokai = pcall(require, 'monokai')
--- if not status then
---     print('failed to load ' .. 'monokai')
---     return
--- end
--- monokai.setup {
---     palette = monokai.pro
--- }
+local status, monokai = pcall(require, 'monokai')
+if not status then
+    print('failed to load ' .. 'monokai')
+    return
+end
+monokai.setup {
+    palette = monokai.pro
+}
 
 -- set everforest --
 -- vim.cmd('colorscheme everforest')
@@ -33,8 +28,8 @@ g.gruvbox_material_background = 'hard'
 -- set sonokai --
 -- vim.cmd('colorscheme sonokai')
 
--- set everforest --
-vim.cmd('colorscheme gruvbox-material')
+-- set gruvbox-material --
+-- vim.cmd('colorscheme gruvbox-material')
 
 -- set gruvbox --
 -- vim.cmd('colorscheme gruvbox')

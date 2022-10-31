@@ -35,7 +35,7 @@ nnoremap qb :bd<CR>
 " quit all buffers except current along with empty buffer
 nnoremap qx :%bd\|e#\|bd#<CR>
 nnoremap 55 q5
-nnoremap ., @5
+nnoremap ,, @5
 nnoremap , @@
 
 nnoremap <S-s> 15j

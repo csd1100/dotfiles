@@ -47,8 +47,8 @@ return packer.startup(function()
 
     -- Sessions Management --
     use {
-        'Shatur/neovim-session-manager',
-        commit = '4005dac93f5cd1257792259ef4df6af0e3afc213'
+        'rmagatti/auto-session',
+        commit = '39319bf7ad15a1881f180fa7c14bf6703775035e'
     }
 
     -- lua line --
@@ -135,6 +135,12 @@ return packer.startup(function()
     use {
         'nkakouros-original/numbers.nvim',
         commit = '01c50eb6cd66ca61e7009b19a71603cc55768fb1'
+    }
+
+    -- fancy notifications --
+    use {
+        'rcarriga/nvim-notify',
+        commit = '354e0ebb269d9e4feca073372431e8453f5f262a'
     }
 
     -- treesitter syntax highlight --

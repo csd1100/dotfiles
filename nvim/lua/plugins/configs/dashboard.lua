@@ -23,7 +23,7 @@ db.custom_header = {
 db.custom_center = { {
     icon = '  ',
     desc = 'Load Last Session               ',
-    action = 'SessionManager load_last_session<CR>',
+    action = 'RestoreSession',
     shortcut = 'SPC g s l      '
 }, {
     icon = '  ',

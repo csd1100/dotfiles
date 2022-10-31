@@ -4,31 +4,18 @@ if not status then
     return
 end
 
-local status, sm = pcall(require, 'session_manager')
+local status, sm = pcall(require, 'auto-session')
 if not status then
-    print('failed to load ' .. 'session_manager')
-    return
-end
-
-local status, smc = pcall(require, 'session_manager.config')
-if not status then
-    print('failed to load ' .. 'session_manager')
+    print('failed to load ' .. 'auto-session')
     return
 end
 
 local conf = {
-    sessions_dir = pp:new(vim.fn.stdpath('data'), 'sessions'),
-    path_replacer = '__',
-    colon_replacer = '++',
-    autoload_mode = smc.AutoloadMode.CurrentDir,
-    autosave_last_session = true,
-    autosave_ignore_not_normal = true,
-    autosave_ignore_filetypes = {
-        'gitcommit',
-        'NvimTree'
-    },
-    autosave_only_in_session = false,
-    max_path_length = 30,
+    log_level = 'info',
+    auto_session_root_dir = vim.fn.stdpath('data') .. "/sessions/",
+    auto_session_enabled = true,
+    auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+    auto_session_use_git_branch = true,
 }
 
 sm.setup(conf)

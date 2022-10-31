@@ -72,8 +72,7 @@ function M.nvim_jdtls_setup()
     if not workspace_dir then
         workspace_dir = home .. '/work/java/workspace' .. '/' .. project_name
     end
-    print(workspace_dir)
-    vim.list_extend(config['cmd'], {'-data', workspace_dir})
+    vim.list_extend(config['cmd'], { '-data', workspace_dir })
 
     -- This bundles definition is the same as in the previous section (java-debug installation)
     local bundles = {
@@ -114,7 +113,13 @@ function M.nvim_jdtls_setup()
         } }
     end
 
-    config.handlers['language/status'] = function() end
+    local status, notify = pcall(require, 'notify')
+    if status then
+        config.handlers = {}
+        config.handlers['language/status'] = function(_, data, ctx)
+            require('plugins.configs.notifications').handle_jdtls_notifications(data.message, ctx.client_id)
+        end
+    end
 
     return config
 end

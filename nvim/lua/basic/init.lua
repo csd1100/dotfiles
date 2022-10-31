@@ -1,3 +1,5 @@
+vim.cmd('source ~/.vimrc')
+
 local set = vim.opt
 
 local home = os.getenv('HOME')
@@ -14,5 +16,8 @@ set.backup = true
 local project = vim.fn.fnamemodify(vim.fn.getcwd(), ':~:s?\\~??')
 set.backupdir = bkp_dir .. '/' .. project
 
-vim.cmd('source ~/.vimrc')
+-- vim opts for colors and background --
+set.termguicolors = true
+set.background = 'dark'
+
 require('basic.keymaps')
