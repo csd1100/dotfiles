@@ -28,7 +28,7 @@ nnoremap :W :w<CR>
 nnoremap :Q :q<CR>
 nnoremap qq :q<CR>
 nnoremap qa :qa<CR>
-nnoremap zz :wqa<CR>
+nnoremap wqa :wqa<CR>
 nnoremap sx :wq<CR>
 nnoremap sw :w<CR>
 nnoremap qb :bd<CR>
@@ -43,6 +43,9 @@ nnoremap <S-w> 15k
 vnoremap <S-s> 10j
 vnoremap <S-w> 10k
 
+nnoremap zz :set foldenable<CR>
+nnoremap zn :set nofoldenable<CR>
+
 set number
 set relativenumber
 set expandtab
@@ -54,3 +57,5 @@ set showtabline=2
 set tabstop=4
 set softtabstop=-1
 set shiftwidth=0
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
