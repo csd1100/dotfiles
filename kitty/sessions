@@ -1,11 +1,11 @@
 new_tab Home
 launch zsh
 
-new_tab work:1
+new_tab work:shell
 cd ~/work
 launch zsh
 
-new_tab work:2
+new_tab work:nvim
 cd ~/work
 launch zsh
 
