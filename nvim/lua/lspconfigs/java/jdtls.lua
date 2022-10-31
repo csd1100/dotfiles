@@ -56,6 +56,10 @@ function M.nvim_jdtls_setup()
 
     local home = os.getenv('HOME')
 
+    if not vim.fn.filereadable(home .. '/.local/share/nvim/mason/bin/jdtls') then
+        error('jdtls not installed. Install jdtls using mason.')
+    end
+
     local config = {
         cmd = { home .. '/.local/share/nvim/mason/bin/jdtls' },
         root_dir = vim.fs.dirname(vim.fs.find({ '.gradlew', '.git', 'mvnw' }, { upward = true })[1]),
@@ -85,7 +89,6 @@ function M.nvim_jdtls_setup()
             print('failed to load nvim-jdtls.dap')
             return
         end
-        print('xx')
         jdtls.setup_dap({ hotcodereplace = 'auto' })
         jdtls_dap.setup_dap_main_class_configs()
 

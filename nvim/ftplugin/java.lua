@@ -4,5 +4,8 @@ if not status then
     return
 end
 
-local nvim_jdtls_config = require('lspconfigs.java.jdtls').nvim_jdtls_setup()
-jdtls.start_or_attach(nvim_jdtls_config)
+local nvim_jdtls = require('lspconfigs.java.jdtls')
+local status, nvim_jdtls_config = pcall(nvim_jdtls.nvim_jdtls_setup)
+if status then
+    jdtls.start_or_attach(nvim_jdtls_config)
+end
