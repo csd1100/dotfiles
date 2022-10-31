@@ -67,6 +67,14 @@ function M.nvim_jdtls_setup()
         autostart = true,
     }
 
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+    local workspace_dir = os.getenv('NVIM_JAVA_WORKSPACE_DIR')
+    if not workspace_dir then
+        workspace_dir = home .. '/work/java/workspace' .. '/' .. project_name
+    end
+    print(workspace_dir)
+    vim.list_extend(config['cmd'], {'-data', workspace_dir})
+
     -- This bundles definition is the same as in the previous section (java-debug installation)
     local bundles = {
         vim.fn.glob(home ..
@@ -105,6 +113,8 @@ function M.nvim_jdtls_setup()
             port = 8000
         } }
     end
+
+    config.handlers['language/status'] = function() end
 
     return config
 end
