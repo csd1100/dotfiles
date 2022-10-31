@@ -1,6 +1,6 @@
 local status, t = pcall(require, 'nvim-test')
 if not status then
-    print('failed to load nvim-test')
+    vim.notify('failed to load nvim-test', 'error')
     return
 end
 

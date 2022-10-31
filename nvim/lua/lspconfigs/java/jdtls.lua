@@ -1,7 +1,12 @@
 local status, jdtls = pcall(require, 'jdtls')
 if not status then
-    print('failed to load nvim-jdtls.')
+    vim.notify('failed to load nvim-jdtls.', 'error')
     return
+end
+
+local function file_exists(name)
+   local f = io.open(name, "r")
+   return f ~= nil and io.close(f)
 end
 
 local function keymap()
@@ -56,8 +61,9 @@ function M.nvim_jdtls_setup()
 
     local home = os.getenv('HOME')
 
-    if not vim.fn.filereadable(home .. '/.local/share/nvim/mason/bin/jdtls') then
-        error('jdtls not installed. Install jdtls using mason.')
+    if not file_exists(home .. '/.local/share/nvim/mason/bin/jdtls') then
+        vim.notify('jdtls not installed. Install jdtls using mason.', 'error')
+        error('jdtls not installed. Install jdtls using mason.',2)
     end
 
     local config = {
@@ -93,7 +99,7 @@ function M.nvim_jdtls_setup()
         keymap()
         local status, jdtls_dap = pcall(require, 'jdtls.dap')
         if not status then
-            print('failed to load nvim-jdtls.dap')
+            vim.notify('failed to load nvim-jdtls.dap', 'error')
             return
         end
         jdtls.setup_dap({ hotcodereplace = 'auto' })
@@ -101,7 +107,7 @@ function M.nvim_jdtls_setup()
 
         local status, dap = pcall(require, 'dap')
         if not status then
-            print('failed to load dap')
+            vim.notify('failed to load dap', 'error')
             return
         end
         dap.configurations.java = { {

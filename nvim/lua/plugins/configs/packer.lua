@@ -1,12 +1,12 @@
 local status, packer = pcall(require, 'packer')
 if not status then
-    print('failed to load packer')
+    vim.notify('failed to load packer', 'error')
     return
 end
 
 local status, pu = pcall(require, 'packer.util')
 if not status then
-    print('failed to load packer.util')
+    vim.notify('failed to load packer.util', 'error')
     return
 end
 

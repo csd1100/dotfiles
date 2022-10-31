@@ -1,6 +1,6 @@
 local status, notify = pcall(require, 'notify')
 if not status then
-    print('failed to load ' .. 'plenary.path')
+    vim.notify('failed to load plenary.path', 'error')
     return
 end
 

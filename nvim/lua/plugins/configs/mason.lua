@@ -1,6 +1,6 @@
 local status, mason = pcall(require, 'mason')
 if not status then
-    print('failed to load mason')
+    vim.notify('failed to load mason', 'error')
     return
 end
 mason.setup()

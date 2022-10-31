@@ -1,12 +1,12 @@
 local status, dap = pcall(require, 'dap')
 if not status then
-    print('failed to load dap')
+    vim.notify('failed to load dap', 'error')
     return
 end
 
 local status, dapui = pcall(require, 'dapui')
 if not status then
-    print('failed to load dapui')
+    vim.notify('failed to load dapui', 'error')
     return
 end
 

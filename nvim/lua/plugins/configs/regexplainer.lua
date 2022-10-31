@@ -1,6 +1,6 @@
 local status, regexplainer = pcall(require, 'regexplainer')
 if not status then
-    print('failed to load regexplainer')
+    vim.notify('failed to load regexplainer', 'error')
     return
 end
 

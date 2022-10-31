@@ -15,7 +15,7 @@ g.gruvbox_material_background = 'hard'
 -- set monokai --
 local status, monokai = pcall(require, 'monokai')
 if not status then
-    print('failed to load ' .. 'monokai')
+    vim.notify('failed to load monokai', 'error')
     return
 end
 monokai.setup {

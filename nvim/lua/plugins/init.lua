@@ -1,6 +1,6 @@
 local status, packer = pcall(require, 'packer')
 if not status then
-    print('failed to load packer')
+    vim.notify('failed to load packer', 'error')
     return
 end
 
@@ -15,7 +15,7 @@ if fn.isdirectory(install_path) == 0 then
 
     local status, _ = pcall(require, 'plugins.plugin_specification')
     if not status then
-        print('failed to load plugin specifications')
+        vim.notify('failed to load plugin specifications', 'error')
         return
     end
 

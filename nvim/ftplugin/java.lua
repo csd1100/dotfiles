@@ -1,6 +1,6 @@
 local status, jdtls = pcall(require, 'jdtls')
 if not status then
-    print('failed to load nvim-jdtls.')
+    vim.notify('failed to load nvim-jdtls.', 'error')
     return
 end
 

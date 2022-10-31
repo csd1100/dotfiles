@@ -3,7 +3,7 @@ local utils = require('basic.utils')
 local function if_successful(plugin)
     local status, plug = pcall(require, plugin)
     if not status then
-        print('failed to load ' .. plugin)
+        vim.notify('failed to load ' .. plugin, 'error')
         return
     end
     return plug
@@ -17,6 +17,7 @@ require('plugins.configs.packer')
 if_successful('plugins.configs.keymaps')
 if_successful('plugins.configs.basics')
 if_successful('plugins.configs.colorscheme')
+vim.notify = if_successful('notify')
 
 -- plguins using default config --
 utils.if_successful_then_setup('tidy')

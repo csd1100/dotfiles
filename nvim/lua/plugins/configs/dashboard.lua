@@ -1,6 +1,6 @@
 local status, db = pcall(require, 'dashboard')
 if not status then
-    print('failed to load ' .. 'dashboard')
+    vim.notify('failed to load dashboard', 'error')
     return
 end
 

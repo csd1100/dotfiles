@@ -1,12 +1,12 @@
 local status, pp = pcall(require, 'plenary.path')
 if not status then
-    print('failed to load ' .. 'plenary.path')
+    vim.notify('failed to load plenary.path', 'error')
     return
 end
 
 local status, sm = pcall(require, 'auto-session')
 if not status then
-    print('failed to load ' .. 'auto-session')
+    vim.notify('failed to load auto-session', 'error')
     return
 end
 

@@ -1,12 +1,12 @@
 local status, tt = pcall(require, 'tabby.tabline')
 if not status then
-    print('failed to load ' .. 'tabby.tabline')
+    vim.notify('failed to load tabby.tabline', 'error')
     return
 end
 
 local status, util = pcall(require, 'tabby.util')
 if not status then
-    print('failed to load ' .. 'tabby.util')
+    vim.notify('failed to load tabby.util', 'error')
     return
 end
 

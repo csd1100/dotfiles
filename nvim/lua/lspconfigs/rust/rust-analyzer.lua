@@ -1,6 +1,6 @@
 local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
 if not rust_tools_status_ok then
-    print('failed to load ' .. 'rust-tools')
+    vim.notify('failed to load rust-tools', 'error')
     return
 end
 

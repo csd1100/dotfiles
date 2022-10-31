@@ -16,7 +16,7 @@ end
 function M.setup()
     local status, _ = pcall(setupMocha)
     if not status then
-        print('Mocha setup did not complete successfully. Make sure to install javascript and typescript tree-sitter parser')
+        vim.notify('Mocha setup did not complete successfully. Make sure to install javascript and typescript tree-sitter parser', 'error')
     end
 end
 

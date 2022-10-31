@@ -1,24 +1,24 @@
 local status, lspconfig = pcall(require, 'lspconfig')
 if not status then
-    print('failed to load lspconfig')
+    vim.notify('failed to load lspconfig', 'error')
     return
 end
 
 local status, cnl = pcall(require, 'cmp_nvim_lsp')
 if not status then
-    print('failed to load cmp_nvim_lsp')
+    vim.notify('failed to load cmp_nvim_lsp', 'error')
     return
 end
 
 local status, mason = pcall(require, 'mason')
 if not status then
-    print('failed to load mason')
+    vim.notify('failed to load mason', 'error')
     return
 end
 
 local status, lspi = pcall(require, 'mason-lspconfig')
 if not status then
-    print('failed to load mason-lspconfig')
+    vim.notify('failed to load mason-lspconfig', 'error')
     return
 end
 
@@ -75,7 +75,7 @@ lspi.setup_handlers {
     ['jdtls'] = function(server_name)
         local status, _ = pcall(require, 'jdtls')
         if not status then
-            print('failed to load nvim-jdtls. loading mason config')
+            vim.notify('failed to load nvim-jdtls. loading mason config', 'error')
             lspconfig[server_name].setup {
                 on_attach = on_attached,
                 capabilities = capabilities

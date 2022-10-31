@@ -1,6 +1,6 @@
 local status, ib = pcall(require, 'indent_blankline')
 if not status then
-    print('failed to load indent_blankline')
+    vim.notify('failed to load indent_blankline', 'error')
     return
 end
 

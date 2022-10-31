@@ -1,6 +1,6 @@
 local status, cl = pcall(require, 'nvim-cursorline')
 if not status then
-    print('failed to load nvim-cursorline')
+    vim.notify('failed to load nvim-cursorline', 'error')
     return
 end
 
