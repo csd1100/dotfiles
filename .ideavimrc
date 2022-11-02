@@ -9,7 +9,8 @@ vnoremap { <ESC>`>a}<ESC>`<i{
 
 set showmode
 set which-key
-set timeoutlen=5000
+set timeoutlen=3000
+let g:WhichKey_DefaultDelay = 1500
 
 nmap <C-S-p> <Action>(SearchEverywhere)
 nmap <leader><leader> <Action>(GotoFile)
@@ -19,6 +20,7 @@ nmap <C-f> <Action>(Find)
 nmap <C-S-h> <Action>(Replace)
 nmap <C-S-f> <Action>(FindInPath)
 nmap <C-,> <Action>(ShowSettings)
+nmap <leader>e <Action>(FocusEditor)
 nmap <C-S-e> <Action>(ActivateProjectToolWindow)
 nmap <C-S-d> <Action>(ActivateDebugToolWindow)
 nmap <C-S-e> <Action>(ActivateProjectToolWindow)
