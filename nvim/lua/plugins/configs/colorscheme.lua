@@ -33,3 +33,15 @@ monokai.setup {
 
 -- set gruvbox --
 -- vim.cmd('colorscheme gruvbox')
+--
+
+-- tokyonight --
+-- local status, tokyonight = pcall(require, 'tokyonight')
+-- if not status then
+--     vim.notify('failed to load tokyonight', 'error')
+--     return
+-- end
+-- tokyonight.setup {
+--       style = 'moon', -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+-- }
+-- vim.cmd('colorscheme tokyonight')

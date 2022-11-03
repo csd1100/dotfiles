@@ -131,6 +131,10 @@ return packer.startup(function()
         'morhetz/gruvbox',
         commit = 'bf2885a95efdad7bd5e4794dd0213917770d79b7'
     }
+    use{
+        'folke/tokyonight.nvim',
+        commit = '29e2c689c10679f723ae1deadf7f0067d394a545'
+    }
     -- disable relative numbers when in insert mode --
     use {
         'nkakouros-original/numbers.nvim',
@@ -258,5 +262,11 @@ return packer.startup(function()
     -- Game --
     use {
         'seandewar/killersheep.nvim',
+    }
+
+    -- kitty conf --
+    use{
+        'fladson/vim-kitty',
+        commit = 'b2d3453bf7925b5657f853afe3ca0f9b6edf30b4'
     }
 end)
