@@ -5,7 +5,7 @@ local unmap = keymapUtils.unmap
 local M = {}
 
 function M.map_lsp_keys()
-    map('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover Info (LSP)' })
+    map('n', '<leader>i', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover Info (LSP)' })
     map('n', '<C-g>', ':Telescope lsp_document_symbols<CR>', { buffer = bufnr, desc = 'All symbols (LSP)' })
     map('n', '<C-i>', ':Telescope lsp_implementations<CR>', { buffer = bufnr, desc = 'Implementation (LSP)' })
     map('n', '<C-d>', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Definition (LSP)' })
