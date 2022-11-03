@@ -4,6 +4,12 @@ if not status then
     return
 end
 
+local config = {
+    timeout = 800,
+}
+
+notify.setup(config)
+
 local client_notifs = {}
 
 local function get_notif_data(client_id, token)
@@ -89,12 +95,12 @@ function M.handle_notifications(_, result, ctx)
     end
 end
 
-NOTIF = nil
+NOTIFICATION = nil
 SPINNER_POS = 1
 function M.handle_jdtls_notifications(message, client_id)
     if client_id == 1 then
         if message == 'Init...' then
-            NOTIF = vim.notify(message, 'info', {
+            NOTIFICATION = vim.notify(message, 'info', {
                 title = format_title('Init...', vim.lsp.get_client_by_id(client_id).name),
                 icon = spinner_frames[SPINNER_POS],
                 timeout = false,
@@ -104,15 +110,15 @@ function M.handle_jdtls_notifications(message, client_id)
             vim.notify(message , 'info', {
                 title = 'Ready',
                 icon = '',
-                replace = NOTIF,
-                timeout = 3000,
+                replace = NOTIFICATION,
+                timeout = 500,
             })
         else
             SPINNER_POS = (SPINNER_POS + 1) % #spinner_frames
-            NOTIF = vim.notify(message, 'info', {
+            NOTIFICATION = vim.notify(message, 'info', {
                 title = format_title('Loading...', vim.lsp.get_client_by_id(client_id).name),
                 icon = spinner_frames[SPINNER_POS],
-                replace = NOTIF,
+                replace = NOTIFICATION,
                 hide_from_history = false,
             })
         end
