@@ -1,3 +1,11 @@
+local status, projects = pcall(require, 'project_nvim')
+if not status then
+    vim.notify('failed to load nvim-tree', 'error')
+    return
+end
+
+projects.setup()
+
 local status, telescope = pcall(require, 'telescope')
 if not status then
     vim.notify('failed to load telescope', 'error')

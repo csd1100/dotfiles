@@ -1,10 +1,6 @@
-local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
-if not rust_tools_status_ok then
-    vim.notify('failed to load rust-tools', 'error')
-    return
-end
+local M = {}
 
-local config = {
+M.config = {
     tools = { -- rust-tools options
         autoSetHints = true,
         inlay_hints = {
@@ -22,9 +18,14 @@ local config = {
                 checkOnSave = {
                     command = "clippy",
                 },
-            }
-        }
+            },
+        },
     }
 }
 
-rust_tools.setup(config)
+function M.update_config(on_attach, capabilities)
+    M.config.server.capabilities = capabilities
+    M.config.server.on_attach = on_attach
+end
+
+return M

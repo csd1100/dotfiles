@@ -10,9 +10,9 @@ if not status then
     return
 end
 
-local hl_tabline_fill = util.extract_nvim_hl('lualine_c_normal')
-local hl_tabline = util.extract_nvim_hl('lualine_b_normal')
-local hl_tabline_sel = util.extract_nvim_hl('lualine_a_normal')
+local hl_tabline = util.extract_nvim_hl('TabLine')
+local hl_tabline_fill = util.extract_nvim_hl('TabLineFill')
+local hl_tabline_sel = util.extract_nvim_hl('TabLineSel')
 
 local function tab_label(tabid, active)
     local icon = active and '' or ''

@@ -62,7 +62,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cnl.update_capabilities(capabilities)
 
 require('lspconfigs.lua.sumneko_lua')
-require('lspconfigs.rust.rust-analyzer')
 require('lspconfigs.snippets')
 
 lspi.setup_handlers {
@@ -84,7 +83,10 @@ lspi.setup_handlers {
         else
             require('lspconfigs.java.jdtls')
         end
-    end
+    end,
+    ['rust_analyzer'] = function(_)
+        require('lspconfigs.rust.rust-analyzer').update_config(on_attached, capabilities)
+    end,
 }
 
 -- LSP notifications --
