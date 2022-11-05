@@ -1,0 +1,10 @@
+new_tab ~
+launch
+
+new_tab work:shell
+cd ~/work
+launch
+
+new_tab work:nvim
+cd ~/work
+launch
