@@ -10,7 +10,12 @@ map('v', '<leader>/', ":'<,'>CommentToggle<CR>", { desc = 'Comment Selection' })
 -- NvimTree --
 map('n', '<leader><S-f>', ':NvimTreeFocus<CR>', { desc = 'Focus on Files' })
 map('n', '<C-S-E>', ':NvimTreeOpen<CR>', { desc = 'Open Files' })
-map('n', '<C-S-K>', ':NvimTreeClose<CR>', { desc = 'Close Files' })
+
+-- SideBar --
+map('n', '<C-S-B>', ':SidebarNvimFocus<CR>', { desc = 'Open SideBar' })
+
+-- close all open sidebars --
+map('n', '<C-S-K>', ':SidebarNvimClose<CR>|:NvimTreeClose<CR>', { desc = 'Close Sidebars' })
 
 -- Global splkey: g --
 map('n', '<leader>cs', ':Telescope colorscheme<CR>', { desc = 'Chnage colorscheme' })

@@ -30,11 +30,11 @@ utils.if_successful_then_setup('nvim_comment')
 
 -- plugins with configs --
 require('plugins.configs.mason')
-require('plugins.configs.test')
-require('plugins.configs.dapui')
 require('plugins.configs.numbers')
 require('plugins.configs.lualine')
-require('plugins.configs.tabby')
+require('plugins.configs.bufferline')
+require('plugins.configs.sidebar')
+require('plugins.configs.which-key')
 require('plugins.configs.projects')
 require('plugins.configs.gitsigns')
 require('plugins.configs.dashboard')
@@ -47,3 +47,5 @@ require('plugins.configs.sessions_manager')
 
 -- lsp --
 if_successful('lspconfigs')
+require('plugins.configs.dapui')
+require('plugins.configs.test')

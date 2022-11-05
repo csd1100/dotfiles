@@ -67,6 +67,12 @@ return packer.startup(function()
         commit = '2d02a56189e2bde11edd4712fea16f08a6656944'
     }
 
+    -- sidebar --
+    use {
+        'sidebar-nvim/sidebar.nvim',
+        commit = '990ce5f562c9125283ccac5473235b1a56fea6dc'
+    }
+
     -- lua line --
     use {
         'nvim-lualine/lualine.nvim',
@@ -78,10 +84,10 @@ return packer.startup(function()
         commit = '804f0023692653b2b2368462d67d2a87056947f9'
     }
 
-    -- tab line --
-    use {
-        'nanozuki/tabby.nvim',
-        commit = '916c9e56d043906a441cd9f905e2ca1f5c4dddb0'
+    -- tab/buffer line --
+    use{
+        'akinsho/bufferline.nvim',
+        commit = 'd631817de1b52c7b1947e25ec8b7638492914768'
     }
 
     -- indent line --

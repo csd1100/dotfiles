@@ -15,8 +15,8 @@ map('n', '<C-S-h>', ':s/', { desc = 'Substitution using :s' })
 
 --- Tabs splkey: t --
 map('n', '<leader>tt', ':tabnew<CR>', { desc = 'New Tab' })
-map('n', '<C-Right>', ':tabprevious<CR>', { desc = 'Previous Tab' })
-map('n', '<C-Left>', ':tabnext<CR>', { desc = 'Next Tab' })
+map('n', '<C-Right>', ':tabnext<CR>', { desc = 'Previous Tab' })
+map('n', '<C-Left>', ':tabprevious<CR>', { desc = 'Next Tab' })
 map('n', '<leader>te', ':tabedit', { desc = 'Open file in new Tab' })
 
 -- win navigation --
