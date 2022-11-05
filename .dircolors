@@ -1,0 +1,44 @@
+LINK 4;35
+DIR 34
+MISSING 31
+ORPHAN 4;3;37
+
+.class 37
+.bkp 37
+*~ 37
+
+.java 93
+.cpp 93
+.rs 93
+.py 93
+.kt 93
+.ts 93
+.js 93
+.c 93
+
+.sh 33
+.bash 33
+.fish 33
+.zsh 33
+.bat 33
+.lua 33
+.conf 33
+.json 33
+.xml 33
+.yml 33
+.yaml 33
+.toml 33
+.rofi 33
+.gitignore 33
+.gradle 33
+.dircolors 33
+.spec.js 33
+*rc 33
+*config 33
+*Jenkinsfile 33
+*Dockerfile 33
+
+.text 95
+.txt 95
+.md 95
+.asciidoc 95

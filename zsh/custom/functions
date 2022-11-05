@@ -2,6 +2,7 @@
 # make directory and change current directory to created directory
 function mcd () { md -p $1; cd $1 }
 function helpless() { $1 --help | less }
+function batman() { man $1 | bat --color always }
 
 # source overrides
 if [ -f "$ZSH_CUSTOM/overrides/functions" ]

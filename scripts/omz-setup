@@ -62,7 +62,7 @@ fi
 
 log "zsh setup complete linking zshrc "
 log "script directory: $SCRIPT_DIR"
-if [ -e "$HOME/.zshrc" ]; then
+if [ -L "$HOME/.zshrc" ]; then
     mv $HOME/.zshrc $HOME/.zshrc.bkp
 fi
 ln -s $SCRIPT_DIR/zsh/.zshrc $HOME/.zshrc

@@ -1,21 +1,33 @@
-i3-gaps
-polybar
-rofi
-feh
-light - https://github.com/haikarainen/light
-playerctl
-cmus
-ranger
-kitty
-neofetch
-pywal
-i3lock 
-xss-lock
-numlockx
-pulseaudio
-xclip
-scrot
-nm-applet
-picom
-zscroll
-xdotool
+- kitty
+    - imagemagick - for icat kitten
+- zsh
+    - oh-my-zsh
+- neofetch
+- nvim
+    - node/npm - lsps
+    - gcc, g++ - treesitter
+    - xsel (linux) - copy to system clipboard
+----------------- mac ----------------------------
+- yabai
+- skhd
+- coreutils (homebrew package for gnu utils like ls,etc.)
+----------------- linux ----------------------------
+- i3-gaps
+    - i3lock
+    - xss-lock
+- polybar
+- rofi
+- cmus
+- ranger
+- pywal
+- playerctl
+- feh
+- light
+- numlockx
+- pulseaudio
+- xclip
+- scrot
+- nm-applet
+- picom
+- zscroll
+- xdotool

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ $(uname -s) == 'Darwin' ]; then
+    executable='/opt/homebrew/bin/gls'
+    dircolros_exec='/opt/homebrew/bin/gdircolors'
+else
+    executable='/bin/ls'
+    dircolros_exec='/bin/gdircolors'
+fi
+
+if [ -t 1 ]; then
+    eval $($dircolros_exec -b $HOME/.dircolors)
+fi
+
+exec "$executable" --hyperlink=auto --color=auto "$@"

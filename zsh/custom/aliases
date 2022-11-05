@@ -22,6 +22,9 @@ alias tm="tmux"
 alias tps="tmux list-sessions"
 alias tkl="tmux kill-server"
 
+# unaliase for bin overrides
+unalias ls
+
 # source overrides
 if [ -f "$ZSH_CUSTOM/overrides/aliases" ]
 then

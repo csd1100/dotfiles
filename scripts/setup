@@ -8,8 +8,9 @@ readonly ZSH_HOME="$HOME/.oh-my-zsh"
 declare -a config_common=("kitty" "neofetch" "nvim")
 declare -a config_darwin=("skhd" "yabai")
 declare -a config_linux=()
-declare -a configs_in_home_dir=(".tmux.conf" ".vimrc" ".ideavimrc")
+declare -a configs_in_home_dir=(".tmux.conf" ".vimrc" ".ideavimrc" ".dircolors")
 declare -a zsh_customs=("custom/aliases" "custom/env-vars" "custom/functions" "custom/misc" "custom/overrides")
+env_bins=($(ls "$SCRIPT_DIR/zsh/custom/overrides/bin"))
 
 function init(){
     if [ -d $CONFIG_DIR ]; then
@@ -60,6 +61,10 @@ function linker(){
     for util in "${zsh_customs[@]}"; do
         link $ZSH_HOME $util "$SCRIPT_DIR/zsh"
     done
+
+    for util in "${env_bins[@]}"; do
+        link $HOME/bin $util $SCRIPT_DIR/zsh/custom/overrides/bin
+    done
 }
 
 function unlinker(){
@@ -74,6 +79,10 @@ function unlinker(){
 
     for util in "${zsh_customs[@]}"; do
         unlink $ZSH_HOME $util "$SCRIPT_DIR/zsh"
+    done
+
+    for util in "${env_bins[@]}"; do
+        unlink $HOME/bin $util $SCRIPT_DIR/zsh/custom/overrides/bin
     done
 }
 

@@ -1,6 +1,4 @@
 #!/bin/zsh
-# PATH
-export PATH="$HOME/bin:$PATH"
 
 # default editor
 export EDITOR=nvim
@@ -25,3 +23,6 @@ if [ -f "$ZSH_CUSTOM/overrides/env-vars" ]
 then
     source $ZSH_CUSTOM/overrides/env-vars
 fi
+
+# PATH
+export PATH="$HOME/bin:$PATH"
