@@ -10,19 +10,16 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m config external_bar all:0:0
 
 # Global settings
-yabai -m config mouse_follows_focus          on
-yabai -m config focus_follows_mouse          autoraise
+# yabai -m config mouse_follows_focus          on
+# yabai -m config focus_follows_mouse          autoraise
 yabai -m config window_placement             second_child
-yabai -m config window_topmost               off
-yabai -m config window_shadow                float
+yabai -m config window_topmost               on
+yabai -m config window_shadow                off
 yabai -m config window_opacity               on
 yabai -m config window_opacity_duration      0.0
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.95
 yabai -m config window_border                off
-yabai -m config window_border_width          6
-yabai -m config active_window_border_color   0xe9ff5e
-yabai -m config normal_window_border_color   0x5F717A
 yabai -m config insert_feedback_color        0xfc618d
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 on
@@ -53,6 +50,6 @@ yabai -m rule --add app="^Digital Colour Meter"                     manage=off
 yabai -m rule --add app="^Mullvad VPN"                              manage=off mouse_follows_focus=off
 yabai -m rule --add title="^JetBrains Toolbox"                      manage=off mouse_follows_focus=off
 yabai -m rule --add title="^Wine*"                                  manage=off mouse_follows_focus=off
-yabai -m rule --add title="^CleanMyMac X"                           manage=off
+yabai -m rule --add title="^CleanMyMac*"                           manage=off
 
 echo "yabai configuration loaded.."
