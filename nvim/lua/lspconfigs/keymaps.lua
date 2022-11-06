@@ -19,10 +19,19 @@ function M.map_lsp_keys()
     map('n', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format (LSP)' })
 
     map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add Workspace Folder (LSP)' })
-    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = bufnr, desc = 'Remove Workspace Folder (LSP)' })
+    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder,
+        { buffer = bufnr, desc = 'Remove Workspace Folder (LSP)' })
     map('n', '<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { buffer = bufnr, desc = 'List Workspace Folders (LSP)' })
+
+    map('n', '<leader>lo', ':vim.diagnostic.open_float', { desc = 'Open LSP Diagnostics' })
+    map('n', '<leader>l<up>', ':vim.diagnostic.goto_prev', { desc = 'Go To Previous Diagnostics' })
+    map('n', '<leader>l<down>', ':vim.diagnostic.goto_next', { desc = 'Go To Next Diagnostics' })
+    map('n', '<leader>lq', ':vim.diagnostic.setloclist', { desc = '' })
+    map('n', '<leader>li', ':lua require("lspconfigs.nvim-lsp-installer-conf").lsp_setup(\'',
+        { desc = 'Install LSP and Tree Parser' })
+
 end
 
 function M.unmap_lsp_keys()
@@ -41,6 +50,11 @@ function M.unmap_lsp_keys()
     unmap('n', '<leader>wa')
     unmap('n', '<leader>wr')
     unmap('n', '<leader>wl')
+    unmap('n', '<leader>lo')
+    unmap('n', '<leader>l<up>')
+    unmap('n', '<leader>l<down>')
+    unmap('n', '<leader>lq')
+    unmap('n', '<leader>li')
 end
 
 return M

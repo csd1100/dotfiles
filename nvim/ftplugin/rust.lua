@@ -5,4 +5,7 @@ if not rust_tools_status_ok then
 end
 
 local rust_lsp_conf = require('lspconfigs.rust.rust-analyzer')
-rust_tools.setup(rust_lsp_conf.config)
+if not rust_lsp_conf.config._initialized then
+    rust_lsp_conf.config._initialized = true
+    rust_tools.setup(rust_lsp_conf.config)
+end

@@ -17,26 +17,16 @@ map('n', '<C-S-B>', ':SidebarNvimFocus<CR>', { desc = 'Open SideBar' })
 -- close all open sidebars --
 map('n', '<C-S-K>', ':SidebarNvimClose<CR>|:NvimTreeClose<CR>', { desc = 'Close Sidebars' })
 
--- Global splkey: g --
+-- Global --
 map('n', '<leader>cs', ':Telescope colorscheme<CR>', { desc = 'Chnage colorscheme' })
 map('n', '<leader>h', ':Telescope oldfiles<CR>', { desc = 'Recent Files' })
-map('n', '<leader><leader>',
-    ':Telescope find_files find_command=rg,--ignore,--hidden,--no-ignore-vcs,-g,!.git,--files prompt_prefix=🔍 <CR>',
-    { desc = 'Find in Files' })
-map('n', '<leader>b', ':lua require("telescope.builtin").buffers({ sort_mru = true, ignore_current_buffer = true })<CR>'
-    , { desc = 'List Open Buffers' })
+map('n', '<leader><leader>', ':Telescope find_files<CR>', { desc = 'Find in Files' })
+map('n', '<leader>b', ':Telescope buffers<CR>', { desc = 'List Open Buffers' })
 map('n', '<leader>gp', ':Telescope projects<CR>', { desc = 'Projects' })
+map('n', '<C-S-f>', ':Telescope live_grep<CR>', { desc = 'Find String in all files' })
 map('n', '<leader>gss', ':SessionSave<CR>', { desc = 'Save Current Session' })
 map('n', '<leader>gsl', ':SessionLoad<CR>', { desc = 'Load Saved Session' })
 map('n', '<C-S-n>', ':DashboardNewFile<CR>', { desc = 'New Blank File' })
-map('n', '<C-S-f>', ':Telescope live_grep<CR>', { desc = 'Find String in all files' })
-
--- lsp diagnostic splkey: l --
-map('n', '<leader>lo', 'vim.diagnostic.open_float', { desc = 'Open LSP Diagnostics' })
-map('n', '<leader>l<up>', 'vim.diagnostic.goto_prev', { desc = 'Go To Previous Diagnostics' })
-map('n', '<leader>l<down>', 'vim.diagnostic.goto_next', { desc = 'Go To Next Diagnostics' })
-map('n', '<leader>lq', 'vim.diagnostic.setloclist', { desc = '' })
-map('n', '<leader>li', ':lua require("lspconfigs.nvim-lsp-installer-conf").lsp_setup(\'', { desc = 'Install LSP and Tree Parser' })
 
 -- dap splkey: d --
 local debugToggleFn = function(self)
@@ -54,8 +44,8 @@ local debugToggleFn = function(self)
         unmap('n', '<leader><left>')
     end
 end
-
 Mode.new('DEBUG', debugToggleFn)
+
 map('n', '<leader>d', ":lua require('basic.keymaps-utils').Modes.DEBUG:toggle()<CR>", { desc = 'Toggle DEBUG Mode' })
 -- markdown preview --
 map('n', '<leader>mdp', ':Glow<CR>', { desc = 'Markdown Preview using Glow' })

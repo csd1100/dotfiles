@@ -31,6 +31,7 @@ utils.if_successful_then_setup('nvim_comment')
 -- plugins with configs --
 require('plugins.configs.mason')
 require('plugins.configs.numbers')
+require('plugins.configs.telescope')
 require('plugins.configs.lualine')
 require('plugins.configs.bufferline')
 require('plugins.configs.sidebar')

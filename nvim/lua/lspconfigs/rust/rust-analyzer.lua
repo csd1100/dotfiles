@@ -1,6 +1,7 @@
 local M = {}
 
 M.config = {
+    _initialized = false,
     tools = { -- rust-tools options
         autoSetHints = true,
         inlay_hints = {
