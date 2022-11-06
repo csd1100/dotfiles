@@ -5,15 +5,16 @@ MISSING 31
 ORPHAN 4;3;37
 
 .class 37
+.log 3;37
 .bkp 37
 *~ 37
 
-.sh 3
-.bash 3
-.fish 3
-.zsh 3
-.bat 3
-.cmd 3
+.sh 3;33
+.bash 3;33
+.fish 3;33
+.zsh 3;33
+.bat 3;33
+.cmd 3;33
 
 .java 1;93
 .cpp 1;93

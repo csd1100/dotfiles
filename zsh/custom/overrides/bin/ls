@@ -1,11 +1,11 @@
 #!/bin/sh
 
-if [ $(uname -s) == 'Darwin' ]; then
+if [ $(uname -s) = 'Darwin' ]; then
     executable='/opt/homebrew/bin/gls'
     dircolros_exec='/opt/homebrew/bin/gdircolors'
 else
     executable='/bin/ls'
-    dircolros_exec='/bin/gdircolors'
+    dircolros_exec='/bin/dircolors'
 fi
 
 if [ -t 1 ]; then
