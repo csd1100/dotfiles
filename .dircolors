@@ -15,14 +15,14 @@ ORPHAN 4;3;37
 .bat 3
 .cmd 3
 
-.java 93
-.cpp 93
-.rs 93
-.py 93
-.kt 93
-.ts 93
-.js 93
-.c 93
+.java 1;93
+.cpp 1;93
+.rs 1;93
+.py 1;93
+.kt 1;93
+.ts 1;93
+.js 1;93
+.c 1;93
 
 .lua 33
 .conf 33
