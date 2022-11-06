@@ -34,8 +34,6 @@ nnoremap <leader><Tab> i    <ESC>
 nnoremap <leader>s 0
 nnoremap <leader>e $
 
-nnoremap :W :w<CR>
-nnoremap :Q :q<CR>
 nnoremap qq :q<CR>
 nnoremap qa :qa<CR>
 nnoremap sa :wqa<CR>
@@ -55,6 +53,10 @@ vnoremap <S-k> 10k
 
 nnoremap zz :set foldenable<CR>
 nnoremap zn :set nofoldenable<CR>
+
+" map capital versions for ease
+command W w
+command Q q
 
 set number
 set relativenumber
