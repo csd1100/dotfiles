@@ -259,6 +259,12 @@ return packer.startup(function()
         commit = '9bb0d2b2280dccaa14d750c309e487c4e6df696b'
     }
 
+    -- null-ls --
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        commit = '1ac465b1617b28f753cb875d8ac1d0f23c0b96d4'
+    }
+
     -- debugger --
     use {
         'mfussenegger/nvim-dap',
@@ -305,6 +311,11 @@ return packer.startup(function()
         commit = '32f162c27045fc712664b9ddbd33d3c550cb2bfc'
     }
 
+    -- refactoring --
+    use {
+        'ThePrimeagen/refactoring.nvim',
+        commit = 'c9ca8e3bbf7218101f16e6a03b15bf72b99b2cae',
+    }
     -- Game --
     use {
         'seandewar/killersheep.nvim',

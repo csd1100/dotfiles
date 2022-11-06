@@ -111,18 +111,8 @@ function M.nvim_jdtls_setup()
         jdtls.setup_dap({ hotcodereplace = 'auto' })
         jdtls_dap.setup_dap_main_class_configs()
 
-        local status, dap = pcall(require, 'dap')
-        if not status then
-            vim.notify('failed to load dap', 'error')
-            return
-        end
-        dap.configurations.java = { {
-            type = 'java',
-            request = 'attach',
-            name = 'Debug (Attach) - Remote',
-            hostName = '127.0.0.1',
-            port = 8000
-        } }
+        require('lspconfigs.dap.java').setup()
+
     end
 
     local status, notify = pcall(require, 'notify')

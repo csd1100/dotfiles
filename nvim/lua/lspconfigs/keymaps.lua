@@ -26,12 +26,10 @@ function M.map_lsp_keys()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { buffer = bufnr, desc = 'List Workspace Folders (LSP)' })
 
-    map('n', '<leader>lo', ':vim.diagnostic.open_float', { desc = 'Open LSP Diagnostics' })
-    map('n', '<leader>l<up>', ':vim.diagnostic.goto_prev', { desc = 'Go To Previous Diagnostics' })
-    map('n', '<leader>l<down>', ':vim.diagnostic.goto_next', { desc = 'Go To Next Diagnostics' })
-    map('n', '<leader>lq', ':vim.diagnostic.setloclist', { desc = '' })
-    map('n', '<leader>li', ':lua require("lspconfigs.nvim-lsp-installer-conf").lsp_setup(\'',
-        { desc = 'Install LSP and Tree Parser' })
+    map('n', '<leader>lo', vim.diagnostic.open_float, { desc = 'Open LSP Diagnostics' })
+    map('n', '<leader>l<up>', vim.diagnostic.goto_prev, { desc = 'Go To Previous Diagnostics' })
+    map('n', '<leader>l<down>', vim.diagnostic.goto_next, { desc = 'Go To Next Diagnostics' })
+    map('n', '<leader>lq', vim.diagnostic.setloclist, { desc = 'LSP Diagnostics List' })
 
 end
 
