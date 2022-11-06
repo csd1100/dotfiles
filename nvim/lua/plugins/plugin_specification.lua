@@ -5,7 +5,7 @@ if not status then
 end
 
 -- packer config --
-vim.cmd 'autocmd BufWritePost plugin_specification.lua source <afile> | PackerCompile'
+vim.cmd 'autocmd BufWritePost plugin_specification.lua source <afile> | PackerSync'
 return packer.startup(function()
     use {
         'wbthomason/packer.nvim',
@@ -85,7 +85,7 @@ return packer.startup(function()
     }
 
     -- tab/buffer line --
-    use{
+    use {
         'akinsho/bufferline.nvim',
         commit = 'd631817de1b52c7b1947e25ec8b7638492914768'
     }
@@ -233,7 +233,6 @@ return packer.startup(function()
     use {
         'hrsh7th/cmp-vsnip',
         commit = '0abfa1860f5e095a07c477da940cfcb0d273b700',
-        opt = true
     }
 
     -- LSP source for nvim-cmp
@@ -275,21 +274,29 @@ return packer.startup(function()
     -- rust --
     use {
         'simrat39/rust-tools.nvim',
+        ft = { 'rust' },
         commit = '86a2b4e31f504c00715d0dd082a6b8b5d4afbf03',
-        ft = { 'rust' }
     }
 
     -- rust --
     use {
         'Saecki/crates.nvim',
+        ft = { 'rust' },
         commit = '003442e2448870f6f2fab6ec7ac7b4de21e6d1d4',
-        ft = { 'rust' }
     }
 
     -- java --
     use {
         'mfussenegger/nvim-jdtls',
+        ft = { 'java' },
         commit = 'f39efa0e823bcc876d18a7b44d3b61191c42e61c',
+    }
+
+    -- javascript/typescript --
+    use {
+        'jose-elias-alvarez/typescript.nvim',
+        ft = { 'javascript', 'typescript' },
+        commit = '29ea760c5f3decda2f779c315a14263c0eae41a5'
     }
 
     -- testing plugin --

@@ -5,8 +5,8 @@ if not status then
 end
 
 local function file_exists(name)
-   local f = io.open(name, "r")
-   return f ~= nil and io.close(f)
+    local f = io.open(name, "r")
+    return f ~= nil and io.close(f)
 end
 
 local function keymap()
@@ -57,16 +57,22 @@ end
 
 local M = {}
 
+M.config = {}
+
+function M.update_config(_, capabilities)
+    M.config.capabilities = capabilities
+end
+
 function M.nvim_jdtls_setup()
 
     local home = os.getenv('HOME')
 
     if not file_exists(home .. '/.local/share/nvim/mason/bin/jdtls') then
         vim.notify('jdtls not installed. Install jdtls using mason.', 'error')
-        error('jdtls not installed. Install jdtls using mason.',2)
+        error('jdtls not installed. Install jdtls using mason.', 2)
     end
 
-    local config = {
+    M.config = {
         cmd = { home .. '/.local/share/nvim/mason/bin/jdtls' },
         root_dir = vim.fs.dirname(vim.fs.find({ '.gradlew', '.git', 'mvnw' }, { upward = true })[1]),
         filetypes = { 'java' },
@@ -78,7 +84,7 @@ function M.nvim_jdtls_setup()
     if not workspace_dir then
         workspace_dir = home .. '/work/java/workspace' .. '/' .. project_name
     end
-    vim.list_extend(config['cmd'], { '-data', workspace_dir })
+    vim.list_extend(M.config['cmd'], { '-data', workspace_dir })
 
     -- This bundles definition is the same as in the previous section (java-debug installation)
     local bundles = {
@@ -91,11 +97,11 @@ function M.nvim_jdtls_setup()
     vim.list_extend(bundles,
         vim.split(vim.fn.glob(home .. "/.local/share/nvim/mason/packages/java-test/extension/server/*.jar", 1), "\n"))
 
-    config['init_options'] = {
+    M.config['init_options'] = {
         bundles = bundles;
     }
 
-    config['on_attach'] = function(client, bufnr)
+    M.config['on_attach'] = function(client, bufnr)
         keymap()
         local status, jdtls_dap = pcall(require, 'jdtls.dap')
         if not status then
@@ -121,13 +127,13 @@ function M.nvim_jdtls_setup()
 
     local status, notify = pcall(require, 'notify')
     if status then
-        config.handlers = {}
-        config.handlers['language/status'] = function(_, data, ctx)
+        M.config.handlers = {}
+        M.config.handlers['language/status'] = function(_, data, ctx)
             require('plugins.configs.notifications').handle_jdtls_notifications(data.message, ctx.client_id)
         end
     end
 
-    return config
+    return M.config
 end
 
 return M

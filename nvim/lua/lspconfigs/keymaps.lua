@@ -16,6 +16,7 @@ function M.map_lsp_keys()
     map('n', '<leader>ltd', vim.lsp.buf.type_definition, { buffer = bufnr, desc = 'Type Definition (LSP)' })
     map('n', '<leader>lrn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename (LSP)' })
     map('n', '<leader>lca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Actions (LSP)' })
+    map('v', '<leader>lca', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code Actions (LSP)' })
     map('n', '<leader>lf', vim.lsp.buf.format, { buffer = bufnr, desc = 'Format (LSP)' })
 
     map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add Workspace Folder (LSP)' })
