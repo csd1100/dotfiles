@@ -8,7 +8,7 @@ local layout_conf = {
     horizontal = {
         height = 0.9,
         preview_cutoff = 120,
-        prompt_position = "top",
+        prompt_position = "bottom",
         width = 0.8,
         preview_width = 75
     }
