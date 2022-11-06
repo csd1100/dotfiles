@@ -6,3 +6,5 @@ zsh/custom/overrides/env-vars
 zsh/custom/overrides/aliases
 zsh/custom/overrides/functions
 zsh/custom/overrides/misc
+kitty/kitty.conf.bak
+kitty/current-theme.conf
