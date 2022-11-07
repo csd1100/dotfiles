@@ -46,15 +46,27 @@ function M.setup()
                 end
             end, { 'i', 's' })
         }),
-        sources = { {
-            name = 'nvim_lsp'
-        }, {
-            name = 'luasnip'
-        } }
+        sources = {
+            { name = 'nvim_lsp' },
+            { name = 'luasnip' },
+            { name = 'buffer' },
+            { name = 'vsnip' },
+        }
     }
 
     cmp.setup(conf)
 
+    cmp.setup.cmdline(':', {
+        sources = {
+            { name = 'cmdline' }
+        }
+    })
+
+    cmp.setup.cmdline('/', {
+        sources = {
+            { name = 'buffer' }
+        }
+    })
 end
 
 return M

@@ -247,6 +247,12 @@ return packer.startup(function()
         commit = '3022dbc9166796b644a841a02de8dd1cc1d311fa'
     }
 
+    -- LSP source for nvim-cmp
+    use {
+        'hrsh7th/cmp-cmdline',
+        commit = 'c66c379915d68fb52ad5ad1195cdd4265a95ef1e'
+    }
+
     -- Snippets source for nvim-cmp
     use {
         'saadparwaiz1/cmp_luasnip',
