@@ -157,12 +157,6 @@ return packer.startup(function()
         commit = '01c50eb6cd66ca61e7009b19a71603cc55768fb1'
     }
 
-    -- fancy notifications --
-    use {
-        'rcarriga/nvim-notify',
-        commit = '354e0ebb269d9e4feca073372431e8453f5f262a'
-    }
-
     -- treesitter syntax highlight --
     use {
         'nvim-treesitter/nvim-treesitter',

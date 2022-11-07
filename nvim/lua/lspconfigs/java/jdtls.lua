@@ -115,14 +115,6 @@ function M.nvim_jdtls_setup()
 
     end
 
-    local status, notify = pcall(require, 'notify')
-    if status then
-        M.config.handlers = {}
-        M.config.handlers['language/status'] = function(_, data, ctx)
-            require('plugins.configs.notifications').handle_jdtls_notifications(data.message, ctx.client_id)
-        end
-    end
-
     return M.config
 end
 

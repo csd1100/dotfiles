@@ -17,7 +17,6 @@ require('plugins.configs.packer')
 if_successful('plugins.configs.keymaps')
 if_successful('plugins.configs.basics')
 if_successful('plugins.configs.colorscheme')
-vim.notify = if_successful('notify')
 
 -- plguins using default config --
 utils.if_successful_then_setup('tidy')
