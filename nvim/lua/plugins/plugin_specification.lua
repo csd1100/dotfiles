@@ -326,4 +326,9 @@ return packer.startup(function()
         'fladson/vim-kitty',
         commit = 'b2d3453bf7925b5657f853afe3ca0f9b6edf30b4'
     }
+
+    use{
+        'ThePrimeagen/vim-be-good',
+        commit = 'c290810728a4f75e334b07dc0f3a4cdea908d351'
+    }
 end)
