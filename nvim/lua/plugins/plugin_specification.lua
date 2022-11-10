@@ -280,28 +280,24 @@ return packer.startup(function()
     -- rust --
     use {
         'simrat39/rust-tools.nvim',
-        ft = { 'rust' },
         commit = '86a2b4e31f504c00715d0dd082a6b8b5d4afbf03',
     }
 
     -- rust --
     use {
         'Saecki/crates.nvim',
-        ft = { 'rust' },
         commit = '003442e2448870f6f2fab6ec7ac7b4de21e6d1d4',
     }
 
     -- java --
     use {
         'mfussenegger/nvim-jdtls',
-        ft = { 'java' },
         commit = 'f39efa0e823bcc876d18a7b44d3b61191c42e61c',
     }
 
     -- javascript/typescript --
     use {
         'jose-elias-alvarez/typescript.nvim',
-        ft = { 'javascript', 'typescript' },
         commit = '29ea760c5f3decda2f779c315a14263c0eae41a5'
     }
 
