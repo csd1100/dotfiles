@@ -28,12 +28,12 @@ local on_attached = function(client, bufnr)
     LSP_MODE:toggle()
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local default_capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local function setup_custom_configs(server_name, plugin, module, on_attach, capabilities)
     local status, _ = pcall(require, plugin)
     if not status then
-        vim.notify('failed to load ' .. ' loading mason config', 'error')
+        vim.notify('failed to load ' .. server_name ..' loading mason config', 'error')
         lspconfig[server_name].setup {
             on_attach = on_attached,
             capabilities = capabilities
@@ -74,26 +74,26 @@ function M.setup()
 
     lspi.setup(mason_conf)
 
-    capabilities = cnl.update_capabilities(capabilities)
+    default_capabilities = cnl.update_capabilities(default_capabilities)
 
     lspi.setup_handlers {
         function(server_name) -- default handler (optional)
             lspconfig[server_name].setup {
                 on_attach = on_attached,
-                capabilities = capabilities
+                capabilities = default_capabilities
             }
         end,
         ['jdtls'] = function(server_name)
-            setup_custom_configs(server_name, 'jdtls', 'lspconfigs.java.jdtls', nil, capabilities)
+            setup_custom_configs(server_name, 'jdtls', 'lspconfigs.java.jdtls', nil, default_capabilities)
         end,
         ['rust_analyzer'] = function(server_name)
-            setup_custom_configs(server_name, 'rust-tools', 'lspconfigs.rust.rust-analyzer', on_attached, capabilities)
+            setup_custom_configs(server_name, 'rust-tools', 'lspconfigs.rust.rust-analyzer', on_attached, default_capabilities)
         end,
         ['tsserver'] = function(server_name)
-            setup_custom_configs(server_name, 'typescript', 'lspconfigs.js.tsserver', on_attached, capabilities)
+            setup_custom_configs(server_name, 'typescript', 'lspconfigs.js.tsserver', on_attached, default_capabilities)
         end,
         ['sumneko_lua'] = function(server_name)
-            setup_custom_configs(server_name, 'sumneko_lua', 'lspconfigs.lua.sumneko_lua', on_attached, capabilities)
+            require('lspconfigs.lua.sumneko_lua').update_config(on_attached, default_capabilities)
         end,
     }
 
