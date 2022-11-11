@@ -78,6 +78,7 @@ return packer.startup(function()
         'nvim-lualine/lualine.nvim',
         commit = 'a52f078026b27694d2290e34efa61a6e4a690621'
     }
+
     -- cursor line --
     use {
         'yamatsum/nvim-cursorline',
@@ -126,25 +127,30 @@ return packer.startup(function()
         disable = true,
         commit = '4fc970efcbbdcd614733eb8c68d3b8bf8bddec3e'
     }
+
     use {
         'sainnhe/everforest',
         disable = true,
         commit = '765328360ca61f889709c36e68cd44c11a127093'
     }
+
     use {
         'sainnhe/sonokai',
         commit = '7b0ad56a0aaa12f205b586b143edb8296d3d5821'
     }
+
     use {
         'sainnhe/gruvbox-material',
         disable = true,
         commit = '2807579bd0a9981575dbb518aa65d3206f04ea02'
     }
+
     use {
         'morhetz/gruvbox',
         disable = true,
         commit = 'bf2885a95efdad7bd5e4794dd0213917770d79b7'
     }
+
     use {
         'folke/tokyonight.nvim',
         disable = true,
@@ -169,6 +175,7 @@ return packer.startup(function()
         'lewis6991/spellsitter.nvim',
         commit = '4af8640d9d706447e78c13150ef7475ea2c16b30'
     }
+
     -- regex explainer --
     use {
         'bennypowers/nvim-regexplainer',
@@ -311,10 +318,6 @@ return packer.startup(function()
     use {
         'ThePrimeagen/refactoring.nvim',
         commit = 'c9ca8e3bbf7218101f16e6a03b15bf72b99b2cae',
-    }
-    -- Game --
-    use {
-        'seandewar/killersheep.nvim',
     }
 
     -- kitty conf --

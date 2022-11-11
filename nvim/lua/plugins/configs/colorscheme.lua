@@ -36,7 +36,7 @@ vim.cmd('colorscheme sonokai')
 --
 
 -- tokyonight --
-local status, tokyonight = pcall(require, 'tokyonight')
+-- local status, tokyonight = pcall(require, 'tokyonight')
 -- if not status then
 --     vim.notify('failed to load tokyonight', 'error')
 --     return
