@@ -123,40 +123,14 @@ return packer.startup(function()
 
     -- colorschemes --
     use {
-        'tanvirtin/monokai.nvim',
-        disable = true,
-        commit = '4fc970efcbbdcd614733eb8c68d3b8bf8bddec3e'
-    }
-
-    use {
-        'sainnhe/everforest',
-        disable = true,
-        commit = '765328360ca61f889709c36e68cd44c11a127093'
-    }
-
-    use {
         'sainnhe/sonokai',
         commit = '7b0ad56a0aaa12f205b586b143edb8296d3d5821'
     }
 
     use {
         'sainnhe/gruvbox-material',
-        disable = true,
         commit = '2807579bd0a9981575dbb518aa65d3206f04ea02'
     }
-
-    use {
-        'morhetz/gruvbox',
-        disable = true,
-        commit = 'bf2885a95efdad7bd5e4794dd0213917770d79b7'
-    }
-
-    use {
-        'folke/tokyonight.nvim',
-        disable = true,
-        commit = '29e2c689c10679f723ae1deadf7f0067d394a545'
-    }
-
     -- disable relative numbers when in insert mode --
     use {
         'nkakouros-original/numbers.nvim',
