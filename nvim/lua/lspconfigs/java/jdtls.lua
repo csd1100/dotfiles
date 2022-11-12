@@ -9,7 +9,7 @@ local function file_exists(name)
 	return f ~= nil and io.close(f)
 end
 
-local function keymap()
+local function keymap(bufnr)
 	local modesModule = require("basic.modes")
 	local Mode = modesModule.getModeClass()
 
@@ -20,7 +20,7 @@ local function keymap()
 
 	local lspTogggle = function(self)
 		if self.value then
-			lsp_keymaps.map_lsp_keys()
+			lsp_keymaps.map_lsp_keys(bufnr)
 			map(
 				"n",
 				"<leader>li",
@@ -74,14 +74,15 @@ local function keymap()
 				{ buffer = bufnr, desc = "Test Nearest (LSP:Java)" }
 			)
 		else
-			unmap("n", "<leader>joi")
-			unmap("n", "<leader>jev")
-			unmap("n", "<leader>jvt")
-			unmap("n", "<leader>jec")
-			unmap("n", "<leader>jct")
-			unmap("n", "<leader>jem")
-			unmap("n", "<leader>jtc")
-			unmap("n", "<leader>jtm")
+			local opts = { buffer = bufnr }
+			unmap("n", "<leader>joi", opts)
+			unmap("n", "<leader>jev", opts)
+			unmap("n", "<leader>jvt", opts)
+			unmap("n", "<leader>jec", opts)
+			unmap("n", "<leader>jct", opts)
+			unmap("n", "<leader>jem", opts)
+			unmap("n", "<leader>jtc", opts)
+			unmap("n", "<leader>jtm", opts)
 		end
 	end
 
@@ -139,7 +140,7 @@ function M.nvim_jdtls_setup()
 	}
 
 	M.config["on_attach"] = function(client, bufnr)
-		keymap()
+		keymap(bufnr)
 		local status, jdtls_dap = pcall(require, "jdtls.dap")
 		if not status then
 			vim.notify("failed to load nvim-jdtls.dap", "error")

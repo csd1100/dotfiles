@@ -11,8 +11,8 @@ function M.map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
-function M.unmap(mode, lhs)
-	vim.api.nvim_del_keymap(mode, lhs)
+function M.unmap(mode, lhs, opts)
+	vim.keymap.del(mode, lhs, opts)
 end
 
 return M

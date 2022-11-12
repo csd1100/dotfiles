@@ -21,9 +21,9 @@ local on_attached = function(client, bufnr)
 
 	local lspTogggle = function(self)
 		if self.value then
-			lsp_keymaps.map_lsp_keys()
+			lsp_keymaps.map_lsp_keys(bufnr)
 		else
-			lsp_keymaps.unmap_lsp_keys()
+			lsp_keymaps.unmap_lsp_keys(bufnr)
 		end
 	end
 
