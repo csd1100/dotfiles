@@ -16,11 +16,12 @@ local function keymap(bufnr)
 	local keymapUtils = require("basic.keymaps-utils")
 	local map = keymapUtils.map
 	local unmap = keymapUtils.unmap
-	local lsp_keymaps = require("lspconfigs.keymaps")
 
-	local lspTogggle = function(self)
-		if self.value then
-			lsp_keymaps.map_lsp_keys(bufnr)
+	local lspTogggle = function(self, opts)
+		local lsp_keymaps = require("lspconfigs.keymaps")
+
+		if self:isActive(opts.bufnr) then
+			lsp_keymaps.map_lsp_keys(opts)
 			map(
 				"n",
 				"<leader>li",
@@ -74,7 +75,7 @@ local function keymap(bufnr)
 				{ buffer = bufnr, desc = "Test Nearest (LSP:Java)" }
 			)
 		else
-			local opts = { buffer = bufnr }
+			lsp_keymaps.unmap_lsp_keys(opts)
 			unmap("n", "<leader>joi", opts)
 			unmap("n", "<leader>jev", opts)
 			unmap("n", "<leader>jvt", opts)
@@ -87,7 +88,7 @@ local function keymap(bufnr)
 	end
 
 	local LSP = Mode.new("LSP", "{}", lspTogggle)
-	LSP:toggle()
+	LSP:toggle({ buffer = bufnr })
 end
 
 local M = {}

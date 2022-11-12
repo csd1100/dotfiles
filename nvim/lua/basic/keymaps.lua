@@ -1,4 +1,4 @@
-local modesModule = require('basic.modes')
+local modesModule = require("basic.modes")
 
 local keymapUtils = require("basic.keymaps-utils")
 local map = keymapUtils.map
@@ -27,7 +27,7 @@ map("", "<C-+>", ":res +3<CR>", { desc = "Resize Window By +3" })
 map("", "<C-->", ":res -3<CR>", { desc = "Resize Window By -3" })
 
 local completionToggleFn = function(self)
-	if self.value then
+	if self:isActive() then
 		-- add brackets and quotes in visual mode
 		map("v", '"', [[<ESC>`>a"<ESC>`<i"<ESC>]])
 		map("v", "'", [[<ESC>`>a'<ESC>`<i'<ESC>]])
@@ -68,9 +68,4 @@ local COMPL = Mode.new("COMPL", "''", completionToggleFn)
 COMPL:toggle()
 
 -- autocomplete brackets and quotes
-map(
-	"n",
-	"<leader>'",
-	":lua require('basic.modes').getMode('COMPL'):toggle()<CR>",
-	{ desc = "Toggle COMPL Mode" }
-)
+map("n", "<leader>'", ":lua require('basic.modes').getMode('COMPL'):toggle()<CR>", { desc = "Toggle COMPL Mode" })

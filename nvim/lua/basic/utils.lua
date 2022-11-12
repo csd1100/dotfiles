@@ -93,7 +93,7 @@ function M.tableLength(tbl)
 	for _, _ in pairs(tbl) do
 		count = count + 1
 	end
-    return count
+	return count
 end
 
 return M

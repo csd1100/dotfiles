@@ -19,16 +19,16 @@ local on_attached = function(client, bufnr)
 
 	local lsp_keymaps = require("lspconfigs.keymaps")
 
-	local lspTogggle = function(self)
-		if self.value then
-			lsp_keymaps.map_lsp_keys(bufnr)
+	local lspTogggle = function(self, opts)
+		if self:isActive(opts.buffer) then
+			lsp_keymaps.map_lsp_keys(opts)
 		else
-			lsp_keymaps.unmap_lsp_keys(bufnr)
+			lsp_keymaps.unmap_lsp_keys(opts)
 		end
 	end
 
 	local LSP_MODE = Mode.new("LSP", "{}", lspTogggle)
-	LSP_MODE:toggle()
+	LSP_MODE:toggle({ buffer = bufnr })
 end
 
 local default_capabilities = vim.lsp.protocol.make_client_capabilities()
