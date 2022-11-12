@@ -6,7 +6,7 @@ readonly CONFIG_DIR="$HOME/.config"
 readonly ZSH_HOME="$HOME/.oh-my-zsh"
 
 declare -a config_common=("kitty" "neofetch" "nvim")
-declare -a config_darwin=("skhd" "yabai")
+declare -a config_darwin=("skhd" "yabai" "sketchybar")
 declare -a config_linux=()
 declare -a configs_in_home_dir=(".tmux.conf" ".vimrc" ".ideavimrc" ".dircolors")
 declare -a zsh_customs=("custom/aliases" "custom/env-vars" "custom/functions" "custom/misc" "custom/overrides")
