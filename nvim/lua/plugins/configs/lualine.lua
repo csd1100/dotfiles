@@ -5,8 +5,8 @@ if not status then
 end
 
 local function getCustomModes()
-	local modesModule = require("basic.keymaps-utils")
-	return modesModule.getActiveModeIcons(modesModule.Modes)
+	local modesModule = require("basic.modes")
+	return modesModule.getActiveModeIcons()
 end
 
 local conf = {

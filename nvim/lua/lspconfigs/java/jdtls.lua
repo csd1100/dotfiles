@@ -10,6 +10,9 @@ local function file_exists(name)
 end
 
 local function keymap()
+	local modesModule = require("basic.modes")
+	local Mode = modesModule.getModeClass()
+
 	local keymapUtils = require("basic.keymaps-utils")
 	local map = keymapUtils.map
 	local unmap = keymapUtils.unmap
@@ -82,7 +85,7 @@ local function keymap()
 		end
 	end
 
-	local LSP = keymapUtils.getModeClass().new("LSP", "{}", lspTogggle)
+	local LSP = Mode.new("LSP", "{}", lspTogggle)
 	LSP:toggle()
 end
 

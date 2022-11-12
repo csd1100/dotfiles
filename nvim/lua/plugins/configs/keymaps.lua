@@ -1,7 +1,8 @@
-local utilsModule = require("basic.keymaps-utils")
-local map = utilsModule.map
-local unmap = utilsModule.unmap
-local Mode = utilsModule.getModeClass()
+local modesModule = require("basic.modes")
+local Mode = modesModule.getModeClass()
+local keymapUtils = require("basic.keymaps-utils")
+local map = keymapUtils.map
+local unmap = keymapUtils.unmap
 
 -- Comment Toggle --
 map("n", "<leader>/", ":CommentToggle<CR>", { desc = "Comment current Line" })
@@ -50,7 +51,7 @@ local debugToggleFn = function(self)
 	end
 end
 Mode.new("DEBUG", "", debugToggleFn)
-map("n", "<leader>D", ":lua require('basic.keymaps-utils').Modes.DEBUG:toggle()<CR>", { desc = "Toggle DEBUG Mode" })
+map("n", "<leader>D", ":lua require('basic.modes').getMode('DEBUG'):toggle()<CR>", { desc = "Toggle DEBUG Mode" })
 
 -- test splkey: t --
 local testToggleFn = function(self)
@@ -79,7 +80,7 @@ local testToggleFn = function(self)
 	end
 end
 Mode.new("TEST", "ﭧ",testToggleFn)
-map("n", "<leader>T", ":lua require('basic.keymaps-utils').Modes.TEST:toggle()<CR>", { desc = "Toggle TEST Mode" })
+map("n", "<leader>T", ":lua require('basic.modes').getMode('TEST'):toggle()<CR>", { desc = "Toggle TEST Mode" })
 
 -- git splkey: v --
 local gitsignsToggleFn = function(self)
@@ -123,4 +124,4 @@ local gitsignsToggleFn = function(self)
 	end
 end
 Mode.new("GIT", "",gitsignsToggleFn)
-map("n", "<leader>V", ":lua require('basic.keymaps-utils').Modes.GIT:toggle()<CR>", { desc = "Toggle TEST Mode" })
+map("n", "<leader>V", ":lua require('basic.modes').getMode('GIT'):toggle()<CR>", { desc = "Toggle GIT Mode" })
