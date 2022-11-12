@@ -24,7 +24,7 @@ local on_attached = function(client, bufnr)
 		end
 	end
 
-	local LSP_MODE = keymapUtils.getModeClass().new("LSP", lspTogggle)
+	local LSP_MODE = keymapUtils.getModeClass().new("LSP", "{}", lspTogggle)
 	LSP_MODE:toggle()
 end
 

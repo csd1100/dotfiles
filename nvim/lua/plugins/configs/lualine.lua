@@ -6,7 +6,7 @@ end
 
 local function getCustomModes()
 	local modesModule = require("basic.keymaps-utils")
-	return modesModule.getActiveModes(modesModule.Modes)
+	return modesModule.getActiveModeIcons(modesModule.Modes)
 end
 
 local conf = {

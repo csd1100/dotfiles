@@ -15,9 +15,14 @@ function M.getModeClass()
 		self:toggleFn()
 	end
 
-	function Mode.new(id, toggleFn)
-		this = setmetatable({}, Mode)
+	function Mode.new(id, icon, toggleFn)
+		local this = setmetatable({}, Mode)
 		this.id = id
+		if icon == nil or icon == "" then
+			this.icon = string.sub(id, 1, 1)
+		else
+			this.icon = icon
+		end
 		this.toggleFn = toggleFn
 		M.Modes[this.id] = this
 		return this
@@ -27,13 +32,23 @@ function M.getModeClass()
 end
 
 function M.getActiveModes(modes)
-	activeModes = {}
-	for k, v in pairs(modes) do
+	local activeModes = {}
+	for _, v in pairs(modes) do
 		if v.value then
 			table.insert(activeModes, v.id)
 		end
 	end
 	return table.concat(activeModes, ", ")
+end
+
+function M.getActiveModeIcons(modes)
+	local activeModes = {}
+	for _, v in pairs(modes) do
+		if v.value then
+			table.insert(activeModes, v.icon)
+		end
+	end
+	return table.concat(activeModes, " | ")
 end
 
 function M.map(mode, lhs, rhs, opts)
@@ -88,7 +103,7 @@ local completionToggleFn = function(self)
 end
 
 local Mode = M.getModeClass()
-local COMPL = Mode.new("COMPL", completionToggleFn)
+local COMPL = Mode.new("COMPL", "''", completionToggleFn)
 -- enable quotes completion by default --
 COMPL:toggle()
 

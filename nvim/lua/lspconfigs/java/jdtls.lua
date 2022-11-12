@@ -82,7 +82,7 @@ local function keymap()
 		end
 	end
 
-	local LSP = keymapUtils.getModeClass().new("LSP", lspTogggle)
+	local LSP = keymapUtils.getModeClass().new("LSP", "{}", lspTogggle)
 	LSP:toggle()
 end
 

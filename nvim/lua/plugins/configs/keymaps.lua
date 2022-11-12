@@ -49,7 +49,7 @@ local debugToggleFn = function(self)
 		unmap("n", "<leader><left>")
 	end
 end
-Mode.new("DEBUG", debugToggleFn)
+Mode.new("DEBUG", "", debugToggleFn)
 map("n", "<leader>D", ":lua require('basic.keymaps-utils').Modes.DEBUG:toggle()<CR>", { desc = "Toggle DEBUG Mode" })
 
 -- test splkey: t --
@@ -78,7 +78,7 @@ local testToggleFn = function(self)
 		unmap("n", "<leader>ta")
 	end
 end
-Mode.new("TEST", testToggleFn)
+Mode.new("TEST", "ﭧ",testToggleFn)
 map("n", "<leader>T", ":lua require('basic.keymaps-utils').Modes.TEST:toggle()<CR>", { desc = "Toggle TEST Mode" })
 
 -- git splkey: v --
@@ -122,5 +122,5 @@ local gitsignsToggleFn = function(self)
 		unmap("n", "<leader>vdd")
 	end
 end
-Mode.new("GIT", gitsignsToggleFn)
+Mode.new("GIT", "",gitsignsToggleFn)
 map("n", "<leader>V", ":lua require('basic.keymaps-utils').Modes.GIT:toggle()<CR>", { desc = "Toggle TEST Mode" })
