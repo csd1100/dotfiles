@@ -85,8 +85,8 @@ map("n", "<leader>T", ":lua require('basic.modes').getMode('TEST'):toggle()<CR>"
 -- git splkey: v --
 local gitsignsToggleFn = function(self)
 	if self.value then
-		map({ "n", "v" }, "<leader>vs", ":Gitsigns stage_hunk()<CR>", { desc = "Stage Hunk (GIT)" })
-		map({ "n", "v" }, "<leader>vr", ":Gitsigns reset_hunk()<CR>", { desc = "Reset Hunk (GIT)" })
+		map({ "n", "v" }, "<leader>vs", ":lua require('gitsigns').stage_hunk()<CR>", { desc = "Stage Hunk (GIT)" })
+		map({ "n", "v" }, "<leader>vr", ":lua require('gitsigns').reset_hunk()<CR>", { desc = "Reset Hunk (GIT)" })
 		map("n", "<leader>vS", ":lua require('gitsigns').stage_buffer()<CR>", { desc = "Stage Buffer (GIT)" })
 		map("n", "<leader>vu", ":lua require('gitsigns').undo_stage_hunk()<CR>", { desc = "Undo Stage Hunk (GIT)" })
 		map("n", "<leader>vR", ":lua require('gitsigns').reset_buffer()<CR>", { desc = "Reset Buffer (GIT)" })
