@@ -1,7 +1,4 @@
-local utils = require("basic.utils")
-local M = {}
-
-local Modes = {}
+local modeStore = {}
 local globalActiveModes = {}
 
 local function toggleGlobalActiveModes(mode)
@@ -26,16 +23,16 @@ local function addToActiveBuffers(mode, bufnr)
 	end
 end
 
-local function handleToggleWithOptions(mode, opts)
+local function handleToggleWithFilter(mode, filter)
 	if not mode.globalValue then
-		addToActiveBuffers(mode, opts.buffer)
-		mode:toggleFn(opts)
+		addToActiveBuffers(mode, filter.buffer)
+		mode:toggleFn(filter)
 	else
 		return
 	end
 end
 
-function M.getModeClass()
+local function modeClass()
 	local Mode = {
 		id = "Mode",
 		globalValue = false,
@@ -44,19 +41,19 @@ function M.getModeClass()
 	}
 	Mode.__index = Mode
 
-	function Mode:toggle(opts)
-		if not opts then
+	function Mode:toggle(filter)
+		if not filter then
 			handleGlobalToggle(self)
 		else
-			handleToggleWithOptions(self, opts)
+			handleToggleWithFilter(self, filter)
 		end
 	end
 
-	function Mode:isActive(bufnr)
-		if not bufnr then
+	function Mode:isActive(filter)
+		if not filter then
 			return self.globalValue
 		else
-			return self.activeBuffers[bufnr]
+			return self.activeBuffers[filter.buffer]
 		end
 	end
 
@@ -74,23 +71,22 @@ function M.getModeClass()
 		this.icon = Mode.getValidIcon(id, icon)
 		this.toggleFn = toggleFn
 		this.activeBuffers = {}
-		Modes[this.id] = this
+		modeStore[this.id] = this
 		return this
 	end
 
 	return Mode
 end
 
-function M.getMode(id)
-	return Modes[id]
+-- Module start --
+local M = {}
+
+function M.createMode(id, icon, toggleFn)
+	return modeClass().new(id, icon, toggleFn)
 end
 
-function M.getGlobalActiveModes()
-	local activeModes = {}
-	for _, v in pairs(globalActiveModes) do
-		table.insert(activeModes, v.id)
-	end
-	return activeModes
+function M.getMode(id)
+	return modeStore[id]
 end
 
 function M.getGlobalActiveModesIcons()
@@ -101,19 +97,9 @@ function M.getGlobalActiveModesIcons()
 	return activeModeIcons
 end
 
-function M.getBufferActiveModes(bufnr)
-	local activeModes = {}
-	for _, v in pairs(Modes) do
-		if v.activeBuffers[bufnr] then
-			table.insert(activeModes, v.id)
-		end
-	end
-	return activeModes
-end
-
 function M.getBufferActiveModesIcons(bufnr)
 	local activeModeIcons = {}
-	for _, v in pairs(Modes) do
+	for _, v in pairs(modeStore) do
 		if v.activeBuffers[bufnr] then
 			table.insert(activeModeIcons, v.icon)
 		end

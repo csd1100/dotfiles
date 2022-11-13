@@ -11,83 +11,85 @@ end
 
 local function keymap(bufnr)
 	local modesModule = require("basic.modes")
-	local Mode = modesModule.getModeClass()
 
 	local keymapUtils = require("basic.keymaps-utils")
 	local map = keymapUtils.map
 	local unmap = keymapUtils.unmap
 
-	local lspTogggle = function(self, opts)
+	local lspTogggle = function(self, filter)
 		local lsp_keymaps = require("lspconfigs.keymaps")
 
-		if self:isActive(opts.bufnr) then
-			lsp_keymaps.map_lsp_keys(opts)
+		if self:isActive(filter) then
+			lsp_keymaps.map_lsp_keys(filter)
 			map(
 				"n",
 				"<leader>li",
 				':lua require("jdtls").organize_imports()<CR>',
-				{ buffer = bufnr, desc = "Organize Imports (LSP:Java)" }
+				{ buffer = filter.buffer, desc = "Organize Imports (LSP:Java)" }
 			)
 
 			map(
 				"n",
 				"<leader>lev",
 				':lua require("jdtls").extract_variable()<CR>',
-				{ buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
+				{ buffer = filter.buffer, desc = "Extract Variable (LSP:Java)" }
 			)
 			map(
 				"v",
 				"<leader>lev",
 				':lua require("jdtls").extract_variable(true)<CR>',
-				{ buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
+				{ buffer = filter.buffer, desc = "Extract Variable (LSP:Java)" }
 			)
 
 			map(
 				"n",
 				"<leader>lec",
 				':lua require("jdtls").extract_constant()<CR>',
-				{ buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
+				{ buffer = filter.buffer, desc = "Extract Constant (LSP:Java)" }
 			)
 			map(
 				"v",
 				"<leader>lec",
 				':lua require("jdtls").extract_constant(true)<CR>',
-				{ buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
+				{ buffer = filter.buffer, desc = "Extract Constant (LSP:Java)" }
 			)
 
 			map(
 				"v",
 				"<leader>lem",
 				':lua require("jdtls").extract_method(true)<CR>',
-				{ buffer = bufnr, desc = "Extract Method (LSP:Java)" }
+				{ buffer = filter.buffer, desc = "Extract Method (LSP:Java)" }
 			)
 
 			map(
 				"n",
 				"<leader>ltc",
 				':lua require("jdtls").test_class()<CR>',
-				{ buffer = bufnr, desc = "Test Class (LSP:Java)" }
+				{ buffer = filter.buffer, desc = "Test Class (LSP:Java)" }
 			)
 			map(
 				"n",
 				"<leader>ltm",
 				':lua require("jdtls").test_nearest_method()<CR>',
-				{ buffer = bufnr, desc = "Test Nearest (LSP:Java)" }
+				{ buffer = filter.buffer, desc = "Test Nearest (LSP:Java)" }
 			)
 		else
-			lsp_keymaps.unmap_lsp_keys(opts)
-			unmap("n", "<leader>joi", opts)
-			unmap("n", "<leader>jev", opts)
-			unmap("n", "<leader>jvt", opts)
-			unmap("n", "<leader>jec", opts)
-			unmap("n", "<leader>jct", opts)
-			unmap("n", "<leader>jem", opts)
-			unmap("n", "<leader>jtc", opts)
-			unmap("n", "<leader>jtm", opts)
+			local options = {
+				buffer = filter.buffer,
+			}
+			lsp_keymaps.unmap_lsp_keys(options)
+			unmap("n", "<leader>joi", options)
+			unmap("n", "<leader>jev", options)
+			unmap("n", "<leader>jvt", options)
+			unmap("n", "<leader>jec", options)
+			unmap("n", "<leader>jct", options)
+			unmap("n", "<leader>jem", options)
+			unmap("n", "<leader>jtc", options)
+			unmap("n", "<leader>jtm", options)
 		end
 	end
 
-	local LSP = Mode.new("LSP", "{}", lspTogggle)
+	local LSP = modesModule.createMode("LSP", "{}", lspTogggle)
 	LSP:toggle({ buffer = bufnr })
 end
 

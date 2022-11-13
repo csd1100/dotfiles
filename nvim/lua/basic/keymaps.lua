@@ -26,8 +26,8 @@ map("", "<C-l>", ":wincmd l<CR>", { desc = "Window Right" })
 map("", "<C-+>", ":res +3<CR>", { desc = "Resize Window By +3" })
 map("", "<C-->", ":res -3<CR>", { desc = "Resize Window By -3" })
 
-local completionToggleFn = function(self)
-	if self:isActive() then
+local completionToggleFn = function(self, filter)
+	if self:isActive(filter) then
 		-- add brackets and quotes in visual mode
 		map("v", '"', [[<ESC>`>a"<ESC>`<i"<ESC>]])
 		map("v", "'", [[<ESC>`>a'<ESC>`<i'<ESC>]])
@@ -62,10 +62,15 @@ local completionToggleFn = function(self)
 	end
 end
 
-local Mode = modesModule.getModeClass()
-local COMPL = Mode.new("COMPL", "''", completionToggleFn)
+local COMPL = modesModule.createMode("COMPL", "''", completionToggleFn)
 -- enable quotes completion by default --
 COMPL:toggle()
 
 -- autocomplete brackets and quotes
-map("n", "<leader>'", ":lua require('basic.modes').getMode('COMPL'):toggle()<CR>", { desc = "Toggle COMPL Mode" })
+map("n", "<leader>''", ":lua require('basic.modes').getMode('COMPL'):toggle()<CR>", { desc = "Toggle COMPL Mode" })
+map(
+	"n",
+	"<leader>'",
+	":lua require('basic.modes').getMode('COMPL'):toggle({ buffer = " .. vim.api.nvim_get_current_buf() .. " })<CR>",
+	{ desc = "Toggle Buffer COMPL Mode" }
+)

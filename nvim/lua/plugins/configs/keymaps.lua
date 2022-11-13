@@ -1,5 +1,4 @@
 local modesModule = require("basic.modes")
-local Mode = modesModule.getModeClass()
 local keymapUtils = require("basic.keymaps-utils")
 local map = keymapUtils.map
 local unmap = keymapUtils.unmap
@@ -35,8 +34,8 @@ map("n", "<leader>mdp", ":Glow<CR>", { desc = "Markdown Preview using Glow" })
 -- ToggleTerm --
 map("n", "<C-S-t>", "<Esc>:ToggleTerm size=11 direction=float <CR>", { desc = "Open Floating Terminal" })
 -- dap splkey: d --
-local debugToggleFn = function(self)
-	if self:isActive() then
+local debugToggleFn = function(self, filter)
+	if self:isActive(filter) then
 		map("n", "<leader>b", ':lua require"dap".toggle_breakpoint()<CR>', { desc = "Toggle Breakpoint (DEBUG)" })
 		map("n", "<leader>d", ':lua require"dap".continue()<CR>', { desc = "Continue (DEBUG)" })
 		map("n", "<leader><down>", ':lua require"dap".step_over()<CR>', { desc = "Step Over (DEBUG)" })
@@ -50,12 +49,18 @@ local debugToggleFn = function(self)
 		unmap("n", "<leader><left>")
 	end
 end
-Mode.new("DEBUG", "", debugToggleFn)
-map("n", "<leader>D", ":lua require('basic.modes').getMode('DEBUG'):toggle()<CR>", { desc = "Toggle DEBUG Mode" })
+modesModule.createMode("DEBUG", "", debugToggleFn)
+map("n", "<leader>DD", ":lua require('basic.modes').getMode('DEBUG'):toggle()<CR>", { desc = "Toggle DEBUG Mode" })
+map(
+	"n",
+	"<leader>D",
+	":lua require('basic.modes').getMode('TEST'):toggle({ buffer = vim.api.nvim_get_current_buf() })<CR>",
+	{ desc = "Toggle DEBUG Mode" }
+)
 
 -- test splkey: t --
-local testToggleFn = function(self)
-	if self:isActive() then
+local testToggleFn = function(self, filter)
+	if self:isActive(filter) then
 		map("n", "<leader>tn", ':lua require("neotest").run.run()<CR>', { desc = "Run nearest test (TEST)" })
 		map(
 			"n",
@@ -79,12 +84,18 @@ local testToggleFn = function(self)
 		unmap("n", "<leader>ta")
 	end
 end
-Mode.new("TEST", "ﭧ", testToggleFn)
-map("n", "<leader>T", ":lua require('basic.modes').getMode('TEST'):toggle()<CR>", { desc = "Toggle TEST Mode" })
+modesModule.createMode("TEST", "ﭧ", testToggleFn)
+map("n", "<leader>TT", ":lua require('basic.modes').getMode('TEST'):toggle()<CR>", { desc = "Toggle TEST Mode" })
+map(
+	"n",
+	"<leader>T",
+	":lua require('basic.modes').getMode('TEST'):toggle({ buffer = vim.api.nvim_get_current_buf() })<CR>",
+	{ desc = "Toggle TEST Mode" }
+)
 
 -- git splkey: v --
-local gitsignsToggleFn = function(self)
-	if self:isActive() then
+local gitsignsToggleFn = function(self, filter)
+	if self:isActive(filter) then
 		map({ "n", "v" }, "<leader>vs", ":lua require('gitsigns').stage_hunk()<CR>", { desc = "Stage Hunk (GIT)" })
 		map({ "n", "v" }, "<leader>vr", ":lua require('gitsigns').reset_hunk()<CR>", { desc = "Reset Hunk (GIT)" })
 		map("n", "<leader>vS", ":lua require('gitsigns').stage_buffer()<CR>", { desc = "Stage Buffer (GIT)" })
@@ -123,5 +134,12 @@ local gitsignsToggleFn = function(self)
 		unmap("n", "<leader>vdd")
 	end
 end
-Mode.new("GIT", "", gitsignsToggleFn)
-map("n", "<leader>V", ":lua require('basic.modes').getMode('GIT'):toggle()<CR>", { desc = "Toggle GIT Mode" })
+modesModule.createMode("GIT", "", gitsignsToggleFn)
+
+map("n", "<leader>VV", ":lua require('basic.modes').getMode('GIT'):toggle()<CR>", { desc = "Toggle GIT Mode" })
+map(
+	"n",
+	"<leader>V",
+	":lua require('basic.modes').getMode('GIT'):toggle({ buffer = vim.api.nvim_get_current_buf() })<CR>",
+	{ desc = "Toggle GIT Mode" }
+)

@@ -15,19 +15,18 @@ local mason_conf = {
 
 local on_attached = function(client, bufnr)
 	local modesModule = require("basic.modes")
-	local Mode = modesModule.getModeClass()
 
 	local lsp_keymaps = require("lspconfigs.keymaps")
 
-	local lspTogggle = function(self, opts)
-		if self:isActive(opts.buffer) then
-			lsp_keymaps.map_lsp_keys(opts)
+	local lspTogggle = function(self, filter)
+		if self:isActive(filter) then
+			lsp_keymaps.map_lsp_keys(filter)
 		else
-			lsp_keymaps.unmap_lsp_keys(opts)
+			lsp_keymaps.unmap_lsp_keys(filter)
 		end
 	end
 
-	local LSP_MODE = Mode.new("LSP", "{}", lspTogggle)
+	local LSP_MODE = modesModule.createMode("LSP", "{}", lspTogggle)
 	LSP_MODE:toggle({ buffer = bufnr })
 end
 
