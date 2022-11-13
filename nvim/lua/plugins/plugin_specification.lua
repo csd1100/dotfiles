@@ -303,6 +303,13 @@ return packer.startup(function()
 		commit = "31d4084c0ddb0f4adc7ce5b99f29d6af591a38f6",
 	})
 
+	-- test: plenary --
+	use({
+		"nvim-neotest/neotest-plenary",
+		requires = "neotest",
+		commit = "37ba50bf8eaec30dcc253060499b43641b5dfe4b",
+	})
+
 	-- refactoring --
 	use({
 		"ThePrimeagen/refactoring.nvim",

@@ -10,6 +10,7 @@ function M.setup()
 	local conf = {
 		adapters = {
 			require("neotest-rust")({}),
+			require("neotest-plenary"),
 		},
 	}
 
