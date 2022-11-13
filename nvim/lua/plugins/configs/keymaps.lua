@@ -27,7 +27,12 @@ map("n", "<C-S-f>", ":Telescope live_grep<CR>", { desc = "Find String in all fil
 map("n", "<leader>gss", ":SessionSave<CR>", { desc = "Save Current Session" })
 map("n", "<leader>gsl", ":SessionLoad<CR>", { desc = "Load Saved Session" })
 map("n", "<C-S-n>", ":DashboardNewFile<CR>", { desc = "New Blank File" })
-
+map(
+	"n",
+	"<leader>ps",
+	":PackerSnapshot " .. os.date("%Y-%m-%d_%X") .. ".json <CR>",
+	{ desc = "Create a Packer Snapshot at current date" }
+)
 -- markdown preview --
 map("n", "<leader>mdp", ":Glow<CR>", { desc = "Markdown Preview using Glow" })
 
@@ -50,13 +55,7 @@ local debugToggleFn = function(self)
 	end
 end
 modesModule.createMode("DEBUG", "", debugToggleFn)
-map("n", "<leader>DD", ":lua require('basic.modes').getMode('DEBUG'):toggle()<CR>", { desc = "Toggle DEBUG Mode" })
-map(
-	"n",
-	"<leader>D",
-	":lua require('basic.modes').getMode('TEST'):toggle({ buffer = vim.api.nvim_get_current_buf() })<CR>",
-	{ desc = "Toggle DEBUG Mode" }
-)
+map("n", "<leader>D", ":lua require('basic.modes').getMode('DEBUG'):toggle()<CR>", { desc = "Toggle DEBUG Mode" })
 
 -- test splkey: t --
 local testToggleFn = function(self)
@@ -85,13 +84,7 @@ local testToggleFn = function(self)
 	end
 end
 modesModule.createMode("TEST", "ﭧ", testToggleFn)
-map("n", "<leader>TT", ":lua require('basic.modes').getMode('TEST'):toggle()<CR>", { desc = "Toggle TEST Mode" })
-map(
-	"n",
-	"<leader>T",
-	":lua require('basic.modes').getMode('TEST'):toggle({ buffer = vim.api.nvim_get_current_buf() })<CR>",
-	{ desc = "Toggle TEST Mode" }
-)
+map("n", "<leader>T", ":lua require('basic.modes').getMode('TEST'):toggle()<CR>", { desc = "Toggle TEST Mode" })
 
 -- git splkey: v --
 local gitsignsToggleFn = function(self)
@@ -136,10 +129,4 @@ local gitsignsToggleFn = function(self)
 end
 modesModule.createMode("GIT", "", gitsignsToggleFn)
 
-map("n", "<leader>VV", ":lua require('basic.modes').getMode('GIT'):toggle()<CR>", { desc = "Toggle GIT Mode" })
-map(
-	"n",
-	"<leader>V",
-	":lua require('basic.modes').getMode('GIT'):toggle({ buffer = vim.api.nvim_get_current_buf() })<CR>",
-	{ desc = "Toggle GIT Mode" }
-)
+map("n", "<leader>V", ":lua require('basic.modes').getMode('GIT'):toggle()<CR>", { desc = "Toggle GIT Mode" })

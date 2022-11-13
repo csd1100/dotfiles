@@ -11,6 +11,7 @@ if not status then
 end
 
 local conf = {
+	snapshot_path = vim.fn.stdpath("cache") .. "/packer.nvim/",
 	display = {
 		open_fn = function()
 			return pu.float({
