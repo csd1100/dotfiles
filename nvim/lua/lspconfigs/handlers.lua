@@ -75,7 +75,7 @@ function M.setup()
 
 	lspi.setup(mason_conf)
 
-	default_capabilities = cnl.update_capabilities(default_capabilities)
+	default_capabilities = cnl.default_capabilities(default_capabilities)
 
 	lspi.setup_handlers({
 		function(server_name) -- default handler (optional)
