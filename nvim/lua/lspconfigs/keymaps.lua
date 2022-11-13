@@ -4,8 +4,7 @@ local unmap = keymapUtils.unmap
 
 local M = {}
 
-function M.map_lsp_keys(options)
-	local bufnr = options.buffer
+function M.map_lsp_keys(bufnr)
 	map("n", "<leader>i", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover Info (LSP)" })
 	map("n", "<C-g>", ":Telescope lsp_document_symbols<CR>", { buffer = bufnr, desc = "All symbols (LSP)" })
 	map("n", "<C-i>", ":Telescope lsp_implementations<CR>", { buffer = bufnr, desc = "Implementation (LSP)" })
@@ -37,9 +36,9 @@ function M.map_lsp_keys(options)
 	map("n", "<leader>lq", vim.diagnostic.setloclist, { buffer = bufnr, desc = "LSP Diagnostics List" })
 end
 
-function M.unmap_lsp_keys(options)
+function M.unmap_lsp_keys(bufnr)
 	local opts = {
-		buffer = options.buffer,
+		buffer = bufnr
 	}
 	unmap("n", "K", opts)
 	unmap("n", "<C-g>", opts)

@@ -34,8 +34,8 @@ map("n", "<leader>mdp", ":Glow<CR>", { desc = "Markdown Preview using Glow" })
 -- ToggleTerm --
 map("n", "<C-S-t>", "<Esc>:ToggleTerm size=11 direction=float <CR>", { desc = "Open Floating Terminal" })
 -- dap splkey: d --
-local debugToggleFn = function(self, filter)
-	if self:isActive(filter) then
+local debugToggleFn = function(self)
+	if self:isActive() then
 		map("n", "<leader>b", ':lua require"dap".toggle_breakpoint()<CR>', { desc = "Toggle Breakpoint (DEBUG)" })
 		map("n", "<leader>d", ':lua require"dap".continue()<CR>', { desc = "Continue (DEBUG)" })
 		map("n", "<leader><down>", ':lua require"dap".step_over()<CR>', { desc = "Step Over (DEBUG)" })
@@ -59,8 +59,8 @@ map(
 )
 
 -- test splkey: t --
-local testToggleFn = function(self, filter)
-	if self:isActive(filter) then
+local testToggleFn = function(self)
+	if self:isActive() then
 		map("n", "<leader>tn", ':lua require("neotest").run.run()<CR>', { desc = "Run nearest test (TEST)" })
 		map(
 			"n",
@@ -94,8 +94,8 @@ map(
 )
 
 -- git splkey: v --
-local gitsignsToggleFn = function(self, filter)
-	if self:isActive(filter) then
+local gitsignsToggleFn = function(self)
+	if self:isActive() then
 		map({ "n", "v" }, "<leader>vs", ":lua require('gitsigns').stage_hunk()<CR>", { desc = "Stage Hunk (GIT)" })
 		map({ "n", "v" }, "<leader>vr", ":lua require('gitsigns').reset_hunk()<CR>", { desc = "Reset Hunk (GIT)" })
 		map("n", "<leader>vS", ":lua require('gitsigns').stage_buffer()<CR>", { desc = "Stage Buffer (GIT)" })

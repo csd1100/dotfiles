@@ -9,52 +9,22 @@ local function toggleGlobalActiveModes(mode)
 	end
 end
 
-local function handleGlobalToggle(mode)
-	toggleGlobalActiveModes(mode)
-	mode.globalValue = not mode.globalValue
-	mode:toggleFn()
-end
-
-local function addToActiveBuffers(mode, bufnr)
-	if mode.activeBuffers[bufnr] then
-		mode.activeBuffers[bufnr] = nil
-	else
-		mode.activeBuffers[bufnr] = true
-	end
-end
-
-local function handleToggleWithFilter(mode, filter)
-	if not mode.globalValue then
-		addToActiveBuffers(mode, filter.buffer)
-		mode:toggleFn(filter)
-	else
-		return
-	end
-end
-
 local function modeClass()
 	local Mode = {
 		id = "Mode",
 		globalValue = false,
 		toggleFn = nil,
-		activeBuffers = {},
 	}
 	Mode.__index = Mode
 
-	function Mode:toggle(filter)
-		if not filter then
-			handleGlobalToggle(self)
-		else
-			handleToggleWithFilter(self, filter)
-		end
+	function Mode:toggle()
+		toggleGlobalActiveModes(self)
+		self.globalValue = not self.globalValue
+		self:toggleFn()
 	end
 
-	function Mode:isActive(filter)
-		if not filter then
-			return self.globalValue
-		else
-			return self.activeBuffers[filter.buffer]
-		end
+	function Mode:isActive()
+		return self.globalValue
 	end
 
 	function Mode.getValidIcon(id, icon)
@@ -93,16 +63,6 @@ function M.getGlobalActiveModesIcons()
 	local activeModeIcons = {}
 	for _, v in pairs(globalActiveModes) do
 		table.insert(activeModeIcons, v.icon)
-	end
-	return activeModeIcons
-end
-
-function M.getBufferActiveModesIcons(bufnr)
-	local activeModeIcons = {}
-	for _, v in pairs(modeStore) do
-		if v.activeBuffers[bufnr] then
-			table.insert(activeModeIcons, v.icon)
-		end
 	end
 	return activeModeIcons
 end
