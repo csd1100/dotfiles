@@ -273,4 +273,8 @@ return packer.startup(function()
 	use({
 		"ThePrimeagen/vim-be-good",
 	})
+
+	use({
+		"csd1100/modes.nvim",
+	})
 end)

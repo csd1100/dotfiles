@@ -96,4 +96,9 @@ function M.tableLength(tbl)
 	return count
 end
 
+function M.appendToTable(table, appendValue)
+	local test = vim.tbl_extend("force", table, appendValue)
+	return test
+end
+
 return M

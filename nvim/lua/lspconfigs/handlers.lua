@@ -14,20 +14,19 @@ local mason_conf = {
 }
 
 local on_attached = function(client, bufnr)
-	local modesModule = require("basic.modes")
+	local modesModule = require("modes")
 
 	local lsp_keymaps = require("lspconfigs.keymaps")
 
-	local lspTogggle = function(self)
-		if self:isActive() then
-			lsp_keymaps.map_lsp_keys(bufnr)
-		else
-			lsp_keymaps.unmap_lsp_keys(bufnr)
-		end
+	local lspActivate = function(options)
+		lsp_keymaps.map_lsp_keys(options.buffer)
+	end
+	local lspDeactivate = function(options)
+		lsp_keymaps.unmap_lsp_keys(options.buffer)
 	end
 
-	local LSP_MODE = modesModule.createMode("LSP", "{}", lspTogggle)
-	LSP_MODE:toggle()
+	modesModule.createIfNotPresent("LSP", lspActivate, lspDeactivate, "{}")
+	modesModule.toggleMode("LSP", { buffer = bufnr })
 end
 
 local default_capabilities = vim.lsp.protocol.make_client_capabilities()

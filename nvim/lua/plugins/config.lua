@@ -14,7 +14,8 @@ if_successful("impatient")
 require("plugins.configs.packer")
 
 -- config --
-if_successful("plugins.configs.keymaps")
+-- if_successful("plugins.configs.keymaps")
+require("plugins.configs.keymaps")
 if_successful("plugins.configs.basics")
 if_successful("plugins.configs.colorscheme")
 

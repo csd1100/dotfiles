@@ -10,87 +10,83 @@ local function file_exists(name)
 end
 
 local function keymap(bufnr)
-	local modesModule = require("basic.modes")
-
 	local keymapUtils = require("basic.keymaps-utils")
 	local map = keymapUtils.map
 	local unmap = keymapUtils.unmap
 
-	local lspTogggle = function(self)
-		local lsp_keymaps = require("lspconfigs.keymaps")
+	local modesModule = require("modes")
 
-		if self:isActive() then
-			lsp_keymaps.map_lsp_keys(bufnr)
-			map(
-				"n",
-				"<leader>li",
-				':lua require("jdtls").organize_imports()<CR>',
-				{ buffer = bufnr, desc = "Organize Imports (LSP:Java)" }
-			)
+	local lsp_keymaps = require("lspconfigs.keymaps")
 
-			map(
-				"n",
-				"<leader>lev",
-				':lua require("jdtls").extract_variable()<CR>',
-				{ buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
-			)
-			map(
-				"v",
-				"<leader>lev",
-				':lua require("jdtls").extract_variable(true)<CR>',
-				{ buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
-			)
+	local lspActivate = function(options)
+		lsp_keymaps.map_lsp_keys(options.buffer)
+		map(
+			"n",
+			"<leader>li",
+			':lua require("jdtls").organize_imports()<CR>',
+			{ buffer = bufnr, desc = "Organize Imports (LSP:Java)" }
+		)
 
-			map(
-				"n",
-				"<leader>lec",
-				':lua require("jdtls").extract_constant()<CR>',
-				{ buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
-			)
-			map(
-				"v",
-				"<leader>lec",
-				':lua require("jdtls").extract_constant(true)<CR>',
-				{ buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
-			)
+		map(
+			"n",
+			"<leader>lev",
+			':lua require("jdtls").extract_variable()<CR>',
+			{ buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
+		)
+		map(
+			"v",
+			"<leader>lev",
+			':lua require("jdtls").extract_variable(true)<CR>',
+			{ buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
+		)
 
-			map(
-				"v",
-				"<leader>lem",
-				':lua require("jdtls").extract_method(true)<CR>',
-				{ buffer = bufnr, desc = "Extract Method (LSP:Java)" }
-			)
+		map(
+			"n",
+			"<leader>lec",
+			':lua require("jdtls").extract_constant()<CR>',
+			{ buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
+		)
+		map(
+			"v",
+			"<leader>lec",
+			':lua require("jdtls").extract_constant(true)<CR>',
+			{ buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
+		)
 
-			map(
-				"n",
-				"<leader>ltc",
-				':lua require("jdtls").test_class()<CR>',
-				{ buffer = bufnr, desc = "Test Class (LSP:Java)" }
-			)
-			map(
-				"n",
-				"<leader>ltm",
-				':lua require("jdtls").test_nearest_method()<CR>',
-				{ buffer = bufnr, desc = "Test Nearest (LSP:Java)" }
-			)
-		else
-			local options = {
-				buffer = bufnr
-			}
-			lsp_keymaps.unmap_lsp_keys(bufnr)
-			unmap("n", "<leader>joi", options)
-			unmap("n", "<leader>jev", options)
-			unmap("n", "<leader>jvt", options)
-			unmap("n", "<leader>jec", options)
-			unmap("n", "<leader>jct", options)
-			unmap("n", "<leader>jem", options)
-			unmap("n", "<leader>jtc", options)
-			unmap("n", "<leader>jtm", options)
-		end
+		map(
+			"v",
+			"<leader>lem",
+			':lua require("jdtls").extract_method(true)<CR>',
+			{ buffer = bufnr, desc = "Extract Method (LSP:Java)" }
+		)
+
+		map(
+			"n",
+			"<leader>ltc",
+			':lua require("jdtls").test_class()<CR>',
+			{ buffer = bufnr, desc = "Test Class (LSP:Java)" }
+		)
+		map(
+			"n",
+			"<leader>ltm",
+			':lua require("jdtls").test_nearest_method()<CR>',
+			{ buffer = bufnr, desc = "Test Nearest (LSP:Java)" }
+		)
+	end
+	local lspDeactivate = function(options)
+		lsp_keymaps.unmap_lsp_keys(options.buffer)
+		unmap("n", "<leader>joi", options)
+		unmap("n", "<leader>jev", options)
+		unmap("n", "<leader>jvt", options)
+		unmap("n", "<leader>jec", options)
+		unmap("n", "<leader>jct", options)
+		unmap("n", "<leader>jem", options)
+		unmap("n", "<leader>jtc", options)
+		unmap("n", "<leader>jtm", options)
 	end
 
-	local LSP = modesModule.createMode("LSP", "{}", lspTogggle)
-	LSP:toggle()
+	modesModule.createIfNotPresent("JLSP", lspActivate, lspDeactivate, "{}")
+	modesModule.toggleMode("JLSP", { buffer = bufnr })
 end
 
 local M = {}

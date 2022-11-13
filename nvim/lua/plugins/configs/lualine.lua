@@ -4,9 +4,13 @@ if not status then
 	return
 end
 
+local modesModule = require("modes")
 local function getCustomGlobalModes()
-	local modesModule = require("basic.modes")
-	return table.concat(modesModule.getGlobalActiveModesIcons(), " | ")
+	return table.concat(modesModule.getActiveModesIcons("*"), " | ")
+end
+
+local function getCustomBufferModes()
+	return table.concat(modesModule.getActiveModesIcons(vim.api.nvim_get_current_buf()), " | ")
 end
 
 local conf = {
@@ -27,7 +31,7 @@ local conf = {
 	},
 	sections = {
 		lualine_a = { "mode", getCustomGlobalModes },
-		lualine_b = { "branch", "diff", "diagnostics" },
+		lualine_b = { getCustomBufferModes, "branch", "diff", "diagnostics" },
 		lualine_c = { "filename" },
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_y = { "progress" },
