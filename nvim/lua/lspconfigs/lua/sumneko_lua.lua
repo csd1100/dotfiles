@@ -27,6 +27,10 @@ function M.update_config(on_attach, capabilities)
 		},
 		on_attach = on_attach,
 		capabilities = capabilities,
+		root_dir = function(fname)
+			return require("lspconfig").util.root_pattern(".git")(fname)
+				or require("lspconfig").util.path.dirname(fname)
+		end,
 	}
 	lspconfig["sumneko_lua"].setup(settings)
 end
