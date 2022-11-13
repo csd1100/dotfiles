@@ -75,12 +75,21 @@ local testToggleFn = function(self)
 		)
 		map("n", "<leader>ts", ':lua require("neotest").run.stop()<CR>', { desc = "Stop current test (TEST)" })
 		map("n", "<leader>ta", ':lua require("neotest").run.attach()<CR>', { desc = "Attach to Test (TEST)" })
+		map(
+			"n",
+			"<leader>tr",
+			':lua require("neotest").output.open({ enter = true })<CR>',
+			{ desc = "Test Results (TEST)" }
+		)
+		map("n", "<leader>ts", ':lua require("neotest").summary.toggle()<CR>', { desc = "Results Summary (TEST)" })
 	else
 		unmap("n", "<leader>tn")
 		unmap("n", "<leader>tf")
 		unmap("n", "<leader>td")
 		unmap("n", "<leader>ts")
 		unmap("n", "<leader>ta")
+		unmap("n", "<leader>tr")
+		unmap("n", "<leader>ts")
 	end
 end
 modesModule.createMode("TEST", "ﭧ", testToggleFn)

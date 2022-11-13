@@ -12,6 +12,6 @@ g.sonokai_better_performance = 1
 g.gruvbox_material_background = "hard"
 g.gruvbox_material_foreground = "mix"
 
-local theme = "gruvbox-material"
+local theme = "sonokai"
 -- set theme --
 vim.cmd("colorscheme " .. theme)

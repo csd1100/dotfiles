@@ -12,6 +12,17 @@ function M.setup()
 			require("neotest-rust")({}),
 			require("neotest-plenary"),
 		},
+		icons = {
+			failed = "",
+			passed = "",
+			running = "",
+			running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
+			skipped = "",
+			unknown = "",
+		},
+		floating = {
+			max_width = 0.9,
+		},
 	}
 
 	neotest.setup(conf)

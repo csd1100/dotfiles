@@ -48,4 +48,4 @@ require("plugins.configs.sessions_manager")
 -- lsp --
 if_successful("lspconfigs")
 require("plugins.configs.dapui")
-require("plugins.configs.test")
+require("plugins.configs.test").setup()
