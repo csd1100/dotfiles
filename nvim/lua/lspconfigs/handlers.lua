@@ -14,9 +14,14 @@ local mason_conf = {
 }
 
 local on_attached = function(client, bufnr)
-	local modesModule = require("modes")
-
 	local lsp_keymaps = require("lspconfigs.keymaps")
+
+	local status, modesModule = pcall(require, "modes")
+	if not status then
+		print("modes plugin not installed or not properly configured, activating keymaps directly")
+		lsp_keymaps.map_lsp_keys(bufnr)
+		return
+	end
 
 	local lspActivate = function(options)
 		lsp_keymaps.map_lsp_keys(options.buffer)

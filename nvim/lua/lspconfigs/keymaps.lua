@@ -13,13 +13,23 @@ function M.map_lsp_keys(bufnr)
 	map("n", "<C-S-->", ":Telescope lsp_incoming_calls<CR>", { buffer = bufnr, desc = "Incoming Calls (LSP)" })
 	map("n", "<C-S-=>", ":Telescope lsp_outgoing_calls<CR>", { buffer = bufnr, desc = "Outgoing Calls (LSP)" })
 	map("n", "<leader>lk", ":lua vim.lsp.buf.signature_help()<CR>", { buffer = bufnr, desc = "Signature Help (LSP)" })
-	map("n", "<leader>ltd", ":lua vim.lsp.buf.type_definition()<CR>", { buffer = bufnr, desc = "Type Definition (LSP)" })
+	map(
+		"n",
+		"<leader>ltd",
+		":lua vim.lsp.buf.type_definition()<CR>",
+		{ buffer = bufnr, desc = "Type Definition (LSP)" }
+	)
 	map("n", "<leader>lrn", ":lua vim.lsp.buf.rename()<CR>", { buffer = bufnr, desc = "Rename (LSP)" })
 	map("n", "<leader>lca", ":lua vim.lsp.buf.code_action()<CR>", { buffer = bufnr, desc = "Code Actions (LSP)" })
 	map("v", "<leader>lca", ":lua vim.lsp.buf.code_action()<CR>", { buffer = bufnr, desc = "Code Actions (LSP)" })
 	map("n", "<leader>lf", ":lua vim.lsp.buf.format()<CR>", { buffer = bufnr, desc = "Format (LSP)" })
 
-	map("n", "<leader>wa", ":lua vim.lsp.buf.add_workspace_folder()<CR>", { buffer = bufnr, desc = "Add Workspace Folder (LSP)" })
+	map(
+		"n",
+		"<leader>wa",
+		":lua vim.lsp.buf.add_workspace_folder()<CR>",
+		{ buffer = bufnr, desc = "Add Workspace Folder (LSP)" }
+	)
 	map(
 		"n",
 		"<leader>wr",
@@ -31,16 +41,26 @@ function M.map_lsp_keys(bufnr)
 	end, { buffer = bufnr, desc = "List Workspace Folders (LSP)" })
 
 	map("n", "<leader>lo", ":lua vim.diagnostic.open_float()<CR>", { buffer = bufnr, desc = "Open LSP Diagnostics" })
-	map("n", "<leader>l<up>", ":lua vim.diagnostic.goto_prev()<CR>", { buffer = bufnr, desc = "Go To Previous Diagnostics" })
-	map("n", "<leader>l<down>", ":lua vim.diagnostic.goto_next()<CR>", { buffer = bufnr, desc = "Go To Next Diagnostics" })
+	map(
+		"n",
+		"<leader>l<up>",
+		":lua vim.diagnostic.goto_prev()<CR>",
+		{ buffer = bufnr, desc = "Go To Previous Diagnostics" }
+	)
+	map(
+		"n",
+		"<leader>l<down>",
+		":lua vim.diagnostic.goto_next()<CR>",
+		{ buffer = bufnr, desc = "Go To Next Diagnostics" }
+	)
 	map("n", "<leader>lq", ":lua vim.diagnostic.setloclist()<CR>", { buffer = bufnr, desc = "LSP Diagnostics List" })
 end
 
 function M.unmap_lsp_keys(bufnr)
 	local opts = {
-		buffer = bufnr
+		buffer = bufnr,
 	}
-	unmap("n", "K", opts)
+	unmap("n", "<leader>i", opts)
 	unmap("n", "<C-g>", opts)
 	unmap("n", "<C-i>", opts)
 	unmap("n", "<C-d>", opts)
@@ -51,6 +71,7 @@ function M.unmap_lsp_keys(bufnr)
 	unmap("n", "<leader>ltd", opts)
 	unmap("n", "<leader>lrn", opts)
 	unmap("n", "<leader>lca", opts)
+	unmap("v", "<leader>lca", opts)
 	unmap("n", "<leader>lf", opts)
 	unmap("n", "<leader>wa", opts)
 	unmap("n", "<leader>wr", opts)
@@ -59,7 +80,6 @@ function M.unmap_lsp_keys(bufnr)
 	unmap("n", "<leader>l<up>", opts)
 	unmap("n", "<leader>l<down>", opts)
 	unmap("n", "<leader>lq", opts)
-	unmap("n", "<leader>li", opts)
 end
 
 return M

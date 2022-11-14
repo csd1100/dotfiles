@@ -4,8 +4,6 @@ local unmap = keymapUtils.unmap
 local utils = require("basic.utils")
 local tbl_extend = utils.appendToTable
 
-local modesModule = require("modes")
-
 -- Comment Toggle --
 map("n", "<leader>/", ":CommentToggle<CR>", { desc = "Comment current Line" })
 map("v", "<leader>/", ":'<,'>CommentToggle<CR>", { desc = "Comment Selection" })
@@ -65,14 +63,6 @@ local deactivateDebugFn = function(options)
 	unmap("n", "<leader><right>", options)
 	unmap("n", "<leader><left>", options)
 end
-modesModule.createIfNotPresent("DEBUG", activateDebugFn, deactivateDebugFn, "")
-map("n", "<leader>D", ":lua require('modes').toggleMode('DEBUG')<CR>", { desc = "Toggle DEBUG Mode" })
-map(
-	"n",
-	"<leader>DD",
-	":lua require('modes').toggleMode('DEBUG',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
-	{ desc = "Toggle DEBUG Mode for Current Buffer" }
-)
 
 -- test splkey: t --
 local activateTestModeFn = function(options)
@@ -132,15 +122,6 @@ local deactivateTestModeFn = function(options)
 	unmap("n", "<leader>tr", options)
 	unmap("n", "<leader>ts", options)
 end
-modesModule.createIfNotPresent("TEST", activateTestModeFn, deactivateTestModeFn, "ﭧ")
-
-map("n", "<leader>T", ":lua require('modes').toggleMode('TEST')<CR>", { desc = "Toggle TEST Mode" })
-map(
-	"n",
-	"<leader>TT",
-	":lua require('modes').toggleMode('TEST',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
-	{ desc = "Toggle TEST Mode for Current Buffer" }
-)
 
 -- -- git splkey: v --
 local activateGitsignsFn = function(options)
@@ -221,15 +202,6 @@ local deacticateGitsignsFn = function(options)
 	unmap("n", "<leader>vD", options)
 	unmap("n", "<leader>vdd", options)
 end
-modesModule.createIfNotPresent("GIT", activateGitsignsFn, deacticateGitsignsFn, "")
-
-map("n", "<leader>V", ":lua require('modes').toggleMode('GIT')<CR>", { desc = "Toggle GIT Mode" })
-map(
-	"n",
-	"<leader>VV",
-	":lua require('modes').toggleMode('GIT',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
-	{ desc = "Toggle GIT Mode for Current Buffer" }
-)
 
 local activateCompletionToggleFn = function(options)
 	-- add brackets and quotes in visual mode
@@ -267,14 +239,45 @@ local deactivateCompletionToggleFn = function(options)
 	unmap("i", "{<CR>", options)
 end
 
-local COMPL = modesModule.createIfNotPresent("COMPL", activateCompletionToggleFn, deactivateCompletionToggleFn, "''")
--- enable quotes completion by default --
-modesModule.toggleMode("COMPL")
--- autocomplete brackets and quotes
-map("n", "<leader>'", ":lua require('modes').toggleMode('COMPL')<CR>", { desc = "Toggle COMPL Mode" })
-map(
-	"n",
-	"<leader>''",
-	":lua require('modes').toggleMode('COMPL',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
-	{ desc = "Toggle COMPL Mode for Current Buffer" }
-)
+local status, modesModule = pcall(require, "modes")
+if status then
+	modesModule.createIfNotPresent("COMPL", activateCompletionToggleFn, deactivateCompletionToggleFn, "''")
+	-- enable quotes completion by default --
+	modesModule.toggleMode("COMPL")
+	-- autocomplete brackets and quotes
+	map("n", "<leader>'", ":lua require('modes').toggleMode('COMPL')<CR>", { desc = "Toggle COMPL Mode" })
+	map(
+		"n",
+		"<leader>''",
+		":lua require('modes').toggleMode('COMPL',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
+		{ desc = "Toggle COMPL Mode for Current Buffer" }
+	)
+
+	modesModule.createIfNotPresent("GIT", activateGitsignsFn, deacticateGitsignsFn, "")
+	map("n", "<leader>V", ":lua require('modes').toggleMode('GIT')<CR>", { desc = "Toggle GIT Mode" })
+	map(
+		"n",
+		"<leader>VV",
+		":lua require('modes').toggleMode('GIT',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
+		{ desc = "Toggle GIT Mode for Current Buffer" }
+	)
+
+	modesModule.createIfNotPresent("TEST", activateTestModeFn, deactivateTestModeFn, "ﭧ")
+
+	map("n", "<leader>T", ":lua require('modes').toggleMode('TEST')<CR>", { desc = "Toggle TEST Mode" })
+	map(
+		"n",
+		"<leader>TT",
+		":lua require('modes').toggleMode('TEST',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
+		{ desc = "Toggle TEST Mode for Current Buffer" }
+	)
+
+	modesModule.createIfNotPresent("DEBUG", activateDebugFn, deactivateDebugFn, "")
+	map("n", "<leader>D", ":lua require('modes').toggleMode('DEBUG')<CR>", { desc = "Toggle DEBUG Mode" })
+	map(
+		"n",
+		"<leader>DD",
+		":lua require('modes').toggleMode('DEBUG',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
+		{ desc = "Toggle DEBUG Mode for Current Buffer" }
+	)
+end
