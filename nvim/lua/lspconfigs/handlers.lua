@@ -36,10 +36,10 @@ end
 
 local default_capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local function setup_custom_configs(server_name, plugin, module, on_attach, capabilities)
-	local status, _ = pcall(require, plugin)
+local function setup_custom_configs(server_name, plug, module, on_attach, capabilities, doSetup)
+	local status, plugin = pcall(require, plug)
 	if not status then
-		vim.notify("failed to load " .. server_name .. " loading mason config", "error")
+		vim.notify("failed to load " .. plug .. " loading mason config", "error")
 		lspconfig[server_name].setup({
 			on_attach = on_attached,
 			capabilities = capabilities,
@@ -47,6 +47,9 @@ local function setup_custom_configs(server_name, plugin, module, on_attach, capa
 		return
 	else
 		require(module).update_config(on_attach, capabilities)
+		if doSetup then
+			plugin.setup(require(module).config)
+		end
 	end
 end
 
@@ -97,11 +100,19 @@ function M.setup()
 				"rust-tools",
 				"lspconfigs.rust.rust-analyzer",
 				on_attached,
-				default_capabilities
+				default_capabilities,
+				true
 			)
 		end,
 		["tsserver"] = function(server_name)
-			setup_custom_configs(server_name, "typescript", "lspconfigs.js.tsserver", on_attached, default_capabilities)
+			setup_custom_configs(
+				server_name,
+				"typescript",
+				"lspconfigs.js.tsserver",
+				on_attached,
+				default_capabilities,
+				true
+			)
 		end,
 		["sumneko_lua"] = function(server_name)
 			require("lspconfigs.lua.sumneko_lua").update_config(on_attached, default_capabilities)
