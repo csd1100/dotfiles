@@ -27,6 +27,8 @@ sketchybar --default updates=when_shown \
 	label.padding_left=10 \
 	label.padding_right=10 \
 	background.drawing=off \
+	label.drawing=off \
+	icon.drawing=off \
 	popup.background.color=$BACKGROUND
 
 # ADD ITEMS

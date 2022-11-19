@@ -7,8 +7,8 @@ MUTED=$(osascript -e 'get volume settings' | rg --pcre2 -o "(?<=output muted:)\w
 
 if [ $MUTED = "true" ]; then
 	ICON=""
-    ACCENT=$ALERT
-    LABEL="Muted"
+	ACCENT=$ALERT
+	LABEL="Muted"
 else
 	case ${PERCENTAGE} in
 	100)
@@ -22,8 +22,8 @@ else
 		;;
 	*) ICON="" ;;
 	esac
-    ACCENT=$ACCENT1
-    LABEL=$PERCENTAGE
+	ACCENT=$ACCENT1
+	LABEL="$PERCENTAGE%"
 fi
 
 sketchybar --set $NAME icon="$ICON" icon.color=$ACCENT label=$LABEL
