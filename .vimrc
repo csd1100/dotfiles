@@ -28,7 +28,7 @@ nnoremap <leader>c :nohl<CR>
 nnoremap <leader><CR> i<CR><Esc>
 nnoremap <leader>j o<Esc>j
 " insert 4 spaces (tab)
-nnoremap <leader><Tab> i    <ESC>
+nnoremap <leader><Tab> i<Tab><ESC>l
 
 " start and end of the line
 nnoremap <leader>s 0
