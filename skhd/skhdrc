@@ -52,8 +52,8 @@ cmd + shift + lalt  - l : yabai -m window --resize right:50:0; \
 # Equalize size of windows
 cmd + shift - b : yabai -m space --balance
 
-# Rotate window tree
-cmd + shift - r : yabai -m space --rotate 90
+# restart
+cmd + shift - r : brew services restart skhd && brew services restart yabai && brew services restart sketchybar
 
 # Enable / Disable gaps in current workspace
 cmd + shift - g : yabai -m space --toggle padding; yabai -m space --toggle gap
