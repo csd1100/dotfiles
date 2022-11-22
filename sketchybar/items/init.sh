@@ -39,5 +39,11 @@ sketchybar --set sound \
 	icon.drawing=on \
 	script="$PLUGIN_DIR/sound.sh"
 
+sketchybar --set clock \
+	label.drawing=on \
+	icon.drawing=on \
+	icon= \
+	update_freq=10 \
+	script="$PLUGIN_DIR/clock.sh"
 # vpn item
 source "$CONFIG_DIR/items/vpn.sh"

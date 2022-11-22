@@ -39,6 +39,7 @@ sketchybar --add item space_display left
 sketchybar --add item focused_window center
 
 # right
+sketchybar --add item clock right
 sketchybar --add alias "Amphetamine,Amphetamine" right
 sketchybar --add item vpn right
 sketchybar --add item sound right
@@ -48,6 +49,7 @@ sketchybar --add item wifi right
 # ADD SUBSCRIPTIONS
 sketchybar --subscribe space_display space_change
 sketchybar --subscribe focused_window front_app_switched
+sketchybar --subscribe clock system_woke
 sketchybar --subscribe battery system_woke
 sketchybar --subscribe sound system_woke volume_change
 sketchybar --subscribe wifi system_woke

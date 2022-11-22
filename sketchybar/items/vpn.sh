@@ -4,8 +4,9 @@ source "$CONFIG_DIR/colors.sh"
 
 sketchybar --set vpn \
 	icon.drawing=on \
-	label.drawing=off \
-	icon= \
+    label.drawing=on \
+	label="DIS" \
+	icon= \
 	icon.color=$ALERT \
 	script="$CONFIG_DIR/plugins/vpn.sh" \
 	click_script="sketchybar -m --set \$NAME popup.drawing=toggle" \

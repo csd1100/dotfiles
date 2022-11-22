@@ -2,7 +2,7 @@
 CONFIG_DIR="$HOME/.config/sketchybar"
 source "$CONFIG_DIR/colors.sh"
 
-PERCENTAGE=$INFO
+PERCENTAGE=${INFO:-$(osascript -e 'get volume settings' | rg --pcre2 -o "(?<=output volume:)\w+")}
 MUTED=$(osascript -e 'get volume settings' | rg --pcre2 -o "(?<=output muted:)\w+")
 
 if [ $MUTED = "true" ]; then
