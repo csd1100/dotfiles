@@ -7,7 +7,7 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
 ### Settings ###
 # External bar
-yabai -m config external_bar all:0:0
+yabai -m config external_bar all:0:55
 
 # Global settings
 yabai -m config window_placement             second_child
@@ -37,27 +37,25 @@ yabai -m config mouse_drop_action            swap
 
 # General space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  3
-yabai -m config bottom_padding               60
-yabai -m config left_padding                 3
-yabai -m config right_padding                3
-yabai -m config window_gap                   3
+yabai -m config top_padding                  5
+yabai -m config bottom_padding               5
+yabai -m config left_padding                 5
+yabai -m config right_padding                5
+yabai -m config window_gap                   5
+
+# layout rules
+yabai -m config --space 6 layout stack
+yabai -m config --space 7 layout stack
+yabai -m config --space 8 layout stack
+yabai -m config --space 10 layout stack
+yabai -m config --space 11 layout stack
+
+# events for sketchybar
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
 
 # Rules
-yabai -m rule --add app="^System Settings$"                         manage=off
-yabai -m rule --add app="^System Information$"                      manage=off
-yabai -m rule --add app="^Finder$" title="(Info|Preferences)"       manage=off
-yabai -m rule --add app="^Calculator$"                              manage=off
-yabai -m rule --add app="^Activity Monitor$"                        manage=off
-yabai -m rule --add app="^Font Book$"                               manage=off
-yabai -m rule --add app="^Archive Utility$"                         manage=off
-yabai -m rule --add app="^App Store$" label="App Store"             manage=off
-yabai -m rule --add app="^Installer$"                               manage=off
-yabai -m rule --add app="^Digital Colour Meter"                     manage=off
-yabai -m rule --add app="^Mullvad VPN"                              manage=off mouse_follows_focus=off
-yabai -m rule --add app="^JetBrains Toolbox"                        manage=off mouse_follows_focus=off
-yabai -m rule --add app="^Wine*"                                    manage=off mouse_follows_focus=off
-yabai -m rule --add app="^CleanMyMac*"                              manage=off
-yabai -m rule --add app="^Alfred*"                              manage=off
+source $HOME/.config/yabai/rules
 
 echo "yabai configuration loaded.."
