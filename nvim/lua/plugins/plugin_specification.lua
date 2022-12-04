@@ -110,6 +110,10 @@ return packer.startup(function()
 	use({
 		"sainnhe/gruvbox-material",
 	})
+
+	use({
+		"catppuccin/nvim",
+	})
 	-- disable relative numbers when in insert mode --
 	use({
 		"nkakouros-original/numbers.nvim",
