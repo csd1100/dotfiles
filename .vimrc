@@ -19,6 +19,11 @@ nnoremap cp de"6P
 " replace from current pos to end of the line with text from reg 6
 nnoremap [] d$"6P
 
+" yank text in reg 0
+vnoremap 00 "0y
+" paste from 0
+nnoremap 00 "0P
+
 inoremap kk <Esc>
 inoremap jj <Esc><CR>
 inoremap lll <Esc>l
