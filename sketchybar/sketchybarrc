@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
-CONFIG_DIR="$HOME/.config/sketchybar"
-PLUGIN_DIR="$CONFIG_DIR/plugins"
-ITEMS_DIR="$CONFIG_DIR/items"
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+ITEMS_DIR="$HOME/.config/sketchybar/items"
 
-source "$CONFIG_DIR/colors.sh"
+source "$HOME/.config/sketchybar/colors.sh"
+source "$HOME/.config/sketchybar/icons.sh"
 
 # CREATE BAR
-sketchybar --bar height=55 \
+sketchybar --bar height=30 \
 	blur_radius=0 \
-	position=bottom \
+	position=top \
 	sticky=off \
 	padding_left=10 \
 	padding_right=10 \
@@ -18,45 +18,32 @@ sketchybar --bar height=55 \
 # SET DEFAULTS
 sketchybar --default updates=when_shown \
 	drawing=on \
+	icon.drawing=off \
 	icon.font="SpaceMono Nerd Font:Bold:17.0" \
 	icon.color=$ACCENT1 \
 	icon.padding_left=4 \
 	icon.padding_right=4 \
+	label.drawing=off \
 	label.font="Jetbrains Mono:Bold:15.0" \
 	label.color=$FOREGROUND \
 	label.padding_left=10 \
 	label.padding_right=10 \
 	background.drawing=off \
-	label.drawing=off \
-	icon.drawing=off \
 	popup.background.color=$BACKGROUND
 
 # ADD ITEMS
 # left
-sketchybar --add item space_display left
-
-# center
-sketchybar --add item focused_window center
+source "$ITEMS_DIR/ispace.sh"
+source "$ITEMS_DIR/iwindow.sh"
 
 # right
-sketchybar --add item clock right
-sketchybar --add alias "Amphetamine,Amphetamine" right
-sketchybar --add item vpn right
-sketchybar --add item sound right
-sketchybar --add item battery right
-sketchybar --add item wifi right
-
-# ADD SUBSCRIPTIONS
-sketchybar --subscribe space_display space_change
-sketchybar --subscribe focused_window front_app_switched
-sketchybar --subscribe clock system_woke
-sketchybar --subscribe battery system_woke
-sketchybar --subscribe sound system_woke volume_change
-sketchybar --subscribe wifi system_woke
+source "$ITEMS_DIR/iclock.sh"
+source "$ITEMS_DIR/ivpn.sh"
+source "$ITEMS_DIR/iwifi.sh"
+source "$ITEMS_DIR/ibattery.sh"
+source "$ITEMS_DIR/isound.sh"
+source "$ITEMS_DIR/ialiases.sh"
 
 sketchybar --update
-
-# INITIALIZING ITEMS
-source "$ITEMS_DIR/init.sh"
 
 echo "sketchybar configuration loaded.."

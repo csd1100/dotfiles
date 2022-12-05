@@ -1,14 +1,10 @@
-#!/usr/bin/env sh
-CONFIG_DIR="$HOME/.config/sketchybar"
-source "$CONFIG_DIR/colors.sh"
+#!/usr/bin/env bash
+sketchybar --add item vpn right
 
 sketchybar --set vpn \
 	icon.drawing=on \
-    label.drawing=on \
-	label="DIS" \
-	icon= \
-	icon.color=$ALERT \
-	script="$CONFIG_DIR/plugins/vpn.sh" \
+	label.drawing=on \
+	script="$PLUGIN_DIR/pvpn.sh" \
 	click_script="sketchybar -m --set \$NAME popup.drawing=toggle" \
 	popup.background.corner_radius=5 \
 	popup.background.border_width=2 \
@@ -18,31 +14,28 @@ sketchybar --set vpn \
 	update_freq=1
 
 sketchybar --add item vpn.connect popup.vpn \
-	--set vpn.connect icon= \
+	--set vpn.connect icon=$VPN_CONNECTED \
 	icon.drawing=on \
 	label.drawing=on \
 	label="connect" \
 	background.padding_left=10 \
 	background.padding_right=10 \
-	click_script="$HOME/bin/vpn-manager connect;
-                                             sketchybar -m --set vpn popup.drawing=off"
+	click_script="$HOME/bin/vpn-manager connect; sketchybar -m --set vpn popup.drawing=off"
 
 sketchybar --add item vpn.disconnect popup.vpn \
-	--set vpn.disconnect icon= \
+	--set vpn.disconnect icon=$VPN_DISCONNECTED \
 	icon.drawing=on \
 	label.drawing=on \
 	label="disconnect" \
 	background.padding_left=10 \
 	background.padding_right=10 \
-	click_script="$HOME/bin/vpn-manager disconnect;
-                                             sketchybar -m --set vpn popup.drawing=off"
+	click_script="$HOME/bin/vpn-manager disconnect; sketchybar -m --set vpn popup.drawing=off"
 
 sketchybar --add item vpn.ui popup.vpn \
-	--set vpn.ui icon= \
+	--set vpn.ui icon=$OPEN \
 	icon.drawing=on \
 	label.drawing=on \
 	label="ui" \
 	background.padding_left=10 \
 	background.padding_right=10 \
-	click_script="$HOME/bin/vpn-manager ui;
-                                             sketchybar -m --set vpn popup.drawing=off"
+	click_script="$HOME/bin/vpn-manager ui; sketchybar -m --set vpn popup.drawing=off"

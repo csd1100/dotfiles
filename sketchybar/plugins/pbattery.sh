@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
-CONFIG_DIR="$HOME/.config/sketchybar"
-source "$CONFIG_DIR/colors.sh"
+source "$HOME/.config/sketchybar/colors.sh"
+source "$HOME/.config/sketchybar/icons.sh"
 
 PERCENTAGE=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
 CHARGING=$(pmset -g batt | grep 'AC Power')
@@ -10,13 +10,13 @@ if [ $PERCENTAGE = "" ]; then
 fi
 
 case ${PERCENTAGE} in
-  9[0-9]|100) ICON="" ACCENT=$ACCENT1
+  9[0-9]|100) ICON=$BATTERY_FULL ACCENT=$ACCENT1
   ;;
-  [6-8][0-9]) ICON="" ACCENT=$ACCENT1
+  [6-8][0-9]) ICON=$BATTERY_HIGH ACCENT=$ACCENT1
   ;;
-  [3-5][0-9]) ICON="" ACCENT=$ACCENT1
+  [3-5][0-9]) ICON=$BATTERY_HALF ACCENT=$ACCENT1
   ;;
-  [1-2][0-9]) ICON="" ACCENT=$WARN
+  [1-2][0-9]) ICON=$BATTERY_LOW ACCENT=$WARN
   ;;
   *) ICON="" ACCENT=$ALERT
 esac
