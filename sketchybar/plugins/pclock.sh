@@ -4,5 +4,12 @@
 # the item invoking this script:
 # https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
 
-sketchybar --set $NAME label="$(date '+%d/%m %H:%M')"
-
+case $SENDER in
+"mouse.entered")
+    LABEL="$(date '+%B %d %Y, %H:%M')"
+	;;
+*)
+    LABEL="$(date '+%H:%M')"
+	;;
+esac
+sketchybar --set $NAME label="$LABEL"

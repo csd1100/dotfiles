@@ -1,8 +1,21 @@
 #!/usr/bin/env bash
-ids=$(yabai -m query --windows | jq -r ".[].id")
+windows=$(yabai -m query --windows | jq -c ".[]")
 
-if [ "$ids" != "" ]; then
+if [ "$windows" != "" ]; then
 	while IFS= read -r window; do
-		sketchybar --add item $window left
-	done <<<"$ids"
+
+		id=$(echo $window | jq -r ".id")
+		app=$(echo $window | jq -r ".app")
+		space=$(echo $window | jq -r ".space")
+
+		sketchybar --add item $id left
+		sketchybar --set $id \
+			label="$($HOME/.config/sketchybar/plugins/picon_map.sh "$app")" \
+			label.drawing=on \
+			label.font="sketchybar-app-font:Regular:13.0" \
+			label.color=$FOREGROUND \
+			label.highlight=off \
+			associated_space=$space \
+			click_script="yabai -m window --focus $id"
+	done <<<"$windows"
 fi

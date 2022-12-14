@@ -4,13 +4,26 @@ source "$HOME/.config/sketchybar/colors.sh"
 
 status="$($HOME/bin/vpn-manager status)"
 if [ $status = "connected" ]; then
-	ACCENT=$ACCENT1
+	ACCENT=$G
 	ICON="$VPN_CONNECTED"
 	LABEL="CONN"
 else
-	ACCENT=$ALERT
+	ACCENT=$R
 	ICON="$VPN_DISCONNECTED"
 	LABEL="DIS"
 fi
 
-sketchybar --set vpn icon=$ICON icon.color=$ACCENT label=$LABEL
+case $SENDER in
+"mouse.entered")
+	LABEL_DRAWING=on
+	;;
+*)
+	LABEL_DRAWING=off
+	;;
+esac
+
+sketchybar --set vpn icon=$ICON \
+	icon.color=$FOREGROUND \
+	label.drawing=$LABEL_DRAWING \
+	label=$LABEL \
+	background.border_color=$ACCENT

@@ -3,15 +3,16 @@ sketchybar --add item vpn right
 
 sketchybar --set vpn \
 	icon.drawing=on \
-	label.drawing=on \
 	script="$PLUGIN_DIR/pvpn.sh" \
 	click_script="sketchybar -m --set \$NAME popup.drawing=toggle" \
 	popup.background.corner_radius=5 \
 	popup.background.border_width=2 \
-	popup.background.border_color=$ACTIVE_BORDER1 \
+	popup.background.border_color=$FOREGROUND \
 	popup.align=right \
 	popup.y_offset=-3 \
-	update_freq=1
+	update_freq=5
+
+sketchybar --subscribe vpn system_woke mouse.entered mouse.exited.global
 
 sketchybar --add item vpn.connect popup.vpn \
 	--set vpn.connect icon=$VPN_CONNECTED \
