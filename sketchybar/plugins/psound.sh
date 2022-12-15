@@ -6,29 +6,23 @@ PERCENTAGE=${INFO:-$(osascript -e 'get volume settings' | rg --pcre2 -o "(?<=out
 MUTED=$(osascript -e 'get volume settings' | rg --pcre2 -o "(?<=output muted:)\w+")
 
 if [ $MUTED = "true" ]; then
-	ICON=$VOLUME_MUTE
 	ACCENT=$R
 	LABEL="Muted"
 else
 	case ${PERCENTAGE} in
 	100)
-		ICON=$VOLUME_HIGH
 		ACCENT=$G
 		;;
 	[8-9][0-9])
-		ICON=$VOLUME_HIGH
 		ACCENT=$G
 		;;
 	[6-7][0-9])
-		ICON=$VOLUME_MEDIUM
 		ACCENT=$Y
 		;;
 	[1-5][0-9])
-		ICON=$VOLUME_LOW
 		ACCENT=$O
 		;;
 	*)
-		ICON=$VOLUME_LOW
 		ACCENT=$R
 		;;
 	esac
@@ -44,8 +38,5 @@ case $SENDER in
 	;;
 esac
 
-sketchybar --set $NAME icon="$ICON" \
-	icon.color=$FOREGROUND \
-	label.drawing=$LABEL_DRAWING \
-	background.border_color=$ACCENT \
+sketchybar --set $NAME label.drawing=$LABEL_DRAWING \
 	label=$LABEL

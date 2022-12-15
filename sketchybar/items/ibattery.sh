@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-sketchybar --add item battery right
+sketchybar --add alias "Control Centre,Battery" right
+sketchybar --rename "Control Centre,Battery" battery
 
 sketchybar --subscribe battery system_woke mouse.entered mouse.exited.global
 
 sketchybar --set battery \
 	label.drawing=on \
-	icon.drawing=on \
 	script="$PLUGIN_DIR/pbattery.sh" \
 	update_freq=5

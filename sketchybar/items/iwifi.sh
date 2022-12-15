@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-sketchybar --add item wifi right
+sketchybar --add alias "Control Centre,WiFi" right
+sketchybar --rename "Control Centre,WiFi" wifi
 
 sketchybar --subscribe wifi system_woke mouse.entered mouse.exited.global
 
 sketchybar --set wifi \
 	label.drawing=on \
-	icon.drawing=on \
 	script="$PLUGIN_DIR/pwifi.sh" \
 	update_freq=5

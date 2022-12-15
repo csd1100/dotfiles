@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-sketchybar --add item vpn right
+
+sketchybar --add alias "Mullvad VPN,Item-0" right
+sketchybar --rename "Mullvad VPN,Item-0" vpn
 
 sketchybar --set vpn \
-	icon.drawing=on \
+	alias.color=$FOREGROUND \
 	script="$PLUGIN_DIR/pvpn.sh" \
 	click_script="sketchybar -m --set \$NAME popup.drawing=toggle" \
 	popup.background.corner_radius=5 \
