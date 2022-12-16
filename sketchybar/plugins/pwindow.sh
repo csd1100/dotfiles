@@ -14,7 +14,7 @@ case $SENDER in
 		label.color=$FOREGROUND \
 		label.highlight=off \
 		associated_space=$space \
-		click_script="yabai -m window --focus $window"
+		click_script="yabai -m window --focus $ID"
 	;;
 "window_destroyed")
 	sketchybar --remove $ID
