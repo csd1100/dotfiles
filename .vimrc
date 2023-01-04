@@ -80,3 +80,4 @@ set softtabstop=-1
 set shiftwidth=0
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+set colorcolumn=76

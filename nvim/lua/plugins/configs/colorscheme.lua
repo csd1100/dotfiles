@@ -2,7 +2,7 @@ local g = vim.g
 local set = vim.opt
 -- vim opts for colors and background --
 set.termguicolors = true
-set.background = "light"
+set.background = "dark"
 
 -- sonokai conf --
 g.sonokai_style = "default"
@@ -20,6 +20,6 @@ require("catppuccin").setup({
     },
 })
 
-local theme = "sonokai"
+local theme = "gruvbox-material"
 -- set theme --
 vim.cmd("colorscheme " .. theme)
