@@ -1,9 +1,9 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ### Load scripting addition ###
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-
+# launchctl unload -F /System/Library/LaunchAgents/com.apple.WindowManager.plist
 
 ### Settings ###
 # External bar
@@ -12,6 +12,8 @@ yabai -m config external_bar all:35:0
 # Global settings
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               on
+yabai -m mouse_follows_focus                 on
+yabai -m focus_follows_mouse                 on
 yabai -m config window_shadow                off
 yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
@@ -47,6 +49,7 @@ yabai -m config window_gap                   5
 yabai -m config --space 2 layout            stack
 yabai -m config --space 3 layout            stack
 yabai -m config --space 5 layout            stack
+yabai -m config --space 6 layout            stack
 
 # events for sketchybar
 yabai -m signal --add event=window_created action='sketchybar --trigger window_added ID="$YABAI_WINDOW_ID"'
