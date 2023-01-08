@@ -12,7 +12,7 @@
     - name: Linux Setup
       include_tasks: linux/setup.yml
       when: ( ansible_os_family == "Debian" or ansible_os_family == "ArchLinux"
-              ansible_os_family == "RedHat" )
+        or ansible_os_family == "RedHat" )
       tags: always
 
     - name: Common Setup
