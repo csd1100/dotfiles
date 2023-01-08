@@ -1,4 +1,4 @@
 - name: Stowing Dotfiles (Linux)
-  shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup common
+  shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup linux
   tags:
   - dotfiles

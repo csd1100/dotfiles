@@ -126,3 +126,47 @@
   tags:
     - cli
     - cli-tools
+
+- name: i3 install (Apt)
+  become: yes
+  apt:
+    name: i3
+  tags:
+    - gui
+    - de
+
+- name: polybar install (Apt)
+  become: yes
+  apt:
+    name: polybar
+  tags:
+    - gui
+    - de
+
+- name: rofi install (Apt)
+  become: yes
+  apt:
+    name: rofi
+  tags:
+    - gui
+    - de
+
+- name: xcffib install (Apt)
+  become: yes
+  apt:
+    name: xcffib
+  tags:
+    - gui
+    - de
+    - never
+    - qtile
+
+- name: qtile install (Apt)
+  become: yes
+  apt:
+    name: qtile
+  tags:
+    - gui
+    - de
+    - never
+    - qtile
