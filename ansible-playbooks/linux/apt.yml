@@ -29,6 +29,7 @@
     - essentials
 
 - name: htop install (htop)
+  become: yes
   apt:
     name: htop
   tags:
