@@ -1,0 +1,112 @@
+- name: Brew install
+  shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  tags:
+    - never
+    - brew-init
+
+- name: Brew Update
+  community.general.homebrew:
+    update_homebrew: true
+    upgrade_all: true
+  tags:
+    - always
+
+- name: GNU coreutils install (Brew)
+  community.general.homebrew:
+    name: coreutils
+  tags:
+    - cli
+    - essentials
+
+- name: zsh install (Brew)
+  community.general.homebrew:
+    name: zsh
+  tags:
+    - zsh
+    - cli
+    - essentials
+
+- name: GNU stow install (Brew)
+  community.general.homebrew:
+    name: stow
+  tags:
+    - cli
+
+- name: imagemagick install (Brew)
+  community.general.homebrew:
+    name: imagemagick
+  tags:
+    - gui
+    - kitty
+
+- name: luarocks install (Brew)
+  community.general.homebrew:
+    name: luarocks
+  tags:
+    - cli
+    - nvim
+
+- name: nvim-nightly install (Brew)
+  community.general.homebrew:
+    name: nvim
+    state: head
+  tags:
+    - cli
+    - nvim
+    - essentials
+
+- name: neofetch install (Brew)
+  community.general.homebrew:
+    name: nvim
+  shell: neofetch
+  tags:
+    - cli
+    - cli-tools
+
+- name: jq install (Brew)
+  community.general.homebrew:
+    name: jq
+  tags:
+    - cli
+    - essentials
+    - cli-tools
+
+- name: yabai install (Brew)
+  community.general.homebrew:
+    name: yabai
+  tags:
+    - gui
+    - de
+
+- name: skhd install (Brew)
+  community.general.homebrew:
+    name: sketchybar
+  tags:
+    - gui
+    - de
+
+- name: enable skhd service (Brew)
+  shell: echo
+  tags:
+    - gui
+    - de
+
+- name: sketchybar install (Brew)
+  community.general.homebrew:
+    name: sketchybar
+  tags:
+    - gui
+    - de
+
+- name: enable sketchybar service (Brew)
+  shell: echo
+  tags:
+    - gui
+    - de
+
+- name: ranger install (Brew)
+  community.general.homebrew:
+    name: ranger
+  tags:
+    - cli
+    - cli-tools
