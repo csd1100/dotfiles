@@ -1,0 +1,109 @@
+- name: Apt Update
+  become: yes
+  apt:
+    autoclean: true
+    autoremove: true
+    update_cache: true
+  tags:
+    - always
+
+- name: git (Apt)
+  become: yes
+  apt:
+    name:
+      - git
+  tags:
+    - cli
+    - essentials
+
+- name: build-tools (Apt)
+  become: yes
+  apt:
+    name:
+      - build-essential
+      - software-properties-common
+      - libreadline-dev
+      - unzip
+  tags:
+    - cli
+    - essentials
+
+- name: curl install (Apt)
+  become: yes
+  apt:
+    name: curl
+  tags:
+    - cli
+    - essentials
+
+- name: wget install (Apt)
+  become: yes
+  apt:
+    name: wget
+  tags:
+    - cli
+    - essentials
+
+- name: zsh install (Apt)
+  become: yes
+  apt:
+    name: zsh
+  tags:
+    - zsh
+    - cli
+    - essentials
+
+- name: GNU stow install (Apt)
+  become: yes
+  apt:
+    name: stow
+  tags:
+    - cli
+
+- name: imagemagick install (Apt)
+  become: yes
+  apt:
+    name: imagemagick
+  tags:
+    - gui
+    - kitty
+
+- name: Add neovim unstable PPA (Apt)
+  become: yes
+  apt_repository:
+    repo: ppa:neovim-ppa/unstable
+
+- name: nvim-nightly install (Apt)
+  become: yes
+  apt:
+    name: neovim
+    update_cache: true
+  tags:
+    - cli
+    - nvim
+    - essentials
+
+- name: neofetch install (Apt)
+  become: yes
+  apt:
+    name: neofetch
+  tags:
+    - cli
+    - cli-tools
+
+- name: jq install (Apt)
+  become: yes
+  apt:
+    name: jq
+  tags:
+    - cli
+    - essentials
+    - cli-tools
+
+- name: ranger install (Apt)
+  become: yes
+  apt:
+    name: ranger
+  tags:
+    - cli
+    - cli-tools

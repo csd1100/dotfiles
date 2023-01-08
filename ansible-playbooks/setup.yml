@@ -1,5 +1,8 @@
 - name: Setup Personalized Development Environment (Install)
   hosts: localhost
+  become: no
+  vars:
+    the_user: "{{ ansible_user_id }}"
   tasks:
     - name: MacOS Setup
       include_tasks: darwin/setup.yml

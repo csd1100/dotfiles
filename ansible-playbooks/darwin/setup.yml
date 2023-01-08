@@ -11,6 +11,20 @@
   tags:
     - always
 
+- name: curl install (Brew)
+  community.general.homebrew:
+    name: curl
+  tags:
+    - cli
+    - essentials
+
+- name: wget install (Brew)
+  community.general.homebrew:
+    name: wget
+  tags:
+    - cli
+    - essentials
+
 - name: GNU coreutils install (Brew)
   community.general.homebrew:
     name: coreutils
@@ -57,8 +71,7 @@
 
 - name: neofetch install (Brew)
   community.general.homebrew:
-    name: nvim
-  shell: neofetch
+    name: neofetch
   tags:
     - cli
     - cli-tools

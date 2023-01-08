@@ -1,0 +1,11 @@
+- name: Debian-based Linux Setup
+  include_tasks: linux/apt.yml
+  when: ansible_os_family == "Debian"
+
+- name: ArchLinux Setup
+  include_tasks: linux/pacman.yml
+  when: ansible_os_family == "ArchLinux"
+
+- name: RadHat-based Linux Setup
+  include_tasks: linux/setup.yml
+  when: ansible_os_family == "RedHat"

@@ -1,0 +1,93 @@
+- name: chsh zsh (shell)
+  become: yes
+  user:
+    name: "{{ the_user }}"
+    shell: /bin/zsh
+  tags:
+    - zsh
+    - cli
+
+- name: oh-my-zsh install (git)
+  shell: curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  args:
+    creates: "~/.oh-my-zsh"
+  tags:
+    - zsh
+    - cli
+
+- name: zsh-autosuggestions install (git)
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions'
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+  tags:
+    - zsh
+    - cli
+
+- name: zsh-completions install (git)
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-completions'
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-completions"
+  tags:
+    - zsh
+    - cli
+
+- name: zsh-syntax-highlighting install (git)
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-syntax-highlighting'
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+  tags:
+    - zsh
+    - cli
+
+- name: zsh-history-substring-search install (git)
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-history-substring-search'
+    dest: "~/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
+  tags:
+    - zsh
+    - cli
+
+- name: spaceship-prompt install (git)
+  ansible.builtin.git:
+    repo: 'https://github.com/spaceship-prompt/spaceship-prompt'
+    dest: "~/.oh-my-zsh/custom/themes/spaceship-prompt"
+    depth: 1
+  tags:
+    - zsh
+    - cli
+
+- name: Create spaceship-prompt symbolic link
+  file:
+    src: "~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme"
+    dest: "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+    state: link
+
+- name: Create zshrc symbolic link
+  file:
+    src: "~/dotfiles/zsh/.zshrc"
+    dest: "~/.zshrc"
+    state: link
+
+- name: kitty install (shell)
+  shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  tags:
+    - gui
+    - kitty
+
+- name: nvm install (shell)
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+  args:
+    creates: ~/.nvm
+  tags:
+    - cli
+    - node
+
+- name: node install (nvm)
+  shell: source ~/.nvm/nvm.sh && nvm install lts/fermium lts/gallium
+  args:
+    executable: /bin/bash
+  tags:
+    - cli
+    - node
+    - node-full
+    - nvim-lsp

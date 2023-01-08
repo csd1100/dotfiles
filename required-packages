@@ -8,6 +8,7 @@
     - gcc, g++ - treesitter
     - xsel (linux) - copy to system clipboard
 - jq
+- ansible
 ----------------- mac ----------------------------
 - yabai
 - skhd
