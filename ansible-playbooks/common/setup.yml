@@ -8,7 +8,7 @@
     - cli
 
 - name: oh-my-zsh install (git)
-  shell: curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
     creates: "~/.oh-my-zsh"
   tags:
