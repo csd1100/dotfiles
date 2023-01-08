@@ -60,15 +60,15 @@ keys = [
     Key([mod, 'shift'], 'q', lazy.window.kill()),
     Key([mod], 'r', lazy.spawncmd()),
     Key([mod], 'd', lazy.spawn(
-        home + '/.config/rofi/rofi-scripts/run-rofi apps')),
+        home + '/.config/rofi/scripts/run-rofi apps')),
     Key([mod, 'shift'], 'd', lazy.spawncmd()),
 
     Key([mod, 'shift'], 'r', lazy.restart()),
     Key([mod, 'shift'], 'e', lazy.shutdown()),
     Key([mod], 'x', lazy.spawn(
-        home + '/.config/rofi/rofi-scripts/power-menu')),
+        home + '/.config/rofi/scripts/power-menu')),
     Key([mod], 'w', lazy.spawn(
-        home + '/.config/rofi/rofi-scripts/run-rofi windows')),
+        home + '/.config/rofi/scripts/run-rofi windows')),
 
     # Screen
     Key([], 'F7', lazy.spawn('xset dpms force off')),

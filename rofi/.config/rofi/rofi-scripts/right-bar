@@ -1,6 +1,6 @@
 #!/bin/bash
 THEME=$(xrdb -get rofi.menu.theme)
-ROFI_SCRIPTS="$CONFIG/rofi/rofi-scripts"
+ROFI_SCRIPTS="$CONFIG/rofi/scripts"
 menu=("Audio Input/Output")
 menu+=("Display Output")
 menu+=("Audio Controls")
