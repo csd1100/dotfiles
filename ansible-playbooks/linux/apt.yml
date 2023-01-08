@@ -68,7 +68,7 @@
     - gui
     - kitty
 
-- name: imagemagick install (Apt)
+- name: luajit, luarocks install (Apt)
   become: yes
   apt:
     name:

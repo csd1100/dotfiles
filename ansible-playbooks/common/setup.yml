@@ -100,3 +100,9 @@
   shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup common
   tags:
   - dotfiles
+
+- name: create kitty desktop file (Linux)
+  shell: cd ~/dotfiles/kitty/.config/kitty && ./kitty-desktop
+  tags:
+  - kitty
+  when: ( ansible_os_family == "Debian" or ansible_os_family == "ArchLinux" )
