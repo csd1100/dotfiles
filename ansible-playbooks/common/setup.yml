@@ -15,8 +15,13 @@
     - zsh
     - cli
 
+- name: Remove existing .zshrc
+  file:
+    path: ~/.zshrc
+    state: absent
+
 - name: Dotfiles Setup (zsh)
-  shell: rm ~/.zshrc && DOTFILES=~/dotfiles scripts/setup --single zsh
+  shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup --single zsh
   tags:
   - dotfiles
 
@@ -92,6 +97,6 @@
     - nvim-lsp
 
 - name: Dotfiles Setup (Common)
-  shell: cd ~/dotfiles && DOTFILES=~/dotfiles scripts/setup common
+  shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup common
   tags:
   - dotfiles
