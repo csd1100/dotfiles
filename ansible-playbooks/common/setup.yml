@@ -15,6 +15,11 @@
     - zsh
     - cli
 
+- name: Dotfiles Setup (zsh)
+  shell: cd ~/dotfiles && DOTFILES=~/dotfiles scripts/setup --single zsh
+  tags:
+  - dotfiles
+
 - name: zsh-autosuggestions install (git)
   ansible.builtin.git:
     repo: 'https://github.com/zsh-users/zsh-autosuggestions'
