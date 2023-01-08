@@ -105,21 +105,9 @@
     - gui
     - de
 
-- name: enable skhd service (Brew)
-  shell: echo
-  tags:
-    - gui
-    - de
-
 - name: sketchybar install (Brew)
   community.general.homebrew:
     name: sketchybar
-  tags:
-    - gui
-    - de
-
-- name: enable sketchybar service (Brew)
-  shell: echo
   tags:
     - gui
     - de
@@ -135,3 +123,15 @@
   shell: cd ~/dotfiles && DOTFILES=~/dotfiles scripts/setup darwin
   tags:
   - dotfiles
+
+- name: enable sketchybar service (Brew)
+  shell: brew services start sketchybar
+  tags:
+    - gui
+    - de
+
+- name: enable skhd service (Brew)
+  shell: brew services start skhd
+  tags:
+    - gui
+    - de
