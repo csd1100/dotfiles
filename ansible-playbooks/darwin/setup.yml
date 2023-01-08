@@ -60,6 +60,14 @@
     - gui
     - kitty
 
+- name: ripgrep install (Brew)
+  community.general.homebrew:
+    name: ripgrep
+  tags:
+    - cli
+    - essentials
+    - nvim
+
 - name: luarocks install (Brew)
   community.general.homebrew:
     name: luarocks

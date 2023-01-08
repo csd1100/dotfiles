@@ -68,6 +68,15 @@
     - gui
     - kitty
 
+- name: ripgrep install (Apt)
+  become: yes
+  apt:
+    name: ripgrep
+  tags:
+    - cli
+    - nvim
+    - essentials
+
 - name: luajit, luarocks install (Apt)
   become: yes
   apt:

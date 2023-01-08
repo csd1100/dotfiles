@@ -1,6 +1,6 @@
 .vscode/*
 *~
-nvim/plugin/*
+nvim/.config/nvim/plugin/*
 .DS_Store
 env/env/overrides/env-vars
 env/env/overrides/aliases
