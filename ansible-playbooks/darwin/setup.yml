@@ -11,6 +11,13 @@
   tags:
     - always
 
+- name: git install (Brew)
+  community.general.homebrew:
+    name: git
+  tags:
+    - cli
+    - essentials
+
 - name: curl install (Brew)
   community.general.homebrew:
     name: curl

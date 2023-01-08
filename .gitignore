@@ -8,4 +8,4 @@ zsh/custom/overrides/functions
 zsh/custom/overrides/misc
 kitty/kitty.conf.bak
 kitty/current-theme.conf
-yabai/rules
+yabai/.config/yabai/rules
