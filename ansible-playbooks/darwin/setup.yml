@@ -130,3 +130,8 @@
   tags:
     - cli
     - cli-tools
+
+- name: Dotfiles Setup (Darwin)
+  shell: cd ~/dotfiles && DOTFILES=~/dotfiles scripts/setup darwin
+  tags:
+  - dotfiles

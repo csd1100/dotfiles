@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+ARG=$1
+
+case "$ARG" in
+darwin)
+	declare -a config=("skhd" "yabai" "sketchybar")
+	;;
+linux)
+	declare -a config=("i3" "polybar" "rofi" "qtile" ".Xresources")
+	;;
+common)
+	declare -a config=("bin" "zsh" "kitty" "neofetch" "nvim" "tmux" "vim" "dircolors")
+	;;
+*)
+	echo "Invalid argument; expected arguments: darwin/linux/common"
+	exit 1
+	;;
+esac
+
+pushd "$DOTFILES" >/dev/null
+
+for util in "${config[@]}"; do
+	./scripts/stower "$util"
+done
+
+popd

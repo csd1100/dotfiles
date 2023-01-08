@@ -9,3 +9,7 @@
 - name: RadHat-based Linux Setup
   include_tasks: linux/setup.yml
   when: ansible_os_family == "RedHat"
+
+- name: Dotfiles Linux Setup
+  include_tasks: dotfiles.yml
+  tags always

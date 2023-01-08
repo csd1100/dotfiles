@@ -62,12 +62,6 @@
     dest: "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
     state: link
 
-- name: Create zshrc symbolic link
-  file:
-    src: "~/dotfiles/zsh/.zshrc"
-    dest: "~/.zshrc"
-    state: link
-
 - name: kitty install (shell)
   shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
   tags:
@@ -91,3 +85,8 @@
     - node
     - node-full
     - nvim-lsp
+
+- name: Dotfiles Setup (Common)
+  shell: cd ~/dotfiles && DOTFILES=~/dotfiles scripts/setup common
+  tags:
+  - dotfiles

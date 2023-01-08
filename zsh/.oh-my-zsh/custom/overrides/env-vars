@@ -1,0 +1,5 @@
+#!/bin/bash
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="$PATH:/Users/cdeshpande/Library/Python/3.10/bin"

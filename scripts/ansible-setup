@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+which ansible
+RESULT=$?
+
+if [ $RESULT == 0 ]; then
+    echo "ansible already installed"
+else
+    case "${unameOut}" in
+        Linux*)     
+            sudo apt-add-repository -y ppa:ansible/ansible
+            sudo apt-get update -y
+            sudo apt-get install -y curl git software-properties-common ansible
+        ;;
+        Darwin*)    
+            brew install ansible
+        ;;
+        *)          
+            MACHINE="UNKNOWN: ${unameOut}"
+    esac
+fi
+
