@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # default editor
 export EDITOR=nvim
@@ -19,9 +19,9 @@ SPACESHIP_PROMPT_ORDER=(
 )
 
 # source overrides
-if [ -f "$ZSH_CUSTOM/overrides/env-vars" ]
+if [ -f "$HOME/env/overrides/env-vars" ]
 then
-    source $ZSH_CUSTOM/overrides/env-vars
+    source "$HOME/env/overrides/env-vars"
 fi
 
 # PATH

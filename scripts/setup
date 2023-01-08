@@ -10,7 +10,7 @@ linux)
 	declare -a config=("i3" "polybar" "rofi" "qtile" ".Xresources")
 	;;
 common)
-	declare -a config=("bin" "kitty" "neofetch" "nvim" "tmux" "vim" "dircolors")
+	declare -a config=("bin" "env" "kitty" "neofetch" "nvim" "tmux" "vim" "dircolors")
 	;;
 --single)
 	config=("$2")

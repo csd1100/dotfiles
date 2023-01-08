@@ -16,7 +16,7 @@
     - cli
 
 - name: Dotfiles Setup (zsh)
-  shell: cd ~/dotfiles && DOTFILES=~/dotfiles scripts/setup --single zsh
+  shell: rm ~/.zshrc && DOTFILES=~/dotfiles scripts/setup --single zsh
   tags:
   - dotfiles
 

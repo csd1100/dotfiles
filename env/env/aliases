@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 # zsh
 alias zshrc="source $HOME/.zshrc"
 alias zshconfig="code $HOME/.zshrc"
@@ -26,7 +26,7 @@ alias tkl="tmux kill-server"
 unalias ls
 
 # source overrides
-if [ -f "$ZSH_CUSTOM/overrides/aliases" ]
+if [ -f "$HOME/env/overrides/aliases" ]
 then
-    source $ZSH_CUSTOM/overrides/aliases
+    source "$HOME/env/overrides/aliases"
 fi

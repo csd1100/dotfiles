@@ -68,6 +68,16 @@
     - gui
     - kitty
 
+- name: imagemagick install (Apt)
+  become: yes
+  apt:
+    name:
+      - luarocks
+      - luajit
+  tags:
+    - cli
+    - nvim
+
 - name: Add neovim unstable PPA (Apt)
   become: yes
   apt_repository:
