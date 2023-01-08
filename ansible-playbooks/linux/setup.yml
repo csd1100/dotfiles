@@ -9,7 +9,7 @@
   tags: always
 
 - name: RadHat-based Linux Setup
-  include_tasks: linux/setup.yml
+  include_tasks: linux/dnf.yml
   when: ansible_os_family == "RedHat"
   tags: always
 

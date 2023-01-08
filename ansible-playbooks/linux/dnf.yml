@@ -1,92 +1,91 @@
-- name: Apt Update
+- name: dnf Update
   become: yes
-  apt:
-    autoclean: true
+  dnf:
     autoremove: true
     update_cache: true
   tags:
     - always
 
-- name: git (Apt)
+- name: git (DNF)
   become: yes
-  apt:
+  dnf:
     name:
       - git
   tags:
     - cli
     - essentials
 
-- name: build-tools (Apt)
+- name: build-tools (DNF)
   become: yes
-  apt:
+  dnf:
     name:
-      - build-essential
-      - software-properties-common
-      - libreadline-dev
+      - gcc
+      - gcc-c++
+      - kernel-devel
       - unzip
   tags:
     - cli
     - essentials
 
 - name: htop install (htop)
-  apt:
+  dnf:
     name: htop
   tags:
     - cli
     - essentials
 
-- name: curl install (Apt)
+- name: curl install (DNF)
   become: yes
-  apt:
+  dnf:
     name: curl
   tags:
     - cli
     - essentials
 
-- name: wget install (Apt)
+- name: wget install (DNF)
   become: yes
-  apt:
+  dnf:
     name: wget
   tags:
     - cli
     - essentials
 
-- name: zsh install (Apt)
+- name: zsh install (DNF)
   become: yes
-  apt:
+  dnf:
     name: zsh
   tags:
     - zsh
     - cli
     - essentials
 
-- name: GNU stow install (Apt)
+- name: GNU stow install (DNF)
   become: yes
-  apt:
+  dnf:
     name: stow
   tags:
     - cli
 
-- name: imagemagick install (Apt)
+- name: imagemagick install (DNF)
   become: yes
-  apt:
+  dnf:
     name: imagemagick
   tags:
     - gui
     - kitty
 
-- name: ripgrep install (Apt)
+- name: ripgrep install (DNF)
   become: yes
-  apt:
+  dnf:
     name: ripgrep
   tags:
     - cli
     - nvim
     - essentials
 
-- name: luajit, luarocks install (Apt)
+- name: luajit, luarocks install (DNF)
   become: yes
-  apt:
+  dnf:
     name:
       - luarocks
       - luajit
@@ -94,74 +93,76 @@
     - cli
     - nvim
 
-- name: Add neovim unstable PPA (Apt)
+- name: Add neovim unstable COPR (DNF)
   become: yes
-  apt_repository:
-    repo: ppa:neovim-ppa/unstable
+  community.general.copr:
+    name: agriffis/neovim-nightly
   tags:
     - cli
     - nvim
     - essentials
 
-- name: nvim-nightly install (Apt)
+- name: nvim-nightly install (DNF)
   become: yes
-  apt:
-    name: neovim
+  dnf:
+    name:
+      - neovim
+      - python3-neovim
     update_cache: true
   tags:
     - cli
     - nvim
     - essentials
 
-- name: neofetch install (Apt)
+- name: neofetch install (DNF)
   become: yes
-  apt:
+  dnf:
     name: neofetch
   tags:
     - cli
 
-- name: jq install (Apt)
+- name: jq install (DNF)
   become: yes
-  apt:
+  dnf:
     name: jq
   tags:
     - cli
     - essentials
 
-- name: ranger install (Apt)
+- name: ranger install (DNF)
   become: yes
-  apt:
+  dnf:
     name: ranger
   tags:
     - cli
 
-- name: i3 install (Apt)
+- name: i3 install (DNF)
   become: yes
-  apt:
+  dnf:
     name: i3
   tags:
     - gui
     - de
 
-- name: polybar install (Apt)
+- name: polybar install (DNF)
   become: yes
-  apt:
+  dnf:
     name: polybar
   tags:
     - gui
     - de
 
-- name: rofi install (Apt)
+- name: rofi install (DNF)
   become: yes
-  apt:
+  dnf:
     name: rofi
   tags:
     - gui
     - de
 
-- name: sway install (Apt)
+- name: sway install (DNF)
   become: yes
-  apt:
+  dnf:
     name: sway
   tags:
     - gui
