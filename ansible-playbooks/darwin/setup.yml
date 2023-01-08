@@ -32,6 +32,13 @@
     - cli
     - essentials
 
+- name: htop install (Brew)
+  community.general.homebrew:
+    name: htop
+  tags:
+    - cli
+    - essentials
+
 - name: GNU coreutils install (Brew)
   community.general.homebrew:
     name: coreutils
@@ -143,3 +150,16 @@
   tags:
     - gui
     - de
+
+- name: Create a fonts directory if it does not exist (Darwin)
+  file:
+    path: ~/Library/Fonts
+    state: directory
+    mode: '0755'
+  tags: dotfiles
+
+- name: Copy fonts (Darwin)
+  copy:
+    src: ~/dotfiles/fonts/
+    dest: ~/Library/Fonts
+  tags: dotfiles

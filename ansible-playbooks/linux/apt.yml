@@ -28,6 +28,13 @@
     - cli
     - essentials
 
+- name: htop install (htop)
+  apt:
+    name: htop
+  tags:
+    - cli
+    - essentials
+
 - name: curl install (Apt)
   become: yes
   apt:
