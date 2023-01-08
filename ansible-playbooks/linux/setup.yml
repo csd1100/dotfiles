@@ -1,14 +1,17 @@
 - name: Debian-based Linux Setup
   include_tasks: linux/apt.yml
   when: ansible_os_family == "Debian"
+  tags: always
 
 - name: ArchLinux Setup
   include_tasks: linux/pacman.yml
   when: ansible_os_family == "ArchLinux"
+  tags: always
 
 - name: RadHat-based Linux Setup
   include_tasks: linux/setup.yml
   when: ansible_os_family == "RedHat"
+  tags: always
 
 - name: Dotfiles Linux Setup
   include_tasks: dotfiles.yml

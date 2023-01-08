@@ -72,8 +72,8 @@
     name: ripgrep
   tags:
     - cli
-    - essentials
     - nvim
+    - essentials
 
 - name: luarocks install (Brew)
   community.general.homebrew:
@@ -96,7 +96,6 @@
     name: neofetch
   tags:
     - cli
-    - cli-tools
 
 - name: jq install (Brew)
   community.general.homebrew:
@@ -104,7 +103,6 @@
   tags:
     - cli
     - essentials
-    - cli-tools
 
 - name: yabai install (Brew)
   community.general.homebrew:
@@ -132,7 +130,6 @@
     name: ranger
   tags:
     - cli
-    - cli-tools
 
 - name: Dotfiles Setup (Darwin)
   shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup darwin

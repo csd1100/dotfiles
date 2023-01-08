@@ -98,6 +98,10 @@
   become: yes
   apt_repository:
     repo: ppa:neovim-ppa/unstable
+  tags:
+    - cli
+    - nvim
+    - essentials
 
 - name: nvim-nightly install (Apt)
   become: yes
@@ -115,7 +119,6 @@
     name: neofetch
   tags:
     - cli
-    - cli-tools
 
 - name: jq install (Apt)
   become: yes
@@ -124,7 +127,6 @@
   tags:
     - cli
     - essentials
-    - cli-tools
 
 - name: ranger install (Apt)
   become: yes
@@ -132,7 +134,6 @@
     name: ranger
   tags:
     - cli
-    - cli-tools
 
 - name: i3 install (Apt)
   become: yes
