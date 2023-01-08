@@ -21,6 +21,21 @@ local conf = {
 		},
 		layout_strategy = "horizontal",
 		layout_config = layout_conf,
+		vimgrep_arguments = {
+			"rg",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--smart-case",
+			"-u",
+			"--ignore",
+			"--hidden",
+			"--no-ignore-vcs",
+			"-g",
+			"!.git",
+		},
 	},
 	pickers = {
 		find_files = {
