@@ -72,12 +72,6 @@
     dest: "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
     state: link
 
-- name: kitty install (shell)
-  shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-  tags:
-    - gui
-    - kitty
-
 - name: nvm install (shell)
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
   args:

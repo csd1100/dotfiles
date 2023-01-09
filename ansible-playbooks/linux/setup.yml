@@ -13,6 +13,14 @@
   when: ansible_os_family == "RedHat"
   tags: always
 
+- name: kitty install (shell) (Linux)
+  shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  args:
+    creates: ~/.local/kitty.app/
+  tags:
+    - gui
+    - kitty
+
 - name: Dotfiles Linux Setup
   include_tasks: dotfiles.yml
   tags: always
