@@ -19,11 +19,15 @@
   file:
     path: ~/.zshrc
     state: absent
+  tags:
+    - zsh
+    - cli
 
 - name: Dotfiles Setup (zsh)
   shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup --single zsh
   tags:
-  - dotfiles
+    - dotfiles
+    - cli
 
 - name: zsh-autosuggestions install (git)
   ansible.builtin.git:
@@ -71,6 +75,9 @@
     src: "~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme"
     dest: "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
     state: link
+  tags:
+    - zsh
+    - cli
 
 - name: nvm install (shell)
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
@@ -93,10 +100,11 @@
 - name: Dotfiles Setup (Common)
   shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup common
   tags:
-  - dotfiles
+    - dotfiles
+    - cli
 
 - name: create kitty desktop file (Linux)
   shell: cd ~/dotfiles/kitty/.config/kitty && ./kitty-desktop
   tags:
-  - kitty
+    - kitty
   when: ( ansible_os_family == "Debian" or ansible_os_family == "ArchLinux" )
