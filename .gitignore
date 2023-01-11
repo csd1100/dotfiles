@@ -1,9 +1,13 @@
-.vscode/*
 *~
-nvim/.config/nvim/plugin/*
+*.bak
+.vscode/*
 .DS_Store
+env/env/*
+env/env/overrides/*
 !env/env/overrides/README.md
 !env/env/{env-vars,aliases,functions,misc}
-kitty/kitty.conf.bak
-kitty/current-theme.conf
+bin/bin/*
+!bin/bin/overrides/*
+kitty/.config/kitty/current-theme.conf
+nvim/.config/nvim/plugin/*
 yabai/.config/yabai/rules
