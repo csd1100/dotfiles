@@ -26,6 +26,7 @@ fi
 
 # PATH
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin/overrides:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # CONFIG

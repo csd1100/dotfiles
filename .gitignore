@@ -2,10 +2,8 @@
 *~
 nvim/.config/nvim/plugin/*
 .DS_Store
-env/env/overrides/env-vars
-env/env/overrides/aliases
-env/env/overrides/functions
-env/env/overrides/misc
+!env/env/overrides/README.md
+!env/env/{env-vars,aliases,functions,misc}
 kitty/kitty.conf.bak
 kitty/current-theme.conf
 yabai/.config/yabai/rules
