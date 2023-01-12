@@ -60,6 +60,7 @@ cmd + shift - b : yabai -m space --balance
 
 # restart
 cmd + shift - r : brew services restart skhd && brew services restart yabai && brew services restart sketchybar
+cmd + shift - c : brew services restart skhd
 
 # Enable / Disable gaps in current workspace
 cmd + shift - g : yabai -m space --toggle padding; yabai -m space --toggle gap

@@ -3,6 +3,11 @@
 function mcd () { md -p $1; cd $1 }
 function helpless() { $1 --help | less }
 function batman() { man $1 | bat --color always }
+function finder() {
+    dir=$(find ~ ~/work -mindepth 1 -maxdepth 2 -type d | fzf)
+    echo $dir
+    cd $dir
+}
 
 # source overrides
 if [ -f "$HOME/env/overrides/functions" ]
