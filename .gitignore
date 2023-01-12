@@ -3,11 +3,11 @@
 .vscode/*
 .DS_Store
 env/env/*
+!env/env/{env-vars,aliases,functions,misc,overrides}
 env/env/overrides/*
 !env/env/overrides/README.md
-!env/env/{env-vars,aliases,functions,misc}
 bin/bin/*
-!bin/bin/overrides/*
+!bin/bin/helpers
 kitty/.config/kitty/current-theme.conf
 nvim/.config/nvim/plugin/*
 yabai/.config/yabai/rules
