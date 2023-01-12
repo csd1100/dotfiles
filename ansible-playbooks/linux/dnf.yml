@@ -34,6 +34,13 @@
     - cli
     - essentials
 
+- name: fzf install (htop)
+  dnf:
+    name: fzf
+  tags:
+    - cli
+    - essentials
+
 - name: curl install (DNF)
   become: yes
   dnf:

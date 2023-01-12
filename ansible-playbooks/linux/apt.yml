@@ -36,6 +36,14 @@
     - cli
     - essentials
 
+- name: fzf install (htop)
+  become: yes
+  apt:
+    name: fzf
+  tags:
+    - cli
+    - essentials
+
 - name: curl install (Apt)
   become: yes
   apt:

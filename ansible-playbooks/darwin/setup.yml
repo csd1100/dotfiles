@@ -39,6 +39,13 @@
     - cli
     - essentials
 
+- name: fzf install (Brew)
+  community.general.homebrew:
+    name: fzf
+  tags:
+    - cli
+    - essentials
+
 - name: GNU coreutils install (Brew)
   community.general.homebrew:
     name: coreutils
