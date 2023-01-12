@@ -63,6 +63,9 @@ nnoremap (( ci(
 nnoremap zz :set foldenable<CR>
 nnoremap zn :set nofoldenable<CR>
 
+" set current file as executable
+nnoremap <leader>x :!chmod +x %<CR>
+
 " map capital versions for ease
 command W w
 command Q q
