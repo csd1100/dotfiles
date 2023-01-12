@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 MODI=$1
 THEME=$(xrdb -get rofi.start.theme)
 case $MODI in

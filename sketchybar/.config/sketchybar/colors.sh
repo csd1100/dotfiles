@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 BACKGROUND=0xaa181C1F #181C1F
 FOREGROUND=0xffFFFFFF #FFFFFF

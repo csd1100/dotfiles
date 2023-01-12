@@ -136,6 +136,21 @@
   tags:
     - cli
 
+- name: picom install (Apt)
+  become: yes
+  apt:
+    name: picom
+  tags:
+    - gui
+    - de
+
+- name: Add i3 nightly repo(Apt)
+  become: yes
+  shell: ~/dotfiles/scripts/helpers/i3-add-apt-repo
+  tags:
+    - gui
+    - de
+
 - name: i3 install (Apt)
   become: yes
   apt:
@@ -160,10 +175,44 @@
     - gui
     - de
 
+- name: feh install (Apt)
+  become: yes
+  apt:
+    name: feh
+  tags:
+    - gui
+    - de
+
+- name: PulseAudio install (Apt)
+  become: yes
+  apt:
+    name:
+      - pulseaudio
+      - pavucontrol
+  tags:
+    - gui
+    - de
+
+- name: playerctl install (Apt)
+  become: yes
+  apt:
+    name: playerctl
+  tags:
+    - gui
+    - de
+
+- name: light install (Apt)
+  become: yes
+  apt:
+    deb: https://github.com/haikarainen/light/releases/download/v1.2/light_1.2_amd64.deb
+  tags:
+    - gui
+    - de
+
 - name: sway install (Apt)
   become: yes
   apt:
     name: sway
   tags:
-    - gui
-    - de
+    - sway
+    - never

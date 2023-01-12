@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function log(){
     printf  "\n[$(date)] $1 \n\n"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 THEME=$(xrdb -get rofi.display.theme)
 avail_outputs=($(xrandr | grep ' connected' | sed -En "s/ .*//p"))
 if [[ ${#avail_outputs[@]} > 1 ]]; then

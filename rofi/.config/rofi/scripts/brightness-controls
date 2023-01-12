@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 THEME=$(xrdb -get rofi.display.theme)
 
 menu=($(seq 0 10 100))

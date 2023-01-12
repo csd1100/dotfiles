@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 readonly BLACK=$(tput setaf 0)
 readonly RED=$(tput setaf 1)

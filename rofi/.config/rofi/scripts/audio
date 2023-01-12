@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 THEME=$(xrdb -get rofi.audio.theme)
 function func(){
     arg=($(pactl list $1 | grep "Name" | sed -n -e 's/^.*: //p'))

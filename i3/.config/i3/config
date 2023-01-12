@@ -1,27 +1,14 @@
-#  import from .Xresources
-set_from_resource $term i3.term
-set_from_resource $font i3.font
-set_from_resource $innerGap i3.innerGap
-set_from_resource $outerGap i3.outerGap
-set_from_resource $leftGap i3.leftGap
-set_from_resource $rightGap i3.rightGap
-set_from_resource $topGap i3.topGap
-set_from_resource $bottomGap i3.bottomGap
-set_from_resource $brightnessStep i3.brightnessStep
-set_from_resource $volumeStep i3.volumeStep
-set_from_resource $wallpaperPath i3.wallpaperPath
-set_from_resource $rofiTheme rofi.theme
-set_from_resource $scripts script.loc
-set_from_resource $config xdg.config.home
+# Variables
+set $config ~/.config
+set $innerGap 10
+set $outerGap 10
+set $term kitty
 
 # Mod key Windows key
 set $mod Mod4
 
-#numlock on
-exec_always --no-startup-id numlockx on
-
 # Font for window titles.
-font pango: $font
+font pango: Jetbrains Mono 15
 
 # Disabling Title Bar for gaps
 for_window [class=".*"] border pixel 0
@@ -29,33 +16,24 @@ for_window [class=".*"] border pixel 0
 # Gaps configuration
 gaps inner $innerGap
 gaps outer $outerGap
-gaps left $leftGap
-gaps right $rightGap
-gaps top $topGap
-gaps bottom $bottomGap
 
 # Use pactl to adjust volume in PulseAudio.
-exec pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
-exec pactl set-default-source alsa_input.pci-0000_00_1f.3.analog-stereo
 set $refresh_i3status killall -SIGUSR1 i3status
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Adjust the brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A $brightnessStep
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U $brightnessStep
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
 
 # Music Control
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioStop exec playerctl stop
-
-# Display Control
-bindsym F10 exec $scripts/scripts/display-outputs
-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -65,31 +43,18 @@ bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
-bindsym alt+F4 kill
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -98,11 +63,11 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+shift+t layout tabbed
+bindsym $mod+Shift+t layout tabbed
 bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
@@ -129,36 +94,18 @@ set $ws7 "7:"
 set $ws8 "8:"
 set $ws9 "9"
 set $ws10 "10"
-set $ws11 "11:"
-set $ws12 "12:"
-set $ws13 "13:"
-set $ws14 "14:"
-set $ws15 "15:"
-set $ws16 "16:"
-set $ws17 "17:"
-set $ws18 "18:"
-set $ws19 "19"
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1 ;exec $scripts/running kitty
-bindsym $mod+2 workspace number $ws2 ;exec $scripts/running chrome
-bindsym $mod+3 workspace number $ws3 ;exec $scripts/running rhythmbox
-bindsym $mod+4 workspace number $ws4 ;exec $scripts/running nautilus
-bindsym $mod+5 workspace number $ws5 ;exec $scripts/running code
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
 bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7 ;exec $scripts/running ebook-viewer
-bindsym $mod+8 workspace number $ws8 ;exec $scripts/running brave
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
-bindsym $mod+ctrl+1 workspace number $ws11
-bindsym $mod+ctrl+2 workspace number $ws12
-bindsym $mod+ctrl+3 workspace number $ws13
-bindsym $mod+ctrl+4 workspace number $ws14
-bindsym $mod+ctrl+5 workspace number $ws15
-bindsym $mod+ctrl+6 workspace number $ws16
-bindsym $mod+ctrl+7 workspace number $ws17
-bindsym $mod+ctrl+8 workspace number $ws18
-bindsym $mod+ctrl+9 workspace number $ws19
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -171,21 +118,13 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
-bindsym $mod+Shift+ctrl+1 move container to workspace number $ws11
-bindsym $mod+Shift+ctrl+2 move container to workspace number $ws12
-bindsym $mod+Shift+ctrl+3 move container to workspace number $ws13
-bindsym $mod+Shift+ctrl+4 move container to workspace number $ws14
-bindsym $mod+Shift+ctrl+5 move container to workspace number $ws15
-bindsym $mod+Shift+ctrl+6 move container to workspace number $ws16
-bindsym $mod+Shift+ctrl+7 move container to workspace number $ws17
-bindsym $mod+Shift+ctrl+8 move container to workspace number $ws18
-bindsym $mod+Shift+ctrl+9 move container to workspace number $ws19
-
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r exec $scripts/reloader
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, Exit i3' 'i3-msg exit'"
 
@@ -197,16 +136,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -216,30 +149,11 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Multi-screen screenshots with scrot
-bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # All screens
-
-# OSX-like area selection screenshots
-bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
-
-#pywal
-exec --no-startup-id wal -i $wallpaperPath -n
-exec feh --bg-fill "$(< "${HOME}/.cache/wal/wal")"
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock -- $scripts/lock-screen
-bindsym F9 exec $scripts/lock-screen
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# wallpaper
+exec feh --bg-fill ~/Pictures/Wallpapers/Wallpaper.jpg
 
 # picom
 exec_always picom
-
-# xres
-exec_always xrdb ~/.Xresources
 
 # Polybar
 exec $config/polybar/scripts/polybar-launch &

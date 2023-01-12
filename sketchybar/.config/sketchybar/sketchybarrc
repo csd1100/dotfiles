@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 ITEMS_DIR="$HOME/.config/sketchybar/items"
 
