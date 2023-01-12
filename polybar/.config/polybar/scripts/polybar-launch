@@ -32,4 +32,4 @@ else
     polybar -c=$config --reload $BAR_NAME &
   done
 fi
-echo "Polybar launched..."
+echo "Polybar launched.."

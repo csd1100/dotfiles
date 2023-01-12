@@ -145,7 +145,6 @@
     - de
 
 - name: Add i3 nightly repo(Apt)
-  become: yes
   shell: ~/dotfiles/scripts/helpers/i3-add-apt-repo
   tags:
     - gui

@@ -1,6 +1,0 @@
-rofi.start.theme:       /home/cdeshpande/.config/rofi/sidebar.rasi
-rofi.power.theme:       /home/cdeshpande/.config/rofi/rsidebar.rasi
-rofi.audio.theme:       /home/cdeshpande/.config/rofi/rsidebar.rasi
-rofi.display.theme:     /home/cdeshpande/.config/rofi/rsidebar.rasi
-rofi.media.theme:       /home/cdeshpande/.config/rofi/rsidebar.rasi
-rofi.menu.theme:        /home/cdeshpande/.config/rofi/rsidebar.rasi

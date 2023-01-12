@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-THEME=$(xrdb -get rofi.audio.theme)
+THEME=$ROFI_THEME
 
 menu+=("Mute")
 menu+=($(seq 0 10 100))
@@ -9,7 +9,7 @@ selected=$(( IFS=$'\n'; echo "${menu[*]}" ) | rofi -dmenu -p Level -theme $THEME
 
 case $selected in
     "Mute")
-        pactl set-sink-mute @DEFAULT_SINK@ toggle 
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
     ;;
     *)
         if [ -z "$selected" ]

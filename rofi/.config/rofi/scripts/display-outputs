@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-THEME=$(xrdb -get rofi.display.theme)
+THEME=$ROFI_THEME
 avail_outputs=($(xrandr | grep ' connected' | sed -En "s/ .*//p"))
 if [[ ${#avail_outputs[@]} > 1 ]]; then
     avail_outputs+=("Main Only")
@@ -10,7 +10,7 @@ selected=$(( IFS=$'\n'; echo "${avail_outputs[*]}" ) | rofi -dmenu -p Outputs -t
 
 case $selected in
     "All")
-        xrandr --output ${avail_outputs[0]} --mode 1920x1080 
+        xrandr --output ${avail_outputs[0]} --mode 1920x1080
         for u in "${avail_outputs[@]}"
         do
             if [ "$u" != "${avail_outputs[0]}" ]; then
@@ -19,11 +19,11 @@ case $selected in
         done
     ;;
     "Replicate")
-        xrandr --output ${avail_outputs[0]} --mode 1920x1080 
+        xrandr --output ${avail_outputs[0]} --mode 1920x1080
         for u in "${avail_outputs[@]}"
         do
             if [ "$u" != "${avail_outputs[0]}" ]; then
-                xrandr --output $u --mode 1920x1080 --same-as ${avail_outputs[0]} 
+                xrandr --output $u --mode 1920x1080 --same-as ${avail_outputs[0]}
             fi
         done
     ;;
@@ -39,7 +39,7 @@ case $selected in
         exit 99
     ;;
     *)
-        xrandr --output $selected --mode 1920x1080 
+        xrandr --output $selected --mode 1920x1080
         for u in "${avail_outputs[@]}"
         do
             if [ "$u" != "$selected" ]; then
@@ -48,4 +48,4 @@ case $selected in
         done
     ;;
 esac
-$(xrdb -get script.loc)/reloader
+$HOME/.config/i3/scripts/reloader

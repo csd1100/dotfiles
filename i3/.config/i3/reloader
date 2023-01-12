@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-xrdb ~/.Xresources
-i3-msg restart
-wal -i $(xrdb -get i3.wallpaperPath) -n
-feh --bg-fill "$(<"${HOME}/.cache/wal/wal")"
-$HOME/.config/polybar/scripts/polybar-launch &

@@ -7,7 +7,7 @@ darwin)
 	declare -a config=("skhd" "yabai" "sketchybar")
 	;;
 linux)
-	declare -a config=("i3" "polybar" "rofi" ".Xresources")
+	declare -a config=("i3" "polybar" "rofi")
 	;;
 common)
 	declare -a config=("bin" "env" "kitty" "neofetch" "nvim" "tmux" "vim" "dircolors")

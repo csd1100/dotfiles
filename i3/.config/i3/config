@@ -1,9 +1,13 @@
 # Variables
 set $config ~/.config
 set $innerGap 10
-set $outerGap 10
+set $outerGap 3
 set $term kitty
 
+set $musicMode music
+set $resizeMode resize
+set $volumeMode volume
+set $brightnessMode brightness
 # Mod key Windows key
 set $mod Mod4
 
@@ -16,24 +20,6 @@ for_window [class=".*"] border pixel 0
 # Gaps configuration
 gaps inner $innerGap
 gaps outer $outerGap
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
-
-# Adjust the brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
-
-# Music Control
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioStop exec playerctl stop
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -57,7 +43,7 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+#bindsym $mod+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -74,7 +60,7 @@ bindsym $mod+t layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Tab focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -119,26 +105,28 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# move focus
+bindsym $mod+Shift+Up workspace prev_on_output
+bindsym $mod+Shift+Down workspace next_on_output
+bindsym $mod+Shift+Left workspace back_and_forth
+bindsym $mod+Shift+Right workspace back_and_forth
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec $scripts/reloader
+bindsym $mod+Shift+r exec $config/i3/scripts/reloader
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, Exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
+mode $resizeMode {
         # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape or $mod+r
@@ -147,10 +135,56 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode $resizeMode
+
+mode $brightnessMode {
+    # Adjust the brightness
+    bindsym h exec --no-startup-id light -U 5
+    bindsym j exec --no-startup-id light -U 10
+    bindsym k exec --no-startup-id light -A 10
+    bindsym l exec --no-startup-id light -A 5
+
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Shift+b mode "default"
+}
+
+bindsym $mod+Shift+b mode $brightnessMode
+
+mode $volumeMode {
+    # Adjust the brightness
+    bindsym h exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym j exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+    bindsym k exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+    bindsym l exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym n exec --no-startup-id pactl set-source-mute @DEFAULT_SINK@ toggle
+
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Shift+v mode "default"
+}
+
+bindsym $mod+Shift+v mode $volumeMode
+
+mode $musicMode {
+    bindsym h exec --no-startup-id playerctl previous
+    bindsym j exec --no-startup-id playerctl next
+    bindsym p exec --no-startup-id playerctl play-pause
+    bindsym q exec --no-startup-id playerctl stop
+
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+Shift+m mode "default"
+}
+
+bindsym $mod+Shift+m mode $musicMode
 
 # wallpaper
-exec feh --bg-fill ~/Pictures/Wallpapers/Wallpaper.jpg
+exec_always feh --bg-fill ~/Pictures/Wallpapers/Wallpaper.jpg
 
 # picom
 exec_always picom
@@ -159,7 +193,7 @@ exec_always picom
 exec $config/polybar/scripts/polybar-launch &
 
 # start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id $config/rofi/scripts/run-rofi apps
+bindsym $mod+space exec --no-startup-id $config/rofi/scripts/run-rofi apps
 bindsym $mod+Shift+d exec --no-startup-id $config/rofi/scripts/run-rofi run
 bindsym $mod+w exec --no-startup-id $config/rofi/scripts/run-rofi windows
 bindsym $mod+x exec --no-startup-id $config/rofi/scripts/power-menu
