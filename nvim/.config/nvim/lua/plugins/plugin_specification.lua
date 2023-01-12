@@ -24,7 +24,10 @@ return packer.startup(function()
 	-- fzf telescope --
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = "nvim-lua/plenary.nvim",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{"nvim-telescope/telescope-live-grep-args.nvim"},
+		},
 	})
 
 	-- Sessions Management --

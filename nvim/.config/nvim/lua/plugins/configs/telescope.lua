@@ -50,3 +50,4 @@ local conf = {
 }
 
 telescope.setup(conf)
+telescope.load_extension("live_grep_args")
