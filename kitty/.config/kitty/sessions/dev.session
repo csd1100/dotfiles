@@ -1,0 +1,7 @@
+new_tab dev:shell
+cd ~/work
+launch zsh
+
+new_tab dev:nvim
+cd ~/work
+launch zsh
