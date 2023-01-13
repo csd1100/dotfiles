@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+function launch_kitty {
+    kitty_base_command="kitty @"
+
+    create_window="$kitty_base_command launch --type=$1 --cwd $dir"
+    tab_id_1=`$create_window`
+
+    set_shell_title="$kitty_base_command set-tab-title -m id:$tab_id_1 $SHELL_TITLE"
+    $set_shell_title
+
+    create_nvim_tab="$kitty_base_command launch -m id:$tab_id_1 --type=tab --tab-title $NVIM_TITLE --cwd $dir nvim"
+    tab_id_2=`$create_nvim_tab`
+}
+
+case $1 in
+    "-w")
+        MODE="window"
+    ;;
+    "-t")
+        MODE="tab"
+    ;;
+    *)
+        echo "Wrong argument passed."
+        exit 1
+    ;;
+esac
+
+dir=`find ~ ~/work -mindepth 1 -maxdepth 2 -type d | fzf`
+base_name=`basename $dir`
+
+SHELL_TITLE="$base_name:shell"
+NVIM_TITLE="$base_name:nvim"
+
+if [ $MODE = "window" ]; then
+    launch_kitty os-window
+else
+    launch_kitty tab
+fi
