@@ -4,6 +4,11 @@ if not status then
 	return
 end
 
+local status, fidget = pcall(require, "fidget")
+if status then
+    fidget.setup()
+end
+
 local keymapUtils = require("basic.keymaps-utils")
 
 local mason_conf = {

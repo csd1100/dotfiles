@@ -90,6 +90,12 @@ return packer.startup(function()
 		"lewis6991/gitsigns.nvim",
 	})
 
+	use({
+		"tpope/vim-fugitive",
+	})
+	use({
+		"tpope/vim-rhubarb",
+	})
 	-- colorizer --
 	use({
 		"norcalli/nvim-colorizer.lua",
@@ -167,6 +173,9 @@ return packer.startup(function()
 	})
 	use({
 		"williamboman/mason-lspconfig.nvim",
+	})
+	use({
+		"j-hui/fidget.nvim",
 	})
 
 	-- Autocompletion plugin
