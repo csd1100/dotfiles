@@ -26,7 +26,7 @@ return packer.startup(function()
 		"nvim-telescope/telescope.nvim",
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
-			{"nvim-telescope/telescope-live-grep-args.nvim"},
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
 		},
 	})
 
@@ -132,6 +132,10 @@ return packer.startup(function()
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdateSync",
+	})
+	use({ -- Additional text objects via treesitter
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
 	})
 
 	-- spell-check --
