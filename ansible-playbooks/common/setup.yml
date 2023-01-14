@@ -108,3 +108,8 @@
   tags:
     - kitty
   when: ( ansible_os_family == "Debian" or ansible_os_family == "ArchLinux" )
+
+- name: Create a work directory if it does not exist
+  file:
+    path: ~/work
+    state: directory

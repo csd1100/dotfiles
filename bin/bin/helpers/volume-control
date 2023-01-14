@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+if [ $(uname -s) = 'Darwin' ]; then
+	current_volume=$(($(osascript -e 'output volume of (get volume settings)') / 14))
+	increase=$(($2 / 14))
+	echo $current_volume
+	echo $increase
+	case $1 in
+	+)
+		osascript -e "set Volume $(($current_volume + $increase))"
+		osascript -e 'output volume of (get volume settings)'
+		;;
+	-)
+		osascript -e "set Volume $(($current_volume - $increase))"
+		osascript -e 'output volume of (get volume settings)'
+		;;
+	*)
+		echo "Wrong Argument passed. Expected Argument + / - "
+		exit
+		;;
+	esac
+else
+	echo "Linux not yet supported"
+	exit 1
+fi

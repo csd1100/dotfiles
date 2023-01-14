@@ -14,13 +14,16 @@ alias :q="exit"
 alias :Q="exit"
 
 # git
-alias gh="git history"
+alias gh="git log --oneline --graph --pretty"
 alias gcv="git commit -v"
 
 #tmux
 alias tm="tmux"
 alias tps="tmux list-sessions"
 alias tkl="tmux kill-server"
+
+# docker
+alias dps=""
 
 # unaliase for bin overrides
 unalias ls
