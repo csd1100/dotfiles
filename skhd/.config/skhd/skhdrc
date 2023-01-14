@@ -1,5 +1,9 @@
 # Open terminal
-cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+cmd - return : /Applications/kitty.app/Contents/MacOS/kitty \
+                        -o allow_remote_control=yes --single-instance -d ~
+cmd + shift - return : /Applications/kitty.app/Contents/MacOS/kitty \
+                            --single-instance -o allow_remote_control=yes -d ~ \
+                            --session ~/.config/kitty/sessions/home.session
 
 # Navigation
 cmd - h : yabai -m window --focus west
@@ -22,10 +26,10 @@ cmd - 7 : yabai -m space --focus 7
 cmd - 8 : yabai -m space --focus 8
 cmd - 9 : yabai -m space --focus 9
 cmd - 0 : yabai -m space --focus 10
-cmd + shift - down : yabai -m space --focus recent
-cmd + shift - up : yabai -m space --focus recent
-cmd + shift - right : yabai -m space --focus next
-cmd + shift - left : yabai -m space --focus prev
+cmd + shift - left : yabai -m space --focus recent
+cmd + shift - right : yabai -m space --focus recent
+cmd + shift - down : yabai -m space --focus next
+cmd + shift - up : yabai -m space --focus prev
 
 # Moving windows
 cmd + shift - h : yabai -m window --warp west
