@@ -42,6 +42,9 @@ sketchybar --default updates=when_shown \
 source "$ITEMS_DIR/ispace.sh"
 source "$ITEMS_DIR/iwindow.sh"
 
+#center
+source "$ITEMS_DIR/imode.sh"
+
 # right
 source "$ITEMS_DIR/iclock.sh"
 source "$ITEMS_DIR/ivpn.sh"

@@ -4,6 +4,9 @@ cmd - return : /Applications/kitty.app/Contents/MacOS/kitty \
 cmd + shift - return : /Applications/kitty.app/Contents/MacOS/kitty \
                             --single-instance -o allow_remote_control=yes -d ~ \
                             --session ~/.config/kitty/sessions/home.session
+# create a new space
+cmd + shift - n : yabai -m space --create
+cmd + shift - d : yabai -m space --create
 
 # Navigation
 cmd - h : yabai -m window --focus west
@@ -26,6 +29,7 @@ cmd - 7 : yabai -m space --focus 7
 cmd - 8 : yabai -m space --focus 8
 cmd - 9 : yabai -m space --focus 9
 cmd - 0 : yabai -m space --focus 10
+
 cmd + shift - left : yabai -m space --focus recent
 cmd + shift - right : yabai -m space --focus recent
 cmd + shift - down : yabai -m space --focus next
@@ -66,11 +70,25 @@ cmd + shift - b : yabai -m space --balance
 cmd + shift - r : brew services restart skhd && brew services restart yabai && brew services restart sketchybar
 cmd + shift - c : brew services restart skhd
 
-# Enable / Disable gaps in current workspace
-cmd + shift - g : yabai -m space --toggle padding; yabai -m space --toggle gap
-
 # Float / Unfloat window
 cmd + shift - space : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
 
 # Make window native fullscreen
 cmd + shift - f : yabai -m window --toggle native-fullscreen
+
+# close a window
+cmd + shift - q : yabai -m window --close
+
+# mode brightness for secondary keyboard
+:: brightness : sketchybar --trigger yabai-mode MODE=brightness
+
+ctrl + alt - b ; brightness
+
+brightness < escape ; default
+
+brightness < h : skhd -k "0x6B"
+brightness < j : skhd -k "0x6B"
+brightness < k : skhd -k "0x71"
+brightness < l : skhd -k "0x71"
+
+brightness < ctrl + alt - b : sketchybar --trigger yabai-mode MODE=default; skhd -k "escape";
