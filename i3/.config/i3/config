@@ -1,8 +1,10 @@
 # Variables
 set $config ~/.config
-set $innerGap 10
-set $outerGap 3
-set $term kitty
+set $innerGap 8
+set $outerGap 0
+set $termCommand "kitty -o allow_remote_control=yes --single-instance -d ~"
+set $termCommand2 "kitty -o allow_remote_control=yes --single-instance -d ~ \
+                    --session ~/.config/kitty/sessions/home.session"
 
 set $musicMode music
 set $resizeMode resize
@@ -25,7 +27,8 @@ gaps outer $outerGap
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec $termCommand
+bindsym $mod+Shift+Return exec $termCommand2
 
 # kill focused window
 bindsym $mod+Shift+q kill
