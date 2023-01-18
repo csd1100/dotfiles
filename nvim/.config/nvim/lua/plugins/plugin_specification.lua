@@ -45,6 +45,11 @@ return packer.startup(function()
 		"folke/which-key.nvim",
 	})
 
+	-- undotree --
+	use({
+		"mbbill/undotree",
+	})
+
 	-- project management --
 	use({
 		"ahmedkhalf/project.nvim",

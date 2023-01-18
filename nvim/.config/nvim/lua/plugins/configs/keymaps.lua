@@ -24,7 +24,6 @@ map("n", "<leader>h", ":Telescope oldfiles<CR>", { desc = "Recent Files" })
 map("n", "<leader><leader>", ":Telescope find_files<CR>", { desc = "Find in Files" })
 map("n", "<leader>b", ":Telescope buffers<CR>", { desc = "List Open Buffers" })
 map("n", "<leader>gp", ":Telescope projects<CR>", { desc = "Projects" })
--- map("n", "<C-S-f>", ":Telescope live_grep<CR>", { desc = "Find String in all files" })
 map("n", "<C-S-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 map("n", "<leader>gss", ":SessionSave<CR>", { desc = "Save Current Session" })
 map("n", "<leader>gsl", ":SessionLoad<CR>", { desc = "Load Saved Session" })
@@ -35,6 +34,7 @@ map(
 	":PackerSnapshot " .. os.date("%Y-%m-%d_%X") .. ".json <CR>",
 	{ desc = "Create a Packer Snapshot at current date" }
 )
+map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "Show Undotree" })
 -- markdown preview --
 map("n", "<leader>mdp", ":Glow<CR>", { desc = "Markdown Preview using Glow" })
 

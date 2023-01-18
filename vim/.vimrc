@@ -56,9 +56,9 @@ nnoremap <S-k> 15k
 vnoremap <S-j> 10j
 vnoremap <S-k> 10k
 
-nnoremap [[ ci[
-nnoremap {{ ci{
-nnoremap (( ci(
+nnoremap d[ ci[
+nnoremap d{ ci{
+nnoremap d( ci(
 
 nnoremap zz :set foldenable<CR>
 nnoremap zn :set nofoldenable<CR>
