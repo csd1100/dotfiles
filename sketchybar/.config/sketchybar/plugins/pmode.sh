@@ -11,6 +11,9 @@ case $MODE in
 "music")
 	COLOR=$B_LIGHT
 	;;
+"space")
+	COLOR=$R_LIGHT
+	;;
 "default")
 	COLOR=$BACKGROUND
 	;;
