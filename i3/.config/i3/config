@@ -190,7 +190,7 @@ bindsym $mod+Shift+m mode $musicMode
 exec_always feh --bg-fill ~/Pictures/Wallpapers/Wallpaper.jpg
 
 # polybar
-exec_always $config/polybar/scripts/polybar-launch &
+exec_always /usr/bin/env sh -c "CONFIG=~/.config/ BAR_NAME=bottom-bar ~/.config/polybar/scripts/polybar-launch &> /tmp/polybar.log"
 
 # picom
 exec_always picom

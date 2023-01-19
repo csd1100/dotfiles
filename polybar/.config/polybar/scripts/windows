@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+active_window_ids=($(
+	xdotool search --all --onlyvisible --desktop $(xprop -notype -root _NET_CURRENT_DESKTOP | cut -c 24-) "" 2>/dev/null
+))
+
+declare -a active_windows
+
+for window in "${active_window_ids[@]}"; do
+	active_windows+=($(xdotool getwindowname "$window"))
+done
+
+active_windows_reverse=($(
+	printf '%s\n' "${active_windows[@]}" | tac | tr '\n' ' '
+	echo
+))
+
+active_windows_reverse[0]="%{F#1DE9B6}${active_windows_reverse[0]}%{F-}"
+
+printf -v joined '%s  ' "${active_windows_reverse[@]}"
+echo "${joined%,}"
