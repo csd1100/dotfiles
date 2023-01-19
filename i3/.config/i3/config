@@ -19,6 +19,15 @@ font pango: Jetbrains Mono 15
 # Disabling Title Bar for gaps
 for_window [class=".*"] border pixel 5
 
+# Colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #1DE9B6 #0D8164 #FFFFFF #00E5FF   #1DE9B6
+client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
+client.unfocused        #21282B #222222 #888888 #292D2E   #222222
+client.urgent           #2F343A #FB1E5C #FFFFFF #FB1E5C   #FB1E5C
+client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
+client.background       #FFFFFF
+
 # Gaps configuration
 gaps inner $innerGap
 gaps outer $outerGap
@@ -44,6 +53,10 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 #bindsym $mod+h split h
@@ -198,6 +211,7 @@ exec_always picom
 # start rofi (a program launcher)
 bindsym $mod+space exec --no-startup-id $config/rofi/scripts/run-rofi apps
 bindsym $mod+Shift+d exec --no-startup-id $config/rofi/scripts/run-rofi run
+bindsym $mod+Shift+d exec --no-startup-id $config/rofi/scripts/run-rofi ssh
 bindsym $mod+w exec --no-startup-id $config/rofi/scripts/run-rofi windows
 bindsym $mod+x exec --no-startup-id $config/rofi/scripts/power-menu
 

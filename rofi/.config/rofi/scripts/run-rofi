@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 MODI=$1
-THEME=$ROFI_THEME
+THEME="~/.config/rofi/rofi.rasi"
 case $MODI in
 run)
     echo run
@@ -11,6 +11,9 @@ apps)
     ;;
 windows)
     rofi -show window -theme $THEME
+    ;;
+ssh)
+    rofi -show ssh -theme $THEME
     ;;
 *) ;;
 
