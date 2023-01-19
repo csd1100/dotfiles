@@ -12,7 +12,7 @@ declare -a active_windows
 
 for window in "${active_window_ids[@]}"; do
 	if [ "$window" = "$(xdotool getwindowfocus)" ]; then
-		active_windows+=("%{F#1DE9B6}$(xdotool getwindowname "$window")%{F-}")
+		active_windows+=("%{F#1DE9B6}$(xdotool getwindowname "$window" | cut -c-30)%{F-}")
 	else
 		active_windows+=($(xdotool getwindowname "$window"))
 	fi
