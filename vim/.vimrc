@@ -39,6 +39,10 @@ nnoremap <leader><Tab> i<Tab><ESC>l
 nnoremap <leader>s 0
 nnoremap <leader>e $
 
+" yank into clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
 nnoremap qq :q<CR>
 nnoremap qa :qa<CR>
 nnoremap sa :wqa<CR>
