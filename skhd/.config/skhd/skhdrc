@@ -102,3 +102,18 @@ brightness < k : skhd -k "0x71"
 brightness < l : skhd -k "0x71"
 
 brightness < ctrl + alt - b : sketchybar --trigger yabai-mode MODE=default; skhd -k "escape";
+
+:: restart : sketchybar --trigger yabai-mode MODE=restart
+ctrl + alt - r ; restart
+
+restart < ctrl + alt - r : sketchybar --trigger yabai-mode MODE=default; skhd -k "escape";
+
+restart < cmd + shift - y : brew services restart yabai
+restart < cmd + shift - s : brew services restart sketchybar
+restart < cmd + shift - c : brew services restart skhd
+
+restart < escape ; default
+
+:: vm
+ctrl + alt - p ; vm
+vm < ctrl + alt - p ; default

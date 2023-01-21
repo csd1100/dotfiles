@@ -14,6 +14,9 @@ case $MODE in
 "space")
 	COLOR=$R_LIGHT
 	;;
+"restart")
+	COLOR=$G_LIGHT
+	;;
 "default")
 	COLOR=$BACKGROUND
 	;;

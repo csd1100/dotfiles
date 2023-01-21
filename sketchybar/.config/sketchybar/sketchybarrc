@@ -6,14 +6,14 @@ source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
 
 # CREATE BAR
-sketchybar --bar height=30 \
+sketchybar --bar height=45 \
 	blur_radius=0 \
-	position=top \
+	position=bottom \
 	sticky=off \
 	padding_left=10 \
 	padding_right=10 \
-	y_offset=5 \
-	margin=5 \
+	y_offset=0 \
+	margin=0 \
 	corner_radius=5 \
 	color=$BACKGROUND
 
