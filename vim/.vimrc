@@ -105,12 +105,14 @@ set relativenumber
 set expandtab
 set hlsearch
 set showcmd
+set smartindent
 set timeoutlen=1500
 set encoding=utf-8
 set showtabline=2
 set tabstop=4
-set softtabstop=-1
-set shiftwidth=0
+set softtabstop=4
+set shiftwidth=4
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-set colorcolumn=76
+set colorcolumn=80
+set scrolloff=8

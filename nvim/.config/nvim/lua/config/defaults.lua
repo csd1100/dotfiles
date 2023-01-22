@@ -13,4 +13,5 @@ set.backup = true
 set.backupdir = bkp_dir .. "/" .. project
 
 local undo_dir = home .. "/.nvim/undos"
+set.undofile = true
 set.undodir = undo_dir .. "/" .. project

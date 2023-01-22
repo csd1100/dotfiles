@@ -13,7 +13,7 @@ function M.map_lsp_keys(bufnr)
 	map("n", "<C-S-->", function() vim.cmd[[Telescope lsp_incoming_calls]] end, { buffer = bufnr, desc = "Incoming Calls (LSP)" })
 	map("n", "<C-S-=>", function() vim.cmd[[Telescope lsp_outgoing_calls]] end, { buffer = bufnr, desc = "Outgoing Calls (LSP)" })
 	map("n", "<leader>lk", function() vim.lsp.buf.signature_help() end, { buffer = bufnr, desc = "Signature Help (LSP)" })
-	map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { buffer = bufnr, desc = "Signature Help (LSP)" })
+	map("i", "<C-k>", function() vim.lsp.buf.signature_help() end, { buffer = bufnr, desc = "Signature Help (LSP)" })
 	map(
 		"n",
 		"<leader>ltd",
@@ -69,7 +69,7 @@ function M.unmap_lsp_keys(bufnr)
 	unmap("n", "<C-S-->", opts)
 	unmap("n", "<C-S-=>", opts)
 	unmap("n", "<leader>lk", opts)
-	unmap("i", "<C-h>", opts)
+	unmap("i", "<C-k>", opts)
 	unmap("n", "<leader>ltd", opts)
 	unmap("n", "<leader>lrn", opts)
 	unmap("n", "<leader>lca", opts)

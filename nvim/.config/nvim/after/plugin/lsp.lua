@@ -3,6 +3,12 @@ local map = keymapUtils.map
 
 local lsp = require("lsp-zero")
 
+
+local status, fidget = pcall(require, "fidget")
+if status then
+    fidget.setup()
+end
+
 lsp.preset("recommended")
 
 lsp.ensure_installed({

@@ -24,6 +24,13 @@ map(
 	{ desc = "Create a Packer Snapshot at current date" }
 )
 map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "Show Undotree" })
+map("n", "]t", function()
+	require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+map("n", "[t", function()
+	require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
 
 -- -- git splkey: v --
 local activateGitsignsFn = function(options)
@@ -143,7 +150,7 @@ end
 
 local status, modesModule = pcall(require, "modes")
 if status then
-    modesModule.setup()
+	modesModule.setup()
 	modesModule.createIfNotPresent("COMPL", activateCompletionToggleFn, deactivateCompletionToggleFn, "''")
 	-- enable quotes completion by default --
 	modesModule.toggleMode("COMPL")
