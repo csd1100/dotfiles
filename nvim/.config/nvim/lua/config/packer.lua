@@ -65,6 +65,7 @@ local function packer_startup()
 		use("csd1100/modes.nvim")
 		use("folke/which-key.nvim")
 		use("sainnhe/gruvbox-material")
+		use({ "sonph/onehalf", rtp = "vim" })
 		use("glepnir/dashboard-nvim")
 		use("ThePrimeagen/vim-be-good")
 

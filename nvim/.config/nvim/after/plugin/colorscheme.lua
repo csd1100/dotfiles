@@ -8,6 +8,6 @@ set.background = "dark"
 g.gruvbox_material_background = "hard"
 g.gruvbox_material_foreground = "mix"
 
-local theme = "gruvbox-material"
+local theme = "onehalfdark"
 -- set theme --
 vim.cmd.colorscheme(theme)
