@@ -10,6 +10,37 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+" netrw explorer
+nnoremap <C-S-e> :Ex<CR>
+
+" move selected block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" append to current line
+nnoremap J mzJ`z
+
+" fast movement
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" keep search result in middle of screen
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" paste over current word
+xnoremap <leader>p "_dP
+
+" delete to void register
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" quickfix navigtion
+nnoremap <C-k> <cmd>cnext<CR>zz
+nnoremap <C-j> <cmd>cprev<CR>zz
+nnoremap <leader>k <cmd>lnext<CR>zz
+nnoremap <leader>j <cmd>lprev<CR>zz
+
 vnoremap <C-S-y> "+y
 nnoremap <C-p> "+p
 " yank text in reg 6
@@ -54,11 +85,6 @@ nnoremap qx :%bd\|e#\|bd#<CR>
 nnoremap 55 q5
 nnoremap ,, @5
 nnoremap , @@
-
-nnoremap <S-j> 15j
-nnoremap <S-k> 15k
-vnoremap <S-j> 10j
-vnoremap <S-k> 10k
 
 nnoremap d[ ci[
 nnoremap d{ ci{
