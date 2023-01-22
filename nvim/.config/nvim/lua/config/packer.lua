@@ -54,6 +54,7 @@ local function packer_startup()
 			tag = "nightly",
 		})
 		use("rmagatti/auto-session")
+		use("ahmedkhalf/project.nvim")
 		use("nvim-lualine/lualine.nvim")
 		use("yamatsum/nvim-cursorline")
 		use("lukas-reineke/indent-blankline.nvim")
