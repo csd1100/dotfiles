@@ -9,6 +9,11 @@ if status then
     fidget.setup()
 end
 
+local status, refactoring = pcall(require, "refactoring")
+if status then
+    refactoring.setup()
+end
+
 lsp.preset("recommended")
 
 lsp.ensure_installed({
