@@ -3,7 +3,7 @@
 function launch_kitty {
 	tab_id_1=$(kitty @ launch --type="$1" --os-window-title "$base_name" --cwd "$dir")
 	kitty @ set-tab-title -m id:"$tab_id_1" "$SHELL_TITLE"
-	kitty @ launch -m id:"$tab_id_1" --type=tab --tab-title "$NVIM_TITLE" --cwd "$dir" zsh -c "nvim; zsh"
+	kitty @ launch -m id:"$tab_id_1" --type=tab --tab-title "$NVIM_TITLE" --cwd "$dir" zsh -c "/usr/bin/env nvim; zsh"
 }
 
 case $1 in
@@ -22,11 +22,13 @@ esac
 dir=$(find ~ ~/work -mindepth 1 -maxdepth 2 -type d | fzf)
 base_name=$(basename $dir)
 
-SHELL_TITLE="$base_name:shell"
-NVIM_TITLE="$base_name:nvim"
+if [  -z "$basename" ]; then
+    SHELL_TITLE="$base_name:shell"
+    NVIM_TITLE="$base_name:nvim"
 
-if [ $MODE = "window" ]; then
-	launch_kitty os-window
-else
-	launch_kitty tab
+    if [ $MODE = "window" ]; then
+        launch_kitty os-window
+    else
+        launch_kitty tab
+    fi
 fi
