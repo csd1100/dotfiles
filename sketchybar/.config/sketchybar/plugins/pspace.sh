@@ -1,31 +1,27 @@
 #!/usr/bin/env bash
+source "$HOME/.config/sketchybar/colors.sh"
 
-case $SENDER in
-"mouse.entered")
-	sketchybar --set space_display label.drawing=off
-
-	spaces=$(yabai -m query --spaces | jq -r ".[].index")
-	if [ "$spaces" != "" ]; then
-		while IFS= read -r space; do
-			sketchybar --set "s$space" drawing=on
-		done <<<"$spaces"
+update() {
+	WIDTH="dynamic"
+	HIGHLIGHT="$BACKGROUND1"
+	if [ "$SELECTED" = "true" ]; then
+		WIDTH="0"
+		HIGHLIGHT="$BACKGROUND2"
 	fi
+
+	sketchybar --animate tanh 20 --set $NAME icon.background.color="$HIGHLIGHT" icon.highlight=$SELECTED label.width=$WIDTH
+
+}
+
+mouse_clicked() {
+	yabai -m space --focus $SID 2>/dev/null
+}
+
+case "$SENDER" in
+"mouse.clicked")
+	mouse_clicked
 	;;
 *)
-	if [ -z "$INFO" ]; then
-		LABEL=$(yabai -m query --spaces --space | jq -r ".index")
-	else
-		LABEL="$(echo $INFO | jq '."display-1"')"
-	fi
-
-	sketchybar --set space_display label.drawing=on \
-		label="$LABEL"
-
-	spaces=$(yabai -m query --spaces | jq -r ".[].index")
-	if [ "$spaces" != "" ]; then
-		while IFS= read -r space; do
-			sketchybar --set "s$space" drawing=off
-		done <<<"$spaces"
-	fi
+	update
 	;;
 esac

@@ -5,6 +5,22 @@ ITEMS_DIR="$HOME/.config/sketchybar/items"
 source "$HOME/.config/sketchybar/colors.sh"
 source "$HOME/.config/sketchybar/icons.sh"
 
+separator() {
+	sketchybar --query separator &>/dev/null
+	RESULT="$?"
+	echo $RESULT
+	if [ $RESULT = 1 ]; then
+		sketchybar --add item separator left
+		sketchybar --set separator \
+			label.drawing=on \
+			label.color=$FOREGROUND \
+			label="|" \
+			icon.drawing=off
+	else
+		sketchybar --clone "separator$1" separator
+	fi
+}
+
 # CREATE BAR
 sketchybar --bar height=45 \
 	blur_radius=0 \
@@ -21,15 +37,17 @@ sketchybar --bar height=45 \
 sketchybar --default updates=when_shown \
 	drawing=on \
 	icon.drawing=off \
-	icon.font="SpaceMono Nerd Font:Bold:13.0" \
+	icon.font="Jetbrains Mono:Regular:15.0" \
 	icon.color=$FOREGROUND \
 	icon.padding_left=5 \
 	icon.padding_right=5 \
+	icon.background.height=28 \
 	label.drawing=off \
-	label.font="Jetbrains Mono:Bold:13.0" \
+	label.font="Jetbrains Mono:Bold:15.0" \
 	label.color=$FOREGROUND \
 	label.padding_left=5 \
 	label.padding_right=5 \
+	label.background.height=28 \
 	background.drawing=off \
 	background.corner_radius=5 \
 	background.border_width=0 \
@@ -39,7 +57,10 @@ sketchybar --default updates=when_shown \
 
 # ADD ITEMS
 # left
+source "$ITEMS_DIR/imenu.sh"
+separator 0
 source "$ITEMS_DIR/ispace.sh"
+separator 1
 source "$ITEMS_DIR/iwindow.sh"
 
 #center

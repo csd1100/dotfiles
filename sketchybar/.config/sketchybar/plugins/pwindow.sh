@@ -8,7 +8,7 @@ case $SENDER in
 	app=$(yabai -m query --windows --window $ID | jq -r ".app")
 	sketchybar --add item $ID left
 	sketchybar --set $ID \
-		label="$($HOME/.config/sketchybar/plugins/picon_map.sh "$app")" \
+		label="$app" \
 		label.drawing=on \
 		label.font="sketchybar-app-font:Regular:13.0" \
 		label.color=$FOREGROUND \

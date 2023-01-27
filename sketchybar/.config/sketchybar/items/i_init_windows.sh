@@ -10,9 +10,9 @@ if [ "$windows" != "" ]; then
 
 		sketchybar --add item $id left
 		sketchybar --set $id \
-			label="$($HOME/.config/sketchybar/plugins/picon_map.sh "$app")" \
+			label="$app" \
 			label.drawing=on \
-			label.font="sketchybar-app-font:Regular:13.0" \
+			label.font="Jetbrains Mono:Regular:13.0" \
 			label.color=$FOREGROUND \
 			label.highlight=off \
 			associated_space=$space \
