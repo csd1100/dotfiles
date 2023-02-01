@@ -10,7 +10,7 @@ case $SENDER in
 	sketchybar --set $ID \
 		label="$app" \
 		label.drawing=on \
-		label.font="sketchybar-app-font:Regular:13.0" \
+		label.font="Jetbrains Mono:Regular:13.0" \
 		label.color=$FOREGROUND \
 		label.highlight=off \
 		associated_space=$space \
