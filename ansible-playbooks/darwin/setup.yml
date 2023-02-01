@@ -39,6 +39,13 @@
     - cli
     - essentials
 
+- name: vim install (Brew)
+  community.general.homebrew:
+    name: vim
+  tags:
+    - cli
+    - essentials
+
 - name: fzf install (Brew)
   community.general.homebrew:
     name: fzf

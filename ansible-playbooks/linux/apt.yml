@@ -28,7 +28,7 @@
     - cli
     - essentials
 
-- name: htop install (htop)
+- name: htop install (Apt)
   become: yes
   apt:
     name: htop
@@ -36,7 +36,15 @@
     - cli
     - essentials
 
-- name: fzf install (htop)
+- name: vim install (Apt)
+  become: yes
+  apt:
+    name: vim
+  tags:
+    - cli
+    - essentials
+
+- name: fzf install (Apt)
   become: yes
   apt:
     name: fzf

@@ -27,14 +27,21 @@
     - cli
     - essentials
 
-- name: htop install (htop)
+- name: htop install (DNF)
   dnf:
     name: htop
   tags:
     - cli
     - essentials
 
-- name: fzf install (htop)
+- name: vim install (DNF)
+  dnf:
+    name: vim
+  tags:
+    - cli
+    - essentials
+
+- name: fzf install (DNF)
   dnf:
     name: fzf
   tags:
