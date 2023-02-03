@@ -3,9 +3,6 @@
 alias zshrc="source $HOME/.zshrc"
 alias zshconfig="code $HOME/.zshrc"
 
-# generic
-alias :q="exit"
-
 # neovim
 alias nv="nvim"
 
@@ -16,6 +13,7 @@ alias :Q="exit"
 # git
 alias gh="git log --oneline --graph --pretty"
 alias gcv="git commit -v"
+alias gc="git fetch && git checkout"
 
 #tmux
 alias tm="tmux"
@@ -23,7 +21,13 @@ alias tps="tmux list-sessions"
 alias tkl="tmux kill-server"
 
 # docker
-alias dps=""
+alias dps="docker ps --format=\$DOCKER_FORMAT"
+alias dc="docker-compose"
+alias dcps="docker-compose ps"
+alias dcup="docker-compose up -d"
+alias dcdn="docker-compose down -v"
+alias dcst="docker-compose start"
+alias dcstp="docker-compose stop"
 
 # unaliase for bin overrides
 unalias ls

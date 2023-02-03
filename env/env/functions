@@ -9,6 +9,14 @@ function finder() {
     cd $dir
 }
 
+function dbash() {
+    docker exec -it "$1" /usr/bin/bash
+}
+
+function dl() {
+    docker logs "$1" | less
+}
+
 # source overrides
 if [ -f "$HOME/env/overrides/functions" ]
 then
