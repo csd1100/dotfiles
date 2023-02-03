@@ -8,8 +8,8 @@ if [ "$windows" != "" ]; then
 		app=$(echo $window | jq -r ".app")
 		space=$(echo $window | jq -r ".space")
 
-		sketchybar --add item $id left
-		sketchybar --set $id \
+		sketchybar --add item "window.$id" left
+		sketchybar --set "window.$id" \
 			label="$app" \
 			label.drawing=on \
 			label.font="Jetbrains Mono:Regular:13.0" \

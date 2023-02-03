@@ -8,7 +8,7 @@ sketchybar --add event window_added \
 
 sketchybar --add item window_display left
 
-sketchybar --subscribe window_display window_added window_destroyed
+sketchybar --subscribe window_display window_added window_destroyed window_focus
 
 sketchybar --set window_display \
 	script="$PLUGIN_DIR/pwindow.sh"

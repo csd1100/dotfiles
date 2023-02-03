@@ -6,6 +6,7 @@ sketchybar --rename "Control Centre,Battery" battery
 sketchybar --subscribe battery system_woke mouse.entered mouse.exited.global
 
 sketchybar --set battery \
+    alias.color=$FOREGROUND \
 	label.drawing=on \
 	script="$PLUGIN_DIR/pbattery.sh" \
 	update_freq=5
