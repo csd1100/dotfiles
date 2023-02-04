@@ -9,6 +9,13 @@ function finder() {
     cd $dir
 }
 
+# git
+function gsq() {
+    git reset --soft "$1" &&
+    git commit --edit -m"$(git log --format=%B --reverse HEAD..HEAD@{1})"
+}
+
+# docker
 function dbash() {
     docker exec -it "$1" /usr/bin/bash
 }
