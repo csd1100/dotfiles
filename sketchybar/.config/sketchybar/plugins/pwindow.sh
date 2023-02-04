@@ -5,7 +5,7 @@ source "$HOME/.config/sketchybar/icons.sh"
 space=$(yabai -m query --spaces --space | jq -r ".index")
 case $SENDER in
 "window_added")
-    # reset highlight
+	# reset highlight
 	sketchybar --set /window.*/ label.color=$FOREGROUND
 	app=$(yabai -m query --windows --window $ID | jq -r ".app")
 	sketchybar --add item "window.$ID" left
@@ -22,9 +22,10 @@ case $SENDER in
 	sketchybar --remove window.$ID
 	;;
 "window_focus")
-    # reset highlight
+	# reset highlight
+	space=$(yabai -m query --windows --window $ID | jq -r ".space")
 	sketchybar --set /window.*/ label.color=$FOREGROUND
-	sketchybar --set window.$ID label.color=$ACCENT
+	sketchybar --set window.$ID label.color=$ACCENT \
+		associated_space=$space
 	;;
-
 esac
