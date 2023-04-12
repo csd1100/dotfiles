@@ -27,6 +27,7 @@ sketchybar --bar height=45 \
 	position=bottom \
 	sticky=off \
 	padding_left=10 \
+	corner_radius=0 \
 	padding_right=10 \
 	y_offset=0 \
 	margin=0 \

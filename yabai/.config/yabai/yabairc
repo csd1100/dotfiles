@@ -24,7 +24,7 @@ yabai -m config insert_feedback_color        0xfffc618d
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 on
 
-yabai -m config window_border                on
+yabai -m config window_border                off
 yabai -m config window_border_hidpi          on
 yabai -m config window_border_blur           off
 yabai -m config window_border_width          2
@@ -67,7 +67,7 @@ yabai -m space 0 --label utils
 yabai -m signal --add event=window_created action='sketchybar --trigger window_added ID="$YABAI_WINDOW_ID"'
 yabai -m signal --add event=window_destroyed action='sketchybar --trigger window_destroyed ID="$YABAI_WINDOW_ID"'
 yabai -m signal --add event=window_focused action='sketchybar --trigger window_focus ID="$YABAI_WINDOW_ID"'
-
+yabai -m signal --add event=window_moved action='sketchybar --trigger window_moved ID="$YABAI_WINDOW_ID"'
 # Rules
 source $HOME/.config/yabai/rules
 

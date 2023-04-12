@@ -3,19 +3,19 @@ source "$HOME/.config/sketchybar/colors.sh"
 
 case $MODE in
 "brightness")
-	COLOR=$Y_LIGHT
+	COLOR=$Y
 	;;
 "volume")
-	COLOR=$V_LIGHT
+	COLOR=$V
 	;;
 "music")
-	COLOR=$B_LIGHT
+	COLOR=$B
 	;;
 "space")
-	COLOR=$R_LIGHT
+	COLOR=$R
 	;;
 "restart")
-	COLOR=$G_LIGHT
+	COLOR=$G
 	;;
 "default")
 	COLOR=$BACKGROUND
