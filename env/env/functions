@@ -4,7 +4,7 @@ function mcd () { md -p $1; cd $1 }
 function helpless() { $* --help | less }
 function batman() { man $1 | bat --color always }
 function finder() {
-    dir=$(find ~ ~/work -mindepth 1 -maxdepth 2 -type d | fzf)
+    dir=$(find ~ ~/work -mindepth 1 -maxdepth 3 -type d | fzf)
     echo $dir
     cd $dir
 }
