@@ -32,6 +32,8 @@ map("n", "[t", function()
 	require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
 
+map({ "n", "v" }, "<leader>v[", ":lua require('gitsigns').prev_hunk()<CR>", { desc = "Previous Hunk (GIT)" })
+map({ "n", "v" }, "<leader>v]", ":lua require('gitsigns').next_hunk()<CR>", { desc = "Next Hunk (GIT)" })
 -- -- git splkey: v --
 local activateGitsignsFn = function(options)
 	local opts = {}
