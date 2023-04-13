@@ -19,7 +19,7 @@ map("n", "<leader>gss", ":SessionSave<CR>", { desc = "Save Current Session" })
 map("n", "<leader>gsl", ":SessionLoad<CR>", { desc = "Load Saved Session" })
 map(
 	"n",
-	"<leader>ps",
+	"<leader><S-p>",
 	":PackerSnapshot " .. os.date("%Y-%m-%d_%X") .. ".json <CR>",
 	{ desc = "Create a Packer Snapshot at current date" }
 )

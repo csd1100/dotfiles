@@ -41,8 +41,6 @@ nnoremap <C-j> <cmd>cprev<CR>zz
 nnoremap <leader>k <cmd>lnext<CR>zz
 nnoremap <leader>j <cmd>lprev<CR>zz
 
-vnoremap <C-S-y> "+y
-nnoremap <C-p> "+p
 " yank text in reg 6
 vnoremap "" "6y
 " replace current word with text from reg 6
@@ -60,6 +58,9 @@ inoremap jj <Esc><CR>
 inoremap lll <Esc>l
 inoremap hhh <Esc>h
 
+" remap <Tab> to <C-p> as with LSP <Tab> doesn't seem to work
+nnoremap <C-S-p> <Tab>
+
 nnoremap <leader>c :nohl<CR>
 nnoremap <leader><CR> i<CR><Esc>
 nnoremap <leader>j o<Esc>j
@@ -73,6 +74,7 @@ nnoremap <leader>e $
 " yank into clipboard
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
+nnoremap <leader>p "+p
 
 nnoremap qq :q<CR>
 nnoremap qa :qa<CR>
