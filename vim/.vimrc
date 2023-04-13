@@ -59,7 +59,7 @@ inoremap lll <Esc>l
 inoremap hhh <Esc>h
 
 " remap <Tab> to <C-p> as with LSP <Tab> doesn't seem to work
-nnoremap <C-S-p> <Tab>
+nnoremap <C-p> <Tab>
 
 nnoremap <leader>c :nohl<CR>
 nnoremap <leader><CR> i<CR><Esc>
