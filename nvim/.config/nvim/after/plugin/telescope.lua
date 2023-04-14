@@ -3,6 +3,7 @@ if not telescope then
 	vim.notify("failed to load telescope", "error")
 	return
 end
+local lga_actions = require("telescope-live-grep-args.actions")
 
 local layout_conf = {
 	horizontal = {
@@ -45,6 +46,20 @@ local conf = {
 		buffers = {
 			sort_mru = true,
 			ignore_current_buffer = true,
+		},
+	},
+	extensions = {
+		live_grep_args = {
+			auto_quoting = true, -- enable/disable auto-quoting
+			-- define mappings, e.g.
+			mappings = { -- extend mappings
+				i = {
+					['<C-k>'] = lga_actions.quote_prompt(),
+					['<C-i>'] = lga_actions.quote_prompt({ postfix = ' --iglob ' }),
+					['<C-n>'] = lga_actions.quote_prompt({ postfix = ' --iglob "!node_modules/**"' }),
+				},
+			},
+			theme = "dropdown", -- use dropdown theme
 		},
 	},
 }

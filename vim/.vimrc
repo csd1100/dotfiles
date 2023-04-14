@@ -1,10 +1,6 @@
 nnoremap <Space> <nop>
 let mapleader =" "
 
-" remap K to <leader>i
-nnoremap <leader>i K
-nmap K <nop>
-
 map <up> <nop>
 map <down> <nop>
 map <left> <nop>
@@ -118,3 +114,4 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set colorcolumn=80
 set scrolloff=8
+set spell

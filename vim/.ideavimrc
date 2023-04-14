@@ -12,46 +12,55 @@ set which-key
 set timeoutlen=3000
 let g:WhichKey_DefaultDelay = 1500
 
-nmap <C-S-p> <Action>(SearchEverywhere)
-nmap <leader><leader> <Action>(GotoFile)
-nmap <C-o> <Action>(Back)
-nmap <Tab> <Action>(Forward)
-nmap <leader>/ <Action>(CommentByLineComment)
-nmap <C-f> <Action>(Find)
-nmap <C-S-h> <Action>(Replace)
-nmap <C-S-f> <Action>(FindInPath)
-nmap <C-,> <Action>(ShowSettings)
-nmap <leader>e <Action>(FocusEditor)
-nmap <C-S-e> <Action>(ActivateProjectToolWindow)
-nmap <C-S-d> <Action>(ActivateDebugToolWindow)
-nmap <C-S-e> <Action>(ActivateProjectToolWindow)
-nmap <C-S-l> <Action>(ActivateTODOToolWindow)
-nmap <C-g> <Action>(GotoSymbol)
-nmap <C-i> <Action>(GotoImplementation)
-nmap <C-S-u> <Action>(FindUsages)
-nmap <leader>lf <Action>(ReformatCode)
-nmap <leader>rm <Action>(RefactoringMenu)
-vmap <leader>lem <Action>(ExtractMethod)
-vmap <leader>leC <Action>(ExtractClass)
-vmap <leader>lev <Action>(IntroduceVariable)
-vmap <leader>lec <Action>(IntroduceField)
-vmap <leader>lrn <Action>(RenameElement)
-nmap <leader>lrn <Action>(RenameElement)
-vmap <leader>lcs <Action>(ChangeSignature)
-nmap <leader>lrn <Action>(RenameElement)
-nmap <leader>lcs <Action>(ChangeSignature)
-nmap <leader><S-d> <Action>(Debug)
-nmap <leader><S-r> <Action>(Run)
-nmap <leader><S-s> <Action>(Resume)
-nmap <leader><S-x> <Action>(Stop)
-nmap <leader>b <Action>(ToggleLineBreakpoint)
-nmap <leader><down> <Action>(StepInto)
-nmap <leader><right> <Action>(StepOver)
-nmap <leader><left> <Action>(StepOut)
-nmap <C-Left> <Action>(PreviousTab)
-nmap <C-Right> <Action>(NextTab)
-nmap <leader>v[ <Action>(VcsShowPrevChangeMarker)
-nmap <leader>v] <Action>(VcsShowNextChangeMarker)
-vmap .. <Action>(EvaluateExpression)
+nmap <C-,> <Action>(ShowSettings)<ESC>
+
+nmap <leader><leader> <Action>(GotoFile)<ESC>
+nmap <C-S-f> <Action>(SearchEverywhere)<ESC>
+nmap <C-f> <Action>(Find)<ESC>
+nmap <C-S-h> <Action>(Replace)<ESC>
+nmap <C-S-f> <Action>(FindInPath)<ESC>
+
+nmap <Tab> <Action>(Forward)<ESC>
+nmap <C-o> <Action>(Back)<ESC>
+nmap <leader>v[ <Action>(VcsShowPrevChangeMarker)<ESC>
+nmap <leader>v] <Action>(VcsShowNextChangeMarker)<ESC>
+nmap <C-Left> <Action>(PreviousTab)<ESC>
+nmap <C-Right> <Action>(NextTab)<ESC>
+
+nmap <leader>/ <Action>(CommentByLineComment)<ESC>
+vmap <leader>/ <Action>(CommentByLineComment)<ESC>
 vmap <S-j> <Action>(MoveLineDown)
 vmap <S-k> <Action>(MoveLineUp)
+
+nmap <leader>e <Action>(FocusEditor)<ESC>
+nmap <C-S-e> <Action>(ActivateProjectToolWindow)<ESC>
+nmap <C-S-d> <Action>(ActivateDebugToolWindow)<ESC>
+nmap <C-S-l> <Action>(ActivateTODOToolWindow)<ESC>
+
+nmap <C-g> <Action>(GotoSymbol)<ESC>
+nmap <C-i> <Action>(GotoImplementation)<ESC>
+nmap <C-S-u> <Action>(FindUsages)<ESC>
+
+nmap <leader>rm <Action>(RefactoringMenu)<ESC>
+vmap <leader>lem <Action>(ExtractMethod)<ESC>
+vmap <leader>leC <Action>(ExtractClass)<ESC>
+vmap <leader>lev <Action>(IntroduceVariable)<ESC>
+vmap <leader>lec <Action>(IntroduceField)<ESC>
+vmap <leader>lrn <Action>(RenameElement)<ESC>
+nmap <leader>lrn <Action>(RenameElement)<ESC>
+vmap <leader>lcs <Action>(ChangeSignature)<ESC>
+nmap <leader>lcs <Action>(ChangeSignature)<ESC>
+nmap <leader>lrn <Action>(RenameElement)<ESC>
+
+nmap <leader>lf <Action>(ReformatCode)<ESC>
+vmap <leader>lf <Action>(ReformatCode)<ESC>
+
+nmap <leader><S-d> <Action>(Debug)<ESC>
+nmap <leader><S-r> <Action>(Run)<ESC>
+nmap <leader><S-s> <Action>(Resume)<ESC>
+nmap <leader><S-x> <Action>(Stop)<ESC>
+nmap <leader>b <Action>(ToggleLineBreakpoint)<ESC>
+nmap <leader><down> <Action>(StepInto)<ESC>
+nmap <leader><right> <Action>(StepOver)<ESC>
+nmap <leader><left> <Action>(StepOut)<ESC>
+vmap .. <Action>(EvaluateExpression)<ESC>

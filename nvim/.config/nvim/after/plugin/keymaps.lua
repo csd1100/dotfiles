@@ -15,6 +15,8 @@ map("n", "<leader><leader>", ":Telescope find_files<CR>", { desc = "Find in File
 map("n", "<leader>b", ":Telescope buffers<CR>", { desc = "List Open Buffers" })
 map("n", "<leader>gp", ":Telescope projects<CR>", { desc = "Projects" })
 map("n", "<C-S-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+map("v", "<C-S-f>", ":lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<CR>")
+map("n", "<C-S-f><C-S-f>", ":Telescope resume<CR>")
 map("n", "<leader>gss", ":SessionSave<CR>", { desc = "Save Current Session" })
 map("n", "<leader>gsl", ":SessionLoad<CR>", { desc = "Load Saved Session" })
 map(
