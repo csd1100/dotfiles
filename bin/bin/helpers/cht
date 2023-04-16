@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
-languages=$(echo "java javascript bash rust typescript c go cpp python" | tr " " "\n")
+languages=$(echo "java javascript bash rust lua typescript c go cpp python" | tr " " "\n")
 core_utils=$(echo "grep sed awk find xargs sort" | tr " " "\n")
 selected=$(echo -e "$languages\n$core_utils" | fzf)
 
-read -p "Query > " query
-
-# if selected is language
-if echo "$languages" | grep -qs "$selected"; then
-    curl cht.sh/$selected/$(echo "$query" | tr " " "+")
-else
-    curl cht.sh/$selected~"$query"
+if [ ! -z "$selected" ]; then
+	read -p "Query > " query
+	# if selected is language
+	if echo "$languages" | grep -qs "$selected"; then
+		curl cht.sh/$selected/$(echo "$query" | tr " " "+")
+	else
+		curl cht.sh/$selected~"$query"
+	fi
 fi
