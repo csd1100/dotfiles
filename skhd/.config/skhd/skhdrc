@@ -108,9 +108,6 @@ cmd + shift - c : brew services restart skhd
 # Float / Unfloat window
 cmd + shift - space : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
 
-# Make window native fullscreen
-cmd + shift - f : yabai -m window --toggle native-fullscreen
-
 # close a window
 cmd - q : echo "null" > /dev/null
 cmd + shift - q : yabai -m window --close

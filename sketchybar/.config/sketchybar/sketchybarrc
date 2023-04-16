@@ -31,7 +31,7 @@ sketchybar --bar height=45 \
 	padding_right=10 \
 	y_offset=0 \
 	margin=0 \
-	corner_radius=5 \
+	corner_radius=0 \
 	color=$BACKGROUND
 
 # SET DEFAULTS
