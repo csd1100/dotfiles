@@ -34,6 +34,44 @@ map("n", "[t", function()
 	require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
 
+-- temp keymaps for csd-snips till config feature
+map(
+	{ "n" },
+	"<leader>dcl",
+	":lua require('csd-snips').write_to_console()<CR>",
+	{ desc = "Write debug message for STDOUT (csd-snips)" }
+)
+map(
+	{ "n" },
+	"<leader>dl",
+	":lua require('csd-snips').write_to_logger()<CR>",
+	{ desc = "Write debug message for logger (csd-snips)" }
+)
+map(
+	{ "n" },
+	"<leader>ddc",
+	":lua require('csd-snips').debug_to_console()<CR>",
+	{ desc = "Write debug message for STDOUT (csd-snips)" }
+)
+map(
+	{ "n" },
+	"<leader>ddl",
+	":lua require('csd-snips').debug_to_logger()<CR>",
+	{ desc = "Write debug message for logger (csd-snips)" }
+)
+map(
+	{ "n" },
+	"<leader>dcs",
+	":lua require('csd-snips').debug_string_to_console()<CR>",
+	{ desc = "Write debug message for STDOUT (csd-snips)" }
+)
+map(
+	{ "n" },
+	"<leader>dls",
+	":lua require('csd-snips').debug_string_to_logger()<CR>",
+	{ desc = "Write debug message for logger (csd-snips)" }
+)
+
 map({ "n", "v" }, "<leader>v[", ":lua require('gitsigns').prev_hunk()<CR>", { desc = "Previous Hunk (GIT)" })
 map({ "n", "v" }, "<leader>v]", ":lua require('gitsigns').next_hunk()<CR>", { desc = "Next Hunk (GIT)" })
 -- -- git splkey: v --
