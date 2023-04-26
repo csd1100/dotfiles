@@ -148,6 +148,8 @@ local function nvim_jdtls_setup()
 		require("lspconfigs.dap.java").setup()
 	end
 
+	config.handlers["language/status"] = function() end
+
 	return config
 end
 
