@@ -97,11 +97,18 @@ local function packer_startup()
 				{ "rafamadriz/friendly-snippets" },
 			},
 		})
+		use("mfussenegger/nvim-jdtls")
 		use("csd1100/csd-snips.nvim")
 		use({
 			"iamcco/markdown-preview.nvim",
 			run = function()
 				vim.fn["mkdp#util#install"]()
+			end,
+		})
+		use({
+			"nkakouros-original/numbers.nvim",
+			config = function()
+				require("numbers").setup()
 			end,
 		})
 	end)
