@@ -2,7 +2,7 @@ local set = vim.opt
 
 local home = os.getenv("HOME")
 if not home then
-	home = vim.fn.getcwd()
+    home = vim.fn.getcwd()
 end
 
 local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":~:s?\\~??")
