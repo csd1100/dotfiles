@@ -94,6 +94,23 @@ nnoremap zn :set nofoldenable<CR>
 " set current file as executable
 nnoremap <leader>x :!chmod +x %<CR>
 
+" tabs
+nnoremap <leader>tt :tabnew<CR>
+nnoremap <C-Right> :tabnext<CR>
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <leader>te :tabedit
+
+" window navigation and resize
+noremap <C-h> :wincmd h<CR>
+noremap <C-j> :wincmd j<CR>
+noremap <C-k> :wincmd k<CR>
+noremap <C-l> :wincmd l<CR>
+noremap <C-+> :res +3<CR>
+noremap <C--> :res -3<CR>
+
+" replace word under cursor
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
 " map capital versions for ease
 command W w
 command Q q

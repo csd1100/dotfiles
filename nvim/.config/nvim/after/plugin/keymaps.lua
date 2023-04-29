@@ -17,8 +17,7 @@ map("n", "<leader>gp", ":Telescope projects<CR>", { desc = "Projects" })
 map("n", "<C-S-f>", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 map("v", "<C-S-f>", ":lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<CR>")
 map("n", "<C-S-f><C-S-f>", ":Telescope resume<CR>")
-map("n", "<leader>gss", ":SessionSave<CR>", { desc = "Save Current Session" })
-map("n", "<leader>gsl", ":SessionLoad<CR>", { desc = "Load Saved Session" })
+map("n", "<leader>gsl", ":lua require('persistence').load()<CR>", { desc = "Save Current Session" })
 map(
 	"n",
 	"<leader><S-p>",
@@ -33,6 +32,17 @@ end, { desc = "Next todo comment" })
 map("n", "[t", function()
 	require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
+
+local ui = require("harpoon.ui")
+
+map("n", "<leader>ha", ":lua require('harpoon.mark').add_file()<CR>", { desc = "Harpoon add" })
+map("n", "<leader>ht", ":lua require('telescope').extensions.harpoon.marks()<CR>", { desc = "Harpoon Telescope" })
+map("n", "<leader>hm", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { desc = "Harpoon Menu" })
+
+map("n", "<C-1>", ":lua require('harpoon.ui').nav_file(1)<CR>")
+map("n", "<C-2>", ":lua require('harpoon.ui').nav_file(2)<CR>")
+map("n", "<C-3>", ":lua require('harpoon.ui').nav_file(3)<CR>")
+map("n", "<C-4>", ":lua require('harpoon.ui').nav_file(4)<CR>")
 
 -- temp keymaps for csd-snips till config feature
 map(
@@ -192,7 +202,6 @@ end
 
 local status, modesModule = pcall(require, "modes")
 if status then
-	modesModule.setup()
 	modesModule.createIfNotPresent("COMPL", activateCompletionToggleFn, deactivateCompletionToggleFn, "''")
 	-- enable quotes completion by default --
 	modesModule.toggleMode("COMPL")

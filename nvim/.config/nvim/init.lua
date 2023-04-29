@@ -1,2 +1,2 @@
-vim.cmd('source ~/.vimrc')
-require('config')
+vim.cmd("source ~/.vimrc")
+require("config")
