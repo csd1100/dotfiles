@@ -17,16 +17,25 @@ return {
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
+			{ "hrsh7th/cmp-cmdline" },
 			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lua" },
 
 			-- Snippets
 			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
+			-- snippets kind(function, string) icons --
+			{ "onsails/lspkind.nvim" },
 		},
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
+		ft = {
+			"bash",
+			"javascript",
+			"typescript",
+			"lua",
+		},
 		config = function()
 			local null_ls = require("null-ls")
 			local opts = {
@@ -43,6 +52,11 @@ return {
 			{
 				"ThePrimeagen/refactoring.nvim",
 				config = true,
+				ft = {
+					"javascript",
+					"typescript",
+					"lua",
+				},
 			},
 		},
 	},

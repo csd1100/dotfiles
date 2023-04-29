@@ -18,25 +18,25 @@ function M.map_lsp_keys(bufnr)
 	map("n", "gi", function()
 		vim.lsp.buf.declaration()
 	end, { buffer = bufnr, desc = "Implementation (LSP)" })
-    map("n", "go", function()
-        vim.lsp.buf.type_definition()
-    end, { buffer = bufnr, desc = "Type Definition (LSP)" })
-    map("n", "gr", function()
-        vim.lsp.buf.references()
-    end, { buffer = bufnr, desc = "References(LSP)" })
-    map("n", "gs", function()
-        vim.lsp.buf.signature_help()
-    end, { buffer = bufnr, desc = "Signature Help (LSP)" })
-    map("i", "<C-k>", function()
-        vim.lsp.buf.signature_help()
-    end, { buffer = bufnr, desc = "Signature Help (LSP)" })
+	map("n", "go", function()
+		vim.lsp.buf.type_definition()
+	end, { buffer = bufnr, desc = "Type Definition (LSP)" })
+	map("n", "gr", function()
+		vim.lsp.buf.references()
+	end, { buffer = bufnr, desc = "References(LSP)" })
+	map("n", "gs", function()
+		vim.lsp.buf.signature_help()
+	end, { buffer = bufnr, desc = "Signature Help (LSP)" })
+	map("i", "<C-k>", function()
+		vim.lsp.buf.signature_help()
+	end, { buffer = bufnr, desc = "Signature Help (LSP)" })
 
-    map("n", "<C-g>", function()
-        vim.cmd([[Telescope lsp_document_symbols]])
-    end, { buffer = bufnr, desc = "All symbols (LSP)" })
-    map("n", "<C-i>", function()
-        vim.cmd([[Telescope lsp_implementations]])
-    end, { buffer = bufnr, desc = "Implementation (LSP)" })
+	map("n", "<C-g>", function()
+		vim.cmd([[Telescope lsp_document_symbols]])
+	end, { buffer = bufnr, desc = "All symbols (LSP)" })
+	map("n", "<C-i>", function()
+		vim.cmd([[Telescope lsp_implementations]])
+	end, { buffer = bufnr, desc = "Implementation (LSP)" })
 	map("n", "<C-S-u>", function()
 		vim.cmd([[Telescope lsp_references]])
 	end, { buffer = bufnr, desc = "All Usages (LSP)" })
@@ -122,8 +122,8 @@ function M.unmap_lsp_keys(bufnr)
 	unmap("n", "gd", opts)
 	unmap("n", "gD", opts)
 	unmap("n", "gi", opts)
-    unmap("n", "go", opts)
-    unmap("n", "gr", opts)
+	unmap("n", "go", opts)
+	unmap("n", "gr", opts)
 	unmap("n", "<C-S-u>", opts)
 	unmap("n", "<C-S-->", opts)
 	unmap("n", "<C-S-=>", opts)
@@ -147,6 +147,77 @@ function M.unmap_lsp_keys(bufnr)
 	unmap("n", "<leader>rb", opts)
 	unmap("n", "<leader>rbf", opts)
 	unmap("n", "<leader>ri", opts)
+end
+
+M.map_jdtls_keys = function(bufnr)
+	M.map_lsp_keys(bufnr)
+	map(
+		"n",
+		"<leader>li",
+		':lua require("jdtls").organize_imports()<CR>',
+		{ buffer = bufnr, desc = "Organize Imports (LSP:Java)" }
+	)
+
+	map(
+		"n",
+		"<leader>lev",
+		':lua require("jdtls").extract_variable()<CR>',
+		{ buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
+	)
+	map(
+		"v",
+		"<leader>lev",
+		':lua require("jdtls").extract_variable(true)<CR>',
+		{ buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
+	)
+
+	map(
+		"n",
+		"<leader>lec",
+		':lua require("jdtls").extract_constant()<CR>',
+		{ buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
+	)
+	map(
+		"v",
+		"<leader>lec",
+		':lua require("jdtls").extract_constant(true)<CR>',
+		{ buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
+	)
+
+	map(
+		"v",
+		"<leader>lem",
+		':lua require("jdtls").extract_method(true)<CR>',
+		{ buffer = bufnr, desc = "Extract Method (LSP:Java)" }
+	)
+
+	map(
+		"n",
+		"<leader>ltc",
+		':lua require("jdtls").test_class()<CR>',
+		{ buffer = bufnr, desc = "Test Class (LSP:Java)" }
+	)
+	map(
+		"n",
+		"<leader>ltm",
+		':lua require("jdtls").test_nearest_method()<CR>',
+		{ buffer = bufnr, desc = "Test Nearest (LSP:Java)" }
+	)
+end
+
+M.unmap_jdtls_keys = function(bufnr)
+	M.unmap_lsp_keys(bufnr)
+    local options = {
+        buffer = bufnr
+    }
+	unmap("n", "<leader>li", options)
+	unmap("n", "<leader>lev", options)
+	unmap("v", "<leader>lev", options)
+	unmap("n", "<leader>lec", options)
+	unmap("v", "<leader>lec", options)
+	unmap("n", "<leader>lem", options)
+	unmap("n", "<leader>ltc", options)
+	unmap("n", "<leader>ltm", options)
 end
 
 return M

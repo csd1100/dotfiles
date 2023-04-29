@@ -1,14 +1,28 @@
-local keymapUtils = require("config.keymap-utils")
-local map = keymapUtils.map
+local map = require("config.keymap-utils").map
+local arr_has_value = require("config.utils").arr_has_value
 
 local lsp = require("lsp-zero")
-
 lsp.preset("recommended")
 
-lsp.ensure_installed({
+local lsp_zero_managed_list = {
+	"bashls",
 	"tsserver",
 	"lua_ls",
+	"gopls",
 	"rust_analyzer",
+	"marksman",
+}
+
+local lsp_zero_unmanaged_list = {
+    "jdtls"
+}
+
+local lsp_list = vim.tbl_extend("force", lsp_zero_managed_list, lsp_zero_unmanaged_list)
+
+lsp.ensure_installed(lsp_list)
+
+lsp.skip_server_setup({
+	"jdtls",
 })
 
 -- Fix Undefined global 'vim'
@@ -22,32 +36,11 @@ lsp.configure("lua_ls", {
 	},
 })
 
-local cmp = require("cmp")
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-	["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-	["<C-y>"] = cmp.mapping.confirm({ select = true }),
-	["<C-Space>"] = cmp.mapping.complete(),
-})
-
--- disable completion with tab
--- this helps with copilot setup
-cmp_mappings["<Tab>"] = nil
-cmp_mappings["<S-Tab>"] = nil
-
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings,
-})
-
-lsp.set_preferences({
-	suggest_lsp_servers = false,
-	sign_icons = {
-		error = "",
-		warn = "",
-		hint = "⚑",
-		info = "",
-	},
+lsp.set_sign_icons({
+	error = "",
+	warn = "",
+	hint = "⚑",
+	info = "",
 })
 
 lsp.on_attach(function(client, bufnr)
@@ -62,7 +55,12 @@ lsp.on_attach(function(client, bufnr)
 		end
 
 		modesModule.createIfNotPresent("LSP", lspActivate, lspDeactivate, "{}")
-		modesModule.toggleMode("LSP", { buffer = bufnr })
+
+		-- This is workaround as since v2.0 lsp-zero on_attach also is used by
+		-- non lsp-zero lsps
+		if arr_has_value(lsp_zero_managed_list, client.name) then
+			modesModule.toggleMode("LSP", { buffer = bufnr })
+		end
 		map("n", "<leader>ldis", function()
 			require("modes").toggleMode("LSP", { buffer = vim.api.nvim_get_current_buf() })
 		end, { desc = "Toggle COMPL LSP for Current Buffer" })
@@ -72,6 +70,99 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
+
+local cmp = require("cmp")
+local cmp_action = require("lsp-zero").cmp_action()
+local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
+require("luasnip.loaders.from_vscode").lazy_load()
+
+cmp.setup({
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
+		{ name = "path" },
+		{ name = "luasnip" },
+		{ name = "nvim_lua" },
+	},
+	mapping = {
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<C-c>"] = cmp.mapping.abort(),
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+		["<C-d>"] = cmp.mapping.scroll_docs(4),
+		["<Up>"] = cmp.mapping.select_prev_item(cmp_select_opts),
+		["<Down>"] = cmp.mapping.select_next_item(cmp_select_opts),
+		["<C-p>"] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.select_prev_item(cmp_select_opts)
+			else
+				cmp.complete()
+			end
+		end),
+		["<C-n>"] = cmp.mapping(function()
+			if cmp.visible() then
+				cmp.select_next_item(cmp_select_opts)
+			else
+				cmp.complete()
+			end
+		end),
+		["<C-f>"] = cmp_action.luasnip_jump_forward(),
+		["<C-b>"] = cmp_action.luasnip_jump_backward(),
+	},
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
+	},
+	window = {
+		documentation = {
+			max_height = 15,
+			max_width = 60,
+		},
+	},
+	formatting = {
+		fields = { "menu", "abbr", "kind" },
+
+		format = require("lspkind").cmp_format({
+			mode = "symbol_text",
+			maxwidth = 50,
+			ellipsis_char = "...",
+			before = function(entry, item)
+				local menu_icon = {
+					nvim_lsp = "λ",
+					luasnip = "⋗",
+					buffer = "Ω",
+					path = "🖫",
+					nvim_lua = "Π",
+				}
+
+				item.menu = menu_icon[entry.source.name]
+				return item
+			end,
+		}),
+	},
+})
+
+-- `/` cmdline setup.
+cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
+	},
+})
+-- `:` cmdline setup.
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{
+			name = "cmdline",
+			option = {
+				ignore_cmds = { "Man", "!" },
+			},
+		},
+	}),
+})
 
 vim.diagnostic.config({
 	virtual_text = true,
