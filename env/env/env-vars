@@ -38,3 +38,15 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # CONFIG
 export CONFIG="$HOME/.config"
+
+unameOut="$(uname -s)"
+
+if [ $unameOut == "darwin" ]; then
+    export JAVA_11_HOME="/opt/homebrew/Cellar/openjdk@11/11.0.19/"
+    export JAVA_17_HOME="/opt/homebrew/Cellar/openjdk@17/17.0.7/"
+    export JAVA_20_HOME="/opt/homebrew/Cellar/openjdk/20/"
+elif [ $unameOut == "linux" ]; then
+    export JAVA_11_HOME="/usr/lib/jvm/java-11-openjdk/"
+    export JAVA_17_HOME="/usr/lib/jvm/java-17-openjdk/"
+    export JAVA_20_HOME="/usr/lib/jvm/java-20-openjdk/"
+fi
