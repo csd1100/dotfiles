@@ -17,6 +17,9 @@ case $MODE in
 "restart")
 	COLOR=$G
 	;;
+"layout")
+	COLOR=$O
+	;;
 "default")
 	COLOR=$BACKGROUND
 	;;
