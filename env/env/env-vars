@@ -18,19 +18,19 @@ SPACESHIP_PROMPT_ORDER=(
   char          # Prompt character
 )
 
-# source overrides
-if [ -f "$HOME/env/overrides/env-vars" ]
-then
-    source "$HOME/env/overrides/env-vars"
-fi
 
 # DOCKER PS FORMAT
 export DOCKER_FORMAT="\\nID\\t{{.ID}}\\nIMAGE\\t{{.Image}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.RunningFor}}\\nSTATUS\\t{{.Status}}\\nPORTS\\t{{.Ports}}\\nNAMES\\t{{.Names}}\\n"
+
+# GO
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
 
 # PATH
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/bin/helpers:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$GOBIN"
 
 #nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -38,6 +38,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # CONFIG
 export CONFIG="$HOME/.config"
+
 
 unameOut="$(uname -s)"
 if [ $unameOut = "Darwin" ]; then
@@ -48,4 +49,10 @@ elif [ $unameOut = "Linux" ]; then
     export JAVA_11_HOME="/usr/lib/jvm/java-11-openjdk/"
     export JAVA_17_HOME="/usr/lib/jvm/java-17-openjdk/"
     export JAVA_20_HOME="/usr/lib/jvm/java-20-openjdk/"
+fi
+
+# source overrides
+if [ -f "$HOME/env/overrides/env-vars" ]
+then
+    source "$HOME/env/overrides/env-vars"
 fi
