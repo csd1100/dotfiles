@@ -95,6 +95,7 @@ return {
     },
     {
         "csd1100/modes.nvim",
+        -- dev = true,
         config = true,
     },
     {

@@ -69,17 +69,25 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         config = function()
-            local modesModule = require("modes")
-            local function getCustomGlobalModes()
-                return table.concat(modesModule.getActiveModesIcons("*"), " | ")
+            local left_section_separator = ""
+            local right_section_separator = ""
+            local left_component_separator = ""
+            local right_component_separator = ""
+
+            local modes_module = require("modes")
+            local function get_custom_global_modes()
+                return table.concat(
+                    modes_module.get_active_modes_icons("*"),
+                    left_component_separator
+                )
             end
 
-            local function getCustomBufferModes()
+            local function get_custom_buffer_modes()
                 return table.concat(
-                    modesModule.getActiveModesIcons(
+                    modes_module.get_active_modes_icons(
                         vim.api.nvim_get_current_buf()
                     ),
-                    " \\ "
+                    left_component_separator
                 )
             end
 
@@ -88,21 +96,21 @@ return {
                     icons_enabled = true,
                     theme = "auto",
                     component_separators = {
-                        left = "",
-                        right = "",
+                        left = left_component_separator,
+                        right = right_component_separator,
                     },
                     section_separators = {
-                        left = "",
-                        right = "",
+                        left = left_section_separator,
+                        right = right_section_separator,
                     },
                     disabled_filetypes = {},
                     always_divide_middle = true,
                     globalstatus = false,
                 },
                 sections = {
-                    lualine_a = { "mode", getCustomGlobalModes },
+                    lualine_a = { "mode", get_custom_global_modes },
                     lualine_b = {
-                        getCustomBufferModes,
+                        get_custom_buffer_modes,
                         "branch",
                         "diff",
                         "diagnostics",

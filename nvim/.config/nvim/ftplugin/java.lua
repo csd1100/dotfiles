@@ -6,7 +6,7 @@ end
 local function keymap(bufnr)
     local lsp_keymaps = require("config.lsp-keymaps")
 
-    local status, modesModule = pcall(require, "modes")
+    local status, modes_module = pcall(require, "modes")
     if not status then
         print(
             "modes plugin not installed or not properly configured,activating only basic keymaps directly"
@@ -22,8 +22,8 @@ local function keymap(bufnr)
         lsp_keymaps.unmap_jdtls_keys(options.buffer)
     end
 
-    modesModule.createIfNotPresent("JLSP", lspActivate, lspDeactivate, "{}")
-    modesModule.toggleMode("JLSP", { buffer = bufnr })
+    modes_module.create_if_not_present("JLSP", lspActivate, lspDeactivate, "{}")
+    modes_module.toggle_mode("JLSP", { buffer = bufnr })
 end
 
 if not file_exists(vim.fn.stdpath("data") .. "/mason/bin/jdtls") then

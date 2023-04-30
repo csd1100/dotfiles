@@ -52,7 +52,7 @@ lsp.set_sign_icons({
 })
 
 lsp.on_attach(function(client, bufnr)
-    local status, modesModule = pcall(require, "modes")
+    local status, modes_module = pcall(require, "modes")
     local lspMaps = require("config.lsp-keymaps")
     if status then
         local lspActivate = function(options)
@@ -62,15 +62,15 @@ lsp.on_attach(function(client, bufnr)
             lspMaps.unmap_lsp_keys(options.buffer)
         end
 
-        modesModule.createIfNotPresent("LSP", lspActivate, lspDeactivate, "{}")
+        modes_module.create_if_not_present("LSP", lspActivate, lspDeactivate, "{}")
 
         -- This is workaround as since v2.0 lsp-zero on_attach also is used by
         -- non lsp-zero lsps
         if vim.tbl_contains(lsp_zero_managed_list, client.name) then
-            modesModule.toggleMode("LSP", { buffer = bufnr })
+            modes_module.toggle_mode("LSP", { buffer = bufnr })
         end
         map("n", "<leader>ldis", function()
-            require("modes").toggleMode(
+            require("modes").toggle_mode(
                 "LSP",
                 { buffer = vim.api.nvim_get_current_buf() }
             )
