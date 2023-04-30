@@ -1,8 +1,11 @@
 local keymapUtils = require("config.keymap-utils")
 local map = keymapUtils.map
 local unmap = keymapUtils.unmap
-local utils = require("config.utils")
-local tbl_extend = utils.appendToTable
+
+local function tbl_extend(table, appendValue)
+    local test = vim.tbl_extend("force", table, appendValue)
+    return test
+end
 
 -- Comment Toggle --
 map("n", "<leader>/", ":CommentToggle<CR>", { desc = "Comment current Line" })
@@ -36,11 +39,7 @@ map(
 )
 map("n", "<C-S-h>", ":Telescope help_tags<CR>")
 map("n", "<C-S-f><C-S-f>", ":Telescope resume<CR>")
-map(
-    "n",
-    "<C-S-n>",
-    ":lua require('telescope').extensions.notify.notify()<CR>"
-)
+map("n", "<C-S-n>", ":lua require('telescope').extensions.notify.notify()<CR>")
 map(
     "n",
     "<leader>gsl",
@@ -355,6 +354,30 @@ local activateTestsFn = function(options)
             ':lua require("neotest").run.attach()<CR>',
             tbl_extend(opts, { desc = "Attach to Test (TEST)" })
         )
+        map(
+            "n",
+            "<leader>top",
+            ':lua require("neotest").output_panel.toggle()<CR>',
+            tbl_extend(opts, { desc = "Open Test Output Panel (TEST)" })
+        )
+        map(
+            "n",
+            "<leader>tos",
+            ':lua require("neotest").summary.toggle()<CR>',
+            tbl_extend(opts, { desc = "Open Test Output Panel (TEST)" })
+        )
+        map(
+            "n",
+            "<leader>tx[",
+            ':lua require("neotest").jump.prev({ status = "failed" })<CR>',
+            tbl_extend(opts, { desc = "Jump to Previous Failed Test (TEST)" })
+        )
+        map(
+            "n",
+            "<leader>tx]",
+            ':lua require("neotest").jump.next({ status = "failed" })<CR>',
+            tbl_extend(opts, { desc = "Jump to Next Failed Test (TEST)" })
+        )
     end
 end
 
@@ -368,6 +391,10 @@ local deacticateTestsFn = function(options)
         unmap("n", "<leader>td", options)
         unmap("n", "<leader>ts", options)
         unmap("n", "<leader>ta", options)
+        unmap("n", "<leader>tos", options)
+        unmap("n", "<leader>top", options)
+        unmap("n", "<leader>tx[", options)
+        unmap("n", "<leader>tx]", options)
     end
 end
 
