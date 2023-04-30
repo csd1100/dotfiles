@@ -61,11 +61,7 @@ return {
                     },
                     footer = {},
                 },
-                hide = {
-                    true,
-                    true,
-                    true,
-                },
+                hide = {},
             })
         end,
         dependencies = { { "nvim-tree/nvim-web-devicons" } },
@@ -83,7 +79,7 @@ return {
                     modesModule.getActiveModesIcons(
                         vim.api.nvim_get_current_buf()
                     ),
-                    " | "
+                    " \\ "
                 )
             end
 
@@ -92,11 +88,11 @@ return {
                     icons_enabled = true,
                     theme = "auto",
                     component_separators = {
-                        left = "",
+                        left = "",
                         right = "",
                     },
                     section_separators = {
-                        left = "",
+                        left = "",
                         right = "",
                     },
                     disabled_filetypes = {},
