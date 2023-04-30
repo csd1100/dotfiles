@@ -50,7 +50,7 @@ return {
                             action = "new",
                         },
                         {
-                            icon = " ",
+                            icon = " ",
                             icon_hl = "Title",
                             desc = "Open Explorer            ",
                             desc_hl = "String",
