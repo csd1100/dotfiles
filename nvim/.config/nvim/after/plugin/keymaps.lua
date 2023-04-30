@@ -38,6 +38,11 @@ map("n", "<C-S-h>", ":Telescope help_tags<CR>")
 map("n", "<C-S-f><C-S-f>", ":Telescope resume<CR>")
 map(
     "n",
+    "<C-S-n>",
+    ":lua require('telescope').extensions.notify.notify()<CR>"
+)
+map(
+    "n",
     "<leader>gsl",
     ":lua require('persistence').load()<CR>",
     { desc = "Save Current Session" }

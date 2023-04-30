@@ -73,6 +73,7 @@ return {
     },
     {
         "csd1100/csd-snips.nvim",
+        -- dev = true,
         ft = {
             "java",
             "javascript",

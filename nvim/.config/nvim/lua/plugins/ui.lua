@@ -188,7 +188,14 @@ return {
     },
     {
         "norcalli/nvim-colorizer.lua",
-        main = "colorizer",
-        config = true,
+        config = function()
+            require("colorizer").setup()
+        end,
+    },
+    {
+        "rcarriga/nvim-notify",
+        config = function()
+            vim.notify = require("notify")
+        end,
     },
 }
