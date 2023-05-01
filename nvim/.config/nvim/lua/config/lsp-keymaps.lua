@@ -215,7 +215,7 @@ M.unmap_jdtls_keys = function(bufnr)
     unmap("v", "<leader>lev", options)
     unmap("n", "<leader>lec", options)
     unmap("v", "<leader>lec", options)
-    unmap("n", "<leader>lem", options)
+    unmap("v", "<leader>lem", options)
     unmap("n", "<leader>ltc", options)
     unmap("n", "<leader>ltm", options)
 end

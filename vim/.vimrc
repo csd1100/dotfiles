@@ -111,6 +111,8 @@ noremap <C--> :res -3<CR>
 " replace word under cursor
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
+nnoremap /. :source %<CR>
+
 " map capital versions for ease
 command W w
 command Q q
