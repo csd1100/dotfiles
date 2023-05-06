@@ -138,274 +138,216 @@ map(
     { desc = "Next Hunk (GIT)" }
 )
 -- -- git splkey: v --
-local activateGitsignsFn = function(options)
-    local opts = {}
-    if options and options.buffer then
-        opts = tbl_extend(opts, { buffer = options.buffer })
-    end
-    map(
-        { "n", "v" },
-        "<leader>vs",
-        ":lua require('gitsigns').stage_hunk()<CR>",
-        tbl_extend(opts, { desc = "Stage Hunk (GIT)" })
-    )
-    map(
-        { "n", "v" },
-        "<leader>vr",
-        ":lua require('gitsigns').reset_hunk()<CR>",
-        tbl_extend(opts, { desc = "Reset Hunk (GIT)" })
-    )
-    map(
-        "n",
-        "<leader>vS",
-        ":lua require('gitsigns').stage_buffer()<CR>",
-        tbl_extend(opts, { desc = "Stage Buffer (GIT)" })
-    )
-    map(
-        "n",
-        "<leader>vu",
-        ":lua require('gitsigns').undo_stage_hunk()<CR>",
-        tbl_extend(opts, { desc = "Undo Stage Hunk (GIT)" })
-    )
-    map(
-        "n",
-        "<leader>vR",
-        ":lua require('gitsigns').reset_buffer()<CR>",
-        tbl_extend(opts, { desc = "Reset Buffer (GIT)" })
-    )
-    map(
-        "n",
-        "<leader>vp",
-        ":lua require('gitsigns').preview_hunk()<CR>",
-        tbl_extend(opts, { desc = "Preview Hunk (GIT)" })
-    )
-    map("n", "<leader>vfb", function()
-        require("gitsigns").blame_line({
-            full = true,
-        })
-    end, tbl_extend(opts, { desc = "Git Blame Whole File (GIT)" }))
-    map(
-        "n",
-        "<leader>vc",
-        ":lua require('gitsigns').toggle_current_line_blame()<CR>",
-        tbl_extend(opts, { desc = "Git Blame Current Line (GIT)" })
-    )
-    map(
-        "n",
-        "<leader>vd",
-        ":lua require('gitsigns').diffthis()<CR>",
-        tbl_extend(opts, { desc = "Git Diff (GIT)" })
-    )
-    map("n", "<leader>vD", function()
-        require("gitsigns").diffthis("~")
-    end, tbl_extend(opts, { desc = "Git Diff ~ (GIT)" }))
-    map(
-        "n",
-        "<leader>vdd",
-        ":lua require('gitsigns').toggle_deleted()<CR>",
-        tbl_extend(opts, { desc = "Git Toggle Delete (GIT)" })
-    )
-end
-local deacticateGitsignsFn = function(options)
-    unmap("n", "<leader>vs", options)
-    unmap("v", "<leader>vs", options)
-    unmap("n", "<leader>vr", options)
-    unmap("v", "<leader>vr", options)
-    unmap("n", "<leader>vS", options)
-    unmap("n", "<leader>vu", options)
-    unmap("n", "<leader>vR", options)
-    unmap("n", "<leader>vp", options)
-    unmap("n", "<leader>vc", options)
-    unmap("n", "<leader>vfb", options)
-    unmap("n", "<leader>vd", options)
-    unmap("n", "<leader>vD", options)
-    unmap("n", "<leader>vdd", options)
-end
+local opts = {}
+local gitModeMaps = {
+    ["n"] = {
+        ["<leader>vs"] = {
+            ["rhs"] = function()
+                require("gitsigns").stage_hunk()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Stage Hunk" }),
+        },
+        ["<leader>vu"] = {
+            ["rhs"] = function()
+                require("gitsigns").undo_stage_hunk()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Undo Stage Hunk" }),
+        },
+        ["<leader>vr"] = {
+            ["rhs"] = function()
+                require("gitsigns").reset_hunk()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Reset Hunk" }),
+        },
+        ["<leader>vp"] = {
+            ["rhs"] = function()
+                require("gitsigns").preview_hunk()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Preview Hunk" }),
+        },
+        ["<leader>vbf"] = {
+            ["rhs"] = function()
+                require("gitsigns").blame_line({
+                    full = true,
+                })
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Blame File" }),
+        },
+        ["<leader>vbc"] = {
+            ["rhs"] = function()
+                require("gitsigns").toggle_current_line_blame()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Toggle Blame Current Line" }),
+        },
+        ["<leader>vd"] = {
+            ["rhs"] = function()
+                require("gitsigns").diffthis()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Diff" }),
+        },
+        ["<leader>vtd"] = {
+            ["rhs"] = function()
+                require("gitsigns").toggle_deleted()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Show Deleted Lines" }),
+        },
+        ["<leader>vS"] = {
+            ["rhs"] = function()
+                require("gitsigns").stage_hunk()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Stage Buffer" }),
+        },
+        ["<leader>vR"] = {
+            ["rhs"] = function()
+                require("gitsigns").reset_buffer()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Reset Buffer" }),
+        },
+    },
+    ["v"] = {
+        ["<leader>vs"] = {
+            ["rhs"] = function()
+                require("gitsigns").stage_hunk()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Stage Hunk" }),
+        },
+        ["<leader>vr"] = {
+            ["rhs"] = function()
+                require("gitsigns").reset_hunk()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Reset Hunk" }),
+        },
+    },
+}
 
-local activateCompletionToggleFn = function(options)
-    -- add brackets and quotes in visual mode
-    map("v", '"', [[<ESC>`>a"<ESC>`<i"<ESC>]], options)
-    map("v", "'", [[<ESC>`>a'<ESC>`<i'<ESC>]], options)
-    map("v", "`", [[<ESC>`>a`<ESC>`<i`<ESC>]], options)
-    map("v", "(", [[<ESC>`>a)<ESC>`<i(<ESC>]], options)
-    map("v", "[", [[<ESC>`>a]<ESC>`<i[<ESC>]], options)
-    map("v", "{", [[<ESC>`>a}<ESC>`<i{<ESC>]], options)
-    map("i", '"', '""<left>', options)
-    map("i", "'", "''<left>", options)
-    map("i", "`", "``<left>", options)
-    map("i", "'", "''<left>", options)
-    map("i", "(", "()<left>", options)
-    map("i", "[", "[]<left>", options)
-    map("i", "{", "{}<left>", options)
-    map("i", "<", "<><left>", options)
-    map("i", "{<CR>", "{<CR>}<ESC>O", options)
-end
+local complModeMaps = {
+    ["v"] = {
+        ['"'] = { ["rhs"] = '<ESC>`>a"<ESC>`<i"<ESC>', ["opts"] = {} },
+        ["'"] = { ["rhs"] = "<ESC>`>a'<ESC>`<i'<ESC>", ["opts"] = {} },
+        ["`"] = { ["rhs"] = "<ESC>`>a`<ESC>`<i`<ESC>", ["opts"] = {} },
+        ["("] = { ["rhs"] = "<ESC>`>a)<ESC>`<i(<ESC>", ["opts"] = {} },
+        ["["] = { ["rhs"] = "<ESC>`>a]<ESC>`<i[<ESC>", ["opts"] = {} },
+        ["{"] = { ["rhs"] = "<ESC>`>a}<ESC>`<i{<ESC>", ["opts"] = {} },
+        ["<"] = { ["rhs"] = "<ESC>`>a><ESC>`<i<<ESC>", ["opts"] = {} },
+    },
+    ["i"] = {
+        ['"'] = { ["rhs"] = '""<left>', ["opts"] = {} },
+        ["'"] = { ["rhs"] = "''<left>", ["opts"] = {} },
+        ["`"] = { ["rhs"] = "``<left>", ["opts"] = {} },
+        ["("] = { ["rhs"] = "()<left>", ["opts"] = {} },
+        ["["] = { ["rhs"] = "[]<left>", ["opts"] = {} },
+        ["{"] = { ["rhs"] = "{}<left>", ["opts"] = {} },
+        ["<"] = { ["rhs"] = "<><left>", ["opts"] = {} },
+        ["{<CR>"] = { ["rhs"] = "{<CR>}<ESC>O", ["opts"] = {} },
+    },
+}
 
-local deactivateCompletionToggleFn = function(options)
-    unmap("v", '"', options)
-    unmap("v", "`", options)
-    unmap("v", "'", options)
-    unmap("v", "(", options)
-    unmap("v", "[", options)
-    unmap("v", "{", options)
-    unmap("i", '"', options)
-    unmap("i", "`", options)
-    unmap("i", "'", options)
-    unmap("i", "(", options)
-    unmap("i", "[", options)
-    unmap("i", "{", options)
-    unmap("i", "<", options)
-    unmap("i", "{<CR>", options)
-end
+local debugModeMaps = {
+    ["n"] = {
+        ["<leader>b"] = {
+            ["rhs"] = function()
+                require("dap").toggle_breakpoint()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Toggle Breakpoint" }),
+        },
+        ["<leader>D"] = {
+            ["rhs"] = function()
+                require("dap").continue()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Resume Debug" }),
+        },
+        ["<leader><down>"] = {
+            ["rhs"] = function()
+                require("dap").step_over()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Step Over" }),
+        },
+        ["<leader><right>"] = {
+            ["rhs"] = function()
+                require("dap").step_into()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Step Into" }),
+        },
+        ["<leader><left>"] = {
+            ["rhs"] = function()
+                require("dap").step_out()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Step Out" }),
+        },
+    },
+}
 
-local activateDebugFn = function(options)
-    local opts = {}
-    if options and options.buffer then
-        opts = tbl_extend(opts, { buffer = options.buffer })
-    end
-    map(
-        "n",
-        "<leader>b",
-        ':lua require("dap").toggle_breakpoint()<CR>',
-        tbl_extend(opts, { desc = "Toggle Breakpoint (DEBUG)" })
-    )
-
-    map(
-        "n",
-        "<leader>D",
-        ':lua require("dap").continue()<CR>',
-        tbl_extend(opts, { desc = "Continue (DEBUG)" })
-    )
-
-    map(
-        "n",
-        "<leader><down>",
-        ':lua require("dap").step_over()<CR>',
-        tbl_extend(opts, { desc = "Step Over (DEBUG)" })
-    )
-    map(
-        "n",
-        "<leader><right>",
-        ':lua require("dap").step_into()<CR>',
-        tbl_extend(opts, { desc = "Step Into (DEBUG)" })
-    )
-
-    map(
-        "n",
-        "<leader><left>",
-        ':lua require("dap").step_out()<CR>',
-        tbl_extend(opts, { desc = "Step Out (DEBUG)" })
-    )
-end
-local deactivateDebugFn = function(options)
-    unmap("n", "<leader>b", options)
-    unmap("n", "<leader>D", options)
-    unmap("n", "<leader><down>", options)
-    unmap("n", "<leader><right>", options)
-    unmap("n", "<leader><left>", options)
-end
-
-local activateTestsFn = function(options)
-    local opts = {}
-    if options and options.buffer then
-        opts = tbl_extend(opts, { buffer = options.buffer })
-    end
-    if vim.bo.filetype == "java" then
-        map(
-            "n",
-            "<leader>tn",
-            ':lua require("jdtls").test_nearest_method()<CR>',
-            tbl_extend(opts, { desc = "Run nearest test (JDTLS:TEST)" })
-        )
-        map(
-            "n",
-            "<leader>tc",
-            ':lua require("jdtls").test_class()<CR>',
-            tbl_extend(opts, { desc = "Run current test class (JDTLS:TEST)" })
-        )
-    else
-        map(
-            "n",
-            "<leader>tn",
-            ':lua require("neotest").run.run()<CR>',
-            tbl_extend(opts, { desc = "Run nearest test (TEST)" })
-        )
-        map(
-            "n",
-            "<leader>tf",
-            ':lua require("neotest").run.run(vim.fn.expand("%"))<CR>',
-            tbl_extend(opts, { desc = "Run current test file (TEST)" })
-        )
-        map(
-            "n",
-            "<leader>td",
-            ':lua require("neotest").run.run({strategy = "dap"})<CR>',
-            tbl_extend(opts, { desc = "Run nearest test DAP (TEST)" })
-        )
-        map(
-            "n",
-            "<leader>ts",
-            ':lua require("neotest").run.stop()<CR>',
-            tbl_extend(opts, { desc = "Stop current test (TEST)" })
-        )
-        map(
-            "n",
-            "<leader>ta",
-            ':lua require("neotest").run.attach()<CR>',
-            tbl_extend(opts, { desc = "Attach to Test (TEST)" })
-        )
-        map(
-            "n",
-            "<leader>top",
-            ':lua require("neotest").output_panel.toggle()<CR>',
-            tbl_extend(opts, { desc = "Open Test Output Panel (TEST)" })
-        )
-        map(
-            "n",
-            "<leader>tos",
-            ':lua require("neotest").summary.toggle()<CR>',
-            tbl_extend(opts, { desc = "Open Test Output Panel (TEST)" })
-        )
-        map(
-            "n",
-            "<leader>tx[",
-            ':lua require("neotest").jump.prev({ status = "failed" })<CR>',
-            tbl_extend(opts, { desc = "Jump to Previous Failed Test (TEST)" })
-        )
-        map(
-            "n",
-            "<leader>tx]",
-            ':lua require("neotest").jump.next({ status = "failed" })<CR>',
-            tbl_extend(opts, { desc = "Jump to Next Failed Test (TEST)" })
-        )
-    end
-end
-
-local deacticateTestsFn = function(options)
-    if vim.bo.filetype == "java" then
-        unmap("n", "<leader>tn", options)
-        unmap("n", "<leader>tc", options)
-    else
-        unmap("n", "<leader>tn", options)
-        unmap("n", "<leader>tf", options)
-        unmap("n", "<leader>td", options)
-        unmap("n", "<leader>ts", options)
-        unmap("n", "<leader>ta", options)
-        unmap("n", "<leader>tos", options)
-        unmap("n", "<leader>top", options)
-        unmap("n", "<leader>tx[", options)
-        unmap("n", "<leader>tx]", options)
-    end
-end
+local testModeMaps = {
+    ["n"] = {
+        ["<leader>tn"] = {
+            ["rhs"] = function()
+                require("neotest").run.run()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Run Nearest" }),
+        },
+        ["<leader>tf"] = {
+            ["rhs"] = function()
+                require("neotest").run.run(vim.fn.expand("%"))
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Run Current File" }),
+        },
+        ["<leader>ts"] = {
+            ["rhs"] = function()
+                require("neotest").run.stop()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Stop running test" }),
+        },
+        ["<leader>td"] = {
+            ["rhs"] = function()
+                require("neotest").run.run({ strategy = "dap" })
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Run with DAP" }),
+        },
+        ["<leader>ta"] = {
+            ["rhs"] = function()
+                require("neotest").run.attach()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Attach to test" }),
+        },
+        ["<leader>top"] = {
+            ["rhs"] = function()
+                require("neotest").output_panel.toggle()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Toggle Output Panel" }),
+        },
+        ["<leader>tos"] = {
+            ["rhs"] = function()
+                require("neotest").summary.toggle()
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Toggle Summary" }),
+        },
+        ["<leader>t["] = {
+            ["rhs"] = function()
+                require("neotest").jump.prev({ status = "failed" })
+            end,
+            ["opts"] = tbl_extend(
+                opts,
+                { desc = "Jump to Previous Failed test" }
+            ),
+        },
+        ["<leader>t]"] = {
+            ["rhs"] = function()
+                require("neotest").jump.next({ status = "failed" })
+            end,
+            ["opts"] = tbl_extend(opts, { desc = "Jump to Next Failed test" }),
+        },
+    },
+}
 
 local status, modes_module = pcall(require, "modes")
 if status then
     modes_module.create_if_not_present(
         "COMPL",
-        activateCompletionToggleFn,
-        deactivateCompletionToggleFn,
+        function() end,
+        function() end,
         " '' "
     )
+    modes_module.add_maps("COMPL", complModeMaps)
     -- enable quotes completion by default --
     modes_module.toggle_mode("COMPL")
     -- autocomplete brackets and quotes
@@ -424,10 +366,11 @@ if status then
 
     modes_module.create_if_not_present(
         "GIT",
-        activateGitsignsFn,
-        deacticateGitsignsFn,
+        function() end,
+        function() end,
         "  "
     )
+    modes_module.add_maps("GIT", gitModeMaps)
     map(
         "n",
         "<leader>vg",
@@ -443,8 +386,8 @@ if status then
 
     modes_module.create_if_not_present(
         "TEST",
-        activateTestsFn,
-        deacticateTestsFn,
+        function() end,
+        function() end,
         "  "
     )
     map(
@@ -462,10 +405,12 @@ if status then
 
     modes_module.create_if_not_present(
         "DEBUG",
-        activateDebugFn,
-        deactivateDebugFn,
+        function() end,
+        function() end,
         "  "
     )
+    modes_module.add_maps("DEBUG", debugModeMaps)
+
     map(
         "n",
         "<leader>dg",
