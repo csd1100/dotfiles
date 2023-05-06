@@ -20,7 +20,10 @@ local function keymap(bufnr)
 end
 
 if not file_exists(vim.fn.stdpath("data") .. "/mason/bin/jdtls") then
-    vim.notify("jdtls not installed. Install jdtls using mason.", "error")
+    vim.notify(
+        "jdtls not installed. Install jdtls using mason.",
+        vim.log.levels.ERROR
+    )
     return
 end
 
@@ -61,6 +64,22 @@ if not vim.tbl_isempty(java_test) then
     vim.list_extend(bundles, java_test)
 end
 
+local runtimes = {
+    {
+        name = "JavaSE-20",
+        path = os.getenv("JAVA_20_HOME")
+    }
+}
+
+for _, java_ver in ipairs({ "11", "17", "19" }) do
+    if os.getenv("JAVA_" .. java_ver .. "_HOME") then
+        table.insert(runtimes, {
+            name = "JavaSE-" .. java_ver,
+            path = os.getenv("JAVA_" .. java_ver .. "_HOME"),
+        })
+    end
+end
+
 local config = {
     cmd = {
         home .. "/.local/share/nvim/mason/bin/jdtls",
@@ -72,20 +91,7 @@ local config = {
     settings = {
         java = {
             configuration = {
-                runtimes = {
-                    {
-                        name = "JavaSE-11",
-                        path = os.getenv("JAVA_11_HOME"),
-                    },
-                    {
-                        name = "JavaSE-17",
-                        path = os.getenv("JAVA_17_HOME"),
-                    },
-                    {
-                        name = "JavaSE-20",
-                        path = os.getenv("JAVA_20_HOME"),
-                    },
-                },
+                runtimes = runtimes,
             },
         },
     },

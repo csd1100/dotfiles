@@ -42,9 +42,9 @@ export CONFIG="$HOME/.config"
 
 unameOut="$(uname -s)"
 if [ $unameOut = "Darwin" ]; then
-    export JAVA_11_HOME="/opt/homebrew/Cellar/openjdk@11/11.0.19/"
-    export JAVA_17_HOME="/opt/homebrew/Cellar/openjdk@17/17.0.7/"
-    export JAVA_20_HOME="/opt/homebrew/Cellar/openjdk/20/"
+    export JAVA_11_HOME="/opt/homebrew/Cellar/openjdk@11/11.0.19/libexec/openjdk.jdk/Contents/Home/"
+    export JAVA_17_HOME="/opt/homebrew/Cellar/openjdk@17/17.0.7/libexec/openjdk.jdk/Contents/Home"
+    export JAVA_20_HOME="/opt/homebrew/Cellar/openjdk/20.0.1/libexec/openjdk.jdk/Contents/Home"
 elif [ $unameOut = "Linux" ]; then
     export JAVA_11_HOME="/usr/lib/jvm/java-11-openjdk/"
     export JAVA_17_HOME="/usr/lib/jvm/java-17-openjdk/"
