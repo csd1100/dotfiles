@@ -102,8 +102,7 @@ cmd + shift + lalt  - l : yabai -m window --resize right:50:0; \
 cmd + shift - b : yabai -m space --balance
 
 # restart
-cmd + shift - r : brew services restart skhd && brew services restart yabai && brew services restart sketchybar
-cmd + shift - c : brew services restart skhd
+cmd + shift - r : skhd --restart-service && yabai --restart-service && brew services restart sketchybar
 
 # Float / Unfloat window
 cmd + shift - space : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
@@ -131,9 +130,9 @@ ctrl + alt - r ; restart
 
 restart < ctrl + alt - r : sketchybar --trigger yabai-mode MODE=default; skhd -k "escape";
 
-restart < y : brew services restart yabai
-restart < s : brew services restart sketchybar
-restart < c : brew services restart skhd
+restart < y : yabai --restart-service
+restart < s : skhd -k "escape" && brew services restart sketchybar
+restart < k : skhd -k "escape" && sketchybar --trigger yabai-mode MODE=default && skhd --restart-service
 
 restart < escape ; default
 
