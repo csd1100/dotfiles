@@ -1,223 +1,234 @@
-local keymapUtils = require("config.keymap-utils")
-local map = keymapUtils.map
-local unmap = keymapUtils.unmap
-
 local M = {}
 
-function M.map_lsp_keys(bufnr)
-    map("n", "<leader>i", function()
-        vim.lsp.buf.hover()
-    end, { buffer = bufnr, desc = "Hover Info (LSP)" })
-
-    map("n", "gd", function()
-        vim.lsp.buf.definition()
-    end, { buffer = bufnr, desc = "Definition (LSP)" })
-    map("n", "gD", function()
-        vim.lsp.buf.declaration()
-    end, { buffer = bufnr, desc = "Declaration (LSP)" })
-    map("n", "gi", function()
-        vim.lsp.buf.declaration()
-    end, { buffer = bufnr, desc = "Implementation (LSP)" })
-    map("n", "go", function()
-        vim.lsp.buf.type_definition()
-    end, { buffer = bufnr, desc = "Type Definition (LSP)" })
-    map("n", "gr", function()
-        vim.lsp.buf.references()
-    end, { buffer = bufnr, desc = "References(LSP)" })
-    map("n", "gs", function()
-        vim.lsp.buf.signature_help()
-    end, { buffer = bufnr, desc = "Signature Help (LSP)" })
-    map("i", "<C-k>", function()
-        vim.lsp.buf.signature_help()
-    end, { buffer = bufnr, desc = "Signature Help (LSP)" })
-
-    map("n", "<C-g>", function()
-        vim.cmd([[Telescope lsp_document_symbols]])
-    end, { buffer = bufnr, desc = "All symbols (LSP)" })
-    map("n", "<C-i>", function()
-        vim.cmd([[Telescope lsp_implementations]])
-    end, { buffer = bufnr, desc = "Implementation (LSP)" })
-    map("n", "<C-S-u>", function()
-        vim.cmd([[Telescope lsp_references]])
-    end, { buffer = bufnr, desc = "All Usages (LSP)" })
-    map("n", "<C-S-->", function()
-        vim.cmd([[Telescope lsp_incoming_calls]])
-    end, { buffer = bufnr, desc = "Incoming Calls (LSP)" })
-    map("n", "<C-S-=>", function()
-        vim.cmd([[Telescope lsp_outgoing_calls]])
-    end, { buffer = bufnr, desc = "Outgoing Calls (LSP)" })
-
-    map("n", "<leader>lrn", function()
-        vim.lsp.buf.rename()
-    end, { buffer = bufnr, desc = "Rename (LSP)" })
-    map("n", "<leader>lca", function()
-        vim.lsp.buf.code_action()
-    end, { buffer = bufnr, desc = "Code Actions (LSP)" })
-    map("v", "<leader>lca", function()
-        vim.lsp.buf.code_action()
-    end, { buffer = bufnr, desc = "Code Actions (LSP)" })
-
-    map("n", "<leader>lf", function()
-        vim.lsp.buf.format()
-    end, { buffer = bufnr, desc = "Format (LSP)" })
-
-    map("n", "<leader>wa", function()
-        vim.lsp.buf.add_workspace_folder()
-    end, { buffer = bufnr, desc = "Add Workspace Folder (LSP)" })
-    map("n", "<leader>wr", function()
-        vim.lsp.buf.remove_workspace_folder()
-    end, { buffer = bufnr, desc = "Remove Workspace Folder (LSP)" })
-    map("n", "<leader>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, { buffer = bufnr, desc = "List Workspace Folders (LSP)" })
-
-    map("n", "gl", function()
-        vim.diagnostic.open_float()
-    end, { buffer = bufnr, desc = "Open LSP Diagnostics" })
-    map("n", "[d", function()
-        vim.diagnostic.goto_prev()
-    end, { buffer = bufnr, desc = "Go To Previous Diagnostics" })
-    map("n", "]d", function()
-        vim.diagnostic.goto_next()
-    end, { buffer = bufnr, desc = "Go To Next Diagnostics" })
-    map("n", "<leader>lq", function()
-        vim.diagnostic.setloclist()
-    end, { buffer = bufnr, desc = "LSP Diagnostics List" })
-
-    -- Remaps for the refactoring operations currently offered by the plugin
-    map("v", "<leader>re", function()
-        require("refactoring").refactor("Extract Function")
-    end, { buffer = bufnr, desc = "Extract Function (Refactoring)" })
-    map("v", "<leader>rf", function()
-        require("refactoring").refactor("Extract Function To File")
-    end, { buffer = bufnr, desc = "Extract Function To File (Refactoring)" })
-    map("v", "<leader>rv", function()
-        require("refactoring").refactor("Extract Variable")
-    end, { buffer = bufnr, desc = "Extract Variable (Refactoring)" })
-    map("v", "<leader>ri", function()
-        require("refactoring").refactor("Inline Variable")
-    end, { buffer = bufnr, desc = "Inline Variable (Refactoring)" })
-
-    -- Extract block doesn't need visual mode
-    map("n", "<leader>rb", function()
-        require("refactoring").refactor("Extract Block")
-    end, { buffer = bufnr, desc = "Extract Block (Refactoring)" })
-    map("n", "<leader>rbf", function()
-        require("refactoring").refactor("Extract Block To File")
-    end, { buffer = bufnr, desc = "Extract Block To File (Refactoring)" })
-
-    -- Inline variable can also pick up the identifier currently under the cursor without visual mode
-    map("n", "<leader>ri", function()
-        require("refactoring").refactor("Inline Variable")
-    end, { buffer = bufnr, desc = "Inline Variable (Refactoring)" })
-end
-
-function M.unmap_lsp_keys(bufnr)
-    local opts = {
-        buffer = bufnr,
+function M.get_lsp_maps()
+    return {
+        ["n"] = {
+            ["<leader>i"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.hover()
+                end,
+                ["opts"] = { desc = "Hover Info" },
+            },
+            ["gd"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.definition()
+                end,
+                ["opts"] = { desc = "Definition" },
+            },
+            ["gD"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.declaration()
+                end,
+                ["opts"] = { desc = "Declaration" },
+            },
+            ["go"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.type_definition()
+                end,
+                ["opts"] = { desc = "Type Definition" },
+            },
+            ["gr"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.references()
+                end,
+                ["opts"] = { desc = "References" },
+            },
+            ["gs"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.signature_help()
+                end,
+                ["opts"] = { desc = "Signature Help" },
+            },
+            ["<leader>lrn"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.rename()
+                end,
+                ["opts"] = { desc = "Rename" },
+            },
+            ["<leader>lca"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.code_action()
+                end,
+                ["opts"] = { desc = "Code Actions" },
+            },
+            ["<leader>lf"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.format()
+                end,
+                ["opts"] = { desc = "Code Actions" },
+            },
+            ["<leader>ld"] = {
+                ["rhs"] = function()
+                    vim.diagnostic.open_float()
+                end,
+                ["opts"] = { desc = "Open Diagnostics" },
+            },
+            ["<leader>lq"] = {
+                ["rhs"] = function()
+                    vim.diagnostic.setloclist()
+                end,
+                ["opts"] = { desc = "Open Diagnostics" },
+            },
+            ["<leader>[d"] = {
+                ["rhs"] = function()
+                    vim.diagnostic.goto_prev()
+                end,
+                ["opts"] = { desc = "Previous Diagnostic" },
+            },
+            ["<leader>d]"] = {
+                ["rhs"] = function()
+                    vim.diagnostic.goto_next()
+                end,
+                ["opts"] = { desc = "Next Diagnostic" },
+            },
+            ["<leader>rb"] = {
+                ["rhs"] = function()
+                    require("refactoring").refactor("Extract Block")
+                end,
+                ["opts"] = { desc = "Extract Block" },
+            },
+            ["<leader>ri"] = {
+                ["rhs"] = function()
+                    require("refactoring").refactor("Inline Variable")
+                end,
+                ["opts"] = { desc = "Inline Variable" },
+            },
+            ["<leader>rbf"] = {
+                ["rhs"] = function()
+                    require("refactoring").refactor("Extract Block To File")
+                end,
+                ["opts"] = { desc = "Extract Block To File" },
+            },
+            ["<C-g>"] = {
+                ["rhs"] = function()
+                    require("telescope.builtin").lsp_document_symbols()
+                end,
+                ["opts"] = { desc = "All Symbols Telescope" },
+            },
+            ["<C-i>"] = {
+                ["rhs"] = function()
+                    require("telescope.builtin").lsp_implementations()
+                end,
+                ["opts"] = { desc = "Implementation Telescope" },
+            },
+            ["<C-S-u>"] = {
+                ["rhs"] = function()
+                    require("telescope.builtin").lsp_references()
+                end,
+                ["opts"] = { desc = "References Telescope" },
+            },
+            ["<C-S-->"] = {
+                ["rhs"] = function()
+                    require("telescope.builtin").lsp_incoming_calls()
+                end,
+                ["opts"] = { desc = "Incoming Calls Telescope" },
+            },
+            ["<C-S-=>"] = {
+                ["rhs"] = function()
+                    require("telescope.builtin").lsp_outgoing_calls()
+                end,
+                ["opts"] = { desc = "Outgoing Calls Telescope" },
+            },
+        },
+        ["i"] = {
+            ["<C-k>"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.signature_help()
+                end,
+                ["opts"] = { desc = "Signature Help" },
+            },
+        },
+        ["v"] = {
+            ["<leader>lca"] = {
+                ["rhs"] = function()
+                    vim.lsp.buf.code_action()
+                end,
+                ["opts"] = { desc = "Code Actions" },
+            },
+            ["<leader>re"] = {
+                ["rhs"] = function()
+                    require("refactoring").refactor("Extract Function")
+                end,
+                ["opts"] = { desc = "Extract Function" },
+            },
+            ["<leader>rf"] = {
+                ["rhs"] = function()
+                    require("refactoring").refactor("Extract Function To File")
+                end,
+                ["opts"] = { desc = "Extract Function To File" },
+            },
+            ["<leader>rv"] = {
+                ["rhs"] = function()
+                    require("refactoring").refactor("Extract Variable")
+                end,
+                ["opts"] = { desc = "Extract Variable" },
+            },
+            ["<leader>ri"] = {
+                ["rhs"] = function()
+                    require("refactoring").refactor("Inline Variable")
+                end,
+                ["opts"] = { desc = "Inline Variable" },
+            },
+        },
     }
-    unmap("n", "<leader>i", opts)
-    unmap("n", "<C-g>", opts)
-    unmap("n", "<C-i>", opts)
-    unmap("n", "gd", opts)
-    unmap("n", "gD", opts)
-    unmap("n", "gi", opts)
-    unmap("n", "go", opts)
-    unmap("n", "gr", opts)
-    unmap("n", "<C-S-u>", opts)
-    unmap("n", "<C-S-->", opts)
-    unmap("n", "<C-S-=>", opts)
-    unmap("n", "gs", opts)
-    unmap("i", "<C-k>", opts)
-    unmap("n", "<leader>lrn", opts)
-    unmap("n", "<leader>lca", opts)
-    unmap("v", "<leader>lca", opts)
-    unmap("n", "<leader>lf", opts)
-    unmap("n", "<leader>wa", opts)
-    unmap("n", "<leader>wr", opts)
-    unmap("n", "<leader>wl", opts)
-    unmap("n", "gl", opts)
-    unmap("n", "[d", opts)
-    unmap("n", "]d", opts)
-    unmap("n", "<leader>lq", opts)
-    unmap("v", "<leader>re", opts)
-    unmap("v", "<leader>rf", opts)
-    unmap("v", "<leader>rv", opts)
-    unmap("v", "<leader>ri", opts)
-    unmap("n", "<leader>rb", opts)
-    unmap("n", "<leader>rbf", opts)
-    unmap("n", "<leader>ri", opts)
 end
 
-M.map_jdtls_keys = function(bufnr)
-    M.map_lsp_keys(bufnr)
-    map(
-        "n",
-        "<leader>li",
-        ':lua require("jdtls").organize_imports()<CR>',
-        { buffer = bufnr, desc = "Organize Imports (LSP:Java)" }
-    )
+M.get_jdtls_maps = function()
+    return {
+        ["n"] = {
+            ["<leader>li"] = {
+                ["rhs"] = function()
+                    require("jdtls").organize_imports()
+                end,
+                ["opts"] = { desc = "Organize Imports" },
+            },
 
-    map(
-        "n",
-        "<leader>lev",
-        ':lua require("jdtls").extract_variable()<CR>',
-        { buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
-    )
-    map(
-        "v",
-        "<leader>lev",
-        ':lua require("jdtls").extract_variable(true)<CR>',
-        { buffer = bufnr, desc = "Extract Variable (LSP:Java)" }
-    )
-
-    map(
-        "n",
-        "<leader>lec",
-        ':lua require("jdtls").extract_constant()<CR>',
-        { buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
-    )
-    map(
-        "v",
-        "<leader>lec",
-        ':lua require("jdtls").extract_constant(true)<CR>',
-        { buffer = bufnr, desc = "Extract Constant (LSP:Java)" }
-    )
-
-    map(
-        "v",
-        "<leader>lem",
-        ':lua require("jdtls").extract_method(true)<CR>',
-        { buffer = bufnr, desc = "Extract Method (LSP:Java)" }
-    )
-
-    map(
-        "n",
-        "<leader>ltc",
-        ':lua require("jdtls").test_class()<CR>',
-        { buffer = bufnr, desc = "Test Class (LSP:Java)" }
-    )
-    map(
-        "n",
-        "<leader>ltm",
-        ':lua require("jdtls").test_nearest_method()<CR>',
-        { buffer = bufnr, desc = "Test Nearest (LSP:Java)" }
-    )
-end
-
-M.unmap_jdtls_keys = function(bufnr)
-    M.unmap_lsp_keys(bufnr)
-    local options = {
-        buffer = bufnr,
+            ["<leader>rv"] = {
+                ["rhs"] = function()
+                    require("jdtls").extract_variable()
+                end,
+                ["opts"] = { desc = "Extract Variable" },
+            },
+            ["<leader>rc"] = {
+                ["rhs"] = function()
+                    require("jdtls").extract_constant()
+                end,
+                ["opts"] = { desc = "Extract Constant" },
+            },
+            ["<leader>tn"] = {
+                ["rhs"] = function()
+                    require("jdtls").test_nearest_method()
+                end,
+                ["opts"] = { desc = "Run Nearest Test" },
+            },
+            ["<leader>tc"] = {
+                ["rhs"] = function()
+                    require("jdtls").test_class()
+                end,
+                ["opts"] = { desc = "Run Current File" },
+            },
+        },
+        ["v"] = {
+            ["<leader>rv"] = {
+                ["rhs"] = function()
+                    require("jdtls").extract_variable()
+                end,
+                ["opts"] = { desc = "Extract Variable" },
+            },
+            ["<leader>rc"] = {
+                ["rhs"] = function()
+                    require("jdtls").extract_constant(true)
+                end,
+                ["opts"] = { desc = "Extract Constant" },
+            },
+            ["<leader>rm"] = {
+                ["rhs"] = function()
+                    require("jdtls").extract_method(true)
+                end,
+                ["opts"] = { desc = "Extract Method" },
+            },
+        },
     }
-    unmap("n", "<leader>li", options)
-    unmap("n", "<leader>lev", options)
-    unmap("v", "<leader>lev", options)
-    unmap("n", "<leader>lec", options)
-    unmap("v", "<leader>lec", options)
-    unmap("v", "<leader>lem", options)
-    unmap("n", "<leader>ltc", options)
-    unmap("n", "<leader>ltm", options)
 end
 
 return M

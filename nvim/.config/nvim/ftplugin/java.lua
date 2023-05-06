@@ -7,22 +7,15 @@ local function keymap(bufnr)
     local lsp_keymaps = require("config.lsp-keymaps")
 
     local status, modes_module = pcall(require, "modes")
-    if not status then
-        print(
-            "modes plugin not installed or not properly configured,activating only basic keymaps directly"
-        )
-        lsp_keymaps.map_lsp_keys(bufnr)
-        return
-    end
 
-    local lspActivate = function(options)
-        lsp_keymaps.map_jdtls_keys(options.buffer)
-    end
-    local lspDeactivate = function(options)
-        lsp_keymaps.unmap_jdtls_keys(options.buffer)
-    end
-
-    modes_module.create_if_not_present("JLSP", lspActivate, lspDeactivate, "{}")
+    modes_module.create_if_not_present(
+        "JLSP",
+        function() end,
+        function() end,
+        "{}"
+    )
+    modes_module.add_maps("JLSP", lsp_keymaps.get_lsp_maps())
+    modes_module.add_maps("JLSP", lsp_keymaps.get_jdtls_maps())
     modes_module.toggle_mode("JLSP", { buffer = bufnr })
 end
 

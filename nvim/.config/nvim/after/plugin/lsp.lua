@@ -55,14 +55,13 @@ lsp.on_attach(function(client, bufnr)
     local status, modes_module = pcall(require, "modes")
     local lspMaps = require("config.lsp-keymaps")
     if status then
-        local lspActivate = function(options)
-            lspMaps.map_lsp_keys(options.buffer)
-        end
-        local lspDeactivate = function(options)
-            lspMaps.unmap_lsp_keys(options.buffer)
-        end
-
-        modes_module.create_if_not_present("LSP", lspActivate, lspDeactivate, "{}")
+        modes_module.create_if_not_present(
+            "LSP",
+            function() end,
+            function() end,
+            "{}"
+        )
+        modes_module.add_maps("LSP", lspMaps.get_lsp_maps())
 
         -- This is workaround as since v2.0 lsp-zero on_attach also is used by
         -- non lsp-zero lsps
@@ -76,7 +75,7 @@ lsp.on_attach(function(client, bufnr)
             )
         end, { desc = "Toggle COMPL LSP for Current Buffer" })
     else
-        lspMaps.map_lsp_keys(bufnr)
+        lsp.default_keymaps({ buffer = bufnr })
     end
 end)
 
