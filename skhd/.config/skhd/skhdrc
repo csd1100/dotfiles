@@ -52,10 +52,10 @@ cmd + alt - 5 : yabai -m space --focus 19
 cmd + alt - 6 : yabai -m space --focus 20
 cmd + alt - 7 : yabai -m space --focus 21
 
-cmd + shift - left : yabai -m space --focus recent
-cmd + shift - right : yabai -m space --focus recent
-cmd + shift - down : yabai -m space --focus next
-cmd + shift - up : yabai -m space --focus prev
+cmd + shift - up  : yabai -m space --focus recent
+cmd + shift - down  : yabai -m space --focus recent
+cmd + shift - right  : yabai -m space --focus next
+cmd + shift - left : yabai -m space --focus prev
 
 # Moving windows
 cmd + shift - h : yabai -m window --warp west
