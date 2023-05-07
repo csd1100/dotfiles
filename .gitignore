@@ -10,4 +10,5 @@ bin/bin/*
 !bin/bin/helpers
 kitty/.config/kitty/current-theme.conf
 nvim/.config/nvim/plugin/*
+nvim/.config/nvim/.luarc.json
 yabai/.config/yabai/rules

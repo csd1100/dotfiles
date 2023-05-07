@@ -55,7 +55,7 @@ function M.get_lsp_maps()
                 ["rhs"] = function()
                     vim.lsp.buf.format()
                 end,
-                ["opts"] = { desc = "Code Actions" },
+                ["opts"] = { desc = "Format File" },
             },
             ["<leader>ld"] = {
                 ["rhs"] = function()
@@ -144,6 +144,10 @@ function M.get_lsp_maps()
                     vim.lsp.buf.code_action()
                 end,
                 ["opts"] = { desc = "Code Actions" },
+            },
+            ["<leader>lf"] = {
+                ["rhs"] = vim.lsp.buf.format,
+                ["opts"] = { desc = "Format Selection" },
             },
             ["<leader>re"] = {
                 ["rhs"] = function()

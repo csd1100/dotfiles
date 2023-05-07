@@ -2,10 +2,18 @@ vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
 return {
-
+    {
+        "bluz71/vim-moonfly-colors",
+        name = "moonfly",
+        lazy = false,
+        priority = 1000,
+        config = function(plugin)
+            vim.cmd.colorscheme("moonfly")
+        end,
+    },
     {
         "sonph/onehalf",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,
         priority = 1000,
         enabled = false,
         config = function(plugin)
@@ -15,26 +23,14 @@ return {
     },
     {
         "navarasu/onedark.nvim",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         config = function()
             require("onedark").setup({
                 style = "warm",
             })
             require("onedark").load()
-        end,
-    },
-    {
-        "sainnhe/gruvbox-material",
-        lazy = false,
-        priority = 1000,
-        enabled = false,
-        config = function(plugin)
-            -- -- gruvbox-material conf --
-            vim.g.gruvbox_material_background = "hard"
-            vim.g.gruvbox_material_foreground = "mix"
-            -- vim.cmd.colorscheme("gruvbox-material")
         end,
     },
 }
