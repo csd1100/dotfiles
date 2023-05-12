@@ -126,6 +126,13 @@ map(
 )
 
 map(
+    "n",
+    "<leader>mdp",
+    "<cmd>MarkdownPreview<CR>",
+    { desc = "Markdown Preview" }
+)
+
+map(
     { "n", "v" },
     "<leader>v[",
     ":lua require('gitsigns').prev_hunk()<CR>",
@@ -228,7 +235,8 @@ local complModeMaps = {
         ["("] = { ["rhs"] = "<ESC>`>a)<ESC>`<i(<ESC>", ["opts"] = {} },
         ["["] = { ["rhs"] = "<ESC>`>a]<ESC>`<i[<ESC>", ["opts"] = {} },
         ["{"] = { ["rhs"] = "<ESC>`>a}<ESC>`<i{<ESC>", ["opts"] = {} },
-        ["<"] = { ["rhs"] = "<ESC>`>a><ESC>`<i<<ESC>", ["opts"] = {} },
+        -- cause < in "v" mode adjusts indentation
+        ["<leader><"] = { ["rhs"] = "<ESC>`>a><ESC>`<i<<ESC>", ["opts"] = {} },
     },
     ["i"] = {
         ['"'] = { ["rhs"] = '""<left>', ["opts"] = {} },

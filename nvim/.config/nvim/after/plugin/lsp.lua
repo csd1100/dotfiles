@@ -3,23 +3,22 @@ local map = require("config.keymap-utils").map
 local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
-local lsp_zero_managed_list = {
+local lsp_zero_ensure_installed = {
     "bashls",
     "tsserver",
     "lua_ls",
     "gopls",
     "rust_analyzer",
     "marksman",
-}
-
-local lsp_zero_unmanaged_list = {
     "jdtls",
 }
 
-local lsp_list =
-    vim.tbl_extend("force", lsp_zero_managed_list, lsp_zero_unmanaged_list)
+local ignore_on_attach_toggle = {
+    "jdtls",
+    "null-ls"
+}
 
-lsp.ensure_installed(lsp_list)
+lsp.ensure_installed(lsp_zero_ensure_installed)
 
 lsp.skip_server_setup({
     "jdtls",
@@ -63,11 +62,11 @@ lsp.on_attach(function(client, bufnr)
         )
         modes_module.add_maps("LSP", lspMaps.get_lsp_maps())
 
-        -- This is workaround as since v2.0 lsp-zero on_attach also is used by
-        -- non lsp-zero lsps
-        if vim.tbl_contains(lsp_zero_managed_list, client.name) then
+        -- ignore toggle_mode for some lsps
+        if not vim.tbl_contains(ignore_on_attach_toggle, client.name) then
             modes_module.toggle_mode("LSP", { buffer = bufnr })
         end
+
         map("n", "<leader>ldis", function()
             require("modes").toggle_mode(
                 "LSP",

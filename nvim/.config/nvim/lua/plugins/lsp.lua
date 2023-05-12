@@ -47,6 +47,7 @@ return {
                     null_ls.builtins.diagnostics.eslint,
                     null_ls.builtins.code_actions.refactoring,
                     null_ls.builtins.formatting.shfmt,
+                    null_ls.builtins.formatting.prettier,
                 },
             }
             null_ls.setup(opts)

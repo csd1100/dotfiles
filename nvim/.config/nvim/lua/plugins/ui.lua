@@ -69,10 +69,10 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         config = function()
-            local left_section_separator = ""
-            local right_section_separator = ""
-            local left_component_separator = ""
-            local right_component_separator = ""
+            local left_section_separator = ""
+            local right_section_separator = ""
+            local left_component_separator = "⎪"
+            local right_component_separator = "⎪"
 
             local modes_module = require("modes")
             local function get_custom_global_modes()
