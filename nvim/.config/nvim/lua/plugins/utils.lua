@@ -100,8 +100,6 @@ return {
     },
     {
         "mbbill/undotree",
-        cmd = "UndotreeToggle",
-        keys = "<leader>u",
     },
     {
         "folke/which-key.nvim",
@@ -135,6 +133,7 @@ return {
                 add = { text = " " },
                 change = { text = " " },
                 delete = { text = " " },
+                untracked = { text = "" },
             },
         },
         config = true,

@@ -74,6 +74,10 @@ return {
             local left_component_separator = "⎪"
             local right_component_separator = "⎪"
 
+            local function get_vim_mode()
+                return string.sub(vim.api.nvim_get_mode().mode, 1, 1)
+            end
+
             local modes_module = require("modes")
             local function get_custom_global_modes()
                 return table.concat(
@@ -89,6 +93,32 @@ return {
                     ),
                     left_component_separator
                 )
+            end
+
+            local function treesitter_current_position()
+                local node = vim.treesitter.get_node({ 0 })
+                local str = ""
+                if node ~= nil then
+                    if node:type() == "identifier" then
+                        str = vim.treesitter.get_node_text(node, 0, {})
+                            .. "  "
+                            .. str
+                    end
+                    local parent = node:parent()
+                    if parent ~= nil then
+                        while parent ~= nil and not parent:equal(node) do
+                            if #parent:field("name") > 0 then
+                                str = vim.treesitter.get_node_text(
+                                    parent:field("name")[1],
+                                    0,
+                                    {}
+                                ) .. "  " .. str
+                            end
+                            parent = parent:parent()
+                        end
+                    end
+                end
+                return str
             end
 
             local conf = {
@@ -108,27 +138,54 @@ return {
                     globalstatus = false,
                 },
                 sections = {
-                    lualine_a = { "mode", get_custom_global_modes },
+                    lualine_a = { get_vim_mode },
                     lualine_b = {
-                        get_custom_buffer_modes,
                         "branch",
                         "diff",
-                        "diagnostics",
                     },
-                    lualine_c = { "filename" },
-                    lualine_x = { "encoding", "fileformat", "filetype" },
-                    lualine_y = { "progress" },
-                    lualine_z = { "location" },
-                },
-                inactive_sections = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = { "filename" },
-                    lualine_x = { "location" },
+                    lualine_c = {},
+                    lualine_x = { "diagnostics", "filetype" },
                     lualine_y = {},
                     lualine_z = {},
                 },
-                tabline = {},
+                tabline = {
+                    lualine_a = { "location" },
+                    lualine_b = { "filename" },
+                    lualine_c = { treesitter_current_position },
+                    lualine_x = {},
+                    lualine_y = { get_custom_buffer_modes },
+                    lualine_z = { get_custom_global_modes },
+                },
+                winbar = {
+                    lualine_a = {
+                        {
+                            "tabs",
+                            max_length = 1000,
+                            tabs_color = {
+                                -- Same values as the general color option can be used here.
+                                active = "lualine_b_active", -- Color for active tab.
+                                inactive = "lualine_b_inactive", -- Color for inactive tab.
+                            },
+                            mode = 2,
+                            fmt = function(name, context)
+                                -- Show + if buffer is modified in tab
+                                local buflist =
+                                    vim.fn.tabpagebuflist(context.tabnr)
+                                local winnr = vim.fn.tabpagewinnr(context.tabnr)
+                                local bufnr = buflist[winnr]
+                                local mod = vim.fn.getbufvar(bufnr, "&mod")
+
+                                return name .. (mod == 1 and " +" or "")
+                            end,
+                        },
+                    },
+                    lualine_b = {},
+                    lualine_c = {},
+                    lualine_x = {},
+                    lualine_y = {},
+                    lualine_z = {},
+                },
+
                 extensions = {},
             }
 
