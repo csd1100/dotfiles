@@ -45,6 +45,16 @@ return {
         end,
     },
     {
+        "csd1100/dark-modern.nvim",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        dev = true,
+        config = function()
+            -- vim.cmd.colorscheme("dark-modern")
+        end,
+    },
+    {
         "casonadams/walh",
         lazy = false,
         priority = 1000,

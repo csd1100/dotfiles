@@ -1,6 +1,5 @@
 local keymapUtils = require("config.keymap-utils")
 local map = keymapUtils.map
-local unmap = keymapUtils.unmap
 
 local function tbl_extend(table, appendValue)
     local test = vim.tbl_extend("force", table, appendValue)
@@ -398,6 +397,7 @@ if status then
         function() end,
         "  "
     )
+    modes_module.add_maps("TEST", testModeMaps)
     map(
         "n",
         "<leader>tg",

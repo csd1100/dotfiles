@@ -133,7 +133,6 @@ return {
                 add = { text = " " },
                 change = { text = " " },
                 delete = { text = " " },
-                untracked = { text = "" },
             },
         },
         config = true,
