@@ -103,12 +103,6 @@
     - dotfiles
     - cli
 
-- name: create kitty desktop file (Linux)
-  shell: cd ~/dotfiles/kitty/.config/kitty && ./kitty-desktop
-  tags:
-    - kitty
-  when: ( ansible_os_family == "Debian" or ansible_os_family == "ArchLinux" )
-
 - name: Create a work directory if it does not exist
   file:
     path: ~/work

@@ -28,6 +28,7 @@
     - essentials
 
 - name: htop install (DNF)
+  become: yes
   dnf:
     name: htop
   tags:
@@ -35,6 +36,7 @@
     - essentials
 
 - name: vim install (DNF)
+  become: yes
   dnf:
     name: vim
   tags:
@@ -42,6 +44,7 @@
     - essentials
 
 - name: fzf install (DNF)
+  become: yes
   dnf:
     name: fzf
   tags:
@@ -83,7 +86,7 @@
 - name: imagemagick install (DNF)
   become: yes
   dnf:
-    name: imagemagick
+    name: ImageMagick
   tags:
     - gui
     - kitty

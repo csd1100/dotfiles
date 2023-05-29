@@ -21,6 +21,11 @@
     - gui
     - kitty
 
+- name: create kitty desktop file (Linux)
+  shell: cd ~/dotfiles/kitty/.config/kitty && ./kitty-desktop
+  tags:
+    - kitty
+
 - name: Dotfiles Linux Setup
   include_tasks: dotfiles.yml
   tags: always
