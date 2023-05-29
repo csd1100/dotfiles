@@ -6,6 +6,14 @@
   tags:
     - always
 
+- name: dnf-plugins-core (DNF)
+  become: yes
+  dnf:
+    name:
+      - dnf-plugins-core
+  tags:
+    - essentials
+
 - name: git (DNF)
   become: yes
   dnf:
@@ -110,7 +118,7 @@
     - cli
     - nvim
 
-- name: Add neovim unstable COPR (DNF)
+- name: add neovim unstable COPR (DNF)
   become: yes
   community.general.copr:
     name: agriffis/neovim-nightly
@@ -184,3 +192,40 @@
   tags:
     - gui
     - de
+
+- name: add docker repository (DNF)
+  become: yes
+  get_url:
+    url: https://download.docker.com/linux/fedora/docker-ce.repo
+    dest: /etc/yum.repos.d/docer-ce.repo
+
+- name: docker install (DNF)
+  become: yes
+  dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
+- name: add docker usergroup
+  become: yes
+  group:
+    name: docker
+    state: present
+    gid: 1750
+
+- name: add user to docker group
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: docker
+
+- name: enable docker service
+  become: yes
+  systemd:
+    name: docker
+    state: started
+    enabled: true
