@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-THEME=$ROFI_THEME
+THEME="~/.config/rofi/rofi.rasi"
 avail_outputs=($(xrandr | grep ' connected' | sed -En "s/ .*//p"))
 if [[ ${#avail_outputs[@]} > 1 ]]; then
     avail_outputs+=("Main Only")

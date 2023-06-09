@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-THEME=$ROFI_THEME
+THEME="~/.config/rofi/rofi.rasi"
 
 menu=("Play/Pause")
 menu+=("Next")

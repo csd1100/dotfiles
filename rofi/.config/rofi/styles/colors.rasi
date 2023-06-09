@@ -2,11 +2,11 @@
     red:                         #FB1E5C;
     accent:                      #1DE9B6;
     lightfg:                     white;
-    lightbg:                     black;
+    lightbg:                     #262626;
     foreground:                  white;
-    background:                  black;
+    background:                  #262626;
     separatorcolor:              white;
-    background-color:            black;
+    background-color:            #262626;
     border-color:                white;
     normal-foreground:           var(foreground);
     normal-background:           var(background);
@@ -29,9 +29,9 @@
     spacing:                     2;
 }
 element {
-    padding: 1px ;
+    padding: 1px;
     cursor:  pointer;
-    spacing: 5px ;
+    spacing: 5px;
     border:  0;
 }
 element normal.normal {
@@ -93,29 +93,29 @@ mainbox {
 message {
     padding:      1px ;
     border-color: var(separatorcolor);
-    border:       2px dash 0px 0px ;
+    border:       2px dash 0px 0px;
 }
 textbox {
     text-color: var(foreground);
 }
 listview {
-    padding:      2px 0px 0px ;
+    padding:      2px 0px 0px;
     scrollbar:    true;
     border-color: var(separatorcolor);
-    spacing:      2px ;
+    spacing:      2px;
     fixed-height: 0;
-    border:       2px dash 0px 0px ;
+    border:       2px dash 0px 0px;
 }
 scrollbar {
-    width:        4px ;
+    width:        4px;
     padding:      0;
-    handle-width: 8px ;
+    handle-width: 8px;
     border:       0;
     handle-color: var(normal-foreground);
 }
 sidebar {
     border-color: var(separatorcolor);
-    border:       2px dash 0px 0px ;
+    border:       2px dash 0px 0px;
 }
 button {
     cursor:     pointer;
@@ -128,20 +128,20 @@ button selected {
 }
 num-filtered-rows {
     expand:     false;
-    text-color: Black;
+    text-color: var(normal-foreground);
 }
 num-rows {
     expand:     false;
-    text-color: Black;
+    text-color: var(normal-foreground);
 }
 textbox-num-sep {
     expand:     false;
     str:        "/";
-    text-color: Black;
+    text-color: var(normal-foreground);
 }
 inputbar {
-    padding:    1px ;
-    spacing:    0px ;
+    padding:    1px;
+    spacing:    0px;
     text-color: var(normal-foreground);
     children:   [ prompt,textbox-prompt-colon,entry,num-filtered-rows,textbox-num-sep,num-rows,case-indicator ];
 }
@@ -153,8 +153,8 @@ entry {
     text-color:        var(normal-foreground);
     cursor:            text;
     spacing:           0;
-    placeholder-color: Black;
-    placeholder:       "Type to filter";
+    placeholder-color: gray;
+    placeholder:       " Type to filter";
 }
 prompt {
     spacing:    0;
@@ -162,6 +162,6 @@ prompt {
 }
 textbox-prompt-colon {
     expand:     false;
-    str:        ":";
+    str:        ": ";
     text-color: inherit;
 }

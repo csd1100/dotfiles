@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-THEME=$ROFI_THEME
+THEME="~/.config/rofi/rofi.rasi"
 ROFI_SCRIPTS="$CONFIG/rofi/scripts"
 menu=("Audio Input/Output")
 menu+=("Display Output")

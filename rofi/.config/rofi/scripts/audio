@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-THEME=$ROFI_THEME
+THEME="~/.config/rofi/rofi.rasi"
 function func(){
     arg=($(pactl list $1 | grep "Name" | sed -n -e 's/^.*: //p'))
     test=()

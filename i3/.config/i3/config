@@ -2,8 +2,8 @@
 set $config ~/.config
 set $innerGap 8
 set $outerGap 0
-set $termCommand "kitty -o allow_remote_control=yes --single-instance -d ~"
-set $termCommand2 "kitty -o allow_remote_control=yes --single-instance -d ~ \
+set $termCommand "~/.local/bin/kitty -o allow_remote_control=yes --single-instance -d ~"
+set $termCommand2 "~/.local/bin/kitty -o allow_remote_control=yes --single-instance -d ~ \
                     --session ~/.config/kitty/sessions/home.session"
 
 set $musicMode music
@@ -14,17 +14,17 @@ set $brightnessMode brightness
 set $mod Mod4
 
 # Font for window titles.
-font pango: Jetbrains Mono 15
+font pango: Jetbrains Mono 0
 
 # Disabling Title Bar for gaps
-for_window [class=".*"] border pixel 5
+for_window [class=".*"] border pixel 2
 
 # Colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #BFBFBF #0D8164 #FFFFFF #00E5FF   #BFBFBF
+client.focused          #484E50 #0D8164 #FFFFFF #00E5FF   #484E50
 client.focused_inactive #69696C #5F676A #FFFFFF #484E50   #5F676A
 client.unfocused        #21282B #222222 #888888 #292D2E   #222222
-client.urgent           #2F343A #FB1E5C #FFFFFF #FB1E5C   #FB1E5C
+client.urgent           #FB1E5C #FB1E5C #FFFFFF #FB1E5C   #FB1E5C
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 client.background       #FFFFFF
 
@@ -214,6 +214,3 @@ bindsym $mod+Shift+d exec --no-startup-id $config/rofi/scripts/run-rofi run
 bindsym $mod+Shift+s exec --no-startup-id $config/rofi/scripts/run-rofi ssh
 bindsym $mod+w exec --no-startup-id $config/rofi/scripts/run-rofi windows
 bindsym $mod+x exec --no-startup-id $config/rofi/scripts/power-menu
-
-# start rofi Menu
-bindsym $mod+m exec --no-startup-id $config/rofi/scripts/right-bar
