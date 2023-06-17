@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+unameOut="$(uname -s)"
+
+case "${unameOut}" in
+Linux*)
+    echo "$HOME/Pictures/Wallpapers/Wallpaper.jpg"
+;;
+Darwin*)
+    osascript -e 'tell app "finder" to get posix path of (get desktop picture as alias)'
+;;
+*);;
+esac
