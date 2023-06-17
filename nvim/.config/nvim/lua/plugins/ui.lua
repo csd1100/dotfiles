@@ -148,7 +148,7 @@ return {
                     lualine_y = {},
                     lualine_z = {},
                 },
-                tabline = {
+                winbar = {
                     lualine_a = { "location" },
                     lualine_b = { "filename" },
                     lualine_c = { treesitter_current_position },
@@ -156,7 +156,7 @@ return {
                     lualine_y = { get_custom_buffer_modes },
                     lualine_z = { get_custom_global_modes },
                 },
-                winbar = {
+                tabline = {
                     lualine_a = {
                         {
                             "tabs",

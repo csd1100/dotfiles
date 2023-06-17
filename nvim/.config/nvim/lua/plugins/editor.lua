@@ -6,7 +6,6 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
         ft = {
             "sh",
             "bash",
