@@ -67,6 +67,7 @@ return {
     {
         "j-hui/fidget.nvim",
         config = true,
+        tag = "legacy",
     },
     {
         "mfussenegger/nvim-jdtls",

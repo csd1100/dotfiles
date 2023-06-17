@@ -41,29 +41,26 @@ return {
         config = function()
             vim.g.sonokai_diagnostic_text_highlight = 1
             vim.g.sonokai_better_performance = 1
-            vim.cmd.colorscheme("sonokai")
+            -- vim.cmd.colorscheme("sonokai")
         end,
     },
     {
-        "csd1100/dark-modern.nvim",
+        "Alexis12119/nightly.nvim",
         lazy = false,
         priority = 1000,
         enabled = true,
-        dev = true,
         config = function()
-            -- vim.cmd.colorscheme("dark-modern")
-        end,
-    },
-    {
-        "casonadams/walh",
-        lazy = false,
-        priority = 1000,
-        enabled = false,
-        config = function()
-            vim.g.sonokai_diagnostic_text_highlight = 1
-            vim.g.sonokai_better_performance = 1
-            vim.opt.termguicolors = false
-            -- vim.cmd.colorscheme("walh-default")
+            require("nightly").setup({
+                transparent = false,
+                styles = {
+                    comments = { italic = true },
+                    functions = { italic = false },
+                    variables = { italic = false },
+                    keywords = { italic = false },
+                },
+                highlights = {},
+            })
+            vim.cmd.colorscheme("nightly")
         end,
     },
 }

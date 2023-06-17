@@ -213,26 +213,13 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "indent_blankline",
-        opts = {
-            show_end_of_line = true,
-            space_char_blankline = " ",
-            space_char_highlight_list = {
-                "IndentBlanklineIndent1",
-                "IndentBlanklineIndent2",
-                "IndentBlanklineIndent3",
-                "IndentBlanklineIndent4",
-                "IndentBlanklineIndent5",
-                "IndentBlanklineIndent6",
-            },
-        },
-        config = function(_, opts)
+        config = function()
             vim.opt.list = true
             vim.opt.listchars:append("eol:↴")
-            vim.g.indent_blankline_char = ""
-
             vim.cmd(
                 [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
             )
+
             vim.cmd(
                 [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
             )
@@ -248,6 +235,19 @@ return {
             vim.cmd(
                 [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
             )
+
+            vim.g.indent_blankline_filetype_exclude = { "dashboard" }
+            local opts = {
+                show_end_of_line = true,
+                char_highlight_list = {
+                    "IndentBlanklineIndent1",
+                    "IndentBlanklineIndent2",
+                    "IndentBlanklineIndent3",
+                    "IndentBlanklineIndent4",
+                    "IndentBlanklineIndent5",
+                    "IndentBlanklineIndent6",
+                },
+            }
             require("indent_blankline").setup(opts)
         end,
     },
@@ -260,6 +260,23 @@ return {
     {
         "rcarriga/nvim-notify",
         config = function()
+            require("notify").setup({
+                background_colour = "NotifyBackground",
+                fps = 30,
+                icons = {
+                    DEBUG = "",
+                    ERROR = "",
+                    INFO = "",
+                    TRACE = "✎",
+                    WARN = "",
+                },
+                level = 2,
+                minimum_width = 50,
+                render = "compact",
+                stages = "fade",
+                timeout = 1000,
+                top_down = false,
+            })
             vim.notify = require("notify")
         end,
     },
