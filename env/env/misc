@@ -11,6 +11,3 @@ if [ -f "$HOME/env/overrides/misc" ]
 then
     source "$HOME/env/overrides/misc"
 fi
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
