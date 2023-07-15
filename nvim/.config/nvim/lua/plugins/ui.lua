@@ -75,7 +75,7 @@ return {
             local right_component_separator = "⎪"
 
             local function get_vim_mode()
-                return string.sub(vim.api.nvim_get_mode().mode, 1, 1)
+                return string.upper(string.sub(vim.api.nvim_get_mode().mode, 1, 1))
             end
 
             local modes_module = require("modes")
@@ -148,7 +148,7 @@ return {
                     lualine_y = {},
                     lualine_z = {},
                 },
-                winbar = {
+                tabline = {
                     lualine_a = { "location" },
                     lualine_b = { "filename" },
                     lualine_c = { treesitter_current_position },
@@ -156,14 +156,14 @@ return {
                     lualine_y = { get_custom_buffer_modes },
                     lualine_z = { get_custom_global_modes },
                 },
-                tabline = {
+                winbar = {
                     lualine_a = {
                         {
                             "tabs",
                             max_length = 1000,
                             tabs_color = {
                                 -- Same values as the general color option can be used here.
-                                active = "lualine_b_active", -- Color for active tab.
+                                active = "lualine_a_inactive", -- Color for active tab.
                                 inactive = "lualine_b_inactive", -- Color for inactive tab.
                             },
                             mode = 2,
