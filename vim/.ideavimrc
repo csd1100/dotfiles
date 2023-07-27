@@ -7,6 +7,8 @@ vnoremap ( <ESC>`>a)<ESC>`<i(
 vnoremap [ <ESC>`>a]<ESC>`<i[
 vnoremap { <ESC>`>a}<ESC>`<i{
 
+set visualbell
+set noerrorbells
 set showmode
 set which-key
 set timeoutlen=3000
