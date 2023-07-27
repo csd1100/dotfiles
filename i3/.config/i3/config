@@ -21,7 +21,7 @@ for_window [class=".*"] border pixel 2
 
 # Colors
 # class                 border  backgr. text    indicator child_border
-client.focused          #484E50 #0D8164 #FFFFFF #00E5FF   #484E50
+client.focused          #484E50 #0D8164 #FFFFFF #5e87f5   #3d4b91
 client.focused_inactive #69696C #5F676A #FFFFFF #484E50   #5F676A
 client.unfocused        #21282B #222222 #888888 #292D2E   #222222
 client.urgent           #FB1E5C #FB1E5C #FFFFFF #FB1E5C   #FB1E5C

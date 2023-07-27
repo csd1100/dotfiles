@@ -13,6 +13,19 @@ return {
         end,
     },
     {
+        "loctvl842/monokai-pro.nvim",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        name = "monokai-pro",
+        config = function()
+            require("monokai-pro").setup({
+                filter = "spectrum",
+            })
+            vim.cmd.colorscheme("monokai-pro")
+        end,
+    },
+    {
         "catppuccin/nvim",
         lazy = false,
         priority = 1000,
@@ -25,7 +38,7 @@ return {
                     },
                 },
             })
-            vim.cmd.colorscheme("catppuccin")
+            -- vim.cmd.colorscheme("catppuccin")
         end,
     },
 }
