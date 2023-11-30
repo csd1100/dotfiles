@@ -15,3 +15,6 @@ set.backupdir = bkp_dir .. "/" .. project
 local undo_dir = home .. "/.nvim/undos"
 set.undofile = true
 set.undodir = undo_dir .. "/" .. project
+
+set.list = true
+set.listchars:append({ eol = "↴" })

@@ -75,7 +75,9 @@ return {
             local right_component_separator = "⎪"
 
             local function get_vim_mode()
-                return string.upper(string.sub(vim.api.nvim_get_mode().mode, 1, 1))
+                return string.upper(
+                    string.sub(vim.api.nvim_get_mode().mode, 1, 1)
+                )
             end
 
             local modes_module = require("modes")
@@ -212,34 +214,12 @@ return {
     },
     {
         "lukas-reineke/indent-blankline.nvim",
-        main = "indent_blankline",
-        config = function()
-            vim.opt.list = true
-            vim.opt.listchars:append("eol:↴")
-            vim.cmd(
-                [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-            )
-
-            vim.cmd(
-                [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-            )
-            vim.cmd(
-                [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-            )
-            vim.cmd(
-                [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-            )
-            vim.cmd(
-                [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-            )
-            vim.cmd(
-                [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
-            )
-
-            vim.g.indent_blankline_filetype_exclude = { "dashboard" }
-            local opts = {
-                show_end_of_line = true,
-                char_highlight_list = {
+        main = "ibl",
+        opts = {
+            debounce = 100,
+            indent = {
+                char = "▎",
+                highlight = {
                     "IndentBlanklineIndent1",
                     "IndentBlanklineIndent2",
                     "IndentBlanklineIndent3",
@@ -247,9 +227,12 @@ return {
                     "IndentBlanklineIndent5",
                     "IndentBlanklineIndent6",
                 },
-            }
-            require("indent_blankline").setup(opts)
-        end,
+            },
+            whitespace = { highlight = { "Whitespace", "NonText" } },
+            exclude = {
+                filetypes = { "dashboard" },
+            },
+        },
     },
     {
         "norcalli/nvim-colorizer.lua",
