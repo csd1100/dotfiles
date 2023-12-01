@@ -29,6 +29,9 @@ alias dcdn="docker-compose down -v"
 alias dcst="docker-compose start"
 alias dcstp="docker-compose stop"
 
+# ssh
+alias ssh="kitty +kitten ssh"
+
 # unaliase for bin overrides
 unalias ls
 

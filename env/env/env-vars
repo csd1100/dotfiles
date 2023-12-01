@@ -4,7 +4,7 @@
 export EDITOR=nvim
 
 # spaceship prompt zsh
-SPACESHIP_PROMPT_ORDER=(
+export SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
   user          # Username section
   dir           # Current directory section
