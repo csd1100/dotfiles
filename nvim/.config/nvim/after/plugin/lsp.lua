@@ -73,12 +73,10 @@ local function is_installed(lsp)
 end
 
 for _, value in ipairs(check_installed) do
-    if is_installed(value) then
+    if is_installed(value) ~= nil and is_installed(value) ~= 32512 then
         table.insert(ensure_installed, value)
     end
 end
-
-deep_print(ensure_installed)
 
 require("mason-lspconfig").setup({
     ensure_installed = ensure_installed,
