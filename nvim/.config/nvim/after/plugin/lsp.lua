@@ -69,7 +69,7 @@ local function is_installed(lsp)
     else
         return nil
     end
-    return os.execute(command)
+    return os.execute(command .. " &> /dev/null")
 end
 
 for _, value in ipairs(check_installed) do
