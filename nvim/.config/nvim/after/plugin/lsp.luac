@@ -1,12 +1,56 @@
 local map = require("config.keymap-utils").map
-local lsp_zero = require("lsp-zero")
+
+local lsp = require("lsp-zero")
+lsp.preset("recommended")
+
+local lsp_zero_ensure_installed = {
+    "bashls",
+    "tsserver",
+    "lua_ls",
+    "gopls",
+    "rust_analyzer",
+    "marksman",
+    "jdtls",
+}
 
 local ignore_on_attach_toggle = {
     "jdtls",
-    "null-ls",
+    "null-ls"
 }
 
-lsp_zero.on_attach(function(client, bufnr)
+lsp.ensure_installed(lsp_zero_ensure_installed)
+
+lsp.skip_server_setup({
+    "jdtls",
+    "rust_analyzer",
+})
+
+require("neodev").setup({
+    library = { plugins = { "neotest" }, types = true },
+})
+
+-- Fix Undefined global 'vim'
+lsp.configure("lua_ls", {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" },
+            },
+            completion = {
+                callSnippet = "Replace",
+            },
+        },
+    },
+})
+
+lsp.set_sign_icons({
+    error = "",
+    warn = "",
+    hint = "⚑",
+    info = "",
+})
+
+lsp.on_attach(function(client, bufnr)
     local status, modes_module = pcall(require, "modes")
     local lspMaps = require("config.lsp-keymaps")
     if status then
@@ -30,85 +74,11 @@ lsp_zero.on_attach(function(client, bufnr)
             )
         end, { desc = "Toggle COMPL LSP for Current Buffer" })
     else
-        lsp_zero.default_keymaps({ buffer = bufnr })
+        lsp.default_keymaps({ buffer = bufnr })
     end
 end)
 
-lsp_zero.set_sign_icons({
-    error = "",
-    warn = "",
-    hint = "⚑",
-    info = "",
-})
-
-require("mason").setup({})
-
-local ensure_installed = {
-    "bashls",
-    "lua_ls",
-    "marksman",
-}
-
-local check_installed = {
-    "tsserver",
-    "gopls",
-    "rust_analyzer",
-    "jdtls",
-}
-
-local function is_installed(lsp)
-    local command
-    if lsp == "tsserver" then
-        command = "node --version"
-    elseif lsp == "gopls" then
-        command = "go --version"
-    elseif lsp == "rust_analyzer" then
-        command = "rust --version"
-    elseif lsp == "jdtls" then
-        command = "java --version"
-    else
-        return nil
-    end
-    return os.execute(command)
-end
-
-for _, value in ipairs(check_installed) do
-    if is_installed(value) then
-        table.insert(ensure_installed, value)
-    end
-end
-
-deep_print(ensure_installed)
-
-require("mason-lspconfig").setup({
-    ensure_installed = ensure_installed,
-    automatic_installation = true,
-    handlers = {
-        lsp_zero.default_setup,
-        jdtls = lsp_zero.noop,
-    },
-})
-
-local mason_registry = require("mason-registry")
-
-local tools_to_install = {
-    "java-test",
-    "java-debug-adapter",
-    "chrome-debug-adapter",
-    "node-debug2-adapter",
-}
-
-function mason_install_if_not(tool)
-    if
-        not mason_registry.is_installed(tool)
-        and mason_registry.has_package(tool)
-    then
-        local package = mason_registry.get_package(tool)
-        package:install()
-    end
-end
-
-vim.tbl_map(mason_install_if_not, tools_to_install)
+lsp.setup()
 
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
@@ -201,4 +171,28 @@ cmp.setup.cmdline(":", {
             },
         },
     }),
+})
+
+local mason_registry = require("mason-registry")
+
+local tools_to_install = {
+    "java-test",
+    "java-debug-adapter",
+    "chrome-debug-adapter",
+    "node-debug2-adapter",
+}
+
+function mason_install_if_not(tool)
+    if
+        not mason_registry.is_installed(tool)
+        and mason_registry.has_package(tool)
+    then
+        local package = mason_registry.get_package(tool)
+        package:install()
+    end
+end
+
+vim.tbl_map(mason_install_if_not, tools_to_install)
+vim.diagnostic.config({
+    virtual_text = true,
 })
