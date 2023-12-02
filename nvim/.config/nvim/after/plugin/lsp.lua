@@ -61,7 +61,7 @@ local function is_installed(lsp)
     if lsp == "tsserver" then
         command = "node --version"
     elseif lsp == "gopls" then
-        command = "go --version"
+        command = "go version"
     elseif lsp == "rust_analyzer" then
         command = "rust --version"
     elseif lsp == "jdtls" then
@@ -77,6 +77,7 @@ for _, value in ipairs(check_installed) do
         table.insert(ensure_installed, value)
     end
 end
+deep_print(ensure_installed)
 
 require("mason-lspconfig").setup({
     ensure_installed = ensure_installed,
@@ -128,6 +129,8 @@ cmp.setup({
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<Up>"] = cmp.mapping.select_prev_item(cmp_select_opts),
         ["<Down>"] = cmp.mapping.select_next_item(cmp_select_opts),
+        ["<Tab>"] = cmp.mapping.select_next_item(cmp_select_opts),
+        ["<S-Tab>"] = cmp.mapping.select_prev_item(cmp_select_opts),
         ["<C-p>"] = cmp.mapping(function()
             if cmp.visible() then
                 cmp.select_prev_item(cmp_select_opts)

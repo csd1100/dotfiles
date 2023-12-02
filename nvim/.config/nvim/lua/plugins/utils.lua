@@ -116,7 +116,9 @@ return {
     },
     {
         "mcauley-penney/tidy.nvim",
-        event = "BufWritePre",
+        opts = {
+            filetype_exclude = { "markdown", "diff" },
+        },
         config = true,
     },
     {
