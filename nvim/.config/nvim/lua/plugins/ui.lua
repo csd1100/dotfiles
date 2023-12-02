@@ -165,8 +165,8 @@ return {
                             max_length = 1000,
                             tabs_color = {
                                 -- Same values as the general color option can be used here.
-                                active = "lualine_a_inactive", -- Color for active tab.
-                                inactive = "lualine_a_active", -- Color for inactive tab.
+                                active = "lualine_b_command", -- Color for active tab.
+                                inactive = "lualine_a_inactive", -- Color for inactive tab.
                             },
                             mode = 2,
                             fmt = function(name, context)
