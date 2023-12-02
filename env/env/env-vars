@@ -42,19 +42,18 @@ export CONFIG="$HOME/.config"
 
 unameOut="$(uname -s)"
 if [ $unameOut = "Darwin" ]; then
-    export JAVA_11_HOME="$(find /opt/homebrew/Cellar -type d -regex '.*openjdk@11/.*/libexec/openjdk.jdk/Contents/Home')"
-    export JAVA_17_HOME="$(find /opt/homebrew/Cellar -type d -regex '.*openjdk@17/.*/libexec/openjdk.jdk/Contents/Home')"
-    export JAVA_19_HOME="$(find /opt/homebrew/Cellar -type d -regex '.*openjdk@19/.*/libexec/openjdk.jdk/Contents/Home')"
-    JAVA_VERSION=$(java --version | awk -F ' ' 'NR==1{print $2}')
-    export JAVA_HOME=`find /opt/homebrew/Cellar -type d -regex '.*openjdk.*/$JAVA_VERSION/libexec/openjdk.jdk/Contents/Home'`
+    export JAVA_11_HOME="$(locate '/opt/homebrew/Cellar/openjdk@11/*/libexec/openjdk.jdk/Contents/Home')"
+    export JAVA_17_HOME="$(locate '/opt/homebrew/Cellar/openjdk@17/*/libexec/openjdk.jdk/Contents/Home')"
+    export JAVA_19_HOME="$(locate '/opt/homebrew/Cellar/openjdk@17/*/libexec/openjdk.jdk/Contents/Home')"
+    JAVA_VERSION=$(java -version | awk -F ' ' 'NR==1{print $2}')
+    export JAVA_HOME=`locate "/opt/homebrew/Cellar/openjdk*/${JAVA_VERSION}/libexec/openjdk.jdk/Contents/Home"`
 elif [ $unameOut = "Linux" ]; then
-    export JAVA_11_HOME="$(find /usr/lib/jvm -type d -name '*java-11-openjdk*')"
-    export JAVA_17_HOME="$(find /usr/lib/jvm -type d -name '*java-17-openjdk*')"
-    export JAVA_19_HOME="$(find /usr/lib/jvm -type d -name '*java-19-openjdk*')"
-    JAVA_VERSION=$(java --version | awk -F ' ' 'NR==1{print $2}' | cut -d "." -f1)
-    export JAVA_HOME=`find /usr/lib/jvm -type d -name "*java-${JAVA_VERSION}-openjdk*"`
+    export JAVA_11_HOME="$(locate '/usr/lib/jvm/*java-11-openjdk*')"
+    export JAVA_17_HOME="$(locate '/usr/lib/jvm/*java-17-openjdk*')"
+    export JAVA_19_HOME="$(locate '/usr/lib/jvm/*java-19-openjdk*')"
+    JAVA_VERSION=$(java -version | awk -F ' ' 'NR==1{print $2}' | cut -d "." -f1)
+    export JAVA_HOME=`locate "/usr/lib/jvm/*java-${JAVA_VERSION}-openjdk*"`
 fi
-
 # source overrides
 if [ -f "$HOME/env/overrides/env-vars" ]
 then
