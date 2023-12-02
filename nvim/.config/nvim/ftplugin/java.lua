@@ -66,12 +66,12 @@ end
 
 local runtimes = {
     {
-        name = "JavaSE-20",
-        path = os.getenv("JAVA_20_HOME")
+        name = "JavaSE-17",
+        path = os.getenv("JAVA_17_HOME")
     }
 }
 
-for _, java_ver in ipairs({ "11", "17", "19" }) do
+for _, java_ver in ipairs({ "11", "19"}) do
     if os.getenv("JAVA_" .. java_ver .. "_HOME") then
         table.insert(runtimes, {
             name = "JavaSE-" .. java_ver,
