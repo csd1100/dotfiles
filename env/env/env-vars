@@ -44,7 +44,7 @@ unameOut="$(uname -s)"
 if [ $unameOut = "Darwin" ]; then
     export JAVA_11_HOME="$(locate -l 1 '/opt/homebrew/Cellar/openjdk@11/*/libexec/openjdk.jdk/Contents/Home')"
     export JAVA_17_HOME="$(locate -l 1 '/opt/homebrew/Cellar/openjdk@17/*/libexec/openjdk.jdk/Contents/Home')"
-    export JAVA_19_HOME="$(locate -l 1 '/opt/homebrew/Cellar/openjdk@17/*/libexec/openjdk.jdk/Contents/Home')"
+    export JAVA_19_HOME="$(locate -l 1 '/opt/homebrew/Cellar/openjdk@19/*/libexec/openjdk.jdk/Contents/Home')"
     export JAVA_VERSION="$(java --version | awk -F ' ' 'NR==1{print $2}')"
     export JAVA_HOME=`locate -l 1 "/opt/homebrew/Cellar/openjdk*/${JAVA_VERSION}/libexec/openjdk.jdk/Contents/Home"`
 elif [ $unameOut = "Linux" ]; then

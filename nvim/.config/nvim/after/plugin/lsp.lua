@@ -84,7 +84,7 @@ require("mason-lspconfig").setup({
     automatic_installation = true,
     handlers = {
         lsp_zero.default_setup,
-        jdtls = lsp_zero.noop,
+        jdtls = function() end,
     },
 })
 
