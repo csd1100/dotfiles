@@ -19,9 +19,9 @@ lsp_zero.on_attach(function(client, bufnr)
         modes_module.add_maps("LSP", lspMaps.get_lsp_maps())
 
         -- ignore toggle_mode for some lsps
-        if not vim.tbl_contains(ignore_on_attach_toggle, client.name) then
-            modes_module.toggle_mode("LSP", { buffer = bufnr })
-        end
+        -- if not vim.tbl_contains(ignore_on_attach_toggle, client.name) then
+        modes_module.enable_mode("LSP", { buffer = bufnr })
+        -- end
 
         map("n", "<leader>ldis", function()
             require("modes").toggle_mode(
@@ -77,7 +77,6 @@ for _, value in ipairs(check_installed) do
         table.insert(ensure_installed, value)
     end
 end
-deep_print(ensure_installed)
 
 require("mason-lspconfig").setup({
     ensure_installed = ensure_installed,

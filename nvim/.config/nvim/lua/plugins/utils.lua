@@ -187,4 +187,21 @@ return {
             require("neo-tree").setup()
         end,
     },
+    {
+        {
+            "akinsho/toggleterm.nvim",
+            version = "*",
+            opts = {
+                size = 20,
+                open_mapping = [[<c-\>]],
+                hide_numbers = true,
+                autochdir = true,
+                persist_mode = true,
+                direction = "float",
+                float_opts = {
+                    -- border = "curved",
+                },
+            },
+        },
+    },
 }

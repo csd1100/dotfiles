@@ -43,7 +43,7 @@ return {
         enabled = true,
         name = "catppuccin",
         opts = {
-            flavour = "macchiato",
+            flavour = "frappe",
             transparent_background = false,
         },
         init = function()
