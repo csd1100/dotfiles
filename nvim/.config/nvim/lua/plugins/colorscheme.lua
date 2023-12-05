@@ -47,7 +47,24 @@ return {
             transparent_background = false,
         },
         init = function()
-            vim.cmd.colorscheme("catppuccin")
+            -- vim.cmd.colorscheme("catppuccin")
+        end,
+    },
+    {
+        "rebelot/kanagawa.nvim",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        name = "kanagawa",
+        opts = {
+            theme = "wave",
+            background = {
+                dark = "wave",
+                light = "lotus",
+            },
+        },
+        init = function()
+            vim.cmd.colorscheme("kanagawa")
         end,
     },
 }
