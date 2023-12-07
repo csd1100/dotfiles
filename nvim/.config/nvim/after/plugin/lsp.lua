@@ -1,11 +1,6 @@
 local map = require("config.keymap-utils").map
 local lsp_zero = require("lsp-zero")
 
-local ignore_on_attach_toggle = {
-    "jdtls",
-    "null-ls",
-}
-
 lsp_zero.on_attach(function(client, bufnr)
     local status, modes_module = pcall(require, "modes")
     local lspMaps = require("config.lsp-keymaps")
@@ -59,21 +54,23 @@ local check_installed = {
 local function is_installed(lsp)
     local command
     if lsp == "tsserver" then
-        command = "node --version"
+        command = { "node", "--version" }
     elseif lsp == "gopls" then
-        command = "go version"
+        command = { "go", "version" }
     elseif lsp == "rust_analyzer" then
-        command = "rust --version"
+        command = { "rust", " --version" }
     elseif lsp == "jdtls" then
-        command = "java --version"
+        command = { "java", "--version" }
     else
         return nil
     end
-    return os.execute(command .. " &> /dev/null")
+
+    local status, _ = pcall(vim.system, command)
+    return status
 end
 
 for _, value in ipairs(check_installed) do
-    if is_installed(value) ~= nil and is_installed(value) ~= 32512 then
+    if is_installed(value) then
         table.insert(ensure_installed, value)
     end
 end
