@@ -28,12 +28,12 @@ map("n", "<leader>b", ":Telescope buffers<CR>", { desc = "List Open Buffers" })
 map("n", "<leader>gp", ":Telescope projects<CR>", { desc = "Projects" })
 map(
     "n",
-    "<C-S-f>",
+    "<leader>f",
     ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>"
 )
 map(
     "v",
-    "<C-S-f>",
+    "<leader>f",
     ":lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<CR>"
 )
 map("n", "<C-S-h>", ":Telescope help_tags<CR>")

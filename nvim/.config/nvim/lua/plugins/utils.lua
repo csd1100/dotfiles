@@ -49,6 +49,7 @@ return {
                     "-g",
                     "!{.git,node_modules}",
                 },
+                theme = "dropdown",
             },
             pickers = {
                 find_files = {
@@ -62,10 +63,12 @@ return {
                         "!{.git,node_modules}",
                     },
                     prompt_prefix = "🔍",
+                    theme = "dropdown",
                 },
                 buffers = {
                     sort_mru = true,
                     ignore_current_buffer = true,
+                    theme = "dropdown",
                 },
             },
         },
@@ -173,19 +176,6 @@ return {
             datapath = vim.fn.stdpath("data"),
         },
         config = true,
-    },
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        keys = {
-            { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
-        },
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        },
-        config = function()
-            require("neo-tree").setup()
-        end,
     },
     {
         {
