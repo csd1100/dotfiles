@@ -9,6 +9,7 @@
     - xsel (linux) - copy to system clipboard
 - jq
 - ansible
+- grc - colorize output using regex
 ----------------- mac ----------------------------
 - yabai
 - skhd
