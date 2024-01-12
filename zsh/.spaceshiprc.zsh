@@ -2,6 +2,7 @@ SPACESHIP_PROMPT_ORDER=(
     user          # Username section
     dir           # Current directory section
     git           # Git section (git_branch + git_status)
+    docker_compose
     venv          # virtualenv section
     conda         # conda virtualenv section
     async
@@ -13,9 +14,20 @@ SPACESHIP_PROMPT_ORDER=(
 )
 
 SPACESHIP_RPROMPT_ORDER=(
-  time          # Time stamps section
+    node
+    golang
+    java
+    package
+    time          # Time stamps section
 )
+
+# sections
 SPACESHIP_TIME_SHOW=true
+SPACESHIP_PACKAGE_SHOW=true
+SPACESHIP_NODE_SHOW=true
+SPACESHIP_GOLANG_SHOW=true
+SPACESHIP_JAVA_SHOW=true
+SPACESHIP_DOCKER_COMPOSE_SHOW=true
 
 # vi_mode
 spaceship_vi_mode_enable
