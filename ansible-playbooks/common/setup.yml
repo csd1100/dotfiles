@@ -70,6 +70,14 @@
     - zsh
     - cli
 
+- name: spaceship-vi-mode install (git)
+  ansible.builtin.git:
+    repo: 'https://github.com/spaceship-prompt/spaceship-vi-mode'
+    dest: "~/.oh-my-zsh/custom/plugins/spaceship-vi-mode"
+  tags:
+    - zsh
+    - cli
+
 - name: Create spaceship-prompt symbolic link
   file:
     src: "~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme"
