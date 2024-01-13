@@ -18,6 +18,21 @@
       tags:
         - kitty
       block:
+        - name: Install ImageMagick dependency
+          become: true
+          block:
+            - name: Install imagemagick on Debian and Darwin
+              ansible.builtin.package:
+                name: imagemagick
+                state: present
+              when: ansible_os_family == 'Debian' or ansible_os_family == 'Darwin'
+
+            - name: Install ImageMagick on Fedora
+              ansible.builtin.dnf:
+                name: ImageMagick
+                state: present
+              when: ansible_os_family == 'RedHat'
+
         - name: Set kitty installation directory for linux
           ansible.builtin.set_fact:
             kitty_installation_dir: "{{ kitty_linux_installation_dir }}"
@@ -34,6 +49,7 @@
             curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
           args:
             creates: "{{ kitty_installation_dir }}"
+            executable: /bin/bash
 
         - name: Create kitty desktop file
           ansible.builtin.shell: cd ~/dotfiles/kitty/.config/kitty && ./kitty-desktop
@@ -76,13 +92,15 @@
       block:
         - name: Install nvm
           ansible.builtin.shell: |
-           PROFILE=/dev/null curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | /bin/sh
+           PROFILE=/dev/null curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | /bin/bash
           args:
             creates: ~/.nvm/
+            executable: /bin/bash
 
         - name: Load nvm and install node 18, 20
           ansible.builtin.shell:
-            source ~/.nvm/nvm.sh &&
+            export NVM_DIR="$HOME/.nvm" &&
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
             nvm install lts/hydrogen lts/iron &&
             nvm alias default lts/iron
           args:
@@ -90,7 +108,8 @@
 
         - name: Validate node is installed
           ansible.builtin.shell:
-            source ~/.nvm/nvm.sh &&
+            export NVM_DIR="$HOME/.nvm" &&
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
             nvm use lts/iron &&
             nvm use lts/hydrogen &&
             nvm use default &&
@@ -125,10 +144,6 @@
               ansible.builtin.file:
                 state: absent
                 path: /usr/local/go/
-
-            - ansible.builtin.file:
-                path: /tmp/go-test/
-                state: directory
 
             - name: Linux install go
               become: true

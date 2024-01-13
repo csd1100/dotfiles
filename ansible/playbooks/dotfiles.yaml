@@ -9,40 +9,25 @@
         - name: Stow dotfiles linux
           when: ansible_system == 'Linux'
           block:
-            - name: Run setup script
+            - name: Run linux setup script
               ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup linux
               args:
                 chdir: ~/dotfiles/
-            - name: Validate linux setup succeeded
-              ansible.builtin.lineinfile:
-                path: /tmp/dotfiles-setup
-                regexp: 'linux setup'
-                state: present
 
         - name: Stow dotfiles Darwin
           when: ansible_os_family == 'Darwin'
           block:
-            - name: Run setup script
+            - name: Run darwin setup script
               ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup darwin
               args:
                 chdir: ~/dotfiles/
-            - name: Validate darwin setup succeeded
-              ansible.builtin.lineinfile:
-                path: /tmp/dotfiles-setup
-                regexp: 'darwin setup'
-                state: present
 
         - name: Stow dotfiles common
           block:
-            - name: Run setup script
+            - name: Run common setup script
               ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup common
               args:
                 chdir: ~/dotfiles/
-            - name: Validate common setup succeeded
-              ansible.builtin.lineinfile:
-                path: /tmp/dotfiles-setup
-                regexp: 'common setup'
-                state: present
 
     - name: Setup Fonts
       tags:
@@ -67,13 +52,13 @@
         - name: Darwin fonts setup
           when: ansible_os_family == 'Darwin'
           block:
-            - name: Create a fonts directory if it does not exist (Linux)
+            - name: Create a fonts directory if it does not exist (Darwin)
               ansible.builtin.file:
                 path: ~/Library/Fonts
                 state: directory
                 mode: '0755'
 
-            - name: Copy fonts (Linux)
+            - name: Copy fonts (Darwin)
               ansible.builtin.copy:
                 src: ~/dotfiles/fonts/
                 dest: ~/Library/Fonts
@@ -91,7 +76,7 @@
 
         - name: Install oh-my-zsh (git)
           ansible.builtin.shell:
-            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
           args:
             creates: "~/.oh-my-zsh/"
 
@@ -106,12 +91,6 @@
               ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup --single zsh
               args:
                 chdir: ~/dotfiles/
-
-            - name: Validate zsh setup succeeded
-              ansible.builtin.lineinfile:
-                path: /tmp/dotfiles-setup
-                regexp: 'zsh setup'
-                state: present
 
         - name: Install zsh-autosuggestions (git)
           ansible.builtin.git:
@@ -148,7 +127,7 @@
           ansible.builtin.git:
             repo: 'https://github.com/spaceship-prompt/spaceship-vi-mode'
             dest: "~/.oh-my-zsh/custom/plugins/spaceship-vi-mode"
-            version: master
+            version: main
 
         - name: Create spaceship-prompt symbolic link
           ansible.builtin.file:
@@ -161,3 +140,17 @@
         path: ~/work
         state: directory
         mode: '755'
+
+    - name: Run updatedb for locate
+      block:
+        - name: Run updatedb for locate linux
+          become: true
+          ansible.builtin.shell:
+            updatedb
+          when: ansible_system == "Linux"
+
+        - name: Run updatedb for locate Darwin
+          become: true
+          ansible.builtin.shell:
+            /usr/libexec/locate.updatedb
+          when: ansible_os_family == "Darwin"

@@ -1,6 +1,6 @@
 ---
-- import_playbook: ./init.yml
-- import_playbook: ./install-essentials.yml
-- import_playbook: ./install-desktop.yml
-- import_playbook: ./install-dev.yml
-- import_playbook: ./dotfiles.yml
+- import_playbook: ./init.yaml
+- import_playbook: ./install-essentials.yaml
+- import_playbook: ./install-desktop.yaml
+- import_playbook: ./install-dev.yaml
+- import_playbook: ./dotfiles.yaml

@@ -36,6 +36,15 @@
         state: latest
       tags: cli
 
+    - name: linux common cli tools
+      become: true
+      ansible.builtin.package:
+        name:
+          - plocate
+        state: latest
+      tags: cli
+      when: ansible_system == 'Linux'
+
     - name: debian essentials
       become: true
       ansible.builtin.apt:
@@ -43,7 +52,6 @@
           - build-essential
           - software-properties-common
           - libreadline-dev
-          - imagemagick
         state: latest
       tags: essentials
       when: (ansible_os_family == 'Debian')
@@ -54,7 +62,6 @@
         name:
           - kernel-devel
           - dnf-plugins-core
-          - ImageMagick
         state: latest
       tags: essentials
       when: (ansible_os_family == 'RedHat')
@@ -63,7 +70,6 @@
       ansible.builtin.homebrew:
         name:
           - coreutils
-          - imagemagick
         state: latest
       tags: essentials
       when: (ansible_os_family == 'Darwin')
