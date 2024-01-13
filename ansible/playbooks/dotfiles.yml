@@ -1,0 +1,163 @@
+---
+- name: Dotfiles
+  hosts: all
+  tasks:
+    - name: Stow Dotfiles
+      tags:
+        - dotfiles
+      block:
+        - name: Stow dotfiles linux
+          when: ansible_system == 'Linux'
+          block:
+            - name: Run setup script
+              ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup linux
+              args:
+                chdir: ~/dotfiles/
+            - name: Validate linux setup succeeded
+              ansible.builtin.lineinfile:
+                path: /tmp/dotfiles-setup
+                regexp: 'linux setup'
+                state: present
+
+        - name: Stow dotfiles Darwin
+          when: ansible_os_family == 'Darwin'
+          block:
+            - name: Run setup script
+              ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup darwin
+              args:
+                chdir: ~/dotfiles/
+            - name: Validate darwin setup succeeded
+              ansible.builtin.lineinfile:
+                path: /tmp/dotfiles-setup
+                regexp: 'darwin setup'
+                state: present
+
+        - name: Stow dotfiles common
+          block:
+            - name: Run setup script
+              ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup common
+              args:
+                chdir: ~/dotfiles/
+            - name: Validate common setup succeeded
+              ansible.builtin.lineinfile:
+                path: /tmp/dotfiles-setup
+                regexp: 'common setup'
+                state: present
+
+    - name: Setup Fonts
+      tags:
+        - dotfiles
+        - fonts
+      block:
+        - name: Linux fonts setup
+          when: ansible_system == 'Linux'
+          block:
+            - name: Create a fonts directory if it does not exist (Linux)
+              ansible.builtin.file:
+                path: ~/.local/share/fonts
+                state: directory
+                mode: '0755'
+
+            - name: Copy fonts (Linux)
+              ansible.builtin.copy:
+                src: ~/dotfiles/fonts/
+                dest: ~/.local/share/fonts/
+                mode: '0755'
+
+        - name: Darwin fonts setup
+          when: ansible_os_family == 'Darwin'
+          block:
+            - name: Create a fonts directory if it does not exist (Linux)
+              ansible.builtin.file:
+                path: ~/Library/Fonts
+                state: directory
+                mode: '0755'
+
+            - name: Copy fonts (Linux)
+              ansible.builtin.copy:
+                src: ~/dotfiles/fonts/
+                dest: ~/Library/Fonts
+                mode: '0755'
+
+    - name: Zsh setup
+      tags:
+        - zsh
+      block:
+        - name: Change shell to zsh (shell)
+          become: true
+          ansible.builtin.user:
+            name: "{{ ansible_user_id }}"
+            shell: /bin/zsh
+
+        - name: Install oh-my-zsh (git)
+          ansible.builtin.shell:
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+          args:
+            creates: "~/.oh-my-zsh/"
+
+        - name: Remove existing .zshrc
+          ansible.builtin.file:
+            path: ~/.zshrc
+            state: absent
+
+        - name: Dotfiles Setup (zsh)
+          block:
+            - name: Run zsh setup script
+              ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup --single zsh
+              args:
+                chdir: ~/dotfiles/
+
+            - name: Validate zsh setup succeeded
+              ansible.builtin.lineinfile:
+                path: /tmp/dotfiles-setup
+                regexp: 'zsh setup'
+                state: present
+
+        - name: Install zsh-autosuggestions (git)
+          ansible.builtin.git:
+            repo: 'https://github.com/zsh-users/zsh-autosuggestions'
+            dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+            version: master
+
+        - name: Install zsh-completions (git)
+          ansible.builtin.git:
+            repo: 'https://github.com/zsh-users/zsh-completions'
+            dest: "~/.oh-my-zsh/custom/plugins/zsh-completions"
+            version: master
+
+        - name: Install zsh-syntax-highlighting (git)
+          ansible.builtin.git:
+            repo: 'https://github.com/zsh-users/zsh-syntax-highlighting'
+            dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+            version: master
+
+        - name: Install zsh-history-substring-search (git)
+          ansible.builtin.git:
+            repo: 'https://github.com/zsh-users/zsh-history-substring-search'
+            dest: "~/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
+            version: master
+
+        - name: Install spaceship-prompt (git)
+          ansible.builtin.git:
+            repo: 'https://github.com/spaceship-prompt/spaceship-prompt'
+            dest: "~/.oh-my-zsh/custom/themes/spaceship-prompt"
+            version: master
+            depth: 1
+
+        - name: Install spaceship-vi-mode (git)
+          ansible.builtin.git:
+            repo: 'https://github.com/spaceship-prompt/spaceship-vi-mode'
+            dest: "~/.oh-my-zsh/custom/plugins/spaceship-vi-mode"
+            version: master
+
+        - name: Create spaceship-prompt symbolic link
+          ansible.builtin.file:
+            src: "~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme"
+            dest: "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+            state: link
+
+    - name: Create a work directory if it does not exist
+      ansible.builtin.file:
+        path: ~/work
+        state: directory
+        mode: '755'

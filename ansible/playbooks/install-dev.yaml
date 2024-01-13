@@ -76,18 +76,27 @@
       block:
         - name: Install nvm
           ansible.builtin.shell: |
-           if test -v BASH; then set -o pipefail; fi
            PROFILE=/dev/null curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | /bin/sh
           args:
             creates: ~/.nvm/
 
         - name: Load nvm and install node 18, 20
           ansible.builtin.shell:
-            export NVM_DIR="$HOME/.nvm" &&
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
-            nvm install lts/hydrogen;
-            nvm install lts/iron;
+            source ~/.nvm/nvm.sh &&
+            nvm install lts/hydrogen lts/iron &&
             nvm alias default lts/iron
+          args:
+            executable: /bin/bash
+
+        - name: Validate node is installed
+          ansible.builtin.shell:
+            source ~/.nvm/nvm.sh &&
+            nvm use lts/iron &&
+            nvm use lts/hydrogen &&
+            nvm use default &&
+            node --version | grep "v20"
+          args:
+            executable: /bin/bash
 
     - name: Install golang
       tags:
@@ -142,6 +151,114 @@
       tags:
         - dev
         - rust
-      ansible.builtin.shell: |
-        set -o pipefail
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+      block:
+        - name: Install rust using rustup
+          ansible.builtin.shell:
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          args:
+            creates: ~/.rustup/
+
+        - name: Validate rust is installed
+          ansible.builtin.shell:
+            ~/.cargo/bin/rustc --version
+
+    - name: Install docker linux
+      tags:
+        - dev
+        - docker
+      block:
+        - name: Ubuntu Docker Setup
+          become: true
+          block:
+            - name: Add apt docker gpg key
+              ansible.builtin.apt_key:
+                url: https://download.docker.com/linux/ubuntu/gpg
+                state: present
+            - name: Add apt docker repository
+              ansible.builtin.apt_repository:
+                repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+                state: present
+          when: ansible_distribution == 'Ubuntu'
+
+        - name: Fedora docker setup
+          become: true
+          ansible.builtin.get_url:
+            url: https://download.docker.com/linux/fedora/docker-ce.repo
+            dest: /etc/yum.repos.d/docer-ce.repo
+          when: ansible_distribution == 'Fedora'
+
+        - name: Install docker
+          become: true
+          ansible.builtin.package:
+            name:
+            - docker-ce
+            - docker-ce-cli
+            - containerd.io
+            - docker-buildx-plugin
+            - docker-compose-plugin
+            state: latest
+
+        - name: Add docker usergroup
+          become: true
+          ansible.builtin.group:
+            name: docker
+            state: present
+            gid: 1750
+
+        - name: Add user to docker group
+          become: true
+          ansible.builtin.user:
+            name: "{{ ansible_user_id }}"
+            append: yes
+            groups: docker
+
+        - name: Enable docker service
+          become: true
+          ansible.builtin.systemd:
+            name: docker
+            state: started
+            enabled: true
+      when: ansible_system == "Linux"
+
+    - name: Install neovim nightly
+      tags:
+        - dev
+        - nvim
+      block:
+      - name: nvim dependencies
+        become: true
+        ansible.builtin.package:
+          name:
+            - luajit
+            - luarocks
+          state: latest
+        tags: nvim-deps
+
+      - name: Install neovim linux
+        block:
+          - name: Add neovim apt ppa
+            become: true
+            ansible.builtin.apt_repository:
+              repo: ppa:neovim-ppa/unstable
+            when: ansible_os_family == 'Debian'
+
+          - name: Add neovim dnf copr
+            become: true
+            community.general.copr:
+              name: agriffis/neovim-nightly
+            when: ansible_os_family == 'RedHat'
+
+          - name: Install neovim Linux
+            become: true
+            ansible.builtin.package:
+              name:
+                - neovim
+                - python3-neovim
+              state: latest
+        when: ansible_system == "Linux"
+
+      - name: Install neovim Darwin
+        ansible.builtin.homebrew:
+          name: nvim
+          state: head
+        when: ansible_system == "Darwin"

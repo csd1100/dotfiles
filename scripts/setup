@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+set -e
 
 ARG=$1
+
+touch /tmp/dotfiles-setup
 
 case "$ARG" in
 darwin)
@@ -26,5 +29,11 @@ pushd "$DOTFILES" >/dev/null
 for util in "${config[@]}"; do
 	./scripts/stower "$util"
 done
+
+if [ $ARG = "--single" ]; then
+    echo "$2 setup" >>/tmp/dotfiles-setup
+else
+    echo "$ARG setup" >>/tmp/dotfiles-setup
+fi
 
 popd

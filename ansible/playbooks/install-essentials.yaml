@@ -36,15 +36,6 @@
         state: latest
       tags: cli
 
-    - name: common dependencies
-      become: true
-      ansible.builtin.package:
-        name:
-          - luajit
-          - luarocks
-        state: latest
-      tags: deps
-
     - name: debian essentials
       become: true
       ansible.builtin.apt:
