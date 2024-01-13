@@ -1,0 +1,51 @@
+---
+- name: Install Desktop Environment
+  hosts: all
+  become: no
+  tasks:
+    - name: linux desktop environment
+      become: true
+      ansible.builtin.package:
+        name:
+          - picom
+          - i3
+          - polybar
+          - rofi
+          - feh
+          - pulseaudio
+          - pavucontrol
+          - playerctl
+        state: latest
+      when: ( ansible_os_family == "Debian" or ansible_os_family == "RedHat" )
+
+    - name: darwin desktop environment
+      block:
+        - name: install yabai, skhd, sketchybar
+          community.general.homebrew:
+            name:
+              - yabai
+              - skhd
+              - sketchybar
+            state: latest
+
+        # TODO:
+        - name: run visudo checksum to start yabai with script-additions
+          shell: echo 'test'
+          register: visudo_op
+
+        # TODO:
+        - name: enable skhd
+          shell: echo 'test'
+          register: skhd_service_op
+
+        # TODO:
+        - name: enable yabai
+          shell: echo 'test'
+          register: yabai_service_op
+
+        # TODO:
+        - name: enable sketchybar
+          shell: echo 'test'
+          register: sketchybar_service_op
+
+      when: ( ansible_os_family == "Darwin" )

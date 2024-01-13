@@ -1,0 +1,78 @@
+---
+- name: Install Essentials
+  hosts: all
+  become: no
+  tasks:
+    - name: essential packages
+      become: true
+      ansible.builtin.package:
+        name:
+          - zsh
+          - git
+          - vim
+          - curl
+          - wget
+          - gcc
+          - g++
+          - make
+          - unzip
+          - gnupg
+          - ca-certificates
+        state: latest
+      tags: essentials
+
+    - name: common cli tools
+      become: true
+      ansible.builtin.package:
+        name:
+          - jq
+          - fzf
+          - grc
+          - htop
+          - stow
+          - ranger
+          - ripgrep
+          - neofetch
+        state: latest
+      tags: cli
+
+    - name: common dependencies
+      become: true
+      ansible.builtin.package:
+        name:
+          - luajit
+          - luarocks
+        state: latest
+      tags: deps
+
+    - name: debian essentials
+      become: true
+      ansible.builtin.apt:
+        name:
+          - build-essential
+          - software-properties-common
+          - libreadline-dev
+          - imagemagick
+        state: latest
+      tags: essentials
+      when: (ansible_os_family == 'Debian')
+
+    - name: redhat essentials
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - kernel-devel
+          - dnf-plugins-core
+          - ImageMagick
+        state: latest
+      tags: essentials
+      when: (ansible_os_family == 'RedHat')
+
+    - name: darwin essentials
+      community.general.homebrew:
+        name:
+          - coreutils
+          - imagemagick
+        state: latest
+      tags: essentials
+      when: (ansible_os_family == 'Darwin')

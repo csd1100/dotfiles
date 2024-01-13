@@ -1,0 +1,5 @@
+---
+- import_playbook: ./init.yml
+- import_playbook: ./install-essentials.yml
+- import_playbook: ./install-desktop.yml
+- import_playbook: ./install-dev.yml

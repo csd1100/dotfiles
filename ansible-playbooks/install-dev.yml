@@ -1,0 +1,12 @@
+---
+- name: Dev Setup
+  hosts: all
+  become: no
+  tasks:
+    - name: install kitty
+      shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+      args:
+        creates: /Applications/kitty.app or ~/.local/kitty.app/
+      tags:
+        - dev
+        - kitty

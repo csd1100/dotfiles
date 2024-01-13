@@ -1,0 +1,81 @@
+---
+- name: Init
+  hosts: all
+  become: no
+  tasks:
+    - name: Brew install
+      ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      tags:
+        - setup
+      when: (ansible_os_family == 'Darwin')
+
+    - name: Brew Update
+      community.general.homebrew:
+        update_homebrew: true
+        upgrade_all: true
+      tags:
+        - init
+        - always
+      when: (ansible_os_family == 'Darwin')
+
+    - name: dnf Update
+      become: yes
+      ansible.builtin.dnf:
+        autoremove: true
+        update_cache: true
+      tags:
+        - always
+      when: (ansible_os_family == 'RedHat')
+
+    - name: dnf add distribution gpg
+      become: yes
+      ansible.builtin.dnf:
+         name: distribution-gpg-keys
+         state: present
+      tags:
+        - essentials
+      when: (ansible_os_family == 'RedHat')
+
+    - name: Enable the RPM Fusion repositories
+      become: yes
+      block:
+        - name: get fedora version
+          ansible.builtin.shell: rpm -E %fedora
+          register: fedora_version
+
+        - name: Import a RPM Fusion free key
+          ansible.builtin.rpm_key:
+            state: present
+            key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{fedora_version.stdout}}
+
+        - name: Import a RPM Fusion nonfree key
+          ansible.builtin.rpm_key:
+            state: present
+            key: /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{fedora_version.stdout}}
+
+        - name: enable repositories
+          dnf:
+            name:
+              - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{fedora_version.stdout}}.noarch.rpm"
+              - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{fedora_version.stdout}}.noarch.rpm"
+            state: present
+      when: ansible_distribution == 'Fedora'
+
+    - name: dnf Update
+      become: yes
+      dnf:
+        autoremove: true
+        update_cache: true
+      tags:
+        - always
+      when: (ansible_os_family == 'RedHat')
+
+    - name: Apt Update
+      become: yes
+      apt:
+        autoclean: true
+        autoremove: true
+        update_cache: true
+      tags:
+        - always
+      when: (ansible_os_family == 'Debian')
