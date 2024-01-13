@@ -74,6 +74,9 @@ return {
         ft = "java",
     },
     {
+        "mfussenegger/nvim-ansible",
+    },
+    {
         "csd1100/csd-snips.nvim",
         -- dev = true,
         ft = {
