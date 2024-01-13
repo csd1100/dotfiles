@@ -38,6 +38,7 @@ return {
             "javascript",
             "typescript",
             "lua",
+            "sh",
         },
         config = function()
             local null_ls = require("null-ls")
