@@ -1,7 +1,7 @@
 ---
 - name: Install Essentials
   hosts: all
-  become: no
+  become: false
   tasks:
     - name: essential packages
       become: true
@@ -69,7 +69,7 @@
       when: (ansible_os_family == 'RedHat')
 
     - name: darwin essentials
-      community.general.homebrew:
+      ansible.builtin.homebrew:
         name:
           - coreutils
           - imagemagick

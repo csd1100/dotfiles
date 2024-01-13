@@ -1,7 +1,7 @@
 ---
 - name: Install Desktop Environment
   hosts: all
-  become: no
+  become: false
   tasks:
     - name: linux desktop environment
       become: true
@@ -12,7 +12,7 @@
           - polybar
           - rofi
           - feh
-          - pulseaudio
+          # - pulseaudio
           - pavucontrol
           - playerctl
         state: latest
@@ -21,7 +21,7 @@
     - name: darwin desktop environment
       block:
         - name: install yabai, skhd, sketchybar
-          community.general.homebrew:
+          ansible.builtin.homebrew:
             name:
               - yabai
               - skhd

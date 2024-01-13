@@ -1,5 +1,5 @@
 - name: nvim-nightly install (Brew)
-  community.general.homebrew:
+  ansible.builtin.homebrew:
     name: nvim
     state: head
   tags:
@@ -18,7 +18,7 @@
 - name: Dotfiles Setup (Darwin)
   shell: cd ~/dotfiles && DOTFILES=~/dotfiles ./scripts/setup darwin
   tags:
-  - dotfiles
+    - dotfiles
 
 - name: enable sketchybar service (Brew)
   shell: brew services start sketchybar

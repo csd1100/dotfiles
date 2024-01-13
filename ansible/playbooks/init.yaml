@@ -1,7 +1,7 @@
 ---
 - name: Init
   hosts: all
-  become: no
+  become: false
   tasks:
     - name: Brew install
       ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -10,7 +10,7 @@
       when: (ansible_os_family == 'Darwin')
 
     - name: Brew Update
-      community.general.homebrew:
+      ansible.builtin.homebrew:
         update_homebrew: true
         upgrade_all: true
       tags:
@@ -19,7 +19,7 @@
       when: (ansible_os_family == 'Darwin')
 
     - name: dnf Update
-      become: yes
+      become: true
       ansible.builtin.dnf:
         autoremove: true
         update_cache: true
@@ -28,7 +28,7 @@
       when: (ansible_os_family == 'RedHat')
 
     - name: dnf add distribution gpg
-      become: yes
+      become: true
       ansible.builtin.dnf:
          name: distribution-gpg-keys
          state: present
@@ -37,7 +37,7 @@
       when: (ansible_os_family == 'RedHat')
 
     - name: Enable the RPM Fusion repositories
-      become: yes
+      become: true
       block:
         - name: get fedora version
           ansible.builtin.shell: rpm -E %fedora
@@ -62,7 +62,7 @@
       when: ansible_distribution == 'Fedora'
 
     - name: dnf Update
-      become: yes
+      become: true
       dnf:
         autoremove: true
         update_cache: true
@@ -71,7 +71,7 @@
       when: (ansible_os_family == 'RedHat')
 
     - name: Apt Update
-      become: yes
+      become: true
       apt:
         autoclean: true
         autoremove: true
