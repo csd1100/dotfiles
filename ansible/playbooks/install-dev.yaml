@@ -5,6 +5,8 @@
   vars:
     kitty_macos_installation_dir: /Applications/kitty.app/
     kitty_linux_installation_dir: ~/.local/kitty.app/
+  tags:
+    - dev
   tasks:
     - name: Clone dotfiles if not done
       ansible.builtin.git:
@@ -17,14 +19,20 @@
     - name: Set fact to become or not
       block:
         - name: Set become to true for linux
+          when: ansible_system == "Linux"
           ansible.builtin.set_fact:
             become_value: true
-          when: ansible_system == "Linux"
+          tags:
+            - linux
+            - fedora
+            - ubuntu
 
         - name: Set become to false for darwin
+          when: ansible_system == "Darwin"
           ansible.builtin.set_fact:
             become_value: false
-          when: ansible_system == "Darwin"
+          tags:
+            - darwin
 
     - name: Install kitty
       tags:
@@ -34,27 +42,40 @@
           block:
             - name: Install imagemagick on Debian and Darwin
               become: "{{ become_value }}"
+              when: ansible_os_family == 'Debian' or ansible_os_family == 'Darwin'
               ansible.builtin.package:
                 name: imagemagick
                 state: present
-              when: ansible_os_family == 'Debian' or ansible_os_family == 'Darwin'
+              tags:
+                - darwin
+                - ubuntu
+                - linux
 
             - name: Install ImageMagick on Fedora
               become: true
+              when: ansible_os_family == 'RedHat'
               ansible.builtin.dnf:
                 name: ImageMagick
                 state: present
-              when: ansible_os_family == 'RedHat'
+              tags:
+                - fedora
+                - linux
 
         - name: Set kitty installation directory for linux
+          when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
           ansible.builtin.set_fact:
             kitty_installation_dir: "{{ kitty_linux_installation_dir }}"
-          when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
+          tags:
+            - fedora
+            - ubuntu
+            - linux
 
         - name: Set kitty installation directory for macos
+          when: (ansible_os_family == "Darwin")
           ansible.builtin.set_fact:
             kitty_installation_dir: "{{ kitty_macos_installation_dir }}"
-          when: (ansible_os_family == "Darwin")
+          tags:
+            - darwin
 
         - name: Install kitty
           ansible.builtin.shell: |
@@ -63,45 +84,62 @@
           args:
             creates: "{{ kitty_installation_dir }}"
             executable: /bin/bash
+          tags:
+            - fedora
+            - ubuntu
+            - darwin
+            - linux
 
         - name: Create kitty desktop file
           ansible.builtin.shell: cd ~/dotfiles/kitty/.config/kitty && ./kitty-desktop
+          when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
           args:
             creates: ~/.local/share/applications/kitty.desktop
-          when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
+          tags:
+            - fedora
+            - ubuntu
+            - linux
 
     - name: Install jdk
       tags:
-        - dev
         - jdk
       block:
         - name: Debian install jdk 11, 17
           become: true
+          when: ansible_os_family == 'Debian'
           ansible.builtin.apt:
             name:
               - openjdk-11-jdk
               - openjdk-17-jdk
-          when: ansible_os_family == 'Debian'
+          tags:
+            - ubuntu
 
         - name: RedHat install jdk 11, 17
           become: true
+          when: ansible_os_family == 'RedHat'
           ansible.builtin.dnf:
             name:
               - java-11-openjdk
               - java-17-openjdk
-          when: ansible_os_family == 'RedHat'
+          tags:
+            - fedora
 
         - name: Darwin install jdk 11, 17
+          when: ansible_os_family == 'Darwin'
           community.general.homebrew:
             name:
               - openjdk@11
               - openjdk@17
-          when: ansible_os_family == 'Darwin'
+          tags:
+            - darwin
 
     - name: Install node 18, 20
       tags:
-        - dev
         - node
+        - darwin
+        - linux
+        - fedora
+        - ubuntu
       block:
         - name: Install nvm
           ansible.builtin.shell: |
@@ -135,11 +173,14 @@
 
     - name: Install golang
       tags:
-        - dev
         - golang
       block:
         - name: Install golang linux
           when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
+          tags:
+            - linux
+            - fedora
+            - ubuntu
           block:
             - name: Fetch latest go version
               ansible.builtin.uri:
@@ -178,14 +219,19 @@
                 executable: /bin/bash
 
         - name: Install golang mac
+          when: ansible_os_family == 'Darwin'
           community.general.homebrew:
             name: golang
-          when: ansible_os_family == 'Darwin'
+          tags:
+            - darwin
 
     - name: Install rust
       tags:
-        - dev
         - rust
+        - darwin
+        - linux
+        - fedora
+        - ubuntu
       block:
         - name: Install rust using rustup
           ansible.builtin.shell: |
@@ -200,14 +246,16 @@
             ~/.cargo/bin/rustc --version
 
     - name: Install docker linux
-      tags:
-        - dev
-        - docker
       when: ansible_system == "Linux"
+      tags:
+        - docker
+        - linux
       block:
         - name: Ubuntu Docker Setup
           become: true
           when: ansible_distribution == 'Ubuntu'
+          tags:
+            - ubuntu
           block:
             - name: Add apt docker gpg key
               ansible.builtin.apt_key:
@@ -220,11 +268,13 @@
 
         - name: Fedora docker setup
           become: true
+          when: ansible_distribution == 'Fedora'
+          tags:
+            - fedora
           ansible.builtin.get_url:
             url: https://download.docker.com/linux/fedora/docker-ce.repo
             dest: /etc/yum.repos.d/docer-ce.repo
             mode: '644'
-          when: ansible_distribution == 'Fedora'
 
         - name: Install docker
           become: true
@@ -235,6 +285,9 @@
               - containerd.io
               - docker-buildx-plugin
               - docker-compose-plugin
+          tags:
+            - fedora
+            - ubuntu
 
         - name: Add docker usergroup
           become: true
@@ -242,6 +295,9 @@
             name: docker
             state: present
             gid: 1750
+          tags:
+            - fedora
+            - ubuntu
 
         - name: Add user to docker group
           become: true
@@ -249,6 +305,9 @@
             name: "{{ ansible_user_id }}"
             append: true
             groups: docker
+          tags:
+            - fedora
+            - ubuntu
 
         - name: Enable docker service
           become: true
@@ -256,10 +315,12 @@
             name: docker
             state: started
             enabled: true
+          tags:
+            - fedora
+            - ubuntu
 
     - name: Install neovim nightly
       tags:
-        - dev
         - nvim
       block:
         - name: Nvim dependencies
@@ -268,22 +329,33 @@
             name:
               - luajit
               - luarocks
-          tags: nvim-deps
+          tags:
+            - nvim-deps
+            - linux
+            - darwin
+            - fedora
+            - ubuntu
 
         - name: Install neovim linux
           when: ansible_system == "Linux"
+          tags:
+            - linux
           block:
             - name: Add neovim apt ppa
               become: true
+              when: ansible_os_family == 'Debian'
               ansible.builtin.apt_repository:
                 repo: ppa:neovim-ppa/unstable
-              when: ansible_os_family == 'Debian'
+              tags:
+                - ubuntu
 
             - name: Add neovim dnf copr
               become: true
+              when: ansible_os_family == 'RedHat'
               community.general.copr:
                 name: agriffis/neovim-nightly
-              when: ansible_os_family == 'RedHat'
+              tags:
+                - fedora
 
             - name: Install neovim Linux
               become: true
@@ -291,9 +363,14 @@
                 name:
                   - neovim
                   - python3-neovim
+              tags:
+                - fedora
+                - ubuntu
 
         - name: Install neovim Darwin
+          when: ansible_system == "Darwin"
           community.general.homebrew:
             name: nvim
             state: head
-          when: ansible_system == "Darwin"
+          tags:
+            - darwin

@@ -2,37 +2,46 @@
 - name: Init
   hosts: all
   become: false
+  tags:
+    - init
   tasks:
     - name: Brew Update
+      when: (ansible_os_family == 'Darwin')
       community.general.homebrew:
         update_homebrew: true
         upgrade_all: true
       tags:
-        - init
         - always
-      when: (ansible_os_family == 'Darwin')
+        - darwin
 
     - name: Dnf Update
       become: true
+      when: (ansible_os_family == 'RedHat')
       ansible.builtin.dnf:
         autoremove: true
         update_cache: true
       tags:
         - always
-      when: (ansible_os_family == 'RedHat')
+        - fedora
+        - linux
 
     - name: Dnf add distribution gpg
       become: true
+      when: (ansible_os_family == 'RedHat')
       ansible.builtin.dnf:
         name: distribution-gpg-keys
         state: present
       tags:
         - essentials
-      when: (ansible_os_family == 'RedHat')
+        - fedora
+        - linux
 
     - name: Enable the RPM Fusion repositories
-      when: ansible_distribution == 'Fedora'
       become: true
+      when: ansible_distribution == 'Fedora'
+      tags:
+        - fedora
+        - linux
       block:
         - name: Import a RPM Fusion free key
           ansible.builtin.rpm_key:
@@ -53,10 +62,12 @@
 
     - name: Apt Update
       become: true
+      when: (ansible_os_family == 'Debian')
       ansible.builtin.apt:
         autoclean: true
         autoremove: true
         update_cache: true
       tags:
         - always
-      when: (ansible_os_family == 'Debian')
+        - ubuntu
+        - linux

@@ -2,18 +2,24 @@
 - name: Install Essentials
   hosts: all
   become: false
+  tags:
+    - essentials
   tasks:
     - name: Set fact to become or not
       block:
         - name: Set become to true for linux
+          when: ansible_system == "Linux"
           ansible.builtin.set_fact:
             become_value: true
-          when: ansible_system == "Linux"
+          tags:
+            - linux
 
         - name: Set become to false for darwin
+          when: ansible_system == "Darwin"
           ansible.builtin.set_fact:
             become_value: false
-          when: ansible_system == "Darwin"
+          tags:
+            - darwin
 
     - name: Essential packages
       become: "{{ become_value }}"
@@ -29,7 +35,9 @@
           - unzip
           - gnupg
           - ca-certificates
-      tags: essentials
+      tags:
+        - darwin
+        - linux
 
     - name: Common cli tools
       become: "{{ become_value }}"
@@ -38,44 +46,56 @@
           - jq
           - fzf
           - grc
+          - cmus
           - htop
           - stow
           - ranger
           - ripgrep
           - neofetch
-      tags: cli
+      tags:
+        - cli
+        - darwin
+        - linux
 
     - name: Linux common cli tools
       become: true
+      when: ansible_system == 'Linux'
       ansible.builtin.package:
         name:
           - g++
           - plocate
-      tags: cli
-      when: ansible_system == 'Linux'
+      tags:
+        - cli
+        - linux
 
     - name: Debian essentials
       become: true
+      when: ansible_os_family == 'Debian'
       ansible.builtin.apt:
         name:
           - build-essential
           - software-properties-common
           - libreadline-dev
-      tags: essentials
-      when: ansible_os_family == 'Debian'
+      tags:
+        - ubuntu
+        - linux
 
     - name: Redhat essentials
       become: true
+      when: ansible_os_family == 'RedHat'
       ansible.builtin.dnf:
         name:
           - kernel-devel
           - dnf-plugins-core
-      tags: essentials
-      when: ansible_os_family == 'RedHat'
+      tags:
+        - fedora
+        - linux
 
     - name: Darwin essentials
+      when: (ansible_os_family == 'Darwin')
       community.general.homebrew:
         name:
           - coreutils
-      tags: essentials
-      when: (ansible_os_family == 'Darwin')
+      tags:
+        - cli
+        - darwin

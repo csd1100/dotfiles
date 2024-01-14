@@ -1,23 +1,102 @@
 ---
 - name: Install Desktop Environment
+  tags:
+    - de
   hosts: all
   become: false
   tasks:
     - name: Linux desktop environment
-      become: true
-      ansible.builtin.package:
-        name:
-          - picom
-          - i3
-          - polybar
-          - rofi
-          - feh
-          # - pulseaudio
-          - pavucontrol
-          - playerctl
-      when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+      tags:
+        - linux
+      block:
+        - name: Xorg desktop environment (i3, polybar, rofi, picom)
+          tags:
+            - never
+            - x11
+          become: true
+          when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+          ansible.builtin.package:
+            name:
+              - i3
+              - feh
+              - rofi
+              - picom
+              - scrot
+              - xclip
+              - polybar
+              - xdotool
+              - numlockx
+
+        - name: Wayland desktop environment
+          tags:
+            - wayland
+            - fedora
+          block:
+            - name: Fedora hyprland setup
+              when: ansible_distribution == "Fedora" and
+                ansible_distribution_version == "39"
+              ansible.builtin.dnf:
+                name:
+                  - greetd
+                  - hyprland
+                  - polkit-kde
+                  - hyprland-devel
+                  - xdg-desktop-portal-hyprland
+
+            - name: Wayland clipboard
+              tags:
+                - ubuntu
+              block:
+                - name: Install wl-clipboard
+                  ansible.builtin.package:
+                    name:
+                      - wl-clipboard
+
+                - name: Install latest cliphist from github
+                  block:
+                    - name: Cliphist get latest release url from github
+                      ansible.builtin.uri:
+                        url: https://api.github.com/repos/sentriz/cliphist/releases/latest
+                        return_content: true
+                      register: cliphist_latest
+
+                    - name: Store cliphist latest download url
+                      ansible.builtin.set_fact:
+                        cliphist_url: >
+                          {{ cliphist_latest.json.assets | to_json | from_json |
+                            community.general.json_query(browser_download_url_query) }}
+                      vars:
+                        browser_download_url_query: '[?browser_download_url.contains(@, `amd64`)] |
+                            [0].browser_download_url'
+
+                    - name: Download cliphist to bin
+                      ansible.builtin.get_url:
+                        url: "{{ cliphist_url }}"
+                        dest: ~/bin/cliphist
+                        mode: '544'
+
+            - name: Wayland dependencies
+              tags:
+                - ubuntu
+              ansible.builtin.package:
+                name:
+                  - xdg-utils
+                  - pipewire
+                  - wireplumber
+
+        - name: Common Linux desktop utilities
+          ansible.builtin.package:
+            name:
+              - dunst
+              - playerctl
+              - pavucontrol
+          tags:
+            - ubuntu
+            - fedora
 
     - name: Darwin desktop environment
+      tags:
+        - darwin
       environment:
         PATH: /usr/local/bin:/opt/homebrew/path:{{ ansible_env.PATH }}
       when: ansible_os_family == "Darwin"
@@ -38,10 +117,6 @@
           ansible.builtin.command:
             which yabai
           register: yabai_path
-
-        - name: Test
-          ansible.builtin.debug:
-            msg: "{{ yabai_path }}"
 
         - name: Run visudo checksum to start yabai with script-additions
           ansible.builtin.command: /usr/local/bin/shasum -a 256 {{ yabai_path.stdout }}

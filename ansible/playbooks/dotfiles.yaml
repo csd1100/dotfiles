@@ -5,35 +5,49 @@
   environment:
     DOTFILES: "{{ ansible_env.HOME }}/dotfiles/"
     PATH: "/usr/local/bin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  tags:
+    - dotfiles
   tasks:
     - name: Stow Dotfiles
-      tags:
-        - dotfiles
       block:
         - name: Stow dotfiles linux
           when: ansible_system == 'Linux'
           ansible.builtin.command: ./scripts/setup linux
           args:
             chdir: ~/dotfiles/
+          tags:
+            - linux
+            - fedora
+            - ubuntu
 
         - name: Stow dotfiles Darwin
           when: ansible_os_family == 'Darwin'
           ansible.builtin.command: ./scripts/setup darwin
           args:
             chdir: ~/dotfiles/
+          tags:
+            - darwin
 
         - name: Stow dotfiles common
           ansible.builtin.command: ./scripts/setup common
           args:
             chdir: ~/dotfiles/
+          tags:
+            - darwin
+            - linux
+            - fedora
+            - ubuntu
 
     - name: Setup Fonts
       tags:
-        - dotfiles
         - fonts
       block:
         - name: Linux fonts setup
           when: ansible_system == 'Linux'
+          tags:
+            - linux
+            - fedora
+            - ubuntu
           block:
             - name: Create a fonts directory if it does not exist (Linux)
               ansible.builtin.file:
@@ -49,6 +63,8 @@
 
         - name: Darwin fonts setup
           when: ansible_os_family == 'Darwin'
+          tags:
+            - darwin
           block:
             - name: Create a fonts directory if it does not exist (Darwin)
               ansible.builtin.file:
@@ -65,6 +81,10 @@
     - name: Zsh setup
       tags:
         - zsh
+        - linux
+        - fedora
+        - ubuntu
+        - darwin
       block:
         - name: Change shell to zsh (shell)
           become: true
@@ -134,6 +154,11 @@
             state: link
 
     - name: Create a work directory if it does not exist
+      tags:
+        - linux
+        - fedora
+        - ubuntu
+        - darwin
       ansible.builtin.file:
         path: ~/work
         state: directory
@@ -143,18 +168,26 @@
       block:
         - name: Run updatedb for locate linux
           become: true
+          when: ansible_system == "Linux"
           ansible.builtin.command:
             updatedb
-          when: ansible_system == "Linux"
+          tags:
+            - linux
+            - fedora
+            - ubuntu
 
         - name: Run updatedb for locate Darwin
           become: true
+          when: ansible_os_family == "Darwin"
           ansible.builtin.command:
             /usr/libexec/locate.updatedb
-          when: ansible_os_family == "Darwin"
+          tags:
+            - darwin
 
     - name: Darwin start yabai, skhd, sketchybar
       when: ansible_os_family == "Darwin"
+      tags:
+        - darwin
       block:
         - name: Enable skhd
           ansible.builtin.command: skhd --start-service

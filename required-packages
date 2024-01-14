@@ -15,6 +15,9 @@
 - skhd
 - coreutils (homebrew package for gnu utils like ls,etc.)
 ----------------- linux ----------------------------
+- dunst - notification
+- eww - widgets bar
+--- x11
 - i3-gaps
     - i3lock
     - xss-lock
@@ -30,7 +33,11 @@
 - pulseaudio
 - xclip
 - scrot
-- nm-applet
+- nm-tray
 - picom
-- zscroll
 - xdotool
+
+--- wayland
+- hyprland
+- hyprland-devel
+- cliphist - clipboard wayland - https://github.com/sentriz/cliphist
