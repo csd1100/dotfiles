@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+SYSTEM=$(uname -s)
+
+case $SYSTEM in
+"Linux")
+    DISTRO="$(cat /etc/os-release | grep -oP "(?<=^NAME=).*")"
+    case "$DISTRO" in
+        "Ubuntu")
+            echo -n ""
+            ;;
+        "Fedora Linux")
+            echo -n ""
+            ;;
+        "Arch Linux")
+            echo -n ""
+            ;;
+        "NixOS")
+            echo -n ""
+            ;;
+    esac
+    ;;
+"Darwin")
+    echo -n ""
+    ;;
+esac
