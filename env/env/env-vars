@@ -17,16 +17,17 @@ export GOBIN="$GOPATH/bin"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/bin/helpers:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:$GOBIN"
+export PATH="$GOBIN:$PATH"
 
 #nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # CONFIG
 export CONFIG="$HOME/.config"
 
-
+# JDK
 unameOut="$(uname -s)"
 if [ $unameOut = "Darwin" ]; then
     export JAVA_11_HOME="$(locate -l 1 '/opt/homebrew/Cellar/openjdk@11/*/libexec/openjdk.jdk/Contents/Home')"
