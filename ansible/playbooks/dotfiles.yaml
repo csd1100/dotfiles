@@ -81,19 +81,25 @@
                 mode: '0755'
 
     - name: Copy Wallpapers
-      ansible.builtin.copy:
-        src: "{{ item }}"
-        dest: ~/Pictures/Wallpapers/
-        mode: '666'
-        remote_src: true
-      with_fileglob:
-        - "/home/{{ ansible_user_id }}/dotfiles/wallpapers/*"
       tags:
         - wallpaper
         - linux
         - darwin
         - fedora
         - ubuntu
+      block:
+        - name: Get all files from ~/dotfiles/wallpapers/
+          ansible.builtin.find:
+            paths: ~/dotfiles/wallpapers/
+          register: wallpapers
+
+        - name: Copy all files from ~/dotfiles/wallpapers/
+          ansible.builtin.copy:
+            src: "{{ item.path }}"
+            dest: ~/Pictures/Wallpapers/
+            mode: '666'
+            remote_src: true
+          with_items: "{{ wallpapers.files }}"
 
     - name: Zsh setup
       tags:
