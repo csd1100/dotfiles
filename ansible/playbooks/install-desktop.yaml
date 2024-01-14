@@ -21,6 +21,7 @@
             name:
               - i3
               - feh
+              - rofi
               - picom
               - scrot
               - xclip
@@ -39,6 +40,7 @@
                 - ubuntu
               ansible.builtin.package:
                 name:
+                  - wofi
                   - xdg-utils
                   - pipewire
                   - wireplumber
@@ -70,8 +72,9 @@
                       - glibc-devel
                       - pango-devel
                       - cairo-devel
-                      - rofi-wayland
                       - wlroots-devel
+                      - qt5-qtwayland
+                      - qt6-qtwayland
                       - wayland-devel
                       - libwebp-devel
                       - hyprland-devel

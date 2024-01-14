@@ -15,6 +15,7 @@
         version: main
       tags:
         - dotfiles
+        - always
 
     - name: Set fact to become or not
       block:

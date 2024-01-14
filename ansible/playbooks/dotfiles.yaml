@@ -59,6 +59,7 @@
               ansible.builtin.copy:
                 src: ~/dotfiles/fonts/
                 dest: ~/.local/share/fonts/
+                remote_src: true
                 mode: '0755'
 
         - name: Darwin fonts setup
@@ -76,7 +77,23 @@
               ansible.builtin.copy:
                 src: ~/dotfiles/fonts/
                 dest: ~/Library/Fonts
+                remote_src: true
                 mode: '0755'
+
+    - name: Copy Wallpapers
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: ~/Pictures/Wallpapers/
+        mode: '666'
+        remote_src: true
+      with_fileglob:
+        - "/home/{{ ansible_user_id }}/dotfiles/wallpapers/*"
+      tags:
+        - wallpaper
+        - linux
+        - darwin
+        - fedora
+        - ubuntu
 
     - name: Zsh setup
       tags:
