@@ -1,6 +1,10 @@
 ---
 - name: Dotfiles
   hosts: all
+  become: false
+  environment:
+    DOTFILES: "{{ ansible_env.HOME }}/dotfiles/"
+    PATH: "/usr/local/bin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
   tasks:
     - name: Stow Dotfiles
       tags:
@@ -8,26 +12,20 @@
       block:
         - name: Stow dotfiles linux
           when: ansible_system == 'Linux'
-          block:
-            - name: Run linux setup script
-              ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup linux
-              args:
-                chdir: ~/dotfiles/
+          ansible.builtin.command: ./scripts/setup linux
+          args:
+            chdir: ~/dotfiles/
 
         - name: Stow dotfiles Darwin
           when: ansible_os_family == 'Darwin'
-          block:
-            - name: Run darwin setup script
-              ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup darwin
-              args:
-                chdir: ~/dotfiles/
+          ansible.builtin.command: ./scripts/setup darwin
+          args:
+            chdir: ~/dotfiles/
 
         - name: Stow dotfiles common
-          block:
-            - name: Run common setup script
-              ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup common
-              args:
-                chdir: ~/dotfiles/
+          ansible.builtin.command: ./scripts/setup common
+          args:
+            chdir: ~/dotfiles/
 
     - name: Setup Fonts
       tags:
@@ -88,7 +86,7 @@
         - name: Dotfiles Setup (zsh)
           block:
             - name: Run zsh setup script
-              ansible.builtin.shell: DOTFILES=~/dotfiles ./scripts/setup --single zsh
+              ansible.builtin.command: ./scripts/setup --single zsh
               args:
                 chdir: ~/dotfiles/
 
@@ -145,12 +143,28 @@
       block:
         - name: Run updatedb for locate linux
           become: true
-          ansible.builtin.shell:
+          ansible.builtin.command:
             updatedb
           when: ansible_system == "Linux"
 
         - name: Run updatedb for locate Darwin
           become: true
-          ansible.builtin.shell:
+          ansible.builtin.command:
             /usr/libexec/locate.updatedb
           when: ansible_os_family == "Darwin"
+
+    - name: Darwin start yabai, skhd, sketchybar
+      when: ansible_os_family == "Darwin"
+      block:
+        - name: Enable skhd
+          ansible.builtin.command: skhd --start-service
+
+        - name: Enable yabai script-additions
+          become: true
+          ansible.builtin.command: yabai --load-sa
+
+        - name: Enable yabai
+          ansible.builtin.command: yabai --start-service
+
+        - name: Enable sketchybar
+          ansible.builtin.command: brew services start sketchybar

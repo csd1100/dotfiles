@@ -14,20 +14,33 @@
       tags:
         - dotfiles
 
+    - name: Set fact to become or not
+      block:
+        - name: Set become to true for linux
+          ansible.builtin.set_fact:
+            become_value: true
+          when: ansible_system == "Linux"
+
+        - name: Set become to false for darwin
+          ansible.builtin.set_fact:
+            become_value: false
+          when: ansible_system == "Darwin"
+
     - name: Install kitty
       tags:
         - kitty
       block:
         - name: Install ImageMagick dependency
-          become: true
           block:
             - name: Install imagemagick on Debian and Darwin
+              become: "{{ become_value }}"
               ansible.builtin.package:
                 name: imagemagick
                 state: present
               when: ansible_os_family == 'Debian' or ansible_os_family == 'Darwin'
 
             - name: Install ImageMagick on Fedora
+              become: true
               ansible.builtin.dnf:
                 name: ImageMagick
                 state: present
@@ -79,7 +92,7 @@
           when: ansible_os_family == 'RedHat'
 
         - name: Darwin install jdk 11, 17
-          ansible.builtin.homebrew:
+          community.general.homebrew:
             name:
               - openjdk@11
               - openjdk@17
@@ -92,7 +105,8 @@
       block:
         - name: Install nvm
           ansible.builtin.shell: |
-           PROFILE=/dev/null curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | /bin/bash
+            set -o pipefail
+            PROFILE=/dev/null curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | /bin/bash
           args:
             creates: ~/.nvm/
             executable: /bin/bash
@@ -101,13 +115,15 @@
           ansible.builtin.shell:
             export NVM_DIR="$HOME/.nvm" &&
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
-            nvm install lts/hydrogen lts/iron &&
+            nvm install lts/hydrogen;
+            nvm install lts/iron &&
             nvm alias default lts/iron
           args:
             executable: /bin/bash
 
         - name: Validate node is installed
-          ansible.builtin.shell:
+          ansible.builtin.shell: |
+            set -o pipefail
             export NVM_DIR="$HOME/.nvm" &&
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
             nvm use lts/iron &&
@@ -123,6 +139,7 @@
         - golang
       block:
         - name: Install golang linux
+          when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
           block:
             - name: Fetch latest go version
               ansible.builtin.uri:
@@ -132,12 +149,13 @@
 
             - name: Store go version
               ansible.builtin.set_fact:
-               go_version: "{{ go_version_op.content | regex_search('^.*') }}"
+                go_version: "{{ go_version_op.content | regex_search('^.*') }}"
 
             - name: Download go
               ansible.builtin.get_url:
-               url: https://go.dev/dl/{{go_version}}.linux-amd64.tar.gz
-               dest: /tmp/{{go_version}}.linux-amd64.tar.gz
+                url: https://go.dev/dl/{{ go_version }}.linux-amd64.tar.gz
+                dest: /tmp/{{ go_version }}.linux-amd64.tar.gz
+                mode: '644'
 
             - name: Remove previous go
               become: true
@@ -148,17 +166,19 @@
             - name: Linux install go
               become: true
               ansible.builtin.unarchive:
-                src: /tmp/{{go_version}}.linux-amd64.tar.gz
+                src: /tmp/{{ go_version }}.linux-amd64.tar.gz
                 dest: /usr/local/
                 remote_src: true
 
             - name: Validate go is installed
-              ansible.builtin.shell:
+              ansible.builtin.shell: |
+                set -o pipefail
                 /usr/local/go/bin/go version | grep "{{ go_version }}"
-          when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
+              args:
+                executable: /bin/bash
 
         - name: Install golang mac
-          ansible.builtin.homebrew:
+          community.general.homebrew:
             name: golang
           when: ansible_os_family == 'Darwin'
 
@@ -168,22 +188,26 @@
         - rust
       block:
         - name: Install rust using rustup
-          ansible.builtin.shell:
+          ansible.builtin.shell: |
+            set -o pipefail
             curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           args:
+            executable: /bin/bash
             creates: ~/.rustup/
 
         - name: Validate rust is installed
-          ansible.builtin.shell:
+          ansible.builtin.command:
             ~/.cargo/bin/rustc --version
 
     - name: Install docker linux
       tags:
         - dev
         - docker
+      when: ansible_system == "Linux"
       block:
         - name: Ubuntu Docker Setup
           become: true
+          when: ansible_distribution == 'Ubuntu'
           block:
             - name: Add apt docker gpg key
               ansible.builtin.apt_key:
@@ -193,25 +217,24 @@
               ansible.builtin.apt_repository:
                 repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
                 state: present
-          when: ansible_distribution == 'Ubuntu'
 
         - name: Fedora docker setup
           become: true
           ansible.builtin.get_url:
             url: https://download.docker.com/linux/fedora/docker-ce.repo
             dest: /etc/yum.repos.d/docer-ce.repo
+            mode: '644'
           when: ansible_distribution == 'Fedora'
 
         - name: Install docker
           become: true
           ansible.builtin.package:
             name:
-            - docker-ce
-            - docker-ce-cli
-            - containerd.io
-            - docker-buildx-plugin
-            - docker-compose-plugin
-            state: latest
+              - docker-ce
+              - docker-ce-cli
+              - containerd.io
+              - docker-buildx-plugin
+              - docker-compose-plugin
 
         - name: Add docker usergroup
           become: true
@@ -224,7 +247,7 @@
           become: true
           ansible.builtin.user:
             name: "{{ ansible_user_id }}"
-            append: yes
+            append: true
             groups: docker
 
         - name: Enable docker service
@@ -233,47 +256,44 @@
             name: docker
             state: started
             enabled: true
-      when: ansible_system == "Linux"
 
     - name: Install neovim nightly
       tags:
         - dev
         - nvim
       block:
-      - name: nvim dependencies
-        become: true
-        ansible.builtin.package:
-          name:
-            - luajit
-            - luarocks
-          state: latest
-        tags: nvim-deps
+        - name: Nvim dependencies
+          become: "{{ become_value }}"
+          ansible.builtin.package:
+            name:
+              - luajit
+              - luarocks
+          tags: nvim-deps
 
-      - name: Install neovim linux
-        block:
-          - name: Add neovim apt ppa
-            become: true
-            ansible.builtin.apt_repository:
-              repo: ppa:neovim-ppa/unstable
-            when: ansible_os_family == 'Debian'
+        - name: Install neovim linux
+          when: ansible_system == "Linux"
+          block:
+            - name: Add neovim apt ppa
+              become: true
+              ansible.builtin.apt_repository:
+                repo: ppa:neovim-ppa/unstable
+              when: ansible_os_family == 'Debian'
 
-          - name: Add neovim dnf copr
-            become: true
-            community.general.copr:
-              name: agriffis/neovim-nightly
-            when: ansible_os_family == 'RedHat'
+            - name: Add neovim dnf copr
+              become: true
+              community.general.copr:
+                name: agriffis/neovim-nightly
+              when: ansible_os_family == 'RedHat'
 
-          - name: Install neovim Linux
-            become: true
-            ansible.builtin.package:
-              name:
-                - neovim
-                - python3-neovim
-              state: latest
-        when: ansible_system == "Linux"
+            - name: Install neovim Linux
+              become: true
+              ansible.builtin.package:
+                name:
+                  - neovim
+                  - python3-neovim
 
-      - name: Install neovim Darwin
-        ansible.builtin.homebrew:
-          name: nvim
-          state: head
-        when: ansible_system == "Darwin"
+        - name: Install neovim Darwin
+          community.general.homebrew:
+            name: nvim
+            state: head
+          when: ansible_system == "Darwin"

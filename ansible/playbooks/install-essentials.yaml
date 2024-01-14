@@ -3,8 +3,20 @@
   hosts: all
   become: false
   tasks:
-    - name: essential packages
-      become: true
+    - name: Set fact to become or not
+      block:
+        - name: Set become to true for linux
+          ansible.builtin.set_fact:
+            become_value: true
+          when: ansible_system == "Linux"
+
+        - name: Set become to false for darwin
+          ansible.builtin.set_fact:
+            become_value: false
+          when: ansible_system == "Darwin"
+
+    - name: Essential packages
+      become: "{{ become_value }}"
       ansible.builtin.package:
         name:
           - zsh
@@ -13,16 +25,14 @@
           - curl
           - wget
           - gcc
-          - g++
           - make
           - unzip
           - gnupg
           - ca-certificates
-        state: latest
       tags: essentials
 
-    - name: common cli tools
-      become: true
+    - name: Common cli tools
+      become: "{{ become_value }}"
       ansible.builtin.package:
         name:
           - jq
@@ -33,43 +43,39 @@
           - ranger
           - ripgrep
           - neofetch
-        state: latest
       tags: cli
 
-    - name: linux common cli tools
+    - name: Linux common cli tools
       become: true
       ansible.builtin.package:
         name:
+          - g++
           - plocate
-        state: latest
       tags: cli
       when: ansible_system == 'Linux'
 
-    - name: debian essentials
+    - name: Debian essentials
       become: true
       ansible.builtin.apt:
         name:
           - build-essential
           - software-properties-common
           - libreadline-dev
-        state: latest
       tags: essentials
-      when: (ansible_os_family == 'Debian')
+      when: ansible_os_family == 'Debian'
 
-    - name: redhat essentials
+    - name: Redhat essentials
       become: true
       ansible.builtin.dnf:
         name:
           - kernel-devel
           - dnf-plugins-core
-        state: latest
       tags: essentials
-      when: (ansible_os_family == 'RedHat')
+      when: ansible_os_family == 'RedHat'
 
-    - name: darwin essentials
-      ansible.builtin.homebrew:
+    - name: Darwin essentials
+      community.general.homebrew:
         name:
           - coreutils
-        state: latest
       tags: essentials
       when: (ansible_os_family == 'Darwin')

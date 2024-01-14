@@ -1,6 +1,11 @@
 ---
-- import_playbook: ./init.yaml
-- import_playbook: ./install-essentials.yaml
-- import_playbook: ./install-desktop.yaml
-- import_playbook: ./install-dev.yaml
-- import_playbook: ./dotfiles.yaml
+- name: Initialize package managers
+  ansible.builtin.import_playbook: ./init.yaml
+- name: Install essential packages
+  ansible.builtin.import_playbook: ./install-essentials.yaml
+- name: Install desktop environment
+  ansible.builtin.import_playbook: ./install-desktop.yaml
+- name: Install dev environment
+  ansible.builtin.import_playbook: ./install-dev.yaml
+- name: Setup dotfiles
+  ansible.builtin.import_playbook: ./dotfiles.yaml

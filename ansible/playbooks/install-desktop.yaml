@@ -3,7 +3,7 @@
   hosts: all
   become: false
   tasks:
-    - name: linux desktop environment
+    - name: Linux desktop environment
       become: true
       ansible.builtin.package:
         name:
@@ -15,37 +15,42 @@
           # - pulseaudio
           - pavucontrol
           - playerctl
-        state: latest
-      when: ( ansible_os_family == "Debian" or ansible_os_family == "RedHat" )
+      when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
 
-    - name: darwin desktop environment
+    - name: Darwin desktop environment
+      environment:
+        PATH: /usr/local/bin:/opt/homebrew/path:{{ ansible_env.PATH }}
+      when: ansible_os_family == "Darwin"
       block:
-        - name: install yabai, skhd, sketchybar
-          ansible.builtin.homebrew:
+        - name: Add sketchybar tap
+          community.general.homebrew_tap:
             name:
-              - yabai
-              - skhd
+              - FelixKratz/formulae
+
+        - name: Install yabai, skhd, sketchybar
+          community.general.homebrew:
+            name:
+              - koekeishiya/formulae/yabai
+              - koekeishiya/formulae/skhd
               - sketchybar
-            state: latest
 
-        # TODO:
-        - name: run visudo checksum to start yabai with script-additions
-          shell: echo 'test'
-          register: visudo_op
+        - name: Get yabai path
+          ansible.builtin.command:
+            which yabai
+          register: yabai_path
 
-        # TODO:
-        - name: enable skhd
-          shell: echo 'test'
-          register: skhd_service_op
+        - name: Test
+          ansible.builtin.debug:
+            msg: "{{ yabai_path }}"
 
-        # TODO:
-        - name: enable yabai
-          shell: echo 'test'
-          register: yabai_service_op
+        - name: Run visudo checksum to start yabai with script-additions
+          ansible.builtin.command: /usr/local/bin/shasum -a 256 {{ yabai_path.stdout }}
+          register: shasum_yabai
 
-        # TODO:
-        - name: enable sketchybar
-          shell: echo 'test'
-          register: sketchybar_service_op
-
-      when: ( ansible_os_family == "Darwin" )
+        - name: Create sudoers file
+          become: true
+          ansible.builtin.lineinfile:
+            path: /private/etc/sudoers.d/yabai
+            line: "{{ ansible_user_id }} ALL=(root) NOPASSWD: sha256:{{ shasum_yabai.stdout }} --load-sa"
+            create: true
+            mode: '440'
