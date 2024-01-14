@@ -6,13 +6,13 @@ case $SYSTEM in
 "Linux")
     DISTRO="$(cat /etc/os-release | grep -oP "(?<=^NAME=).*")"
     case "$DISTRO" in
-        "Ubuntu")
+        '"Ubuntu"')
             echo -n ""
             ;;
-        "Fedora Linux")
+        '"Fedora Linux"')
             echo -n ""
             ;;
-        "Arch Linux")
+        '"Arch Linux"')
             echo -n ""
             ;;
         "NixOS")
