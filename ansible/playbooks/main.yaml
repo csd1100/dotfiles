@@ -1,11 +1,20 @@
 ---
+- name: Gather facts
+  hosts: all
+  tags: always
+  become: false
+  tasks:
+    - name: Gather facts
+      ansible.builtin.gather_facts:
+        parallel: true
+
 - name: Initialize package managers
   ansible.builtin.import_playbook: ./init.yaml
 - name: Install essential packages
   ansible.builtin.import_playbook: ./install-essentials.yaml
-- name: Install desktop environment
-  ansible.builtin.import_playbook: ./install-desktop.yaml
 - name: Install dev environment
   ansible.builtin.import_playbook: ./install-dev.yaml
+- name: Install desktop environment
+  ansible.builtin.import_playbook: ./install-desktop.yaml
 - name: Setup dotfiles
   ansible.builtin.import_playbook: ./dotfiles.yaml
