@@ -3,13 +3,12 @@ vim.opt.background = "dark"
 
 return {
     {
-        "sonph/onehalf",
+        "rafi/awesome-vim-colorschemes",
         lazy = false,
         priority = 1000,
         enabled = true,
-        config = function(plugin)
-            vim.opt.rtp:append(plugin.dir .. "/vim")
-            -- vim.cmd.colorscheme("onehalfdark")
+        config = function()
+            -- vim.cmd.colorscheme("deus")
         end,
     },
     {
@@ -47,7 +46,7 @@ return {
             transparent_background = false,
         },
         init = function()
-            -- vim.cmd.colorscheme("catppuccin")
+            vim.cmd.colorscheme("catppuccin")
         end,
     },
     {
@@ -64,7 +63,7 @@ return {
             },
         },
         init = function()
-            vim.cmd.colorscheme("kanagawa")
+            -- vim.cmd.colorscheme("kanagawa")
         end,
     },
 }
