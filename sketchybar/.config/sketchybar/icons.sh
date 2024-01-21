@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+FONT="JetBrainsMono Nerd Font Mono"
+
+# Need to install sf-symbols cask from brew
 # General Icons
 LOADING=􀖇
 APPLE=􀣺

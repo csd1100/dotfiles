@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 ITEMS_DIR="$HOME/.config/sketchybar/items"
 
 source "$HOME/.config/sketchybar/colors.sh"
@@ -13,7 +12,7 @@ separator() {
 		sketchybar --add item separator left
 		sketchybar --set separator \
 			label.drawing=on \
-			label.color=$FOREGROUND \
+			label.color="$FOREGROUND" \
 			label="|" \
 			icon.drawing=off
 	else
@@ -32,20 +31,20 @@ sketchybar --bar height=45 \
 	y_offset=0 \
 	margin=0 \
 	corner_radius=0 \
-	color=$BACKGROUND
+	color="$BACKGROUND"
 
 # SET DEFAULTS
 sketchybar --default updates=when_shown \
 	drawing=on \
 	icon.drawing=off \
-	icon.font="Jetbrains Mono:Regular:15.0" \
-	icon.color=$FOREGROUND \
+	icon.font="$FONT:Regular:15.0" \
+	icon.color="$FOREGROUND" \
 	icon.padding_left=5 \
 	icon.padding_right=5 \
 	icon.background.height=28 \
 	label.drawing=off \
-	label.font="Jetbrains Mono:Bold:15.0" \
-	label.color=$FOREGROUND \
+	label.font="$FONT:Bold:15.0" \
+	label.color="$FOREGROUND" \
 	label.padding_left=5 \
 	label.padding_right=5 \
 	label.background.height=28 \
@@ -54,7 +53,7 @@ sketchybar --default updates=when_shown \
 	background.border_width=0 \
 	background.padding_left=3 \
 	background.padding_right=3 \
-	popup.background.color=$BACKGROUND1
+	popup.background.color="$BACKGROUND1"
 
 # ADD ITEMS
 # left
