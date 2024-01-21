@@ -40,7 +40,10 @@
                 - ubuntu
               ansible.builtin.package:
                 name:
+                  - xev
+                  - wev
                   - wofi
+                  - wlr-randr
                   - xdg-utils
                   - pipewire
                   - wireplumber
