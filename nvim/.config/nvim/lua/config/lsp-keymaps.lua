@@ -65,7 +65,12 @@ function M.get_lsp_maps()
             },
             ["<leader>lq"] = {
                 ["rhs"] = function()
-                    vim.diagnostic.setloclist()
+                    local trouble = if_successful("trouble")
+                    if trouble ~= nil then
+                        trouble.toggle()
+                    else
+                        vim.diagnostic.setloclist()
+                    end
                 end,
                 ["opts"] = { desc = "Open Diagnostics" },
             },
@@ -233,6 +238,10 @@ M.get_jdtls_maps = function()
             },
         },
     }
+end
+
+M.get_rustacean_maps = function ()
+
 end
 
 return M

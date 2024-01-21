@@ -6,7 +6,7 @@ end
 local function keymap(bufnr)
     local lsp_keymaps = require("config.lsp-keymaps")
 
-    local status, modes_module = pcall(require, "modes")
+    local _, modes_module = pcall(require, "modes")
 
     modes_module.create_if_not_present(
         "JLSP",

@@ -32,7 +32,7 @@ return {
     },
 
     {
-        "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
         ft = {
             "bash",
             "javascript",
@@ -45,10 +45,16 @@ return {
             local opts = {
                 sources = {
                     null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.diagnostics.eslint,
+                    null_ls.builtins.diagnostics.eslint_d,
                     null_ls.builtins.code_actions.refactoring,
                     null_ls.builtins.formatting.shfmt,
+                    null_ls.builtins.code_actions.shellcheck,
                     null_ls.builtins.formatting.prettier,
+                    null_ls.builtins.code_actions.gitsigns,
+                    null_ls.builtins.code_actions.gomodifytags,
+                    null_ls.builtins.diagnostics.ansiblelint,
+                    null_ls.builtins.diagnostics.deadnix,
+                    null_ls.builtins.diagnostics.markdownlint,
                 },
             }
             null_ls.setup(opts)
@@ -64,6 +70,10 @@ return {
                 },
             },
         },
+    },
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     {
         "mfussenegger/nvim-jdtls",
@@ -90,18 +100,19 @@ return {
         end,
     },
     {
-        "simrat39/rust-tools.nvim",
-        ft = "rust",
+        "mrcjkb/rustaceanvim",
+        version = "^3",
+        ft = { "rust" },
     },
     {
         "saecki/crates.nvim",
-        ft = "rust",
-        tag = "v0.3.0",
+        event = { "BufRead Cargo.toml" },
+        tag = "stable",
         dependencies = { "nvim-lua/plenary.nvim" },
         config = true,
     },
     {
         "elkowar/yuck.vim",
-        ft = "yuck"
-    }
+        ft = "yuck",
+    },
 }

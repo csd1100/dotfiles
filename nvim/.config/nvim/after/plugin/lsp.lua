@@ -1,7 +1,7 @@
 local map = require("config.keymap-utils").map
 local lsp_zero = require("lsp-zero")
 
-lsp_zero.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(_, bufnr)
     local status, modes_module = pcall(require, "modes")
     local lspMaps = require("config.lsp-keymaps")
     if status then
@@ -58,7 +58,7 @@ local function is_installed(lsp)
     elseif lsp == "gopls" then
         command = { "go", "version" }
     elseif lsp == "rust_analyzer" then
-        command = { "rust", " --version" }
+        command = { "rustc", " --version" }
     elseif lsp == "jdtls" then
         command = { "java", "--version" }
     else
@@ -81,19 +81,28 @@ require("mason-lspconfig").setup({
     handlers = {
         lsp_zero.default_setup,
         jdtls = function() end,
+        rust_analyzer = function() end,
     },
 })
 
 local mason_registry = require("mason-registry")
 
 local tools_to_install = {
+    "stylua",
+    "eslint_d",
+    "shfmt",
+    "shellcheck",
+    "prettier",
+    "gomodifytags",
+    "ansible-lint",
+    "markdownlint",
     "java-test",
     "java-debug-adapter",
     "chrome-debug-adapter",
     "node-debug2-adapter",
 }
 
-function mason_install_if_not(tool)
+local function mason_install_if_not(tool)
     if
         not mason_registry.is_installed(tool)
         and mason_registry.has_package(tool)
