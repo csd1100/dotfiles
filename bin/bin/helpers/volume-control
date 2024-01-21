@@ -20,6 +20,28 @@ if [ $(uname -s) = 'Darwin' ]; then
 		;;
 	esac
 else
-	echo "Linux not yet supported"
-	exit 1
+	which wpctl &>/dev/null
+	if [ $? != 0 ]; then
+		echo "wpctl not installed!"
+		exit 1
+	fi
+	case $1 in
+	+)
+		wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+		wpctl get-volume @DEFAULT_AUDIO_SINK@
+		;;
+	-)
+		wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-
+		wpctl get-volume @DEFAULT_AUDIO_SINK@
+		;;
+	m)
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+		wpctl get-volume @DEFAULT_AUDIO_SINK@
+		;;
+	*)
+		echo "Wrong Argument passed. Expected Argument + / - "
+		exit
+		;;
+	esac
+
 fi

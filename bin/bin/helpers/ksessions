@@ -19,7 +19,7 @@ case $1 in
 	;;
 esac
 
-dir=$(find ~ ~/work -mindepth 1 -maxdepth 3 -type d | fzf)
+dir=$(find -L ~ ~/work -mindepth 1 -maxdepth 3 -type d | sort | uniq | fzf)
 base_name=$(basename $dir)
 
 if [  -z "$basename" ] && [ "$base_name" != "" ]; then
