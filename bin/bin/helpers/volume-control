@@ -1,47 +1,136 @@
 #!/usr/bin/env bash
 
-if [ $(uname -s) = 'Darwin' ]; then
-	current_volume=$(($(osascript -e 'output volume of (get volume settings)') / 14))
-	increase=$(($2 / 14))
-	echo $current_volume
-	echo $increase
-	case $1 in
-	+)
-		osascript -e "set Volume $(($current_volume + $increase))"
-		osascript -e 'output volume of (get volume settings)'
+set -e
+
+mac_volume_scale() {
+	bc <<<"scale=2;$1/14"
+}
+
+calc() {
+	bc <<<"scale=2;$1"
+}
+
+get_volume_darwin() {
+	volume=$(osascript -e 'output volume of (get volume settings)')
+	mac_volume_scale $volume
+}
+
+get_volume_linux() {
+	volume_decimal="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -oP '(?<=Volume:).*')"
+	calc "$volume_decimal*100"
+}
+
+increase_volume_darwin() {
+	increase="$1"
+	current_volume=$(get_volume_darwin)
+	volume=$(calc "$current_volume+$increase")
+	osascript -e "set Volume $volume"
+}
+
+increase_volume_linux() {
+	increase="$1"
+	wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ "$increase"%+
+}
+
+decrease_volume_darwin() {
+	decrease="$1"
+	current_volume=$(get_volume_darwin)
+	volume=$(calc "$current_volume-$decrease")
+	osascript -e "set Volume $volume"
+}
+
+decrease_volume_linux() {
+	decrease="$1"
+	wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ "$decrease"%-
+}
+
+mute_volume_darwin() {
+	osascript -e 'set volume output muted true'
+}
+
+mute_volume_linux() {
+	wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+}
+
+handle_darwin() {
+	operation="$1"
+	case "$operation" in
+	"increase")
+		change=$(mac_volume_scale $2)
+		increase_volume_darwin "$change"
 		;;
-	-)
-		osascript -e "set Volume $(($current_volume - $increase))"
-		osascript -e 'output volume of (get volume settings)'
+	"decrease")
+		change=$(mac_volume_scale $2)
+		decrease_volume_darwin "$change"
 		;;
-	*)
-		echo "Wrong Argument passed. Expected Argument + / - "
-		exit
+	"mute")
+		mute_volume_darwin "$change"
+		;;
+	"get")
+		get_volume_darwin "$change"
 		;;
 	esac
-else
+}
+
+handle_linux() {
+
 	which wpctl &>/dev/null
 	if [ $? != 0 ]; then
 		echo "wpctl not installed!"
 		exit 1
 	fi
-	case $1 in
-	+)
-		wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
-		wpctl get-volume @DEFAULT_AUDIO_SINK@
+
+	operation="$1"
+	change="$2"
+	case "$operation" in
+	"increase")
+		increase_volume_linux "$change"
 		;;
-	-)
-		wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-
-		wpctl get-volume @DEFAULT_AUDIO_SINK@
+	"decrease")
+		decrease_volume_linux "$change"
 		;;
-	m)
-		wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-		wpctl get-volume @DEFAULT_AUDIO_SINK@
+	"mute")
+		mute_volume_linux "$change"
 		;;
-	*)
-		echo "Wrong Argument passed. Expected Argument + / - "
-		exit
+	"get")
+		get_volume_linux "$change"
 		;;
 	esac
+}
 
-fi
+handle() {
+	operation="$1"
+	change="$2"
+	if [ "$(uname -s)" = 'Darwin' ]; then
+		handle_darwin "$operation" "$change"
+	else
+		handle_linux "$operation" "$change"
+	fi
+}
+
+case $1 in
++)
+	if [ -z "$2" ]; then
+		echo "The change in volume parameter required for operation increase"
+		exit 1
+	fi
+	handle "increase" "$2"
+	;;
+-)
+	if [ -z "$2" ]; then
+		echo "The change in volume parameter required for operation decrease"
+		exit 1
+	fi
+	handle "decrease" "$2"
+	;;
+m)
+	handle "mute"
+	;;
+g)
+	handle "get"
+	;;
+*)
+	echo "Wrong Argument passed $1. Expected Argument + / - / m / g "
+	exit 1
+	;;
+esac
