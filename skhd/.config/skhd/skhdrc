@@ -108,7 +108,6 @@ cmd + shift - r : skhd --restart-service && yabai --restart-service && brew serv
 cmd + shift - space : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
 
 # close a window
-cmd - q : echo "null" > /dev/null
 cmd + shift - q : yabai -m window --close
 
 # mode brightness for secondary keyboard
