@@ -12,6 +12,22 @@ return {
         end,
     },
     {
+        "navarasu/onedark.nvim",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        opts = {
+            style = "dark", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+            code_style = {
+                keywords = "italic",
+            },
+        },
+        config = function(_, opts)
+            require("onedark").setup(opts)
+            -- vim.cmd.colorscheme("onedark")
+        end,
+    },
+    {
         "loctvl842/monokai-pro.nvim",
         lazy = false,
         priority = 1000,
@@ -43,7 +59,7 @@ return {
         name = "catppuccin",
         opts = {
             flavour = "frappe",
-            transparent_background = false,
+            transparent_background = true,
         },
         init = function()
             vim.cmd.colorscheme("catppuccin")

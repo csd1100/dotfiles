@@ -66,11 +66,6 @@ return {
         },
     },
     {
-        "j-hui/fidget.nvim",
-        config = true,
-        tag = "legacy",
-    },
-    {
         "mfussenegger/nvim-jdtls",
         ft = "java",
     },
@@ -105,4 +100,8 @@ return {
         dependencies = { "nvim-lua/plenary.nvim" },
         config = true,
     },
+    {
+        "elkowar/yuck.vim",
+        ft = "yuck"
+    }
 }

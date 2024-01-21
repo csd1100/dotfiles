@@ -259,10 +259,31 @@ return {
         end,
     },
     {
+        "j-hui/fidget.nvim",
+        opts = {
+            notification = {
+                override_vim_notify = true,
+                window = {
+                    winblend = 0,
+                },
+            },
+        },
+        config = true,
+        branch = "main",
+    },
+    {
         "rcarriga/nvim-notify",
         config = function()
+            local notify_background = "NotifyBackground"
+            local background_color = vim.api.nvim_get_hl(
+                0,
+                { name = notify_background, link = false }
+            ).bg
+            if background_color == nil then
+                notify_background = "#000000"
+            end
             require("notify").setup({
-                background_colour = "NotifyBackground",
+                background_colour = notify_background,
                 fps = 30,
                 icons = {
                     DEBUG = "",
@@ -273,12 +294,10 @@ return {
                 },
                 level = 2,
                 minimum_width = 50,
-                render = "compact",
-                stages = "fade",
-                timeout = 1000,
-                top_down = false,
+                render = "wrapped-compact",
+                stages = "static",
+                timeout = 1500,
             })
-            vim.notify = require("notify")
         end,
     },
 }
