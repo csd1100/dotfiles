@@ -1,6 +1,16 @@
 local map = require("config.keymap-utils").map
 local lsp_zero = require("lsp-zero")
 
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(args.buf, true)
+        end
+    end,
+})
+
 lsp_zero.on_attach(function(_, bufnr)
     local status, modes_module = pcall(require, "modes")
     local lspMaps = require("config.lsp-keymaps")
@@ -23,7 +33,7 @@ lsp_zero.on_attach(function(_, bufnr)
                 "LSP",
                 { buffer = vim.api.nvim_get_current_buf() }
             )
-        end, { desc = "Toggle COMPL LSP for Current Buffer" })
+        end, { desc = "Toggle LSP for Current Buffer" })
     else
         lsp_zero.default_keymaps({ buffer = bufnr })
     end
@@ -126,6 +136,7 @@ cmp.setup({
         { name = "path" },
         { name = "luasnip" },
         { name = "nvim_lua" },
+        { name = "crates" },
     },
     mapping = {
         ["<CR>"] = cmp.mapping.confirm({ select = true }),

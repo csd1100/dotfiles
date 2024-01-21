@@ -109,6 +109,12 @@ return {
         event = { "BufRead Cargo.toml" },
         tag = "stable",
         dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            null_ls = {
+                enabled = true,
+                name = "crates.nvim",
+            },
+        },
         config = true,
     },
     {

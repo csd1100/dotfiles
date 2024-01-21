@@ -240,8 +240,186 @@ M.get_jdtls_maps = function()
     }
 end
 
-M.get_rustacean_maps = function ()
+M.get_rustacean_maps = function()
+    return {
+        ["n"] = {
+            ["<leader>rca"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp("codeAction")
+                end,
+                ["opts"] = { desc = "Rust Code Actions" },
+            },
+            ["<leader>rd"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp({ "debuggables" })
+                end,
+                ["opts"] = { desc = "Rust Debug Menu" },
+            },
+            ["<leader>rr"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp({ "runnables" })
+                end,
+                ["opts"] = { desc = "Rust Run Menu" },
+            },
+            ["<leader>gm"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp("expandMacro")
+                end,
+                ["opts"] = { desc = "Rust Expand Macro" },
+            },
+            ["<leader>rbm"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp("rebuildProcMacros")
+                end,
+                ["opts"] = { desc = "Rust Rebuild Proc Macro" },
+            },
 
+            ["<leader>J"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp("joinLines")
+                end,
+                ["opts"] = { desc = "Rust Join Lines" },
+            },
+            ["<leader>rha"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp({ "hover", "actions" })
+                end,
+                ["opts"] = { desc = "Rust Hover Actions" },
+            },
+            ["<leader>rc"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp("openCargo")
+                end,
+                ["opts"] = { desc = "Rust Open Cargo.toml" },
+            },
+            ["<leader>ro"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp("parentModule")
+                end,
+                ["opts"] = { desc = "Rust Open Parent Module" },
+            },
+            ["<leader>rk"] = {
+                ["rhs"] = function()
+                    vim.cmd.RustLsp("flyCheck")
+                end,
+                ["opts"] = { desc = "Rust Run cargo check" },
+            },
+        },
+        ["v"] = {},
+    }
+end
+
+M.get_crates_maps = function()
+    local crates = require("crates")
+
+    return {
+        ["n"] = {
+            ["<leader>ct"] = {
+                ["rhs"] = function()
+                    crates.toggle()
+                end,
+                ["opts"] = { desc = "Toggle Crates" },
+            },
+            ["<leader>cr"] = {
+                ["rhs"] = function()
+                    crates.reload()
+                end,
+                ["opts"] = { desc = "Reload Crates Cache" },
+            },
+            ["<leader>cv"] = {
+                ["rhs"] = function()
+                    crates.show_versions_popup()
+                end,
+                ["opts"] = { desc = "Show Crates Versions Popups" },
+            },
+            ["<leader>cf"] = {
+                ["rhs"] = function()
+                    crates.show_features_popup()
+                end,
+                ["opts"] = { desc = "Show Crates Features Popups" },
+            },
+            ["<leader>cd"] = {
+                ["rhs"] = function()
+                    crates.show_dependencies_popup()
+                end,
+                ["opts"] = { desc = "Show Crates Dependencies Popups" },
+            },
+            ["<leader>cu"] = {
+                ["rhs"] = function()
+                    crates.update_crate()
+                end,
+                ["opts"] = { desc = "Update Crate Under Cursor" },
+            },
+            ["<leader>ca"] = {
+                ["rhs"] = function()
+                    crates.update_all_crates()
+                end,
+                ["opts"] = { desc = "Update All Crates" },
+            },
+            ["<leader>cU"] = {
+                ["rhs"] = function()
+                    crates.upgrade_crate()
+                end,
+                ["opts"] = { desc = "Upgrade Crate Under Cursor" },
+            },
+            ["<leader>cA"] = {
+                ["rhs"] = function()
+                    crates.upgrade_crates()
+                end,
+                ["opts"] = { desc = "Upgrade All Crates" },
+            },
+            ["<leader>cx"] = {
+                ["rhs"] = function()
+                    crates.expand_plain_crate_to_inline_table()
+                end,
+                ["opts"] = { desc = "Expand Plain Crate To Inline Table" },
+            },
+            ["<leader>cX"] = {
+                ["rhs"] = function()
+                    crates.extract_crate_into_table()
+                end,
+                ["opts"] = { desc = "Extract Crate Into Table" },
+            },
+            ["<leader>cH"] = {
+                ["rhs"] = function()
+                    crates.open_homepage()
+                end,
+                ["opts"] = { desc = "Open Crates Homepage" },
+            },
+            ["<leader>cR"] = {
+                ["rhs"] = function()
+                    crates.open_repository()
+                end,
+                ["opts"] = { desc = "Open Crates Repository" },
+            },
+            ["<leader>cD"] = {
+                ["rhs"] = function()
+                    crates.open_documentation()
+                end,
+                ["opts"] = { desc = "Open Crates Documentation" },
+            },
+            ["<leader>cC"] = {
+                ["rhs"] = function()
+                    crates.open_crates_io()
+                end,
+                ["opts"] = { desc = "Open crates.io" },
+            },
+        },
+        ["v"] = {
+            ["<leader>cu"] = {
+                ["rhs"] = function()
+                    crates.update_crates()
+                end,
+                ["opts"] = { desc = "Update Selected Crates" },
+            },
+            ["<leader>cU"] = {
+                ["rhs"] = function()
+                    crates.upgrade_crates()
+                end,
+                ["opts"] = { desc = "Upgrade Selected Crates" },
+            },
+        },
+    }
 end
 
 return M
