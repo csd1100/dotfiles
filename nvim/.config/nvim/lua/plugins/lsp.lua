@@ -132,7 +132,7 @@ return {
         dependencies = {
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/mason-lspconfig.nvim" },
-            { "kevinhwang91/nvim-ufo", dependencies = "kevinhwang91/promise-async" },
+            { "kevinhwang91/nvim-ufo",            dependencies = "kevinhwang91/promise-async" },
             {
                 "folke/trouble.nvim",
                 dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -235,6 +235,8 @@ return {
                     end,
                 },
             }
+
+            require("config.jdtls")
 
             -- MASON Installation
             local ensure_installed = {
