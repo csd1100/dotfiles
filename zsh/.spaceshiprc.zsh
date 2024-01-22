@@ -1,8 +1,8 @@
 SPACESHIP_PROMPT_ORDER=(
     user          # Username section
     dir           # Current directory section
-    git           # Git section (git_branch + git_status)
     async
+    git           # Git section (git_branch + git_status)
     exec_time     # Execution time
     nix_shell
     line_sep      # Line break
