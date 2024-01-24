@@ -25,6 +25,9 @@ return {
             { "hrsh7th/cmp-path" },
             { "hrsh7th/cmp-cmdline" },
             { "hrsh7th/cmp-nvim-lua" },
+            { "hrsh7th/cmp-vsnip" },
+            { "hrsh7th/cmp-nvim-lsp-signature-help" },
+            { "hrsh7th/cmp-nvim-lsp-document-symbol" },
             { "L3MON4D3/LuaSnip" },
             { "saadparwaiz1/cmp_luasnip" },
             { "rafamadriz/friendly-snippets" },
@@ -46,7 +49,8 @@ return {
                     { name = "luasnip" },
                     { name = "nvim_lua" },
                     { name = "crates" },
-                    { name = "crates" },
+                    { name = "vsnip" },
+                    { name = "nvim_lsp_signature_help" },
                 },
                 formatting = {
                     fields = { "abbr", "kind", "menu" },
@@ -59,6 +63,11 @@ return {
                 window = {
                     completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
+                },
+                view = {
+                    docs = {
+                        auto_open = false,
+                    },
                 },
                 snippet = {
                     expand = function(args)
@@ -105,6 +114,7 @@ return {
             cmp.setup.cmdline("/", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
+                    { name = "nvim_lsp_document_symbol" },
                     { name = "buffer" },
                 },
             })
@@ -132,7 +142,6 @@ return {
         dependencies = {
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/mason-lspconfig.nvim" },
-            { "kevinhwang91/nvim-ufo",            dependencies = "kevinhwang91/promise-async" },
             {
                 "folke/trouble.nvim",
                 dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -184,7 +193,6 @@ return {
                 function() end,
                 "{}"
             )
-            modes_module.add_maps("Rust", lspMaps.get_lsp_maps())
             modes_module.add_maps("Rust", lspMaps.get_rustacean_maps())
 
             -- LSP Setup

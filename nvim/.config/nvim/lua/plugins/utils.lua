@@ -97,11 +97,6 @@ return {
         end,
     },
     {
-        "csd1100/modes.nvim",
-        -- dev = true,
-        config = true,
-    },
-    {
         "mbbill/undotree",
     },
     {

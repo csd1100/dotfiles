@@ -15,7 +15,7 @@ map(
     "n",
     "<leader>cs",
     ":Telescope colorscheme<CR>",
-    { desc = "Chnage colorscheme" }
+    { desc = "Change colorscheme" }
 )
 map("n", "<leader>h", ":Telescope oldfiles<CR>", { desc = "Recent Files" })
 map(
@@ -45,12 +45,6 @@ map(
     ":lua require('persistence').load()<CR>",
     { desc = "Save Current Session" }
 )
-map(
-    "n",
-    "<leader><S-p>",
-    ":PackerSnapshot " .. os.date("%Y-%m-%d_%X") .. ".json <CR>",
-    { desc = "Create a Packer Snapshot at current date" }
-)
 map("n", "<leader>u", ":UndotreeToggle<CR>", { desc = "Show Undotree" })
 map("n", "]t", function()
     require("todo-comments").jump_next()
@@ -60,7 +54,7 @@ map("n", "[t", function()
     require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
 
-local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
 -- Repeat movement with ; and ,
 -- ensure ; goes forward and , goes backward regardless of the last direction

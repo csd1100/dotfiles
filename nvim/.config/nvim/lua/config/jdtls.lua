@@ -9,7 +9,6 @@ modes_module.create_if_not_present(
     function() end,
     "{}"
 )
-modes_module.add_maps("JLSP", lsp_keymaps.get_lsp_maps())
 modes_module.add_maps("JLSP", lsp_keymaps.get_jdtls_maps())
 
 local cache_vars = {}
