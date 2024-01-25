@@ -143,10 +143,6 @@ return {
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/mason-lspconfig.nvim" },
             {
-                "folke/trouble.nvim",
-                dependencies = { "nvim-tree/nvim-web-devicons" },
-            },
-            {
                 "mfussenegger/nvim-jdtls",
                 ft = "java",
             },
@@ -154,19 +150,6 @@ return {
                 "mrcjkb/rustaceanvim",
                 version = "^3",
                 ft = { "rust" },
-            },
-            {
-                "saecki/crates.nvim",
-                event = { "BufRead Cargo.toml" },
-                tag = "stable",
-                dependencies = { "nvim-lua/plenary.nvim" },
-                opts = {
-                    null_ls = {
-                        enabled = true,
-                        name = "crates.nvim",
-                    },
-                },
-                config = true,
             },
             {
                 "csd1100/modes.nvim",
@@ -253,6 +236,8 @@ return {
                 "marksman",
             }
 
+            local mason_registry = require("mason-registry")
+
             local check_installed = {
                 "tsserver",
                 "gopls",
@@ -260,7 +245,7 @@ return {
                 "jdtls",
             }
 
-            local function is_installed(lsp)
+            local function is_tool_installed(lsp)
                 local command
                 if lsp == "tsserver" then
                     command = { "node", "--version" }
@@ -278,9 +263,15 @@ return {
                 return status
             end
 
-            for _, value in ipairs(check_installed) do
-                if is_installed(value) then
-                    table.insert(ensure_installed, value)
+            print("hello")
+
+            for _, lsp in ipairs(check_installed) do
+                if
+                    not mason_registry.is_installed(lsp)
+                    and is_tool_installed(lsp)
+                then
+                    deep_print(lsp)
+                    table.insert(ensure_installed, lsp)
                 end
             end
 
@@ -296,8 +287,6 @@ return {
                     rust_analyzer = lsp_zero.noop,
                 },
             })
-
-            local mason_registry = require("mason-registry")
 
             local tools_to_install = {
                 "stylua",
@@ -368,6 +357,24 @@ return {
         },
     },
     {
+        "saecki/crates.nvim",
+        event = { "BufRead Cargo.toml" },
+        tag = "stable",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            null_ls = {
+                enabled = true,
+                name = "crates.nvim",
+            },
+        },
+        config = true,
+    },
+    {
+        "folke/trouble.nvim",
+        cmd = "LspStart",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    {
         "csd1100/csd-snips.nvim",
         -- dev = true,
         ft = {
@@ -377,9 +384,13 @@ return {
             "rust",
             "go",
         },
+        config = function()
+            require("config.keymaps").csd_snips()
+        end,
     },
     {
         "mfussenegger/nvim-ansible",
+        ft = "yaml",
     },
     {
         "iamcco/markdown-preview.nvim",

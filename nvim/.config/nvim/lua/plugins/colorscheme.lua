@@ -6,7 +6,7 @@ return {
         "rafi/awesome-vim-colorschemes",
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         config = function()
             -- vim.cmd.colorscheme("deus")
         end,
@@ -15,7 +15,7 @@ return {
         "navarasu/onedark.nvim",
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         opts = {
             style = "dark", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
             code_style = {
@@ -31,7 +31,7 @@ return {
         "loctvl842/monokai-pro.nvim",
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         name = "monokai-pro",
         config = function()
             require("monokai-pro").setup({
@@ -69,7 +69,7 @@ return {
         "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         name = "kanagawa",
         opts = {
             theme = "wave",

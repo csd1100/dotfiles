@@ -11,9 +11,13 @@ return {
         dependencies = {
             { "nvim-lua/plenary.nvim" },
         },
+        config = function()
+            require("config.keymaps").harpoon()
+        end,
     },
     {
         "nvim-telescope/telescope.nvim",
+        keys = { "<leader><leader>", "<leader>f" },
         branch = "0.1.x",
         dependencies = {
             { "nvim-telescope/telescope-live-grep-args.nvim" },
@@ -94,10 +98,15 @@ return {
             require("telescope").setup(opts)
             require("telescope").load_extension("live_grep_args")
             require("telescope").load_extension("harpoon")
+            require("config.keymaps").telescope()
         end,
     },
     {
         "mbbill/undotree",
+        event = "BufReadPost",
+        config = function()
+            require("config.keymaps").undotree()
+        end,
     },
     {
         "folke/which-key.nvim",
@@ -114,8 +123,9 @@ return {
     },
     {
         "mcauley-penney/tidy.nvim",
+        event = "BufReadPost",
         opts = {
-            filetype_exclude = { "markdown", "diff" },
+            filetype_exclude = { "markdown", "diff", "dashboard" },
         },
         config = true,
     },
@@ -123,10 +133,8 @@ return {
         "jghauser/mkdir.nvim",
     },
     {
-        "tpope/vim-fugitive",
-    },
-    {
         "lewis6991/gitsigns.nvim",
+        event = "BufReadPost",
         opts = {
             numhl = true,
             signs = {
@@ -135,13 +143,19 @@ return {
                 delete = { text = " " },
             },
         },
-        config = true,
+        config = function(_, opts)
+            require("gitsigns").setup(opts)
+            require("config.keymaps").gitsigns()
+        end,
     },
     {
         "folke/todo-comments.nvim",
         event = "BufReadPre",
         dependencies = "nvim-lua/plenary.nvim",
-        config = true,
+        config = function(plugin)
+            local todo = require("todo-comments")
+            require("config.keymaps").todo(todo)
+        end,
     },
     {
         "ahmedkhalf/project.nvim",
@@ -173,19 +187,18 @@ return {
         config = true,
     },
     {
-        {
-            "akinsho/toggleterm.nvim",
-            version = "*",
-            opts = {
-                size = 20,
-                open_mapping = [[<c-\>]],
-                hide_numbers = true,
-                autochdir = true,
-                persist_mode = true,
-                direction = "float",
-                float_opts = {
-                    -- border = "curved",
-                },
+        "akinsho/toggleterm.nvim",
+        event = "BufReadPost",
+        version = "*",
+        opts = {
+            size = 20,
+            open_mapping = [[<c-\>]],
+            hide_numbers = true,
+            autochdir = true,
+            persist_mode = true,
+            direction = "float",
+            float_opts = {
+                -- border = "curved",
             },
         },
     },

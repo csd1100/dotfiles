@@ -68,6 +68,7 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
+        event = "BufReadPre",
         config = function()
             local left_section_separator = ""
             local right_section_separator = ""
@@ -95,32 +96,6 @@ return {
                     ),
                     left_component_separator
                 )
-            end
-
-            local function treesitter_current_position()
-                local node = vim.treesitter.get_node({ 0 })
-                local str = ""
-                if node ~= nil then
-                    if node:type() == "identifier" then
-                        str = vim.treesitter.get_node_text(node, 0, {})
-                            .. "  "
-                            .. str
-                    end
-                    local parent = node:parent()
-                    if parent ~= nil then
-                        while parent ~= nil and not parent:equal(node) do
-                            if #parent:field("name") > 0 then
-                                str = vim.treesitter.get_node_text(
-                                    parent:field("name")[1],
-                                    0,
-                                    {}
-                                ) .. "  " .. str
-                            end
-                            parent = parent:parent()
-                        end
-                    end
-                end
-                return str
             end
 
             local conf = {
@@ -153,7 +128,7 @@ return {
                 tabline = {
                     lualine_a = { "location" },
                     lualine_b = { "filename" },
-                    lualine_c = { treesitter_current_position },
+                    lualine_c = {},
                     lualine_x = {},
                     lualine_y = { get_custom_buffer_modes },
                     lualine_z = { get_custom_global_modes },
@@ -196,6 +171,7 @@ return {
     },
     {
         "yamatsum/nvim-cursorline",
+        event = "BufReadPost",
         opts = {
             cursorline = {
                 enable = true,
@@ -214,6 +190,7 @@ return {
     },
     {
         "lukas-reineke/indent-blankline.nvim",
+        event = "BufReadPost",
         main = "ibl",
         opts = {
             debounce = 100,
@@ -254,6 +231,7 @@ return {
     },
     {
         "norcalli/nvim-colorizer.lua",
+        ft = { "html", "lua", "conf", "css" },
         config = function()
             require("colorizer").setup()
         end,
@@ -273,6 +251,7 @@ return {
     },
     {
         "rcarriga/nvim-notify",
+        enabled = false,
         config = function()
             local notify_background = "NotifyBackground"
             local background_color = vim.api.nvim_get_hl(

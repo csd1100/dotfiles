@@ -2,7 +2,11 @@ return {
     {
         "terrortylor/nvim-comment",
         main = "nvim_comment",
-        config = true,
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            require("nvim_comment").setup()
+            require("config.keymaps").comment()
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -18,7 +22,7 @@ return {
         },
         keys = {
             { "<c-space>", desc = "Increment selection" },
-            { "<bs>",      desc = "Decrement selection", mode = "x" },
+            { "<bs>", desc = "Decrement selection", mode = "x" },
         },
         opts = {
             highlight = { enable = true },
@@ -88,7 +92,7 @@ return {
                     -- mapping query_strings to modes.
                     selection_modes = {
                         ["@parameter.outer"] = "v", -- charwise
-                        ["@function.outer"] = "V",  -- linewise
+                        ["@function.outer"] = "V", -- linewise
                         ["@class.outer"] = "<c-v>", -- blockwise
                     },
                     -- If you set this to `true` (default is `false`) then any textobject is
@@ -207,6 +211,7 @@ return {
                 end, opts.ensure_installed)
             end
             require("nvim-treesitter.configs").setup(opts)
+            require("config.keymaps").treesitter()
         end,
     },
 }

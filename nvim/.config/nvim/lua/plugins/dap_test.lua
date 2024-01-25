@@ -84,6 +84,7 @@ return {
             dap.listeners.before.event_exited["dapui_config"] = function()
                 dapui.close()
             end
+            require("config.keymaps").debug()
         end,
     },
     {
@@ -156,6 +157,7 @@ return {
                     open_on_run = true,
                 },
             })
+            require("config.keymaps").test()
         end,
         dependencies = {
             "nvim-lua/plenary.nvim",
