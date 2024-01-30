@@ -47,7 +47,7 @@ return {
                             desc_hl = "String",
                             key = "n",
                             key_hl = "Number",
-                            action = "new",
+                            action = "enew",
                         },
                         {
                             icon = " ",
@@ -240,7 +240,7 @@ return {
         "j-hui/fidget.nvim",
         opts = {
             notification = {
-                override_vim_notify = true,
+                -- override_vim_notify = true,
                 window = {
                     winblend = 0,
                 },
@@ -251,7 +251,7 @@ return {
     },
     {
         "rcarriga/nvim-notify",
-        enabled = false,
+        -- enabled = false,
         config = function()
             local notify_background = "NotifyBackground"
             local background_color = vim.api.nvim_get_hl(
@@ -261,7 +261,8 @@ return {
             if background_color == nil then
                 notify_background = "#000000"
             end
-            require("notify").setup({
+            local notify = require("notify")
+            notify.setup({
                 background_colour = notify_background,
                 fps = 30,
                 icons = {
@@ -277,6 +278,7 @@ return {
                 stages = "static",
                 timeout = 1500,
             })
+            vim.notify = notify
         end,
     },
 }

@@ -234,6 +234,7 @@ return {
                 "bashls",
                 "lua_ls",
                 "marksman",
+                "rust_analyzer",
             }
 
             local mason_registry = require("mason-registry")
@@ -263,14 +264,21 @@ return {
                 return status
             end
 
-            print("hello")
+            local function lsp_already_installed(lsp)
+                if lsp == "tsserver" then
+                    lsp = "typescript-language-server"
+                elseif lsp == "rust_analyzer" then
+                    lsp = "rust-analyzer"
+                end
+                local is_installed = mason_registry.is_installed(lsp)
+                -- print(lsp .. ":" .. is_installed)
+            end
 
             for _, lsp in ipairs(check_installed) do
                 if
-                    not mason_registry.is_installed(lsp)
+                    not lsp_already_installed(lsp)
                     and is_tool_installed(lsp)
                 then
-                    deep_print(lsp)
                     table.insert(ensure_installed, lsp)
                 end
             end
@@ -324,6 +332,8 @@ return {
             "typescript",
             "lua",
             "sh",
+            "markdown",
+            "go",
         },
         config = function()
             local null_ls = require("null-ls")
@@ -396,6 +406,9 @@ return {
         "iamcco/markdown-preview.nvim",
         build = function()
             vim.fn["mkdp#util#install"]()
+        end,
+        config = function()
+            require("config.keymaps").markdown_preview()
         end,
     },
     {

@@ -12,56 +12,48 @@ local M = {}
 
 function M.general() end
 
-function M.telescope()
+function M.telescope(plugin)
+    local builtin = require("telescope.builtin")
     -- colorscheme
-    map(
-        "n",
-        "<leader>cs",
-        ":Telescope colorscheme<CR>",
-        { desc = "Change colorscheme" }
-    )
+    map("n", "<leader>cs", builtin.colorscheme, { desc = "Change colorscheme" })
     -- Recent files
-    map("n", "<leader>to", ":Telescope oldfiles<CR>", { desc = "Recent Files" })
+    map("n", "<leader>to", builtin.oldfiles, { desc = "Recent Files" })
     -- Files
-    map(
-        "n",
-        "<leader><leader>",
-        ":Telescope find_files<CR>",
-        { desc = "Find File" }
-    )
-    -- String search
+    map("n", "<leader><leader>", builtin.find_files, { desc = "Find File" })
+    -- -- String search
     map(
         "n",
         "<leader>f",
-        ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+        plugin.extensions.live_grep_args.live_grep_args,
         { desc = "Grep string" }
     )
     map(
         "v",
         "<leader>f",
-        ":lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<CR>",
-        { desc = "Grep word under cursor" }
+        require("telescope-live-grep-args.shortcuts").grep_word_under_cursor,
+        {
+            desc = "Grep word under cursor",
+        }
     )
     -- buffers
-    map(
-        "n",
-        "<leader>b",
-        ":Telescope buffers<CR>",
-        { desc = "List Open Buffers" }
-    )
+    map("n", "<leader>b", builtin.buffers, { desc = "List Open Buffers" })
     -- projects
     map("n", "<leader>gp", ":Telescope projects<CR>", { desc = "Projects" })
     -- neovim help
-    map("n", "<C-S-h>", ":Telescope help_tags<CR>")
+    map("n", "<C-S-h>", builtin.help_tags, { desc = "Help" })
     -- harpoon
     map(
         "n",
         "<leader>ht",
-        ":lua require('telescope').extensions.harpoon.marks()<CR>",
+        plugin.extensions.harpoon.marks,
         { desc = "Harpoon Telescope" }
     )
+    -- notifications
+    map("v", "<leader>n", function()
+        plugin.extensions.notify.notify()
+    end, { desc = "Notifications" })
     -- Resume last search
-    map("n", "<C-S-f><C-S-f>", ":Telescope resume<CR>")
+    map("n", "<C-S-f><C-S-f>", builtin.resume, { desc = "Resume search" })
 end
 
 function M.comment()

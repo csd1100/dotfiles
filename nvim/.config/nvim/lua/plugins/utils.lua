@@ -17,7 +17,6 @@ return {
     },
     {
         "nvim-telescope/telescope.nvim",
-        keys = { "<leader><leader>", "<leader>f" },
         branch = "0.1.x",
         dependencies = {
             { "nvim-telescope/telescope-live-grep-args.nvim" },
@@ -95,10 +94,11 @@ return {
                     theme = "dropdown",
                 },
             }
-            require("telescope").setup(opts)
-            require("telescope").load_extension("live_grep_args")
-            require("telescope").load_extension("harpoon")
-            require("config.keymaps").telescope()
+            local telescope = require("telescope")
+            telescope.setup(opts)
+            telescope.load_extension("live_grep_args")
+            telescope.load_extension("harpoon")
+            require("config.keymaps").telescope(telescope)
         end,
     },
     {
