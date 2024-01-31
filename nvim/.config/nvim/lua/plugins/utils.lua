@@ -8,11 +8,14 @@ return {
     },
     {
         "theprimeagen/harpoon",
+        branch = "harpoon2",
         dependencies = {
             { "nvim-lua/plenary.nvim" },
         },
         config = function()
-            require("config.keymaps").harpoon()
+            local harpoon = require("harpoon")
+            harpoon:setup()
+            require("config.keymaps").harpoon(harpoon)
         end,
     },
     {

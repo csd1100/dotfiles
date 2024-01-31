@@ -41,13 +41,6 @@ function M.telescope(plugin)
     map("n", "<leader>gp", ":Telescope projects<CR>", { desc = "Projects" })
     -- neovim help
     map("n", "<C-S-h>", builtin.help_tags, { desc = "Help" })
-    -- harpoon
-    map(
-        "n",
-        "<leader>ht",
-        plugin.extensions.harpoon.marks,
-        { desc = "Harpoon Telescope" }
-    )
     -- notifications
     map("v", "<leader>n", function()
         plugin.extensions.notify.notify()
@@ -106,30 +99,27 @@ function M.treesitter()
     map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
 end
 
-function M.harpoon()
-    local ui = require("harpoon.ui")
-    local mark = require("harpoon.mark")
-
+function M.harpoon(plugin)
     map("n", "<leader>ha", function()
-        mark.add_file()
+        plugin:list():append()
     end, { desc = "Harpoon add" })
     map("n", "<leader>hm", function()
-        ui.toggle_quick_menu()
+        plugin.ui:toggle_quick_menu(plugin:list())
     end, { desc = "Harpoon Menu" })
 
     map("n", "<leader>1", function()
-        ui.nav_file(1)
+        plugin:list():select(1)
     end, { desc = "Harpoon 1" })
     map("n", "<leader>2", function()
-        ui.nav_file(2)
+        plugin:list():select(2)
     end, { desc = "Harpoon 2" })
 
     map("n", "<leader>3", function()
-        ui.nav_file(3)
+        plugin:list():select(3)
     end, { desc = "Harpoon 3" })
 
     map("n", "<leader>4", function()
-        ui.nav_file(4)
+        plugin:list():select(4)
     end, { desc = "Harpoon 4" })
 end
 
