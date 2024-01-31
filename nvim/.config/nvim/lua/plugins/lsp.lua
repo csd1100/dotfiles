@@ -234,7 +234,6 @@ return {
                 "bashls",
                 "lua_ls",
                 "marksman",
-                "rust_analyzer",
             }
 
             local mason_registry = require("mason-registry")
@@ -270,8 +269,7 @@ return {
                 elseif lsp == "rust_analyzer" then
                     lsp = "rust-analyzer"
                 end
-                local is_installed = mason_registry.is_installed(lsp)
-                -- print(lsp .. ":" .. is_installed)
+                return mason_registry.is_installed(lsp)
             end
 
             for _, lsp in ipairs(check_installed) do
@@ -298,7 +296,7 @@ return {
 
             local tools_to_install = {
                 "stylua",
-                "eslint_d",
+                "eslint",
                 "shfmt",
                 "shellcheck",
                 "prettier",
@@ -317,6 +315,7 @@ return {
                     and mason_registry.has_package(tool)
                 then
                     local package = mason_registry.get_package(tool)
+                    print("installing" .. tool)
                     package:install()
                 end
             end
@@ -340,7 +339,7 @@ return {
             local opts = {
                 sources = {
                     null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.diagnostics.eslint_d,
+                    null_ls.builtins.diagnostics.eslint,
                     null_ls.builtins.code_actions.refactoring,
                     null_ls.builtins.formatting.shfmt,
                     null_ls.builtins.code_actions.shellcheck,
@@ -393,6 +392,7 @@ return {
             "typescript",
             "rust",
             "go",
+            "lua",
         },
         config = function()
             require("config.keymaps").csd_snips()
