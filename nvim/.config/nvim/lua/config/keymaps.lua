@@ -152,7 +152,7 @@ function M.csd_snips()
     if vim.bo.filetype == "go" then
         map({ "n" }, "\\", function()
             csd_snips.go.print_nil_check()
-        end, { desc = "Write word under cursor to logger (csd-snips)" })
+        end, { desc = "Golang nil check (csd-snips)" })
     end
 end
 
