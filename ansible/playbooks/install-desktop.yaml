@@ -62,12 +62,16 @@
                   become: true
                   ansible.builtin.dnf:
                     name:
+                      - gdm
+                      - swaylock
+                      - kwallet
+                      - polkit-kde
+                      - pam-kwallet
+                      - grim
                       - glibc
                       - libgcc
-                      - greetd
                       - wlroots
                       - hyprland
-                      - polkit-kde
                       - file-devel
                       - gtk3-devel
                       - ninja-build
