@@ -1,0 +1,136 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$sudo\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$cmd_duration\
+$env_var\
+$custom\
+$line_break\
+$jobs\
+$status\
+$os\
+$shell\
+$character"""
+
+right_format = """
+$nix_shell\
+$package\
+$golang\
+$rust\
+$nodejs\
+$java\
+$kotlin\
+$gradle\
+$lua\
+$python\
+$conda\
+$swift\
+$dart\
+$helm\
+$container\
+$docker_context\
+$kubernetes\
+$time\
+"""
+
+[hostname]
+ssh_symbol = "󰣀"
+
+[shlvl]
+disabled = false
+symbol = "󰭩 "
+
+[sudo]
+symbol = ""
+disabled = false
+format = "[$symbol]($style) "
+
+[directory]
+read_only = "󰌾"
+
+[git_branch]
+truncation_length = 20
+symbol = " "
+
+[git_commit]
+tag_symbol = " "
+tag_disabled = false
+
+[git_metrics]
+disabled = false
+
+[status]
+disabled = false
+symbol = ""
+not_found_symbol = ""
+not_executable_symbol = ""
+
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = "[✖](bold red)"
+vimcmd_symbol = "[N](bold green)"
+
+[nix_shell]
+symbol = "󱄅 "
+
+[package]
+symbol = " "
+
+[golang]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[java]
+symbol = "󰬷 "
+
+[kotlin]
+symbol = "󱈙 "
+
+[gradle]
+symbol = " "
+
+[lua]
+symbol = "󰢱 "
+
+[python]
+symbol = "󰌠 "
+
+[conda]
+symbol = "🅒 "
+
+[swift]
+symbol = "󰛥 "
+
+[dart]
+symbol = " "
+
+[helm]
+symbol = "󰠳 "
+
+[docker_context]
+symbol = " "
+
+[kubernetes]
+symbol = "󱃾 "
+
+[time]
+disabled = false
+
+[custom.terrainium]
+command = "echo $TERRAINIUM_TERRAIN_NAME:$TERRAINIUM_SELECTED_BIOME"
+when = ''' test "$TERRAINIUM_ENABLED" = "true" '''
+symbol = "󰛍 "
