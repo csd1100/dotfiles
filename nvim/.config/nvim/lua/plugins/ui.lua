@@ -245,6 +245,11 @@ return {
                     winblend = 0,
                 },
             },
+            progress = {
+                display = {
+                    progress_ttl = 300,
+                },
+            },
         },
         config = true,
         branch = "main",

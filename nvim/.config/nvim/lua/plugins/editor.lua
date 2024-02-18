@@ -187,7 +187,7 @@ return {
                     },
                 },
                 navigation = {
-                    enable = true,
+                    enable = false,
                     keymaps = {
                         goto_definition = "gd",
                         list_definitions = "<leader>ls",
