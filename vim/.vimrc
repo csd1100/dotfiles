@@ -1,3 +1,4 @@
+colorscheme habamax
 nnoremap <Space> <nop>
 let mapleader =" "
 
@@ -38,6 +39,7 @@ nnoremap <leader>k <cmd>lnext<CR>zz
 nnoremap <leader>j <cmd>lprev<CR>zz
 
 " yank text in reg 6
+nnoremap "" ve"6y
 vnoremap "" "6y
 " replace current word with text from reg 6
 nnoremap cp de"6P
@@ -71,6 +73,9 @@ nnoremap <leader>e $
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
+
+" remap P to <leader>P
+nnoremap <leader>P P
 
 nnoremap qq :q<CR>
 nnoremap qa :qa<CR>
