@@ -10,10 +10,11 @@ export RPS1="%{$reset_color%}"
 export DOCKER_FORMAT="\\nID\\t{{.ID}}\\nIMAGE\\t{{.Image}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.RunningFor}}\\nSTATUS\\t{{.Status}}\\nPORTS\\t{{.Ports}}\\nNAMES\\t{{.Names}}\\n"
 
 # GO
-export GOPATH="/usr/local/go"
+export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 
 # PATH
+export PATH="/usr/local/go/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/bin/helpers:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
