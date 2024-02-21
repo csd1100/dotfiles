@@ -127,18 +127,25 @@ return {
                     end,
                 },
             }, neotest_ns)
-            require("neotest").setup({
-                adapters = {
-                    require("neotest-plenary"),
-                    require("neotest-go"),
-                    require("rustaceanvim.neotest"),
-                    require("neotest-jest"),
-                    require("neotest-vitest"),
-                    require("neotest-plenary"),
+            local adapters = {
+                require("neotest-plenary"),
+                require("neotest-go"),
+                require("rustaceanvim.neotest"),
+                require("neotest-plenary"),
+            }
+            if os.getenv("NEOTEST_MOCHA") == "true" then
+                table.insert(
+                    adapters,
                     require("neotest-vim-test")({
-                        allow_file_types = { "js" },
-                    }),
-                },
+                        allow_file_types = { "javascript" },
+                    })
+                )
+            else
+                table.insert(adapters, require("neotest-jest"))
+                table.insert(adapters, require("neotest-vitest"))
+            end
+            require("neotest").setup({
+                adapters = adapters,
                 icons = {
                     child_indent = "│",
                     child_prefix = "├",
