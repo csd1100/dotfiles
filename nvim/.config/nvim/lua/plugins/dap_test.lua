@@ -135,6 +135,9 @@ return {
                     require("neotest-jest"),
                     require("neotest-vitest"),
                     require("neotest-plenary"),
+                    require("neotest-vim-test")({
+                        allow_file_types = { "js" },
+                    }),
                 },
                 icons = {
                     child_indent = "│",
@@ -173,6 +176,8 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "antoinemadec/FixCursorHold.nvim",
+            "vim-test/vim-test",
+            "nvim-neotest/neotest-vim-test",
             {
                 "nvim-neotest/neotest-go",
                 ft = "go",
