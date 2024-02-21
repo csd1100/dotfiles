@@ -5,6 +5,7 @@ local filetypes = {
     "go",
     "rust",
 }
+
 return {
     {
         "mfussenegger/nvim-dap",
@@ -32,18 +33,23 @@ return {
             layouts = {
                 {
                     elements = {
-                        {
-                            id = "scopes",
-                            size = 0.25,
-                        },
-                        "stacks",
+                        "scopes",
                     },
-                    size = 40, -- 40 columns
+                    size = 40,
                     position = "left",
                 },
                 {
-                    elements = { "console" },
-                    size = 0.25, -- 25% of total lines
+                    elements = {
+                        {
+                            id = "stacks",
+                            size = 0.5,
+                        },
+                        {
+                            id = "watches",
+                            size = 0.5,
+                        },
+                    },
+                    size = 8,
                     position = "bottom",
                 },
             },
@@ -102,6 +108,9 @@ return {
         config = true,
     },
     {
+        "nvim-telescope/telescope-dap.nvim",
+    },
+    {
         "nvim-neotest/neotest",
         ft = filetypes,
         config = function()
@@ -122,6 +131,7 @@ return {
                 adapters = {
                     require("neotest-plenary"),
                     require("neotest-go"),
+                    require("rustaceanvim.neotest"),
                     require("neotest-jest"),
                     require("neotest-vitest"),
                     require("neotest-plenary"),

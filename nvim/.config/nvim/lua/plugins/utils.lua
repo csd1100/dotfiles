@@ -53,7 +53,7 @@ return {
                     "--hidden",
                     "--no-ignore-vcs",
                     "-g",
-                    "!{.git,node_modules}",
+                    "!{.git,node_modules,target,out, build}",
                 },
                 theme = "dropdown",
             },
@@ -66,7 +66,7 @@ return {
                         "--hidden",
                         "--no-ignore-vcs",
                         "-g",
-                        "!{.git,node_modules}",
+                        "!{.git,node_modules,target,out, build}",
                     },
                     prompt_prefix = "🔍",
                     theme = "dropdown",
@@ -101,6 +101,7 @@ return {
             telescope.setup(opts)
             telescope.load_extension("live_grep_args")
             telescope.load_extension("harpoon")
+            telescope.load_extension("dap")
             require("config.keymaps").telescope(telescope)
         end,
     },

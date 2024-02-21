@@ -211,6 +211,16 @@ return {
             })
 
             vim.g.rustaceanvim = {
+                tools = {
+                    executor = "neotest",
+                    test_executor = "neotest",
+                    enable_nextest = true,
+                    reload_workspace_from_cargo_toml = true,
+                    float_win_config = {
+                        max_width = 50,
+                        max_height = 5,
+                    },
+                },
                 server = {
                     capabilities = lsp_zero.get_capabilities(),
                     on_attach = function(client, bufnr)
@@ -230,39 +240,83 @@ return {
             require("config.jdtls")
 
             -- MASON Installation
-            local ensure_installed = {
+            local ensure_installed_lsp = {
                 "bashls",
                 "lua_ls",
                 "marksman",
+                "taplo",
             }
 
-            local mason_registry = require("mason-registry")
-
-            local check_installed = {
+            local check_installed_lsp = {
                 "tsserver",
                 "gopls",
                 "rust_analyzer",
                 "jdtls",
             }
 
-            local function is_tool_installed(lsp)
-                local command
-                if lsp == "tsserver" then
-                    command = { "node", "--version" }
-                elseif lsp == "gopls" then
-                    command = { "go", "version" }
-                elseif lsp == "rust_analyzer" then
-                    command = { "rustc", " --version" }
-                elseif lsp == "jdtls" then
-                    command = { "java", "--version" }
+            local tools_to_install = {
+                "stylua",
+                "shfmt",
+                "shellcheck",
+                "markdownlint",
+            }
+
+            local tools_to_check = {
+                "buf",
+                "eslint",
+                "codelldb",
+                "prettier",
+                "gomodifytags",
+                "java-test",
+                "ansible-lint",
+                "java-debug-adapter",
+                "chrome-debug-adapter",
+                "node-debug2-adapter",
+            }
+
+            local function get_language_for(tool)
+                local lang
+                if
+                    tool == "tsserver"
+                    or tool == "chrome-debug-adapter"
+                    or tool == "node-debug2-adapter"
+                    or tool == "prettier"
+                then
+                    lang = "node"
+                elseif tool == "gopls" or tool == "gomodifytags" then
+                    lang = "go"
+                elseif tool == "rust_analyzer" or tool == "codelldb" then
+                    lang = "rust"
+                elseif
+                    tool == "jdtls"
+                    or tool == "java-test"
+                    or tool == "java-debug-adapter"
+                then
+                    lang = "java"
+                elseif tool == "buf" then
+                    lang = "protoc"
                 else
                     return nil
                 end
+                return lang
+            end
 
+            local function is_language_installed(lang)
+                local command
+                if lang == nil then
+                    return nil
+                elseif lang == "go" then
+                    command = { "go", "version" }
+                elseif lang == "rust" then
+                    command = { "rustc", " --version" }
+                else
+                    command = { lang, "--version" }
+                end
                 local status, _ = pcall(vim.system, command)
                 return status
             end
 
+            local mason_registry = require("mason-registry")
             local function lsp_already_installed(lsp)
                 if lsp == "tsserver" then
                     lsp = "typescript-language-server"
@@ -272,17 +326,17 @@ return {
                 return mason_registry.is_installed(lsp)
             end
 
-            for _, lsp in ipairs(check_installed) do
+            for _, lsp in ipairs(check_installed_lsp) do
                 if
                     not lsp_already_installed(lsp)
-                    and is_tool_installed(lsp)
+                    and is_language_installed(get_language_for(lsp))
                 then
-                    table.insert(ensure_installed, lsp)
+                    table.insert(ensure_installed_lsp, lsp)
                 end
             end
 
             require("mason-lspconfig").setup({
-                ensure_installed = ensure_installed,
+                ensure_installed = ensure_installed_lsp,
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
@@ -294,20 +348,11 @@ return {
                 },
             })
 
-            local tools_to_install = {
-                "stylua",
-                "eslint",
-                "shfmt",
-                "shellcheck",
-                "prettier",
-                "gomodifytags",
-                "ansible-lint",
-                "markdownlint",
-                "java-test",
-                "java-debug-adapter",
-                "chrome-debug-adapter",
-                "node-debug2-adapter",
-            }
+            for _, tool in ipairs(tools_to_check) do
+                if is_language_installed(get_language_for(tool)) then
+                    table.insert(tools_to_install, tool)
+                end
+            end
 
             local function mason_install_if_not(tool)
                 if
@@ -315,7 +360,7 @@ return {
                     and mason_registry.has_package(tool)
                 then
                     local package = mason_registry.get_package(tool)
-                    print("installing" .. tool)
+                    vim.notify("installing " .. tool)
                     package:install()
                 end
             end
@@ -333,6 +378,7 @@ return {
             "sh",
             "markdown",
             "go",
+            "proto",
         },
         config = function()
             local null_ls = require("null-ls")
@@ -349,6 +395,8 @@ return {
                     null_ls.builtins.diagnostics.ansiblelint,
                     null_ls.builtins.diagnostics.deadnix,
                     null_ls.builtins.diagnostics.markdownlint,
+                    null_ls.builtins.diagnostics.buf,
+                    null_ls.builtins.formatting.buf,
                 },
             }
             null_ls.setup(opts)
