@@ -3,35 +3,10 @@ vim.opt.background = "dark"
 
 return {
     {
-        "rafi/awesome-vim-colorschemes",
-        lazy = false,
-        priority = 1000,
-        enabled = false,
-        config = function()
-            -- vim.cmd.colorscheme("deus")
-        end,
-    },
-    {
-        "navarasu/onedark.nvim",
-        lazy = false,
-        priority = 1000,
-        enabled = false,
-        opts = {
-            style = "dark", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-            code_style = {
-                keywords = "italic",
-            },
-        },
-        config = function(_, opts)
-            require("onedark").setup(opts)
-            -- vim.cmd.colorscheme("onedark")
-        end,
-    },
-    {
         "loctvl842/monokai-pro.nvim",
         lazy = false,
         priority = 1000,
-        enabled = false,
+        enabled = true,
         name = "monokai-pro",
         config = function()
             require("monokai-pro").setup({
@@ -66,10 +41,40 @@ return {
         end,
     },
     {
+        "bluz71/vim-moonfly-colors",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        name = "moonfly",
+        init = function()
+            -- vim.cmd.colorscheme("moonfly")
+        end,
+    },
+    {
+        "Alexis12119/nightly.nvim",
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        name = "nightly",
+        init = function()
+            require("nightly").setup({
+                transparent = false,
+                styles = {
+                    comments = { italic = true },
+                    functions = { italic = true },
+                    variables = { italic = false },
+                    keywords = { italic = true },
+                },
+                highlights = {},
+            })
+            -- vim.cmd.colorscheme("nightly")
+        end,
+    },
+    {
         "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
-        enabled = false,
+        enabled = true,
         name = "kanagawa",
         opts = {
             theme = "wave",

@@ -70,10 +70,11 @@ return {
         "nvim-lualine/lualine.nvim",
         event = "BufReadPre",
         config = function()
-            local left_section_separator = ""
-            local right_section_separator = ""
-            local left_component_separator = "⎪"
-            local right_component_separator = "⎪"
+            -- local left_section_separator = ""
+            -- local right_section_separator = ""
+            -- local right_component_separator = "⎪"
+            -- local left_component_separator = "⎪"
+            local component_separator = "⎪"
 
             local function get_vim_mode()
                 return string.upper(
@@ -85,7 +86,7 @@ return {
             local function get_custom_global_modes()
                 return table.concat(
                     modes_module.get_active_modes_icons("*"),
-                    left_component_separator
+                    component_separator
                 )
             end
 
@@ -94,7 +95,7 @@ return {
                     modes_module.get_active_modes_icons(
                         vim.api.nvim_get_current_buf()
                     ),
-                    left_component_separator
+                    component_separator
                 )
             end
 
@@ -102,14 +103,8 @@ return {
                 options = {
                     icons_enabled = true,
                     theme = "auto",
-                    component_separators = {
-                        left = left_component_separator,
-                        right = right_component_separator,
-                    },
-                    section_separators = {
-                        left = left_section_separator,
-                        right = right_section_separator,
-                    },
+                    component_separators = component_separator,
+                    section_separators = "",
                     disabled_filetypes = {},
                     always_divide_middle = true,
                     globalstatus = false,
@@ -123,11 +118,11 @@ return {
                     lualine_c = {},
                     lualine_x = { "diagnostics", "filetype" },
                     lualine_y = {},
-                    lualine_z = {},
+                    lualine_z = { "location" },
                 },
                 tabline = {
-                    lualine_a = { "location" },
-                    lualine_b = { "filename" },
+                    lualine_a = { "filename" },
+                    lualine_b = {},
                     lualine_c = {},
                     lualine_x = {},
                     lualine_y = { get_custom_buffer_modes },
@@ -137,23 +132,23 @@ return {
                     lualine_a = {
                         {
                             "tabs",
-                            max_length = 1000,
+                            tab_max_length = 40,
+                            max_length = vim.o.columns / 3,
                             tabs_color = {
                                 -- Same values as the general color option can be used here.
-                                active = "lualine_b_command", -- Color for active tab.
-                                inactive = "lualine_a_inactive", -- Color for inactive tab.
+                                active = {}, -- Color for active tab.
+                                inactive = "lualine_b_active", -- Color for inactive tab.
                             },
                             mode = 2,
-                            fmt = function(name, context)
-                                -- Show + if buffer is modified in tab
-                                local buflist =
-                                    vim.fn.tabpagebuflist(context.tabnr)
-                                local winnr = vim.fn.tabpagewinnr(context.tabnr)
-                                local bufnr = buflist[winnr]
-                                local mod = vim.fn.getbufvar(bufnr, "&mod")
-
-                                return name .. (mod == 1 and " +" or "")
-                            end,
+                            show_modified_status = true,
+                            symbols = {
+                                modified = "[+]", -- Text to show when the file is modified.
+                            },
+                        },
+                        {
+                            "nil",
+                            draw_empty = true,
+                            color = "lualine_b_inactive",
                         },
                     },
                     lualine_b = {},
