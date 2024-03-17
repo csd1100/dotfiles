@@ -248,6 +248,7 @@ return {
             }
 
             local check_installed_lsp = {
+                "eslint-lsp",
                 "tsserver",
                 "gopls",
                 "rust_analyzer",
@@ -263,7 +264,6 @@ return {
 
             local tools_to_check = {
                 "buf",
-                "eslint",
                 "codelldb",
                 "prettier",
                 "gomodifytags",
@@ -278,6 +278,7 @@ return {
                 local lang
                 if
                     tool == "tsserver"
+                    or tool == "eslint-lsp"
                     or tool == "chrome-debug-adapter"
                     or tool == "node-debug2-adapter"
                     or tool == "prettier"
@@ -384,18 +385,17 @@ return {
             local null_ls = require("null-ls")
             local opts = {
                 sources = {
-                    null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.diagnostics.eslint,
                     null_ls.builtins.code_actions.refactoring,
-                    null_ls.builtins.formatting.shfmt,
-                    null_ls.builtins.code_actions.shellcheck,
-                    null_ls.builtins.formatting.prettier,
                     null_ls.builtins.code_actions.gitsigns,
                     null_ls.builtins.code_actions.gomodifytags,
                     null_ls.builtins.diagnostics.ansiblelint,
                     null_ls.builtins.diagnostics.deadnix,
                     null_ls.builtins.diagnostics.markdownlint,
                     null_ls.builtins.diagnostics.buf,
+                    null_ls.builtins.formatting.shfmt,
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.formatting.prettier,
+                    null_ls.builtins.formatting.markdownlint,
                     null_ls.builtins.formatting.buf,
                 },
             }
