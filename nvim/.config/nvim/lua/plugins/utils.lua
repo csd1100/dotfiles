@@ -206,4 +206,15 @@ return {
             },
         },
     },
+    {
+        "laytan/cloak.nvim",
+        opts = {
+            enabled = true,
+        },
+        config = function(opts)
+            local cloak = require("cloak")
+            cloak.setup(opts)
+            require("config.keymaps").cloak()
+        end,
+    },
 }

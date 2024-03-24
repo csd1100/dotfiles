@@ -430,6 +430,21 @@ function M.test()
     )
 end
 
+function M.cloak()
+    map(
+        "n",
+        "<leader>8",
+        ":CloakPreviewLine<CR>",
+        { desc = "Cloak show current line" }
+    )
+    map(
+        "n",
+        "88",
+        ":CloakToggle<CR>",
+        { desc = "Cloak Toggle" }
+    )
+end
+
 local complModeMaps = {
     ["v"] = {
         ['"'] = { ["rhs"] = '<ESC>`>a"<ESC>`<i"<ESC>', ["opts"] = {} },
