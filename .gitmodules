@@ -1,0 +1,3 @@
+[submodule "private-scripts"]
+	path = private-scripts
+	url = git@github.com:csd1100/private-scripts.git

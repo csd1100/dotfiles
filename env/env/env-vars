@@ -43,6 +43,10 @@ elif [ $unameOut = "Linux" ]; then
     export JAVA_VERSION="$(java --version | awk -F ' ' 'NR==1{print $2}' | cut -d '.' -f1)"
     export JAVA_HOME=`locate -l 1 "/usr/lib/jvm/java-${JAVA_VERSION}-openjdk*"`
 fi
+
+# ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 # source overrides
 if [ -f "$HOME/env/overrides/env-vars" ]
 then

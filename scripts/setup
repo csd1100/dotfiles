@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
+# get script dir https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script
+SOURCE=${BASH_SOURCE[0]}
+while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+	DIR=$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)
+	SOURCE=$(readlink "$SOURCE")
+	[[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR=$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)
+
+DOTFILES="$(dirname "$DIR")"
+
 ARG=$1
 
 touch /tmp/dotfiles-setup
@@ -10,7 +21,7 @@ darwin)
 	declare -a config=("skhd" "yabai" "sketchybar")
 	;;
 linux)
-	declare -a config=("i3" "polybar" "rofi" "i3status" "systemd")
+	declare -a config=("i3" "polybar" "rofi" "i3status" "systemd" "private-scripts/systemd")
 	;;
 common)
 	declare -a config=("bin" "env" "kitty" "neofetch" "nvim" "tmux" "vim" "dircolors" "grc")
@@ -27,13 +38,26 @@ esac
 pushd "$DOTFILES" >/dev/null
 
 for util in "${config[@]}"; do
-	./scripts/stower "$util"
+	if echo "$util" | grep -q "private-scripts"; then
+		echo "going to private-scripts/directory"
+		pushd "$DOTFILES/private-scripts" >/dev/null
+		PRIVATE_SCRIPT=true
+		util=$(echo "$util" | sed 's/private-scripts\///')
+		target="$HOME"
+	fi
+
+	"$DOTFILES/scripts/stower" "$util" "$target"
+
+	if [ "$PRIVATE_SCRIPT" = "true" ]; then
+		echo "going back to $DOTFILES"
+		popd >/dev/null
+	fi
 done
 
-if [ $ARG = "--single" ]; then
-    echo "$2 setup" >>/tmp/dotfiles-setup
+if [ "$ARG" = "--single" ]; then
+	echo "$2 setup" >>/tmp/dotfiles-setup
 else
-    echo "$ARG setup" >>/tmp/dotfiles-setup
+	echo "$ARG setup" >>/tmp/dotfiles-setup
 fi
 
-popd
+popd >/dev/null
