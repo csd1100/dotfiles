@@ -24,7 +24,7 @@ linux)
 	declare -a config=("i3" "polybar" "rofi" "i3status" "systemd" "private-scripts/systemd")
 	;;
 common)
-	declare -a config=("bin" "env" "kitty" "neofetch" "nvim" "tmux" "vim" "dircolors" "grc")
+	declare -a config=("bin" "env" "kitty" "neofetch" "nvim" "tmux" "vim" "dircolors" "grc" "ranger")
 	;;
 --single)
 	config=("$2")
