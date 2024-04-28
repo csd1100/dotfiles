@@ -20,7 +20,6 @@ return {
     },
     {
         "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
         dependencies = {
             { "nvim-telescope/telescope-live-grep-args.nvim" },
             { "nvim-lua/plenary.nvim" },
@@ -66,7 +65,7 @@ return {
                         "--hidden",
                         "--no-ignore-vcs",
                         "-g",
-                        "!{.git,node_modules,target,out, build}",
+                        "!{.git,node_modules,target,out,build}",
                     },
                     prompt_prefix = "🔍",
                     theme = "dropdown",
@@ -98,11 +97,11 @@ return {
                 },
             }
             local telescope = require("telescope")
-            telescope.setup(opts)
             telescope.load_extension("live_grep_args")
             telescope.load_extension("harpoon")
             telescope.load_extension("dap")
             require("config.keymaps").telescope(telescope)
+            telescope.setup(opts)
         end,
     },
     {

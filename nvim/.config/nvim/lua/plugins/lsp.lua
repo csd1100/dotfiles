@@ -248,7 +248,7 @@ return {
             }
 
             local check_installed_lsp = {
-                "eslint-lsp",
+                "eslint",
                 "tsserver",
                 "gopls",
                 "rust_analyzer",
