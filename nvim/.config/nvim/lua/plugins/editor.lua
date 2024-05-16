@@ -40,8 +40,8 @@ return {
                     },
                 },
             })
-            vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-            vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+            vim.keymap.set("n", "zn", require("ufo").openAllFolds)
+            vim.keymap.set("n", "zz", require("ufo").closeAllFolds)
             vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
             vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
             vim.keymap.set("n", "K", function()
@@ -56,7 +56,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         version = false, -- last release is way too old and doesn't work on Windows
         build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile" },
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-refactor" },
             {
