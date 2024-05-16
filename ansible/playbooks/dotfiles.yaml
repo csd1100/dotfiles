@@ -176,6 +176,11 @@
             dest: "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
             state: link
 
+        - name: Install starship prompt
+          args:
+            creates: ~/.cargo/bin/starship
+          ansible.builtin.shell: ~/.cargo/bin/cargo install starship --locked
+
     - name: Create a work directory if it does not exist
       tags:
         - linux

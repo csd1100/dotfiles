@@ -125,12 +125,23 @@
           tags:
             - fedora
 
-        - name: Darwin install jdk 11, 17
+        - name: Darwin install jdk 11, 17, 21
           when: ansible_os_family == 'Darwin'
           community.general.homebrew:
             name:
+              - openjdk
               - openjdk@11
               - openjdk@17
+          tags:
+            - darwin
+
+        - name: Darwin link brew jdk
+          when: ansible_os_family == 'Darwin'
+          become: true
+          ansible.builtin.file:
+            src: "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk"
+            dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
+            state: link
           tags:
             - darwin
 

@@ -224,16 +224,17 @@
         PATH: /usr/local/bin:/opt/homebrew/path:{{ ansible_env.PATH }}
       when: ansible_os_family == "Darwin"
       block:
-        - name: Add sketchybar tap
+        - name: Add sketchybar, yabai taps
           community.general.homebrew_tap:
             name:
               - FelixKratz/formulae
+              - koekeishiya/formulae
 
         - name: Install yabai, skhd, sketchybar
           community.general.homebrew:
             name:
-              - koekeishiya/formulae/yabai
-              - koekeishiya/formulae/skhd
+              - yabai
+              - skhd
               - sketchybar
 
         - name: Get yabai path
@@ -242,7 +243,7 @@
           register: yabai_path
 
         - name: Run visudo checksum to start yabai with script-additions
-          ansible.builtin.command: /usr/local/bin/shasum -a 256 {{ yabai_path.stdout }}
+          ansible.builtin.command: /usr/bin/shasum -a 256 {{ yabai_path.stdout }}
           register: shasum_yabai
 
         - name: Create sudoers file
