@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+windows () {
+    WORKSPACE=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')
+    hyprctl clients -j | jq -Mc "map( select(.workspace.id == $WORKSPACE) |
+                                        {
+                                            id: .pid,
+                                            initClass: .initialClass | ascii_downcase | sub(\" \";\"\";\"g\"),
+                                            class: .class|ascii_downcase|sub(\" \";\"\";\"g\"),
+                                            title: .title
+                                        }
+                                    )"
+}
+
+windows
+socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
+	windows
+done

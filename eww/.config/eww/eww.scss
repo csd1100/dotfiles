@@ -1,0 +1,40 @@
+.bar {
+  background: #101418;
+  color: #CEE5FF;
+}
+
+.widget {
+  padding: 0px 15px;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 8px;
+}
+
+.first {
+  padding-right: 0px;
+  margin-right: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.between {
+  padding: 0px 12.5px;
+}
+
+.second {
+  padding-left: 0px;
+  margin-left: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.active {
+  background: #CEE5FF;
+  color: #001D33;
+}
+
+.inactive {
+  color: #B9C8DA;
+  background: #233240;
+}

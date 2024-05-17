@@ -10,17 +10,20 @@
     - name: Linux desktop environment
       tags:
         - linux
+        - fedora
+        - ubuntu
+      when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
       block:
         - name: Xorg desktop environment (i3, polybar, rofi, picom)
           tags:
             - never
             - x11
           become: true
-          when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
           ansible.builtin.package:
             name:
               - i3
               - feh
+              - xev
               - rofi
               - picom
               - scrot
@@ -45,12 +48,15 @@
                   - wofi
                   - wlr-randr
                   - xdg-utils
+                  - waybar
                   - pipewire
                   - wireplumber
 
             - name: Fedora hyprland setup
               when: ansible_distribution == "Fedora" and
-                ansible_distribution_version == "39"
+                ansible_distribution_version | int > 38
+              tags:
+                - fedora
               block:
                 - name: Create git-clones directory for building
                   ansible.builtin.file:
@@ -58,22 +64,35 @@
                     state: directory
                     mode: '766'
 
+                - name: Add hyprland dnf copr
+                  become: true
+                  when: ansible_os_family == 'RedHat'
+                  community.general.copr:
+                    name: solopasha/hyprland
+
                 - name: Install hyprland packages fedora
                   become: true
                   ansible.builtin.dnf:
                     name:
+                      - hyprland-git
+                      - hyprpaper
+                      - hyprpicker
+                      - hypridle
+                      - hyprlock
+                      - hyprland-git-devel
+                      - eww-git
                       - gdm
-                      - swaylock
-                      - kwallet
-                      - polkit-kde
-                      - pam-kwallet
                       - grim
                       - glibc
                       - libgcc
                       - wlroots
-                      - hyprland
+                      - kwallet
+                      - pam-devel
+                      - sdbus-cpp
                       - file-devel
                       - gtk3-devel
+                      - polkit-kde
+                      - pam-kwallet
                       - ninja-build
                       - glib2-devel
                       - glibc-devel
@@ -84,92 +103,14 @@
                       - qt6-qtwayland
                       - wayland-devel
                       - libwebp-devel
-                      - hyprland-devel
                       - libglvnd-devel
+                      - sdbus-cpp-devel
                       - gdk-pixbuf2-devel
                       - libglvnd-core-devel
                       - libjpeg-turbo-devel
                       - gtk-layer-shell-devel
                       - wayland-protocols-devel
                       - xdg-desktop-portal-hyprland
-
-                - name: Install hyprlang
-                  block:
-                    - name: Clone hyprlang
-                      ansible.builtin.git:
-                        repo: https://github.com/hyprwm/hyprlang
-                        dest: ~/work/git-clones/hyprlang
-                        version: main
-
-                    - name: Build hyprlang
-                      args:
-                        chdir: ~/work/git-clones/hyprlang
-                        creates: ~/work/git-clones/hyprlang/build/libhyprlang.so.*
-                      ansible.builtin.shell: |
-                        cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build
-                        cmake --build ./build --config Release --target hyprlang -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
-
-                    - name: Install hyprlang
-                      become: true
-                      args:
-                        chdir: "/home/{{ the_user }}/work/git-clones/hyprlang"
-                        creates: /usr/lib64/libhyprlang.so
-                      ansible.builtin.command:
-                        cmake --install ./build
-
-                - name: Check if hyprpaper is installed
-                  ansible.builtin.stat:
-                    path: ~/bin/hyprpaper
-                  register: hyprpaper_stat
-
-                - name: Install hyprpaper
-                  when: not hyprpaper_stat.stat.exists
-                  block:
-                    - name: Clone hyprpaper
-                      ansible.builtin.git:
-                        repo: https://github.com/hyprwm/hyprpaper
-                        dest: ~/work/git-clones/hyprpaper
-                        version: main
-
-                    - name: Build hyprpaper
-                      community.general.make:
-                        target: all
-                        chdir: ~/work/git-clones/hyprpaper
-
-                    - name: Copy hyprpaper to ~/bin
-                      ansible.builtin.copy:
-                        src: ~/work/git-clones/hyprpaper/build/hyprpaper
-                        dest: ~/bin/hyprpaper
-                        remote_src: true
-                        mode: '544'
-
-                - name: Check if Eww is installed
-                  ansible.builtin.stat:
-                    path: ~/bin/eww
-                  register: eww_stat
-
-                - name: Install Eww
-                  when: not eww_stat.stat.exists
-                  block:
-                    - name: Clone Eww
-                      ansible.builtin.git:
-                        repo: https://github.com/elkowar/eww
-                        dest: ~/work/git-clones/eww
-                        version: master
-
-                    - name: Build Eww
-                      ansible.builtin.shell: |
-                        cargo build --release --no-default-features --features=wayland
-                      args:
-                        chdir: ~/work/git-clones/eww
-                        creates: ~/work/git-clones/eww/target/release/eww
-
-                    - name: Copy Eww to ~/bin
-                      ansible.builtin.copy:
-                        src: ~/work/git-clones/eww/target/release/eww
-                        dest: ~/bin/eww
-                        remote_src: true
-                        mode: '544'
 
             - name: Wayland clipboard
               tags:

@@ -140,6 +140,7 @@ set colorcolumn=80
 set scrolloff=8
 set spell
 set nocp
+set backupcopy=yes
 filetype plugin on
 
 let g:netrw_banner=0

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+direction=$1
+grouped=$(hyprctl activewindow -j | jq '.grouped|length')
+
+if test "$grouped" = 0; then
+	if test "$direction" = "down"; then
+		hyprctl dispatch movefocus l
+	elif test "$direction" = "up"; then
+		hyprctl dispatch movefocus r
+	fi
+else
+	if test "$direction" = "down"; then
+		hyprctl dispatch changegroupactive f
+	elif test "$direction" = "up"; then
+		hyprctl dispatch changegroupactive b
+	fi
+fi

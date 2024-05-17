@@ -1,0 +1,16 @@
+(defvar show false)
+
+(defwidget widget [?onhover ?onhoverlost ?onscroll ?onclick]
+  (eventbox
+    :width 100
+    :onscroll "${onscroll != '' ? onscroll : ''}"
+    :onhover "${onhover != '' ? onhover : ''}"
+    :onhoverlost "${onhoverlost != '' ? onhoverlost : ''}"
+    :onclick "${onclick != '' ? onclick : ''}"
+    (box
+      :space-evenly false
+      (box :class "${show ? 'widget first': 'widget'}"
+        (children :nth 0))
+      (box :class "widget second"
+        :visible {show}
+        (children :nth 1)))))

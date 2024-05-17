@@ -133,7 +133,7 @@ return {
                         {
                             "tabs",
                             tab_max_length = 40,
-                            max_length = vim.o.columns / 3,
+                            max_length = vim.o.columns,
                             tabs_color = {
                                 -- Same values as the general color option can be used here.
                                 active = {}, -- Color for active tab.
@@ -226,7 +226,7 @@ return {
     },
     {
         "norcalli/nvim-colorizer.lua",
-        ft = { "html", "lua", "conf", "css" },
+        ft = { "html", "lua", "conf", "css", "json", "scss" },
         config = function()
             require("colorizer").setup()
         end,

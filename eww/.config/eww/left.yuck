@@ -1,0 +1,38 @@
+(defvar show-workspaces false)
+(deflisten workspaces :initial "[]" "bash ./scripts/get-workspaces")
+(deflisten current :initial "1" "bash ./scripts/get-active-workspace")
+
+(defwidget workspaces []
+  (eventbox
+    :onscroll "bash ./scripts/change-active-workspace {}"
+    :onclick "eww update show-workspaces=${!show-workspaces}"
+    (box :space-evenly false
+      (box :class "widget active ${show-workspaces ? 'first' : ''}"
+        (label :class "between" :text current))
+      (box :class "widget second inactive"
+        :visible {show-workspaces}
+        (for workspace in workspaces
+          (eventbox :onclick 'hyprctl dispatch workspace ${workspace.key}'
+                (label :class "between" :text '${workspace.key}')))))))
+
+(defvar show-window-title false)
+(deflisten windows :initial "[]" "bash ./scripts/get-all-windows")
+(deflisten current-window :initial "" "bash ./scripts/get-active-window")
+
+(defwidget windows []
+  (box :space-evenly false
+    ; // IMPORTANT TO ADD BELOW LINE without this line dynamic class assignment for focused window
+    ; doesn;t work
+    (label :text "${windows}${current-window}" :visible false)
+    (for window in windows
+      (eventbox
+        :onscroll "bash ./scripts/change-active-window {}"
+        :onclick "eww update show-window-title=${!show-window-title}"
+        (box :space-evenly false
+          (image
+            :class "widget between ${show-window-title ? 'first' : ''} ${current-window.id == window.id ? 'active' : 'inactive'}"
+            :path "./icons/apps/${window.initClass}.svg")
+          (label :class "widget between second  ${current-window.id == window.id ? 'active' : 'inactive'}"
+            :visible show-window-title
+            :limit-width 40
+            :text {window.title}))))))

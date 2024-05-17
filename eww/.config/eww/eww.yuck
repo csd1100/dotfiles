@@ -1,0 +1,42 @@
+(include "./left.yuck")
+
+(defwidget all []
+  (centerbox
+    :orientation "h"
+    :class "all"
+    (left
+      (workspaces)
+      (windows))
+    (middle)
+    (right)))
+
+(defwidget left []
+  (box
+    :class "left"
+    :halign "start"
+    :space-evenly false
+      (children)))
+
+(defwidget middle []
+  (box
+    :class "middle"
+    :halign "center"
+    (children)))
+
+(defwidget right []
+  (box
+    :class "right"
+    :halign "end"
+    :space-evenly false
+      (children)))
+
+(defwindow bar
+  :class "bar"
+  :geometry (geometry :x "0%"
+              :y "0%"
+              :width "100%"
+              :height "50px"
+              :anchor "bottom center")
+  :stacking "fg"
+  :exclusive true
+  (all))

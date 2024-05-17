@@ -463,4 +463,9 @@ return {
         "elkowar/yuck.vim",
         ft = "yuck",
     },
+    {
+        "eraserhd/parinfer-rust",
+        build = "cargo build --release",
+        ft = "yuck",
+    },
 }

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+NUMBER=$(hyprctl workspaces -j | jq length)
+echo -n "$NUMBER"
