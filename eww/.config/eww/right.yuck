@@ -59,7 +59,7 @@
               :initial "00:00:00"
   `date +%Y/%m/%d`)
 
-(defvar show-date false)
+(defvar show-date true)
 
 (defwidget time []
   (eventbox
