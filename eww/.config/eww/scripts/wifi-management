@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+IS_ENABLED=false
+IS_CONNECTED=false
+WIFI_SSID=""
+
+NMCLI_WIFI_OP=$(nmcli radio wifi)
+if test "$NMCLI_WIFI_OP" = "disabled"; then
+	IS_CONNECTED=false
+	IS_ENABLED=false
+	WIFI_SSID=""
+else
+	NMCLI_ACTIVE_WIFI_OP=$(nmcli connection show --active | grep wifi)
+	IS_ENABLED=true
+	if test "$NMCLI_ACTIVE_WIFI_OP" = ""; then
+		IS_CONNECTED=false
+		WIFI_SSID=""
+	else
+		IS_CONNECTED=true
+		WIFI_SSID=$(echo "$NMCLI_ACTIVE_WIFI_OP" | awk '{print $1}')
+	fi
+fi
+
+jq -n -Mc --argjson enabled $IS_ENABLED --argjson connected $IS_CONNECTED --arg ssid "$WIFI_SSID" '{enabled:$enabled,connected:$connected,ssid:$ssid}'

@@ -1,4 +1,5 @@
 (include "./left.yuck")
+(include "./right.yuck")
 
 (defwidget all []
   (centerbox
@@ -8,7 +9,13 @@
       (workspaces)
       (windows))
     (middle)
-    (right)))
+    (right
+      ; (brightness) ; to be done later
+      (volume)
+      (net)
+      (bluetooth)
+      ; (battery) ; to be done later
+      (tray))))
 
 (defwidget left []
   (box

@@ -9,11 +9,14 @@
     (box :space-evenly false
       (box :class "widget active ${show-workspaces ? 'first' : ''}"
         (label :class "between" :text current))
-      (box :class "widget second inactive"
-        :visible {show-workspaces}
-        (for workspace in workspaces
-          (eventbox :onclick 'hyprctl dispatch workspace ${workspace.key}'
-                (label :class "between" :text '${workspace.key}')))))))
+      (revealer
+        :reveal {show-workspaces}
+        :duration "200ms"
+        :transition "slideright"
+        (box :class "widget second inactive"
+          (for workspace in workspaces
+            (eventbox :onclick 'hyprctl dispatch workspace ${workspace.key}'
+                  (label :class "between" :text '${workspace.key}'))))))))
 
 (defvar show-window-title false)
 (deflisten windows :initial "[]" "bash ./scripts/get-all-windows")
@@ -27,12 +30,16 @@
     (for window in windows
       (eventbox
         :onscroll "bash ./scripts/change-active-window {}"
-        :onclick "eww update show-window-title=${!show-window-title}"
+        :onclick "bash ./scripts/move-to-window ${window.id}"
+        :onrightclick "eww update show-window-title=${!show-window-title}"
         (box :space-evenly false
           (image
             :class "widget between ${show-window-title ? 'first' : ''} ${current-window.id == window.id ? 'active' : 'inactive'}"
             :path "./icons/apps/${window.initClass}.svg")
-          (label :class "widget between second  ${current-window.id == window.id ? 'active' : 'inactive'}"
-            :visible show-window-title
-            :limit-width 40
-            :text {window.title}))))))
+          (revealer
+            :reveal {show-window-title}
+            :duration "200ms"
+            :transition "slideright"
+            (label :class "widget between second  ${current-window.id == window.id ? 'active' : 'inactive'}"
+              :limit-width 40
+              :text "${window.title}")))))))

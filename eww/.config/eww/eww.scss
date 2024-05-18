@@ -6,14 +6,15 @@
 .widget {
   padding: 0px 15px;
   margin: 10px;
+  margin-right: 0px;
   font-weight: bold;
   font-size: 20px;
   border-radius: 8px;
+  transition: border-radius 50ms ease-in;
 }
 
 .first {
   padding-right: 0px;
-  margin-right: 0px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
@@ -23,7 +24,7 @@
 }
 
 .second {
-  padding-left: 0px;
+  padding-left: 10px;
   margin-left: 0px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -35,6 +36,11 @@
 }
 
 .inactive {
-  color: #B9C8DA;
   background: #233240;
+  color: #B9C8DA;
+}
+
+.tray {
+  background: #68587A;
+  color: #FFFFFF;
 }

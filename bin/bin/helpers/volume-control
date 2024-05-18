@@ -12,12 +12,22 @@ calc() {
 
 get_volume_darwin() {
 	volume=$(osascript -e 'output volume of (get volume settings)')
-	mac_volume_scale $volume
+	mac_volume_scale "$volume"
 }
 
 get_volume_linux() {
 	volume_decimal="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -oP '(?<=Volume:).*')"
-	calc "$volume_decimal*100"
+	# adding following `|| true` since grep fails if MUTED is not found
+	# script has `set -e` specified i.e. it exits if any command returns non-zero
+	# exit code. Adding that line will make grep not to return non-zero exit code
+	muted=$(echo "$volume_decimal" | grep -P 'MUTED' || true)
+	if test "$muted" = ""; then
+		calc "$volume_decimal*100"
+	else
+		level=$(echo "$volume_decimal" | grep -oP '.*(?=\ \[MUTED\])' || true)
+		vol=$(calc "$level*100")
+		echo "$vol,muted"
+	fi
 }
 
 increase_volume_darwin() {
@@ -56,11 +66,11 @@ handle_darwin() {
 	operation="$1"
 	case "$operation" in
 	"increase")
-		change=$(mac_volume_scale $2)
+		change=$(mac_volume_scale "$2")
 		increase_volume_darwin "$change"
 		;;
 	"decrease")
-		change=$(mac_volume_scale $2)
+		change=$(mac_volume_scale "$2")
 		decrease_volume_darwin "$change"
 		;;
 	"mute")

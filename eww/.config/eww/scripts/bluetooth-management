@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+IS_ENABLED=false
+IS_CONNECTED=false
+DEVICE=""
+
+BLUETOOTH_POWERED_OP=$(bluetoothctl show | grep -oP "(?<=Powered:).*" | sed -e 's/^[ \t]*//')
+if test "$BLUETOOTH_POWERED_OP" = "no"; then
+	IS_CONNECTED=false
+	IS_ENABLED=false
+	DEVICE=""
+else
+	BLUETOOTH_CONNECTED_DEVICE=$(bluetoothctl devices Connected)
+	IS_ENABLED=true
+	if test "$BLUETOOTH_CONNECTED_DEVICE" = ""; then
+		IS_CONNECTED=false
+		DEVICE=""
+	else
+		IS_CONNECTED=true
+		DEVICE=$(echo "$BLUETOOTH_CONNECTED_DEVICE" | awk '{$1=$2=""; print $0}' | sed -e 's/^[ \t]*//')
+	fi
+fi
+
+jq -n -Mc --argjson enabled $IS_ENABLED --argjson connected $IS_CONNECTED --arg device "$DEVICE" '{enabled:$enabled,connected:$connected,device:$device}'

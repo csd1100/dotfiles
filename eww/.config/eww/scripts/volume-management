@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+IS_MUTED=false
+VOLUME=0
+DEVICE=""
+
+VOL_OP=$(~/bin/helpers/volume-control g)
+
+if [[ "$VOL_OP" = *",muted"* ]]; then
+	IS_MUTED=true
+	VOLUME=$(echo "$VOL_OP" | grep -oP ".*(?=,muted)")
+else
+	IS_MUTED=false
+	VOLUME=$VOL_OP
+fi
+
+jq -n -Mc --argjson muted $IS_MUTED --arg level "$VOLUME" --arg device "$DEVICE" '{muted:$muted,level:$level,device:$device}'

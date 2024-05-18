@@ -1,0 +1,58 @@
+(defvar show-ssid false)
+(defpoll wifi :interval "2s"
+  :initial '{"enabled":false,"connected":false,"ssid":""}'
+  "bash ./scripts/wifi-management")
+
+(defwidget net []
+  (eventbox
+    :onclick "eww update show-ssid=${!show-ssid}"
+    (box :space-evenly false
+      (image
+        :class "widget between ${show-ssid ? 'first' : ''} ${wifi.enabled ? 'active' : 'inactive'}"
+        :path "./icons/state/${wifi.connected ? 'wifi' : 'wifi.off' }.svg")
+      (revealer
+        :reveal {show-ssid}
+        :duration "200ms"
+        :transition "slideright"
+        (box :class "widget second inactive"
+          (label :class "between" :text '${wifi.ssid}'))))))
+
+(defvar show-bluetooth false)
+(defpoll bluetooth :interval "2s"
+  :initial '{"enabled":false,"connected":false,"device":""}'
+  "bash ./scripts/bluetooth-management")
+
+(defwidget bluetooth []
+  (eventbox
+    :onclick "eww update show-bluetooth=${!show-bluetooth}"
+    (box :space-evenly false
+      (image
+        :class "widget between ${show-bluetooth ? 'first' : ''} ${bluetooth.enabled ? 'active' : 'inactive'}"
+        :path "./icons/state/${bluetooth.connected ? 'bluetooth.connected' : 'bluetooth.off' }.svg")
+      (revealer
+        :reveal {show-bluetooth}
+        :duration "200ms"
+        :transition "slideright"
+        (box :class "widget second inactive"
+          (label :class "between" :text '${bluetooth.device}'))))))
+
+(defvar show-audio-device false)
+(defpoll volume :interval "0.1s"
+  :initial '{"muted":false,"level":0,"device":""}'
+  "bash ./scripts/volume-management")
+
+(defwidget volume []
+  (eventbox
+    :onscroll "bash ./scripts/change-volume {}"
+    (box :space-evenly false
+      (image
+        :class "widget between first ${volume.muted ? 'inactive' : 'active'}"
+        :path "./icons/state/${volume.muted ? 'volume.muted' : 'volume' }.svg")
+      (label :class "widget between second ${volume.muted ? 'inactive' : 'active'}"
+             :text '${ volume.muted ? "Muted" : volume.level}'))))
+
+(defwidget tray []
+  (systray :class "widget tray"
+    :spacing 5
+    :space-evenly true
+    :icon-size 24))

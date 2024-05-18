@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+window_pid=$1
+hyprctl dispatch focuswindow pid:"$window_pid"

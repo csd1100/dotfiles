@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+direction=$1
+if test "$direction" = "down"; then
+	~/bin/helpers/volume-control - 10
+elif test "$direction" = "up"; then
+	~/bin/helpers/volume-control + 10
+fi
