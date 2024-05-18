@@ -139,10 +139,11 @@
                         browser_download_url_query: '[?browser_download_url.contains(@, `amd64`)] |
                             [0].browser_download_url'
 
-                    - name: Copy cliphist to ~/bin
+                    - name: Copy cliphist to /usr/bin
+                      become: true
                       ansible.builtin.get_url:
                         url: "{{ cliphist_url }}"
-                        dest: ~/bin/cliphist
+                        dest: /usr/bin/cliphist
                         mode: '544'
 
         - name: Common Linux desktop utilities

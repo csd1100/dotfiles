@@ -2,5 +2,5 @@
 
 pushd ~/dotfiles/ || exit
 ./scripts/helpers/ansible-setup
-ansible-playbook -i localhost, -u "$1" ./ansible/playbooks/main.yaml
+ansible-playbook -i localhost, -u "$1" ./ansible/playbooks/main.yaml -k -K
 popd || exit

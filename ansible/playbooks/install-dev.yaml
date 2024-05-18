@@ -8,15 +8,6 @@
   tags:
     - dev
   tasks:
-    - name: Clone dotfiles if not done
-      ansible.builtin.git:
-        repo: 'https://github.com/csd1100/dotfiles'
-        dest: "~/dotfiles"
-        version: main
-      tags:
-        - dotfiles
-        - always
-
     - name: Set fact to become or not
       block:
         - name: Set become to true for linux
@@ -390,17 +381,19 @@
     - name: Install VSCodium
       block:
         - name: Install VSCodium on Fedora
-          when: ansible_distribution == "RedHat"
+          when: ansible_os_family == "RedHat"
           tags:
             - fedora
             - linux
           block:
             - name: Add GPG key of VSCodium
+              become: "{{ become_value }}"
               ansible.builtin.rpm_key:
                 state: present
                 key: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
 
             - name: Add Fedora VSCodium Repository
+              become: "{{ become_value }}"
               ansible.builtin.copy:
                 content: |
                   [gitlab.com_paulcarroty_vscodium_repo]
@@ -416,11 +409,18 @@
 
         - name: Install VSCodium
           become: "{{ become_value }}"
+          when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
           ansible.builtin.package:
             name:
-              - vscodium
+              - codium
           tags:
             - fedora
             - ubuntu
-            - darwin
             - linux
+
+        - name: Install VSCodium Darwin
+          when: ansible_system == "Darwin"
+          community.general.homebrew:
+            name: vscodium
+          tags:
+            - darwin
