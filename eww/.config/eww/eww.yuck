@@ -15,6 +15,7 @@
       (net)
       (bluetooth)
       ; (battery) ; to be done later
+      (time)
       (tray))))
 
 (defwidget left []
