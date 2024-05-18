@@ -18,3 +18,5 @@
   ansible.builtin.import_playbook: ./install-desktop.yaml
 - name: Setup dotfiles
   ansible.builtin.import_playbook: ./dotfiles.yaml
+- name: Private Packages
+  ansible.builtin.import_playbook: ../../private-scripts/ansible/playbooks/private-play.yaml

@@ -49,6 +49,7 @@
           - cmus
           - htop
           - stow
+          - unrar
           - ranger
           - ripgrep
           - neofetch
@@ -64,6 +65,7 @@
         name:
           - g++
           - plocate
+          - fd-find
       tags:
         - cli
         - linux
@@ -96,6 +98,7 @@
       community.general.homebrew:
         name:
           - coreutils
+          - fd
       tags:
         - cli
         - darwin
