@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-windows () {
-    WORKSPACE=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')
-    hyprctl clients -j | jq -Mc "map( select(.workspace.id == $WORKSPACE) |
-                                        {
-                                            id: .pid,
-                                            initClass: .initialClass | ascii_downcase | sub(\" \";\"\";\"g\"),
-                                            class: .class|ascii_downcase|sub(\" \";\"\";\"g\"),
-                                            title: .title
-                                        }
-                                    )"
+windows() {
+	WORKSPACE=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')
+	hyprctl clients -j | jq --argjson wspace "$WORKSPACE" \
+		-Mc 'map(select(.workspace.id == $wspace) |
+            {
+                id: .pid,
+                initClass: .initialClass,
+                class: .class,
+                title: .title
+            }
+        )'
 }
 
 windows

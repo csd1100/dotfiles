@@ -34,12 +34,13 @@
         :onrightclick "eww update show-window-title=${!show-window-title}"
         (box :space-evenly false
           (image
-            :class "widget between ${show-window-title ? 'first' : ''} ${current-window.id == window.id ? 'active' : 'inactive'}"
-            :path "./icons/apps/${window.initClass}.svg")
+            :class "widget between ${show-window-title ? 'first' : ''} ${current-window.id == window.id ? 'active' : 'inactive'} icons warning"
+            :icon "${window.initClass}"
+            :icon-size "large-toolbar")
           (revealer
             :reveal {show-window-title}
             :duration "200ms"
             :transition "slideright"
-            (label :class "widget between second  ${current-window.id == window.id ? 'active' : 'inactive'}"
+            (label :class "widget between second ${current-window.id == window.id ? 'active' : 'inactive'}"
               :limit-width 40
               :text "${window.title}")))))))

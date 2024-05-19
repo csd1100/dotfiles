@@ -8,8 +8,9 @@
     :onclick "eww update show-ssid=${!show-ssid}"
     (box :space-evenly false
       (image
-        :class "widget between ${show-ssid ? 'first' : ''} ${wifi.enabled ? 'active' : 'inactive'}"
-        :path "./icons/state/${wifi.connected ? 'wifi' : 'wifi.off' }.svg")
+        :class "icons widget between ${show-ssid ? 'first' : ''} ${wifi.enabled ? 'active' : 'inactive'}"
+        :icon "${wifi.connected ? 'wifi' : 'wifi.off' }"
+        :icon-size "large-toolbar")
       (revealer
         :reveal {show-ssid}
         :duration "200ms"
@@ -27,8 +28,9 @@
     :onclick "eww update show-bluetooth=${!show-bluetooth}"
     (box :space-evenly false
       (image
-        :class "widget between ${show-bluetooth ? 'first' : ''} ${bluetooth.enabled ? 'active' : 'inactive'}"
-        :path "./icons/state/${bluetooth.connected ? 'bluetooth.connected' : 'bluetooth.off' }.svg")
+        :class "icons widget between ${show-bluetooth ? 'first' : ''} ${bluetooth.enabled ? 'active' : 'inactive'}"
+        :icon "${bluetooth.connected ? 'bluetooth.connected' : 'bluetooth.off' }"
+        :icon-size "large-toolbar")
       (revealer
         :reveal {show-bluetooth}
         :duration "200ms"
@@ -46,8 +48,9 @@
     :onscroll "bash ./scripts/change-volume {}"
     (box :space-evenly false
       (image
-        :class "widget between first ${volume.muted ? 'inactive' : 'active'}"
-        :path "./icons/state/${volume.muted ? 'volume.muted' : 'volume' }.svg")
+        :class "icons widget between first ${volume.muted ? 'inactive' : 'active'}"
+        :icon "${volume.muted ? 'volume.muted' : 'volume' }"
+        :icon-size "large-toolbar")
       (label :class "widget between second ${volume.muted ? 'inactive' : 'active'}"
              :text '${ volume.muted ? "Muted" : volume.level}'))))
 
@@ -66,12 +69,15 @@
     :onclick "eww update show-date=${!show-date}"
     (box :space-evenly false
       (image
-        :class "widget between first active"
-        :path "./icons/state/calendar.svg")
-      (label :class "widget between ${ show-date ? 'middle' : 'second'} active"
+        :class "icons widget between first active"
+        :icon "calendar"
+        :icon-size "large-toolbar")
+      (label :width 120 :class "widget between ${ show-date ? 'middle' : 'second'} active"
         :text "${time}")
       (revealer :reveal show-date
-        (label :visible show-date
+        :duration "200ms"
+        :transition "slideright"
+        (label
           :class "widget between second inactive"
           :text date)))))
 

@@ -46,6 +46,13 @@
   color: #B9C8DA;
 }
 
+.icons {
+  -gtk-icon-theme: 'app-icons';
+  -gtk-icon-style: symbolic;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .tray {
   background: #68587A;
   color: #FFFFFF;
