@@ -74,12 +74,12 @@
                   become: true
                   ansible.builtin.dnf:
                     name:
-                      - hyprland-git
+                      - hyprland
                       - hyprpaper
                       - hyprpicker
                       - hypridle
                       - hyprlock
-                      - hyprland-git-devel
+                      - hyprland-devel
                       - eww-git
                       - gdm
                       - grim
