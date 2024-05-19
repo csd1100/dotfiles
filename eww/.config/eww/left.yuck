@@ -35,7 +35,7 @@
         (box :space-evenly false
           (image
             :class "widget between ${show-window-title ? 'first' : ''} ${current-window.id == window.id ? 'active' : 'inactive'} icons warning"
-            :icon "${window.initClass}"
+            :icon "${window.icon}"
             :icon-size "large-toolbar")
           (revealer
             :reveal {show-window-title}

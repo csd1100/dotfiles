@@ -3,12 +3,14 @@
 windows() {
 	WORKSPACE=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')
 	hyprctl clients -j | jq --argjson wspace "$WORKSPACE" \
+		--slurpfile icons ~/dotfiles/fonts/icon_map.json \
 		-Mc 'map(select(.workspace.id == $wspace) |
             {
                 id: .pid,
                 initClass: .initialClass,
                 class: .class,
-                title: .title
+                title: .title,
+                icon: $icons.[0][.class]
             }
         )'
 }
