@@ -101,6 +101,18 @@
             remote_src: true
           with_items: "{{ wallpapers.files }}"
 
+    - name: Linux Link Icons
+      when: ansible_system == "Linux"
+      tags:
+        - icons
+        - linux
+        - fedora
+        - ubuntu
+      ansible.builtin.file:
+        src: "~/dotfiles/app-icons/"
+        dest: "~/.local/share/icons/app-icons"
+        state: link
+
     - name: Zsh setup
       tags:
         - zsh
