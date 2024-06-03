@@ -23,7 +23,7 @@ linux)
 	declare -a config=("linux" "private-scripts/systemd")
 	;;
 common)
-	declare -a config=("bin" "common")
+	declare -a config=("bin" "env" "common")
 	;;
 --single)
 	config=("$2")

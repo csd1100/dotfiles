@@ -133,18 +133,6 @@
           args:
             creates: "~/.oh-my-zsh/"
 
-        - name: Remove existing .zshrc
-          ansible.builtin.file:
-            path: ~/.zshrc
-            state: absent
-
-        - name: Dotfiles Setup (zsh)
-          block:
-            - name: Run zsh setup script
-              ansible.builtin.command: ./scripts/setup --single zsh
-              args:
-                chdir: ~/dotfiles/
-
         - name: Install zsh-autosuggestions (git)
           ansible.builtin.git:
             repo: 'https://github.com/zsh-users/zsh-autosuggestions'
