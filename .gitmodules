@@ -1,3 +1,6 @@
 [submodule "private-scripts"]
 	path = private-scripts
 	url = git@github.com:csd1100/private-scripts.git
+[submodule "app-icons"]
+	path = app-icons
+	url = git@github.com:csd1100/app-icons.git

@@ -12,7 +12,7 @@
       block:
         - name: Stow dotfiles linux
           when: ansible_system == 'Linux'
-          ansible.builtin.command: ./scripts/setup linux
+          ansible.builtin.command: ./scripts/dots-setup linux
           args:
             chdir: ~/dotfiles/
           tags:
@@ -22,14 +22,14 @@
 
         - name: Stow dotfiles Darwin
           when: ansible_os_family == 'Darwin'
-          ansible.builtin.command: ./scripts/setup darwin
+          ansible.builtin.command: ./scripts/dots-setup darwin
           args:
             chdir: ~/dotfiles/
           tags:
             - darwin
 
         - name: Stow dotfiles common
-          ansible.builtin.command: ./scripts/setup common
+          ansible.builtin.command: ./scripts/dots-setup common
           args:
             chdir: ~/dotfiles/
           tags:

@@ -60,26 +60,6 @@
               - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm"
             state: present
 
-    - name: Upgrade Multimedia Packages
-      become: true
-      when: ansible_distribution == 'Fedora'
-      ansible.builtin.dnf:
-        name:
-          - '@multimedia'
-          - '@sound-and-video'
-        state: latest
-
-    - name: Upgrade Development Packages
-      become: true
-      when: ansible_distribution == 'Fedora'
-      ansible.builtin.dnf:
-        name:
-          - '@development-tools'
-          - kernel-headers
-          - kernel-devel
-          - dkms
-        state: latest
-
     - name: Apt Update
       become: true
       when: (ansible_os_family == 'Debian')
