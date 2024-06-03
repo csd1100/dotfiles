@@ -83,7 +83,7 @@
             - linux
 
         - name: Create kitty desktop file
-          ansible.builtin.shell: cd ~/dotfiles/kitty/.config/kitty && ./kitty-desktop
+          ansible.builtin.shell: cd ~/dotfiles/scripts/helpers && ./kitty-desktop
           when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
           args:
             creates: ~/.local/share/applications/kitty.desktop
