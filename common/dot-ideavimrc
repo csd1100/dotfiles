@@ -40,7 +40,7 @@ nmap <C-S-e> <Action>(ActivateProjectToolWindow)<ESC>
 nmap <C-S-d> <Action>(ActivateDebugToolWindow)<ESC>
 nmap <C-S-l> <Action>(ActivateTODOToolWindow)<ESC>
 
-nmap <C-g> <Action>(GotoSymbol)<ESC>
+nmap <C-g> <Action>(FileStructurePopup)<ESC>
 nmap <C-i> <Action>(GotoImplementation)<ESC>
 nmap <C-S-u> <Action>(FindUsages)<ESC>
 
