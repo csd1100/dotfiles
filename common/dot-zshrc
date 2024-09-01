@@ -6,6 +6,7 @@ plugins=(
     zsh-completions
     zsh-syntax-highlighting
     fzf
+    docker
     kubectl
 )
 
