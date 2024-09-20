@@ -67,3 +67,5 @@ nmap <leader><down> <Action>(StepInto)<ESC>
 nmap <leader><right> <Action>(StepOver)<ESC>
 nmap <leader><left> <Action>(StepOut)<ESC>
 vmap .. <Action>(EvaluateExpression)<ESC>
+
+nmap <S-q> <Action>(ShowIntentionActions)<ESC>
