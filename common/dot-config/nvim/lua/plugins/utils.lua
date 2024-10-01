@@ -113,11 +113,6 @@ return {
     },
     {
         "folke/which-key.nvim",
-        config = function()
-            require("which-key").register({
-                [":"] = "which_key_ignore",
-            })
-        end,
     },
     {
         "nkakouros-original/numbers.nvim",
