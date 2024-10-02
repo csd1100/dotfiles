@@ -111,36 +111,36 @@ cmd + shift - space : yabai -m window --toggle float; yabai -m window --grid 4:4
 cmd + shift - q : yabai -m window --close
 
 # mode brightness for secondary keyboard
-:: brightness : sketchybar --trigger yabai-mode MODE=brightness
-
-ctrl + alt - b ; brightness
-
-brightness < escape ; default
-
-brightness < h : skhd -k "0x6B"
-brightness < j : skhd -k "0x6B"
-brightness < k : skhd -k "0x71"
-brightness < l : skhd -k "0x71"
-
-brightness < ctrl + alt - b : sketchybar --trigger yabai-mode MODE=default; skhd -k "escape";
-
-:: restart : sketchybar --trigger yabai-mode MODE=restart
-ctrl + alt - r ; restart
-
-restart < ctrl + alt - r : sketchybar --trigger yabai-mode MODE=default; skhd -k "escape";
-
-restart < y : yabai --restart-service
-restart < s : skhd -k "escape" && brew services restart sketchybar
-restart < k : skhd -k "escape" && sketchybar --trigger yabai-mode MODE=default && skhd --restart-service
-
-restart < escape ; default
-
-:: vm
-ctrl + alt - p ; vm
-vm < ctrl + alt - p ; default
-
-# mode layout
-:: layout : sketchybar --trigger yabai-mode MODE=layout
+# :: brightness : sketchybar --trigger yabai-mode MODE=brightness
+#
+# ctrl + alt - b ; brightness
+#
+# brightness < escape ; default
+#
+# brightness < h : skhd -k "0x6B"
+# brightness < j : skhd -k "0x6B"
+# brightness < k : skhd -k "0x71"
+# brightness < l : skhd -k "0x71"
+#
+# brightness < ctrl + alt - b : sketchybar --trigger yabai-mode MODE=default; skhd -k "escape";
+#
+# :: restart : sketchybar --trigger yabai-mode MODE=restart
+# ctrl + alt - r ; restart
+#
+# restart < ctrl + alt - r : sketchybar --trigger yabai-mode MODE=default; skhd -k "escape";
+#
+# restart < y : yabai --restart-service
+# restart < s : skhd -k "escape" && brew services restart sketchybar
+# restart < k : skhd -k "escape" && sketchybar --trigger yabai-mode MODE=default && skhd --restart-service
+#
+# restart < escape ; default
+#
+# :: vm
+# ctrl + alt - p ; vm
+# vm < ctrl + alt - p ; default
+#
+# # mode layout
+# :: layout : sketchybar --trigger yabai-mode MODE=layout
 
 ctrl + alt - l ; layout
 
