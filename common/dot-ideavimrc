@@ -18,7 +18,7 @@ let g:WhichKey_DefaultDelay = 1500
 nmap <C-,> <Action>(ShowSettings)<ESC>
 
 nmap <leader><leader> <Action>(GotoFile)<ESC>
-nmap <C-S-f> <Action>(SearchEverywhere)<ESC>
+"nmap <C-S-f> <Action>(SearchEverywhere)<ESC>
 nmap <C-f> <Action>(Find)<ESC>
 nmap <C-S-h> <Action>(Replace)<ESC>
 nmap <C-S-f> <Action>(FindInPath)<ESC>
@@ -35,7 +35,7 @@ vmap <leader>/ <Action>(CommentByLineComment)<ESC>
 vmap <S-j> <Action>(MoveLineDown)
 vmap <S-k> <Action>(MoveLineUp)
 
-nmap <leader>e <Action>(FocusEditor)<ESC>
+nmap <leader>z <Action>(HideAllWindows)<ESC>
 nmap <C-S-e> <Action>(ActivateProjectToolWindow)<ESC>
 nmap <C-S-d> <Action>(ActivateDebugToolWindow)<ESC>
 nmap <C-S-l> <Action>(ActivateTODOToolWindow)<ESC>
@@ -45,27 +45,19 @@ nmap <C-i> <Action>(GotoImplementation)<ESC>
 nmap <C-S-u> <Action>(FindUsages)<ESC>
 
 nmap <leader>rm <Action>(RefactoringMenu)<ESC>
-vmap <leader>lem <Action>(ExtractMethod)<ESC>
+vmap <leader>rm <Action>(RefactoringMenu)<ESC>
+vmap <leader>em <Action>(ExtractMethod)<ESC>
 vmap <leader>leC <Action>(ExtractClass)<ESC>
-vmap <leader>lev <Action>(IntroduceVariable)<ESC>
-vmap <leader>lec <Action>(IntroduceField)<ESC>
-vmap <leader>lrn <Action>(RenameElement)<ESC>
-nmap <leader>lrn <Action>(RenameElement)<ESC>
-vmap <leader>lcs <Action>(ChangeSignature)<ESC>
-nmap <leader>lcs <Action>(ChangeSignature)<ESC>
-nmap <leader>lrn <Action>(RenameElement)<ESC>
+nmap <leader>ev <Action>(IntroduceVariable)<ESC>
+nmap <leader>ec <Action>(IntroduceConstant)<ESC>
+nmap <leader>ef <Action>(IntroduceField)<ESC>
+nmap <leader>rn <Action>(RenameElement)<ESC>
+nmap <leader>cs <Action>(ChangeSignature)<ESC>
 
 nmap <leader>lf <Action>(ReformatCode)<ESC>
 vmap <leader>lf <Action>(ReformatCode)<ESC>
 
-nmap <leader><S-d> <Action>(Debug)<ESC>
-nmap <leader><S-r> <Action>(Run)<ESC>
-nmap <leader><S-s> <Action>(Resume)<ESC>
-nmap <leader><S-x> <Action>(Stop)<ESC>
-nmap <leader>b <Action>(ToggleLineBreakpoint)<ESC>
-nmap <leader><down> <Action>(StepInto)<ESC>
-nmap <leader><right> <Action>(StepOver)<ESC>
-nmap <leader><left> <Action>(StepOut)<ESC>
-vmap .. <Action>(EvaluateExpression)<ESC>
+nmap <leader><right> <Action>(NextProjectWindow)<ESC>
+nmap <leader><left> <Action>(PreviousProjectWindow)<ESC>
 
 nmap <S-q> <Action>(ShowIntentionActions)<ESC>
