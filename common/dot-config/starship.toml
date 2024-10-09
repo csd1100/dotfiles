@@ -130,7 +130,11 @@ symbol = "󱃾 "
 [time]
 disabled = false
 
+[cmd_duration]
+min_time = 500
+format = 'underwent [$duration](bold yellow)'
+
 [custom.terrainium]
-command = "echo $TERRAINIUM_TERRAIN_NAME:$TERRAINIUM_SELECTED_BIOME"
+command = "echo $TERRAIN_NAME:$TERRAIN_SELECTED_BIOME"
 when = ''' test "$TERRAINIUM_ENABLED" = "true" '''
 symbol = "󰛍 "

@@ -4,6 +4,7 @@
 .DS_Store
 env/env/*
 !env/env/{env-vars,aliases,functions,misc,overrides}
+!env/env/helpers
 env/env/overrides/*
 !env/env/overrides/README.md
 bin/bin/*

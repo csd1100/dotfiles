@@ -2,17 +2,12 @@
 # zsh-completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-if [ "$TERRAINIUM_ENABLED" = "true" ];then
-    clear
-    autoload -Uzw "${TERRAINIUM_INIT_FILE}"
-    "${TERRAINIUM_INIT_ZSH}"
-    builtin unfunction -- "${TERRAINIUM_INIT_ZSH}"
-    terrainium_enter
-    echo init....
-fi
+source "$HOME/env/helpers/pnpm_completions"
 
 # source overrides
 if [ -f "$HOME/env/overrides/misc" ]
 then
     source "$HOME/env/overrides/misc"
 fi
+
+source "$HOME/.config/terrainium/terrainium_init"

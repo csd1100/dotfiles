@@ -2,27 +2,29 @@
 # make directory and change current directory to created directory
 function mcd () { md -p $1; cd $1 }
 function helpless() { $* --help | less }
-function batman() { man $1 | bat --color always }
-function finder() {
-    dir=$(find -L ~ ~/work -mindepth 1 -maxdepth 3 -type d | sort | uniq | fzf)
-    echo $dir
-    cd $dir
-}
 
-# git
-function gsq() {
-    git reset --soft "$1" &&
-    git commit --edit -m"$(git log --format=%B --reverse HEAD..HEAD@{1})"
+function batman() { man $1 | bat --color always }
+
+function finder() {
+    dir=$(fd -L --full-path ~ ~/work --min-depth 1 -d 3 -t d --and ".*$1.*" | fzf)
+    echo "cd $dir"
+    cd $dir
 }
 
 # docker
 function dbash() {
-    docker exec -it "$1" /usr/bin/bash
+    docker exec -it "$1" bash
+    if [ $? != 0 ]; then
+        docker exec -it "$1" sh
+    fi
 }
 
 function dl() {
     docker logs "$1" | less
 }
+
+compdef mcd=mkdir
+compdef batman=man
 
 # source overrides
 if [ -f "$HOME/env/overrides/functions" ]

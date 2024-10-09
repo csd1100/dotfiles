@@ -140,7 +140,7 @@ cmd + shift - q : yabai -m window --close
 # vm < ctrl + alt - p ; default
 #
 # # mode layout
-# :: layout : sketchybar --trigger yabai-mode MODE=layout
+:: layout : sketchybar --trigger yabai-mode MODE=layout
 
 ctrl + alt - l ; layout
 

@@ -13,12 +13,13 @@ alias :Q="exit"
 # git
 alias gh="git log --oneline --graph --pretty"
 alias gcv="git commit -v"
+alias gcav="git commit --amend -v"
 alias gc="git fetch && git checkout"
 
 #tmux
-alias tm="tmux"
-alias tps="tmux list-sessions"
-alias tkl="tmux kill-server"
+# alias tm="tmux"
+# alias tps="tmux list-sessions"
+# alias tkl="tmux kill-server"
 
 # docker
 alias dps="docker ps --format=\$DOCKER_FORMAT"

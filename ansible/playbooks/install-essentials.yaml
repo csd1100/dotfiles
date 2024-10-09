@@ -45,12 +45,13 @@
         name:
           - jq
           - fzf
+          - bat
           - grc
+          - nnn
           - cmus
-          - htop
+          - btop
           - stow
           - unrar
-          - ranger
           - ripgrep
           - neofetch
       tags:

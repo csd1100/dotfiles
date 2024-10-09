@@ -19,8 +19,8 @@ case $1 in
 	;;
 esac
 
-dir=$(find -L ~ ~/work -mindepth 1 -maxdepth 3 -type d | sort | uniq | fzf)
-base_name=$(basename $dir)
+dir=$(fd -L --full-path ~ ~/work --min-depth 1 -d 3 -t d | fzf)
+base_name=$(basename "$dir")
 
 if [  -z "$basename" ] && [ "$base_name" != "" ]; then
     SHELL_TITLE="$base_name:shell"
