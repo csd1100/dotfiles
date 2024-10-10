@@ -96,33 +96,32 @@
       tags:
         - jdk
       block:
-        - name: Debian install jdk 11, 17
+        - name: Debian install jdk 11, 21
           become: true
           when: ansible_os_family == 'Debian'
           ansible.builtin.apt:
             name:
               - openjdk-11-jdk
-              - openjdk-17-jdk
+              - openjdk-21-jdk
           tags:
             - ubuntu
 
-        - name: RedHat install jdk 11, 17
+        - name: RedHat install jdk 11, 21
           become: true
           when: ansible_os_family == 'RedHat'
           ansible.builtin.dnf:
             name:
               - java-11-openjdk
-              - java-17-openjdk
+              - java-21-openjdk
           tags:
             - fedora
 
-        - name: Darwin install jdk 11, 17, 21
+        - name: Darwin install jdk 11, 21
           when: ansible_os_family == 'Darwin'
           community.general.homebrew:
             name:
-              - openjdk
               - openjdk@11
-              - openjdk@17
+              - openjdk@21
           tags:
             - darwin
 
@@ -136,7 +135,7 @@
           tags:
             - darwin
 
-    - name: Install node 18, 20
+    - name: Install node 20
       tags:
         - node
         - darwin
@@ -144,32 +143,23 @@
         - fedora
         - ubuntu
       block:
-        - name: Install nvm
+        - name: Install volta
           ansible.builtin.shell: |
             set -o pipefail
-            PROFILE=/dev/null curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | /bin/bash
+            PROFILE=/dev/null curl https://get.volta.sh | /bin/bash
           args:
-            creates: ~/.nvm/
+            creates: ~/.volta/
             executable: /bin/bash
 
-        - name: Load nvm and install node 18, 20
+        - name: Load volta and install 20
           ansible.builtin.shell:
-            export NVM_DIR="$HOME/.nvm" &&
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
-            nvm install lts/hydrogen;
-            nvm install lts/iron &&
-            nvm alias default lts/iron
+            $HOME/.volta/bin/volta install node@20
           args:
             executable: /bin/bash
 
         - name: Validate node is installed
           ansible.builtin.shell: |
-            set -o pipefail
-            export NVM_DIR="$HOME/.nvm" &&
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&
-            nvm use lts/iron &&
-            nvm use lts/hydrogen &&
-            nvm use default &&
+            PATH="$HOME/.volta/bin/:$PATH"
             node --version | grep "v20"
           args:
             executable: /bin/bash
@@ -181,6 +171,7 @@
         - name: Install golang linux
           when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
           tags:
+            - golang
             - linux
             - fedora
             - ubuntu

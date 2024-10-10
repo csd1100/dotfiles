@@ -27,7 +27,6 @@
         name:
           - zsh
           - git
-          - vim
           - curl
           - wget
           - gcc
@@ -76,6 +75,7 @@
       when: ansible_os_family == 'Debian'
       ansible.builtin.apt:
         name:
+          - vim-gtk3
           - build-essential
           - software-properties-common
           - libreadline-dev
@@ -88,6 +88,7 @@
       when: ansible_os_family == 'RedHat'
       ansible.builtin.dnf:
         name:
+          - vim-X11
           - kernel-devel
           - dnf-plugins-core
       tags:
@@ -98,8 +99,9 @@
       when: (ansible_os_family == 'Darwin')
       community.general.homebrew:
         name:
-          - coreutils
           - fd
+          - vim
+          - coreutils
       tags:
         - cli
         - darwin
