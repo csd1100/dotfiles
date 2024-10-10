@@ -2,5 +2,6 @@
 
 pushd ~/dotfiles/ || exit
 ./scripts/helpers/ansible-setup
-ansible-playbook -i localhost, -u "$1" ./ansible/playbooks/main.yaml -k -K
+source "$HOME/py3-ansible/bin/activate"
+ansible-playbook -i localhost, -u "$1" ./ansible/playbooks/main.yaml -k -K "${@:2}"
 popd || exit

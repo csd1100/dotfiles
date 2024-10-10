@@ -20,3 +20,4 @@
   ansible.builtin.import_playbook: ./dotfiles.yaml
 - name: Private Packages
   ansible.builtin.import_playbook: ../../private-scripts/ansible/playbooks/private-play.yaml
+  when: private == True

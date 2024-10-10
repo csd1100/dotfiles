@@ -3,13 +3,33 @@
 which ansible
 RESULT=$?
 
+install_pip() {
+	unameOut="$(uname -s)"
+
+	case "${unameOut}" in
+	Linux*)
+		if grep "NAME=\"Ubuntu\"" /etc/os-release &>/dev/null; then
+			sudo apt install python3-venv sshpass
+		else
+			python3 -m ensurepip --upgrade
+		fi
+		;;
+	Darwin*)
+		python3 -m ensurepip --upgrade
+		;;
+	*) MACHINE="UNKNOWN:${unameOut}" ;;
+	esac
+}
+
 if [ $RESULT == 0 ]; then
-    echo "ansible already installed"
+	echo "ansible already installed"
 else
-    python3 -m ensurepip --upgrade
-    pip3 install pipx
-    pipx ensurepath
-    pipx install --include-deps ansible
-    # needed for json querying
-    pipx inject ansible jmespath
+	install_pip
+	python3 -m venv "$HOME/py3-ansible"
+	source "$HOME/py3-ansible/bin/activate"
+	pip3 install pipx
+	pipx ensurepath
+	pipx install --include-deps ansible
+	# needed for json querying
+	pipx inject ansible jmespath
 fi
