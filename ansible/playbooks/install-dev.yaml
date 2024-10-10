@@ -382,7 +382,7 @@
               become: "{{ become_value }}"
               ansible.builtin.rpm_key:
                 state: present
-                key: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
+                key: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
 
             - name: Add Fedora VSCodium Repository
               become: "{{ become_value }}"
@@ -399,10 +399,31 @@
                 dest: /etc/yum.repos.d/vscodium.repo
                 mode: '644'
 
+        - name: Install VSCodium on Ubuntu
+          when: ansible_os_family == "Debian"
+          tags:
+            - ubuntu
+            - linux
+          block:
+            - name: Add GPG key of VSCodium
+              become: "{{ become_value }}"
+              ansible.builtin.apt_key:
+                url: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+                state: present
+
+            - name: Add Apt VSCodium Repository
+              become: "{{ become_value }}"
+              ansible.builtin.copy:
+                content: |
+                  deb https://download.vscodium.com/debs vscodium main
+                dest: /etc/apt/sources.list.d/vscodium.list
+                mode: '644'
+
         - name: Install VSCodium
           become: "{{ become_value }}"
           when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
           ansible.builtin.package:
+            update_cache: yes
             name:
               - codium
           tags:
