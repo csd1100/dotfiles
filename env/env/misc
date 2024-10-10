@@ -2,8 +2,6 @@
 # zsh-completions
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-source "$HOME/env/helpers/pnpm_completions"
-
 # source overrides
 if [ -f "$HOME/env/overrides/misc" ]
 then
