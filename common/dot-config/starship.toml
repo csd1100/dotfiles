@@ -136,5 +136,5 @@ format = 'underwent [$duration](bold yellow)'
 
 [custom.terrainium]
 command = "echo $TERRAIN_NAME:$TERRAIN_SELECTED_BIOME"
-when = ''' test "$TERRAINIUM_ENABLED" = "true" '''
-symbol = "󰛍 "
+when = ''' test "$TERRAIN_ENABLED" = "true" '''
+symbol = " 󰛍 "
