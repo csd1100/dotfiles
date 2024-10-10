@@ -1,6 +1,7 @@
 ---
 - name: Init
-  hosts: all
+  hosts: localhost
+  connection: local
   become: false
   tags:
     - init

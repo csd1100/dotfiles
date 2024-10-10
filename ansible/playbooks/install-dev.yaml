@@ -1,6 +1,7 @@
 ---
 - name: Dev Setup
-  hosts: all
+  hosts: localhost
+  connection: local
   become: false
   vars:
     kitty_macos_installation_dir: /Applications/kitty.app/

@@ -1,6 +1,7 @@
 ---
 - name: Install Essentials
-  hosts: all
+  hosts: localhost
+  connection: local
   become: false
   tags:
     - essentials

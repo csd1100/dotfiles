@@ -1,8 +1,9 @@
 ---
 - name: Install Desktop Environment
+  hosts: localhost
+  connection: local
   tags:
     - de
-  hosts: all
   become: false
   vars:
     the_user: "{{ ansible_user_id }}"
@@ -62,7 +63,7 @@
                   ansible.builtin.file:
                     path: ~/work/git-clones/
                     state: directory
-                    mode: '766'
+                    mode: "766"
 
                 - name: Add hyprland dnf copr
                   become: true
@@ -136,15 +137,16 @@
                           {{ cliphist_latest.json.assets | to_json | from_json |
                             community.general.json_query(browser_download_url_query) }}
                       vars:
-                        browser_download_url_query: '[?browser_download_url.contains(@, `amd64`)] |
-                            [0].browser_download_url'
+                        browser_download_url_query:
+                          "[?browser_download_url.contains(@, `amd64`)] |
+                          [0].browser_download_url"
 
                     - name: Copy cliphist to /usr/bin
                       become: true
                       ansible.builtin.get_url:
                         url: "{{ cliphist_url }}"
                         dest: /usr/bin/cliphist
-                        mode: '544'
+                        mode: "544"
 
         - name: Common Linux desktop utilities
           become: true
@@ -180,8 +182,7 @@
               - sketchybar
 
         - name: Get yabai path
-          ansible.builtin.command:
-            which yabai
+          ansible.builtin.command: which yabai
           register: yabai_path
 
         - name: Run visudo checksum to start yabai with script-additions
@@ -194,4 +195,4 @@
             path: /private/etc/sudoers.d/yabai
             line: "{{ ansible_user_id }} ALL=(root) NOPASSWD: sha256:{{ shasum_yabai.stdout }} --load-sa"
             create: true
-            mode: '440'
+            mode: "440"

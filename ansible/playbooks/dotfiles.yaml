@@ -1,6 +1,7 @@
 ---
 - name: Dotfiles
-  hosts: all
+  hosts: localhost
+  connection: local
   become: false
   environment:
     DOTFILES: "{{ ansible_env.HOME }}/dotfiles/"
