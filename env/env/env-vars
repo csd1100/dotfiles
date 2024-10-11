@@ -27,6 +27,11 @@ export CONFIG="$HOME/.config"
 # ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
+# zsh-completions
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+# custom completions
+fpath+=$HOME/env/completions
+
 # source overrides
 if [ -f "$HOME/env/overrides/env-vars" ]
 then

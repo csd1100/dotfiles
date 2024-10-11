@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
-# zsh-completions
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+# always add files to completion options
+function _add_files_to_completion() {
+    _files
+}
+compdef _add_files_to_completion -first-
 
 # source overrides
 if [ -f "$HOME/env/overrides/misc" ]
