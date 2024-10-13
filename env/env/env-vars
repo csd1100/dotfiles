@@ -31,6 +31,8 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # custom completions
 fpath+=$HOME/env/completions
+# zsh vi-mode disable clipboard
+export VI_MODE_DISABLE_CLIPBOARD="true"
 
 # source overrides
 if [ -f "$HOME/env/overrides/env-vars" ]
