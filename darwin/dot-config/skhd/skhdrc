@@ -98,6 +98,9 @@ cmd + shift + lalt  - k : yabai -m window --resize top:0:-50; \
 cmd + shift + lalt  - l : yabai -m window --resize right:50:0; \
                   yabai -m window --resize left:50:0
 
+# fullscreen
+cmd + alt - f : yabai -m window --toggle windowed-fullscreen
+
 # Equalize size of windows
 cmd + shift - b : yabai -m space --balance
 
