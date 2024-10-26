@@ -6,6 +6,14 @@ function _add_files_to_completion() {
 }
 compdef _add_files_to_completion -first-
 
+# pnpm
+export PNPM_HOME="/home/user/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 # source overrides
 if [ -f "$HOME/env/overrides/misc" ]
 then
