@@ -1,35 +1,55 @@
-#!/usr/bin/env zsh
-zstyle ':completion:*' use-cache yes
-export ZSH="$HOME/.oh-my-zsh"
+function zcompile-many() {
+  local f
+  for f; do zcompile -R -- "$f".zwc "$f"; done
+}
 
-plugins=(
-    git
-    npm
-    dnf
-    rust
-    brew
-    volta
-    grunt
-    macos
-    gradle
-    docker
-    ubuntu
-    golang
-    vi-mode
-    fzf
-    kubectl
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-)
+# Clone and compile to wordcode missing plugins.
+if [[ ! -e ~/zsh/zsh-syntax-highlighting ]]; then
+  git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ~/zsh/zsh-syntax-highlighting
+  zcompile-many ~/zsh/zsh-syntax-highlighting/{zsh-syntax-highlighting.zsh,highlighters/*/*.zsh}
+fi
+if [[ ! -e ~/zsh/zsh-autosuggestions ]]; then
+  git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git ~/zsh/zsh-autosuggestions
+  zcompile-many ~/zsh/zsh-autosuggestions/{zsh-autosuggestions.zsh,src/**/*.zsh}
+fi
+if [[ ! -e ~/zsh/powerlevel10k ]]; then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/zsh/powerlevel10k
+  make -C ~/zsh/powerlevel10k pkg
+fi
+if [[ ! -e ~/zsh/zsh-completions ]]; then
+  git clone --depth=1 https://github.com/zsh-users/zsh-completions.git ~/zsh/zsh-completions
+fi
 
+# Activate Powerlevel10k Instant Prompt.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# here sequence matters of env going first before oh-my-zsh
-source "$HOME/env/env-vars"
+function env_compile() {
+  zcompile-many ~/env/*.zsh
+  zcompile-many ~/env/completions/^*.zwc
+  zcompile-many ~/env/overrides/*.zsh
+}
 
-source "$ZSH/oh-my-zsh.sh"
+if [[ ! -e ~/env/functions.zsh.zwc ]]; then
+    env_compile
+fi
 
-source "$HOME/env/misc"
-source "$HOME/env/aliases"
-source "$HOME/env/functions"
+# Enable the "new" completion system (compsys).
+autoload -Uz compinit && compinit
 
-eval "$(starship init zsh)"
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Load plugins.
+source ~/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/zsh/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.p10k.zsh
+source ~/env/env-vars.zsh
+source ~/env/functions.zsh
+source ~/env/aliases.zsh
+source ~/env/misc.zsh
+
+[[ ~/.zcompdump.zwc -nt ~/.zcompdump ]] || zcompile-many ~/.zcompdump
+
+# vim: ft=zsh

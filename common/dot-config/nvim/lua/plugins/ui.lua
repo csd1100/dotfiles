@@ -121,14 +121,6 @@ return {
                     lualine_z = { "location" },
                 },
                 tabline = {
-                    lualine_a = { "filename" },
-                    lualine_b = {},
-                    lualine_c = {},
-                    lualine_x = {},
-                    lualine_y = { get_custom_buffer_modes },
-                    lualine_z = { get_custom_global_modes },
-                },
-                winbar = {
                     lualine_a = {
                         {
                             "tabs",
@@ -154,8 +146,8 @@ return {
                     lualine_b = {},
                     lualine_c = {},
                     lualine_x = {},
-                    lualine_y = {},
-                    lualine_z = {},
+                    lualine_y = { get_custom_buffer_modes },
+                    lualine_z = { get_custom_global_modes },
                 },
 
                 extensions = {},

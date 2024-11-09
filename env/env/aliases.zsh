@@ -1,20 +1,32 @@
-#!/usr/bin/env zsh
-# zsh
-alias zshrc="source $HOME/.zshrc"
-alias zshconfig="code $HOME/.zshrc"
-
 # neovim
 alias nv="nvim"
 
 # general
+alias md="mkdir"
 alias :q="exit"
 alias :Q="exit"
+alias tree='tree -a -I .git'
+alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 # git
-alias gh="git log --oneline --graph --pretty"
+alias gc="git fetch && git checkout"
+alias gcl="git clone"
+alias gst="git status"
+alias gd="git diff"
+alias gdt="git difftool"
+alias ga="git add"
+alias gaa="git add ."
 alias gcv="git commit -v"
 alias gcav="git commit --amend -v"
-alias gc="git fetch && git checkout"
+alias gsta="git stash add"
+alias gstp="git stash pop"
+alias gstd="git stash drop"
+alias gp="git push"
+alias gl="git pull"
+alias gh="git log --oneline --graph --pretty"
 
 #tmux
 # alias tm="tmux"
@@ -34,10 +46,9 @@ alias dcstp="docker-compose stop"
 alias s="kitty +kitten ssh"
 
 # unaliase for bin overrides
-unalias ls
 
 # source overrides
-if [ -f "$HOME/env/overrides/aliases" ]
+if [ -f "$HOME/env/overrides/aliases.zsh" ]
 then
-    source "$HOME/env/overrides/aliases"
+    source "$HOME/env/overrides/aliases.zsh"
 fi

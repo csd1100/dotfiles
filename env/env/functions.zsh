@@ -1,14 +1,24 @@
-#!/usr/bin/env zsh
+# zsh
+function zshedit() {
+    nvim ~/dotfiles/common/dot-zshrc
+    env_compile
+}
+
 # make directory and change current directory to created directory
-function mcd () { md -p $1; cd $1 }
+function mcd() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
+compdef _directories mcd
+
 function helpless() { $* --help | less }
 
 function batman() { man $1 | bat --color always }
+compdef batman=man
 
 function finder() {
-    dir=$(fd -L --full-path ~ ~/work --min-depth 1 -d 3 -t d --and ".*$1.*" | fzf)
-    echo "cd $dir"
-    cd $dir
+    dir=$(fd -L --full-path --min-depth 1 -d 3 -t d ".*$1.*" ~ ~/work | fzf)
+    if [ ! -z "$dir" ]; then
+        echo "cd $dir"
+        cd $dir
+    fi
 }
 
 # docker
@@ -22,9 +32,6 @@ function dbash() {
 function dl() {
     docker logs "$1" | less
 }
-
-compdef mcd=mkdir
-compdef batman=man
 
 # source overrides
 if [ -f "$HOME/env/overrides/functions" ]

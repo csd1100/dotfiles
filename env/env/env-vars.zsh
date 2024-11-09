@@ -1,4 +1,5 @@
-#!/usr/bin/env zsh
+GPG_TTY=$(tty)
+export GPG_TTY
 
 # default editor
 export EDITOR=nvim
@@ -13,13 +14,21 @@ export DOCKER_FORMAT="\\nID\\t{{.ID}}\\nIMAGE\\t{{.Image}}\\nCOMMAND\\t{{.Comman
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 
+# pnpm
+export PNPM_HOME="/home/user/.local/share/pnpm"
+
 # PATH
-export PATH="/usr/local/go/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/bin/helpers:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$GOBIN:$PATH"
-export PATH="$HOME/.volta/bin:$PATH"
+path=(
+    ~/bin/helpers
+    ~/bin
+    ~/.local/bin
+    $GOBIN
+    ~/.volta/bin
+    ~/.cargo/bin
+    $PNPM_HOME
+    /usr/local/go/bin
+    $path
+)
 
 # CONFIG
 export CONFIG="$HOME/.config"
@@ -27,15 +36,18 @@ export CONFIG="$HOME/.config"
 # ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-# zsh-completions
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 # custom completions
-fpath+=$HOME/env/completions
+fpath=(
+    ~/env/completions
+    ~/zsh/zsh-completions/src
+    $fpath
+)
+
 # zsh vi-mode disable clipboard
-export VI_MODE_DISABLE_CLIPBOARD="true"
+# export VI_MODE_DISABLE_CLIPBOARD="true"
 
 # source overrides
-if [ -f "$HOME/env/overrides/env-vars" ]
+if [ -f "$HOME/env/overrides/env-vars.zsh" ]
 then
-    source "$HOME/env/overrides/env-vars"
+    source "$HOME/env/overrides/env-vars.zsh"
 fi
