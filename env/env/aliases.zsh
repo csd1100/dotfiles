@@ -2,6 +2,8 @@
 alias nv="nvim"
 
 # general
+alias l="ls -al"
+alias la="ls -a"
 alias md="mkdir"
 alias :q="exit"
 alias :Q="exit"

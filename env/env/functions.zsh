@@ -2,6 +2,7 @@
 function zshedit() {
     nvim ~/dotfiles/common/dot-zshrc
     env_compile
+    exec zsh
 }
 
 # make directory and change current directory to created directory

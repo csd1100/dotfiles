@@ -12,12 +12,16 @@ if [[ ! -e ~/zsh/zsh-autosuggestions ]]; then
   git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git ~/zsh/zsh-autosuggestions
   zcompile-many ~/zsh/zsh-autosuggestions/{zsh-autosuggestions.zsh,src/**/*.zsh}
 fi
+if [[ ! -e ~/zsh/zsh-completions ]]; then
+  git clone --depth=1 https://github.com/zsh-users/zsh-completions.git ~/zsh/zsh-completions
+fi
+if [[ ! -e ~/zsh/zsh-history-substring-search ]]; then
+  git clone --depth=1 https://github.com/zsh-users/zsh-history-substring-search.git ~/zsh/zsh-history-substring-search
+  zcompile-many ~/zsh/zsh-history-substring-search/*.zsh
+fi
 if [[ ! -e ~/zsh/powerlevel10k ]]; then
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/zsh/powerlevel10k
   make -C ~/zsh/powerlevel10k pkg
-fi
-if [[ ! -e ~/zsh/zsh-completions ]]; then
-  git clone --depth=1 https://github.com/zsh-users/zsh-completions.git ~/zsh/zsh-completions
 fi
 
 # Activate Powerlevel10k Instant Prompt.
@@ -43,6 +47,7 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 # Load plugins.
 source ~/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/zsh/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.p10k.zsh
 source ~/env/env-vars.zsh

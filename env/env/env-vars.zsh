@@ -15,7 +15,7 @@ export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 
 # pnpm
-export PNPM_HOME="/home/user/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 
 # PATH
 path=(
@@ -45,6 +45,11 @@ fpath=(
 
 # zsh vi-mode disable clipboard
 # export VI_MODE_DISABLE_CLIPBOARD="true"
+
+# zsh history substring search
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=none
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=none
+export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
 
 # source overrides
 if [ -f "$HOME/env/overrides/env-vars.zsh" ]
