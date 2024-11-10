@@ -12,6 +12,7 @@ alias ~="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias wget="wget2"
 
 # git
 alias gc="git fetch && git checkout"

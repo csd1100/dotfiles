@@ -1,7 +1,6 @@
 - kitty
     - imagemagick - for icat kitten
 - zsh
-    - oh-my-zsh
 - neofetch
 - nvim
     - node/npm - lsps
