@@ -28,7 +28,8 @@ alias gstp="git stash pop"
 alias gstd="git stash drop"
 alias gp="git push"
 alias gl="git pull"
-alias gh="git log --oneline --graph --pretty"
+alias gh="git log --oneline --graph"
+alias glog="git log --graph"
 
 #tmux
 # alias tm="tmux"
