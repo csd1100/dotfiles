@@ -44,8 +44,9 @@ alias dcdn="docker-compose down -v"
 alias dcst="docker-compose start"
 alias dcstp="docker-compose stop"
 
-# ssh
-alias s="kitty +kitten ssh"
+# kitty kittens
+alias s="kitten ssh"
+alias d="kitten diff"
 
 # unaliase for bin overrides
 
