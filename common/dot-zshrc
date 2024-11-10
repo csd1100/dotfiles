@@ -40,9 +40,10 @@ if [[ ! -e ~/env/functions.zsh.zwc ]]; then
 fi
 
 # Enable the "new" completion system (compsys).
+source ~/env/env-vars.zsh
+zmodload zsh/complist
+zstyle ':completion:*' menu select
 autoload -Uz compinit && compinit
-
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 # Load plugins.
 source ~/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -50,7 +51,7 @@ source ~/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 source ~/zsh/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.p10k.zsh
-source ~/env/env-vars.zsh
+source <(fzf --zsh)
 source ~/env/functions.zsh
 source ~/env/aliases.zsh
 source ~/env/misc.zsh

@@ -49,7 +49,10 @@ fpath=(
 # zsh history substring search
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=none
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=none
-export HISTORY_SUBSTRING_SEARCH_PREFIXED=true
+export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
+
+# zsh autosuggest
+# export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 # source overrides
 if [ -f "$HOME/env/overrides/env-vars.zsh" ]
