@@ -33,6 +33,7 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     # os_icon               # os identifier
+    shell_level
     context                 # user@hostname
     dir                     # current directory
     vcs                     # git status
@@ -1667,6 +1668,12 @@
     fi
   }
 
+  # shlvl
+  function prompt_shell_level() {
+    if [ "$SHLVL" -gt 1 ]; then
+        p10k segment -f 12 -i '󰭩' -t "$SHLVL"
+    fi
+  }
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
   # https://github.com/romkatv/powerlevel10k#instant-prompt.
