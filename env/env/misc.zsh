@@ -15,6 +15,8 @@ function _add_files_to_completion() {
 compdef _add_files_to_completion -first-
 
 ## binds
+#vi mode
+bindkey  -v
 # history-substring
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down

@@ -4,6 +4,11 @@ function zcompile-many() {
 }
 
 # Clone and compile to wordcode missing plugins.
+if [[ ! -e ~/zsh/fzf ]]; then
+  git clone --depth=1 https://github.com/junegunn/fzf.git ~/zsh/fzf
+  ~/zsh/fzf/install --bin
+  cp ~/zsh/fzf/bin/fzf ~/bin
+fi
 if [[ ! -e ~/zsh/zsh-syntax-highlighting ]]; then
   git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ~/zsh/zsh-syntax-highlighting
   zcompile-many ~/zsh/zsh-syntax-highlighting/{zsh-syntax-highlighting.zsh,highlighters/*/*.zsh}
