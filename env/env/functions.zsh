@@ -29,10 +29,24 @@ function dbash() {
         docker exec -it "$1" sh
     fi
 }
+function _dbash() {
+    service=docker
+    words=(docker exec -it '')
+    CURRENT+=2
+    _docker
+}
+compdef _dbash dbash
 
 function dl() {
     docker logs "$1" | less
 }
+function _dl() {
+    service=docker
+    words=(docker logs '')
+    CURRENT+=1
+    _docker
+}
+compdef _dl dl
 
 # source overrides
 if [ -f "$HOME/env/overrides/functions" ]
