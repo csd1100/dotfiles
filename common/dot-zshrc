@@ -36,7 +36,9 @@ fi
 
 function env_compile() {
   zcompile-many ~/env/*.zsh
+  setopt extended_glob
   zcompile-many ~/env/completions/^*.zwc
+  unsetopt extended_glob
   zcompile-many ~/env/overrides/*.zsh
 }
 
