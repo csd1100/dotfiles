@@ -12,7 +12,7 @@ alias ~="cd ~"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias wget="wget2"
+alias wget="wget2 --user-agent=\"Wget/1.25.0\""
 
 # git
 alias gc="git fetch && git checkout"
