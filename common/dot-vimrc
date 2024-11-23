@@ -1,3 +1,5 @@
+set nocp
+
 colorscheme habamax
 nnoremap <Space> <nop>
 let mapleader =" "
@@ -38,7 +40,7 @@ nnoremap <C-j> <cmd>cprev<CR>zz
 nnoremap <leader>k <cmd>lnext<CR>zz
 nnoremap <leader>j <cmd>lprev<CR>zz
 
-" yank text in reg 6
+" yank word in reg 6
 nnoremap "" ve"6y
 vnoremap "" "6y
 " replace current word with text from reg 6
@@ -83,16 +85,19 @@ nnoremap sa :wqa<CR>
 nnoremap sx :wq<CR>
 nnoremap sw :w<CR>
 nnoremap qb :bd<CR>
+
 " quit all buffers except current along with empty buffer
 nnoremap qx :%bd\|e#\|bd#<CR>
+
+" record everything in register 5
 nnoremap 55 q5
-nnoremap m @5
+nnoremap mm @5
 
 nnoremap d[ ci[
 nnoremap d{ ci{
 nnoremap d( ci(
 
-nnoremap zz :set foldenable<CR>
+nnoremap ze :set foldenable<CR>
 nnoremap zn :set nofoldenable<CR>
 
 " set current file as executable
@@ -139,7 +144,6 @@ set foldmethod=expr
 set colorcolumn=80
 set scrolloff=8
 set spell
-set nocp
 set backupcopy=yes
 filetype plugin on
 

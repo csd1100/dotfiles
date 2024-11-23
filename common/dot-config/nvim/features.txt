@@ -1,0 +1,9 @@
+dashboard
+colorscheme - catpuccin: transparent, monokai-pro
+persistent sessions
+lazy plugin manager
+treesitter - lua, bash, zsh, fish, md, json, yaml, toml
+lsp - lua, bash, zsh, fish, md, json, yaml, toml
+cmp - lsp, treesitter, snippets, buffer, path, commands, search
+refactoring
+csd - modes, snippets
