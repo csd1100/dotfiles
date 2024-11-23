@@ -145,6 +145,10 @@ set foldmethod=expr
 set colorcolumn=80
 set scrolloff=8
 set spell
+set backup
+" here // is added at end to add entire file path for backups
+set backupdir=~/.nvim/backups//
+set writebackup
 set backupcopy=yes
 filetype plugin on
 
