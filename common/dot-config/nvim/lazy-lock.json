@@ -8,6 +8,7 @@
   "mini.icons": { "branch": "main", "commit": "54686be7d58807906cb2c8c2216e0bf9c044f19a" },
   "monokai-pro.nvim": { "branch": "master", "commit": "d79eef3cbbd2e8323e9c2131a912c0131b6dbc85" },
   "numbers.nvim": { "branch": "master", "commit": "d1f95879a4cdf339f59e6a2dc6aef26912cf554c" },
+  "nvim-notify": { "branch": "master", "commit": "fbef5d32be8466dd76544a257d3f3dce20082a07" },
   "nvim-web-devicons": { "branch": "master", "commit": "f09be61d05bebcba85bb47be1931322d51b95644" },
   "persistence.nvim": { "branch": "main", "commit": "f6aad7dde7fcf54148ccfc5f622c6d5badd0cc3d" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },

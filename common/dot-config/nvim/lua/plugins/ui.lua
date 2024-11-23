@@ -86,6 +86,7 @@ return {
             ku.map('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
             ku.map('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
             ku.map('n', '<leader>cs', builtin.colorscheme, { desc = 'Telescope colorschemes' })
+            ku.map('n', '<leader>n', telescope.extensions.notify.notify, { desc = 'Telescope Notifications' })
 
             telescope.load_extension('fzf')
             telescope.load_extension('live_grep_args')
@@ -249,5 +250,15 @@ return {
                 footer = {},
             },
         },
+    },
+    {
+        'rcarriga/nvim-notify',
+        init = function()
+            vim.notify = require("notify")
+        end,
+        opts = {
+            timeout = 300,
+        },
+        config = true,
     },
 }

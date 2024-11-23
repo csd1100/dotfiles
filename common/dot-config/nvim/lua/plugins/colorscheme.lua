@@ -14,6 +14,7 @@ return {
                 },
                 which_key = true,
                 rainbow_delimiters = false,
+                notify = true,
             },
             -- TODO: integrations: cmp, nvim-notify, mason
         },
@@ -30,6 +31,7 @@ return {
             background_clear = {
                 "float_win",
                 "which-key",
+                "notify",
             },
             -- TODO: integrations: cmp, nvim-notify, mason
         },
