@@ -161,6 +161,7 @@ return {
         opts = {
             indent = {},
             scope = {},
+            exclude = { filetypes = { "dashboard" } },
         },
         config = function(_, opts)
             local hooks = require "ibl.hooks"
@@ -182,5 +183,71 @@ return {
 
             require("ibl").setup(opts)
         end,
+    },
+    {
+        'nvimdev/dashboard-nvim',
+        event = 'VimEnter',
+        opts = {
+            theme = 'doom',
+            hide = {
+                statusline,
+                tabline,
+                winbar,
+            },
+            config = {
+                header = {
+                    [[]],
+                    [[]],
+                    [[                               __                ]],
+                    [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
+                    [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+                    [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+                    [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+                    [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+                    [[]],
+                    [[]],
+                    [[]],
+                },
+                center = {
+                    {
+                        icon = "  ",
+                        icon_hl = "Title",
+                        desc = "Load Last Session of CWD ",
+                        desc_hl = "String",
+                        key = "l",
+                        key_hl = "Number",
+                        action = "lua require('persistence').load()",
+                    },
+                    {
+                        icon = "  ",
+                        icon_hl = "Title",
+                        desc = "Open Recently Opened File",
+                        desc_hl = "String",
+                        key = "h",
+                        key_hl = "Number",
+                        action = "Telescope oldfiles",
+                    },
+                    {
+                        icon = "  ",
+                        icon_hl = "Title",
+                        desc = "Open a New File          ",
+                        desc_hl = "String",
+                        key = "n",
+                        key_hl = "Number",
+                        action = "enew",
+                    },
+                    {
+                        icon = "  ",
+                        icon_hl = "Title",
+                        desc = "Open Explorer            ",
+                        desc_hl = "String",
+                        key = "e",
+                        key_hl = "Number",
+                        action = "Ex",
+                    },
+                },
+                footer = {},
+            },
+        },
     },
 }
