@@ -8,6 +8,13 @@ set easymotion
 set timeoutlen=3000
 let g:WhichKey_DefaultDelay = 1500
 
+vnoremap " <ESC>`>a"<ESC>`<i"
+vnoremap ' <ESC>`>a'<ESC>`<i'
+vnoremap ` <ESC>`>a`<ESC>`<i`
+vnoremap ( <ESC>`>a)<ESC>`<i(
+vnoremap [ <ESC>`>a]<ESC>`<i[
+vnoremap { <ESC>`>a}<ESC>`<i{
+
 nmap <C-,> <Action>(ShowSettings)<ESC>
 
 nmap <leader><leader> <Action>(GotoFile)<ESC>
