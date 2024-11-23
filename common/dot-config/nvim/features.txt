@@ -1,4 +1,3 @@
-commentor
 treesitter - lua, bash, zsh, fish, md, json, yaml, toml
 lsp - lua, bash, zsh, fish, md, json, yaml, toml
 cmp - lsp, treesitter, snippets, buffer, path, commands, search
