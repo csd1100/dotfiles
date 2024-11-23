@@ -1,4 +1,4 @@
-indent-blankline
+rainbow-delimeters
 cursorline
 commentor
 dashboard
