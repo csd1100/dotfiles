@@ -9,9 +9,6 @@ export SAVEHIST=1000000000
 # default editor
 export EDITOR=nvim
 
-# spaceship prompt zsh
-export RPS1="%{$reset_color%}"
-
 # DOCKER PS FORMAT
 export DOCKER_FORMAT="\\nID\\t{{.ID}}\\nIMAGE\\t{{.Image}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.RunningFor}}\\nSTATUS\\t{{.Status}}\\nPORTS\\t{{.Ports}}\\nNAMES\\t{{.Names}}\\n"
 

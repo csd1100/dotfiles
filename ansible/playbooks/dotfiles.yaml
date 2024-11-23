@@ -158,25 +158,6 @@
             dest: "~/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
             version: master
 
-        - name: Install spaceship-prompt (git)
-          ansible.builtin.git:
-            repo: 'https://github.com/spaceship-prompt/spaceship-prompt'
-            dest: "~/.oh-my-zsh/custom/themes/spaceship-prompt"
-            version: master
-            depth: 1
-
-        - name: Install spaceship-vi-mode (git)
-          ansible.builtin.git:
-            repo: 'https://github.com/spaceship-prompt/spaceship-vi-mode'
-            dest: "~/.oh-my-zsh/custom/plugins/spaceship-vi-mode"
-            version: main
-
-        - name: Create spaceship-prompt symbolic link
-          ansible.builtin.file:
-            src: "~/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme"
-            dest: "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-            state: link
-
         - name: Install starship prompt
           args:
             creates: ~/.cargo/bin/starship
