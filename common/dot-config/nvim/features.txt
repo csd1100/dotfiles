@@ -1,7 +1,6 @@
 indent-blankline
 cursorline
 lualine
-tidy
 commentor
 dashboard
 persistence
