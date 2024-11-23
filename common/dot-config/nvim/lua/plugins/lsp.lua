@@ -143,10 +143,6 @@ return {
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/mason-lspconfig.nvim" },
             {
-                "mfussenegger/nvim-jdtls",
-                ft = "java",
-            },
-            {
                 "mrcjkb/rustaceanvim",
                 version = "^4",
                 ft = { "rust" },
@@ -227,8 +223,6 @@ return {
                 },
             }
 
-            require("config.jdtls")
-
             -- MASON Installation
             local ensure_installed_lsp = {
                 "bashls",
@@ -242,7 +236,6 @@ return {
                 "tsserver",
                 "gopls",
                 "rust_analyzer",
-                "jdtls",
             }
 
             local tools_to_install = {
@@ -272,10 +265,6 @@ return {
                     lang = "go"
                 elseif tool == "rust_analyzer" or tool == "codelldb" then
                     lang = "rust"
-                elseif
-                    tool == "jdtls"
-                then
-                    lang = "java"
                 elseif tool == "buf" then
                     lang = "protoc"
                 else
@@ -326,7 +315,6 @@ return {
                         local lua_opts = lsp_zero.nvim_lua_ls()
                         require("lspconfig").lua_ls.setup(lua_opts)
                     end,
-                    jdtls = lsp_zero.noop,
                     rust_analyzer = lsp_zero.noop,
                 },
             })

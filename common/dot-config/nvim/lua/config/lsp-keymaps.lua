@@ -182,52 +182,6 @@ function M.get_lsp_maps()
     }
 end
 
-M.get_jdtls_maps = function()
-    return {
-        ["n"] = {
-            ["<leader>li"] = {
-                ["rhs"] = function()
-                    require("jdtls").organize_imports()
-                end,
-                ["opts"] = { desc = "Organize Imports" },
-            },
-
-            ["<leader>rv"] = {
-                ["rhs"] = function()
-                    require("jdtls").extract_variable()
-                end,
-                ["opts"] = { desc = "Extract Variable" },
-            },
-            ["<leader>rc"] = {
-                ["rhs"] = function()
-                    require("jdtls").extract_constant()
-                end,
-                ["opts"] = { desc = "Extract Constant" },
-            },
-        },
-        ["v"] = {
-            ["<leader>rv"] = {
-                ["rhs"] = function()
-                    require("jdtls").extract_variable()
-                end,
-                ["opts"] = { desc = "Extract Variable" },
-            },
-            ["<leader>rc"] = {
-                ["rhs"] = function()
-                    require("jdtls").extract_constant(true)
-                end,
-                ["opts"] = { desc = "Extract Constant" },
-            },
-            ["<leader>rm"] = {
-                ["rhs"] = function()
-                    require("jdtls").extract_method(true)
-                end,
-                ["opts"] = { desc = "Extract Method" },
-            },
-        },
-    }
-end
-
 M.get_rustacean_maps = function()
     return {
         ["n"] = {
