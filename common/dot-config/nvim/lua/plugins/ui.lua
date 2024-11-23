@@ -88,4 +88,36 @@ return {
             preset = "modern",
         },
     },
+    {
+        'nvim-lualine/lualine.nvim',
+        event = 'BufEnter',
+        opts = {
+            options = {
+                theme = 'wombat',
+                component_separators = { left = '', right = ''},
+                section_separators = { left = '', right = ''},
+            },
+            sections = {
+                lualine_a = {
+                    { 'mode', fmt = function(str) return str:sub(1,1) end }
+                },
+                lualine_b = { 'branch', 'diff' },
+                lualine_c = { 'diagnostics' },
+                lualine_x = { 'searchcount', 'selectioncount', 'filetype' },
+                lualine_y = { 'progress' },
+                lualine_z = { 'location' },
+            },
+            tabline = {
+                lualine_a = {
+                    {
+                        'tabs',
+                        tab_max_length = 15,
+                        mode = 1,
+                        path = 1,
+                        max_length = vim.o.columns,
+                    }
+                },
+            },
+        },
+    }
 }
