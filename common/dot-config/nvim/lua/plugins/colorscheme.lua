@@ -8,11 +8,6 @@ return {
             transparent_background = true,
             show_end_of_buffer = true,
             default_integrations = true,
-            dim_inactive = {
-                enabled = true,
-                shade = "dark",
-                percentage = 0.25,
-            },
             integrations = {
                 telescope = {
                     enabled = true,

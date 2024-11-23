@@ -17,7 +17,6 @@ return {
         },
         opts = {
             defaults = {
-                borderchars = { "█", " ", "▀", "█", "█", " ", " ", "▀" },
                 path_display = {
                     shorten = { len = 2, exclude = { -1, 1 } },
                 },
@@ -50,6 +49,10 @@ return {
         },
         config = function(_, opts)
             local lga_actions = require("telescope-live-grep-args.actions")
+
+            if vim.g.colors_name == "monokai-pro" then
+                opts.defaults.borderchars = { "█", " ", "▀", "█", "█", " ", " ", "▀" }
+            end
 
             opts.extensions.live_grep_args = {
                 auto_quoting = true,
