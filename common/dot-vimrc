@@ -2,7 +2,8 @@ set nocp
 
 colorscheme habamax
 nnoremap <Space> <nop>
-let mapleader =" "
+let mapleader = " "
+let maplocalleader = "\\"
 
 map <up> <nop>
 map <down> <nop>

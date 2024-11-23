@@ -1,9 +1,17 @@
+undos
+backups
+indent-blankline
+cursorline
+lualine
+tidy
+numbers
 dashboard
-colorscheme - catpuccin: transparent, monokai-pro
-persistent sessions
-lazy plugin manager
+persistence
+telescope
 treesitter - lua, bash, zsh, fish, md, json, yaml, toml
 lsp - lua, bash, zsh, fish, md, json, yaml, toml
 cmp - lsp, treesitter, snippets, buffer, path, commands, search
+trouble
+notify
 refactoring
 csd - modes, snippets
