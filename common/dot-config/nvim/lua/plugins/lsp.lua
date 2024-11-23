@@ -48,7 +48,6 @@ return {
                     { name = "path" },
                     { name = "luasnip" },
                     { name = "nvim_lua" },
-                    { name = "crates" },
                     { name = "vsnip" },
                     { name = "nvim_lsp_signature_help" },
                 },
@@ -384,19 +383,6 @@ return {
         },
     },
     {
-        "saecki/crates.nvim",
-        event = { "BufRead Cargo.toml" },
-        tag = "stable",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {
-            null_ls = {
-                enabled = true,
-                name = "crates.nvim",
-            },
-        },
-        config = true,
-    },
-    {
         "folke/trouble.nvim",
         cmd = "LspStart",
         dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -419,23 +405,5 @@ return {
     {
         "mfussenegger/nvim-ansible",
         ft = "yaml",
-    },
-    {
-        "iamcco/markdown-preview.nvim",
-        build = function()
-            vim.fn["mkdp#util#install"]()
-        end,
-        config = function()
-            require("config.keymaps").markdown_preview()
-        end,
-    },
-    {
-        "elkowar/yuck.vim",
-        ft = "yuck",
-    },
-    {
-        "eraserhd/parinfer-rust",
-        build = "cargo build --release",
-        ft = "yuck",
     },
 }
