@@ -72,5 +72,10 @@ return {
             telescope.load_extension('live_grep_args')
         end,
     },
-
+    {
+        'mbbill/undotree',
+        keys = {
+            {'<leader>u', vim.cmd.UndotreeToggle, desc = 'Toggle UndoTree'}
+        },
+    },
 }
