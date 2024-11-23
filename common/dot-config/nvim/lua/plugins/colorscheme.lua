@@ -16,13 +16,14 @@ return {
             integrations = {
                 telescope = {
                     enabled = true,
-                }
+                },
+                which_key = true,
             },
             -- TODO: integrations: cmp, lualine, indent-blankline, nvim-notify,
-            -- whichkey, mason, rainbow-delimeters
+            -- mason, rainbow-delimeters
         },
         init = function()
-            -- vim.cmd.colorscheme "catppuccin"
+            --vim.cmd.colorscheme "catppuccin"
         end,
     },
     {
@@ -33,9 +34,10 @@ return {
             transparent_background = false,
             background_clear = {
                 "float_win",
+                "which-key",
             },
             -- TODO: integrations: cmp, lualine, indent-blankline, nvim-notify,
-            -- whichkey, mason, rainbow-delimeters
+            -- mason, rainbow-delimeters
         },
         init = function()
             vim.cmd.colorscheme "monokai-pro"

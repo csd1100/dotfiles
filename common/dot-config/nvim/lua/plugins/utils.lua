@@ -78,4 +78,11 @@ return {
             {'<leader>u', vim.cmd.UndotreeToggle, desc = 'Toggle UndoTree'}
         },
     },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            preset = "modern",
+        },
+    }
 }

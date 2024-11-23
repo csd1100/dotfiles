@@ -1,4 +1,3 @@
-whick-key
 indent-blankline
 cursorline
 lualine
