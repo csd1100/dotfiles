@@ -13,12 +13,16 @@ return {
                 shade = "dark",
                 percentage = 0.25,
             },
+            integrations = {
+                telescope = {
+                    enabled = true,
+                }
+            },
             -- TODO: integrations: cmp, lualine, indent-blankline, nvim-notify,
-            -- telescope, whichkey, mason, rainbow-delimeters
+            -- whichkey, mason, rainbow-delimeters
         },
-        config = function(_, opts)
-            require("catppuccin").setup(opts)
-            vim.cmd.colorscheme "catppuccin"
+        init = function()
+            -- vim.cmd.colorscheme "catppuccin"
         end,
     },
     {
@@ -28,14 +32,13 @@ return {
             filter = "spectrum",
             transparent_background = false,
             background_clear = {
-                "float_win"
+                "float_win",
             },
             -- TODO: integrations: cmp, lualine, indent-blankline, nvim-notify,
-            -- telescope, whichkey, mason, rainbow-delimeters
+            -- whichkey, mason, rainbow-delimeters
         },
-        config = function(_, opts)
-            require("monokai-pro").setup(opts)
-            -- vim.cmd.colorscheme "monokai-pro"
+        init = function()
+            vim.cmd.colorscheme "monokai-pro"
         end,
     },
 }
