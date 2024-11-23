@@ -1,4 +1,3 @@
-rainbow-delimeters
 cursorline
 commentor
 dashboard

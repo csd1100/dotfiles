@@ -13,9 +13,9 @@ return {
                     enabled = true,
                 },
                 which_key = true,
+                rainbow_delimiters = false,
             },
-            -- TODO: integrations: cmp, lualine, indent-blankline, nvim-notify,
-            -- mason, rainbow-delimeters
+            -- TODO: integrations: cmp, nvim-notify, mason
         },
         init = function()
             --vim.cmd.colorscheme "catppuccin"
@@ -31,8 +31,7 @@ return {
                 "float_win",
                 "which-key",
             },
-            -- TODO: integrations: cmp, lualine, indent-blankline, nvim-notify,
-            -- mason, rainbow-delimeters
+            -- TODO: integrations: cmp, nvim-notify, mason
         },
         init = function()
             vim.cmd.colorscheme "monokai-pro"
