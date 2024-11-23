@@ -211,16 +211,6 @@ return {
             })
 
             vim.g.rustaceanvim = {
-                tools = {
-                    executor = "neotest",
-                    test_executor = "neotest",
-                    enable_nextest = true,
-                    reload_workspace_from_cargo_toml = true,
-                    float_win_config = {
-                        max_width = 50,
-                        max_height = 5,
-                    },
-                },
                 server = {
                     capabilities = lsp_zero.get_capabilities(),
                     on_attach = function(client, bufnr)
@@ -267,11 +257,7 @@ return {
                 "codelldb",
                 "prettier",
                 "gomodifytags",
-                "java-test",
                 "ansible-lint",
-                "java-debug-adapter",
-                "chrome-debug-adapter",
-                "node-debug2-adapter",
             }
 
             local function get_language_for(tool)
@@ -279,8 +265,6 @@ return {
                 if
                     tool == "tsserver"
                     or tool == "eslint-lsp"
-                    or tool == "chrome-debug-adapter"
-                    or tool == "node-debug2-adapter"
                     or tool == "prettier"
                 then
                     lang = "node"
@@ -290,8 +274,6 @@ return {
                     lang = "rust"
                 elseif
                     tool == "jdtls"
-                    or tool == "java-test"
-                    or tool == "java-debug-adapter"
                 then
                     lang = "java"
                 elseif tool == "buf" then

@@ -99,7 +99,6 @@ return {
             local telescope = require("telescope")
             telescope.load_extension("live_grep_args")
             telescope.load_extension("harpoon")
-            telescope.load_extension("dap")
             require("config.keymaps").telescope(telescope)
             telescope.setup(opts)
         end,

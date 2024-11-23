@@ -204,18 +204,6 @@ M.get_jdtls_maps = function()
                 end,
                 ["opts"] = { desc = "Extract Constant" },
             },
-            ["<leader>tn"] = {
-                ["rhs"] = function()
-                    require("jdtls").test_nearest_method()
-                end,
-                ["opts"] = { desc = "Run Nearest Test" },
-            },
-            ["<leader>tc"] = {
-                ["rhs"] = function()
-                    require("jdtls").test_class()
-                end,
-                ["opts"] = { desc = "Run Current File" },
-            },
         },
         ["v"] = {
             ["<leader>rv"] = {
