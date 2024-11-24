@@ -157,6 +157,7 @@ set backupcopy=yes
 set undofile
 set undodir=~/.nvim/undos//
 set cursorline
+set updatetime=500
 
 filetype plugin on
 

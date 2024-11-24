@@ -1,7 +1,7 @@
 function _G.if_successful(plug)
     local status, plugin = pcall(require, plug)
     if not status then
-        vim.notify('failed to load ' .. plug, 'error')
+        vim.notify('failed to load ' .. plug, 4)
         return
     end
     return plugin
@@ -18,3 +18,5 @@ end
 function _G.reset_required(module)
     package.loaded[module] = nil
 end
+
+_G.ui_borders = 'rounded'

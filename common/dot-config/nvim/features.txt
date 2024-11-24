@@ -1,6 +1,7 @@
 lsp - lua, bash, zsh, fish, md, json, yaml, toml
 cmp - lsp, treesitter, snippets, buffer, path, commands, search
 trouble
-noice
+gitsigns
 refactoring
 csd - snippets
+noice

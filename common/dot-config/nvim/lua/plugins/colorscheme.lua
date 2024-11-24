@@ -15,6 +15,7 @@ return {
                 which_key = true,
                 rainbow_delimiters = false,
                 notify = true,
+                mason = true,
             },
             -- TODO: integrations: cmp, mason
         },
@@ -36,7 +37,7 @@ return {
             -- TODO: integrations: cmp, mason
         },
         init = function()
-            -- vim.cmd.colorscheme "monokai-pro"
+            -- vim.cmd.colorscheme('monokai-pro')
         end,
     },
 }
