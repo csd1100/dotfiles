@@ -16,6 +16,7 @@ return {
                 which_key = true,
                 rainbow_delimiters = false,
                 notify = true,
+                fidget = true,
                 mason = true,
                 cmp = true,
                 lsp_trouble = true,

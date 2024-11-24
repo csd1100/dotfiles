@@ -51,10 +51,10 @@ return {
             },
             extensions = {
                 fzf = {
-                    fuzzy = true, -- false will only do exact matching
+                    fuzzy = true,                   -- false will only do exact matching
                     override_generic_sorter = true, -- override the generic sorter
-                    override_file_sorter = true, -- override the file sorter
-                    case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+                    override_file_sorter = true,    -- override the file sorter
+                    case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
                 },
             },
         },
@@ -63,7 +63,7 @@ return {
 
             if vim.g.colors_name == 'monokai-pro' then
                 opts.defaults.borderchars =
-                    { '█', ' ', '▀', '█', '█', ' ', ' ', '▀' }
+                { '█', ' ', '▀', '█', '█', ' ', ' ', '▀' }
             end
 
             opts.extensions.live_grep_args = {
@@ -513,5 +513,22 @@ return {
                 { desc = 'Toggle GIT Mode for Current Buffer' }
             )
         end,
+    },
+    {
+        'j-hui/fidget.nvim',
+        event = 'VeryLazy',
+        opts = {
+            -- options
+            notification = {
+                window = {
+                    winblend = 0,
+                },
+            },
+            progress = {
+                display = {
+                    progress_ttl = 300,
+                },
+            },
+        },
     },
 }
