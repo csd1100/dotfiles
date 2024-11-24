@@ -148,49 +148,64 @@ return {
             'csd1100/modes.nvim',
         },
         event = 'BufEnter',
-        opts = {
-            options = {
-                theme = 'wombat',
-                component_separators = { left = '', right = '' },
-                section_separators = { left = '', right = '' },
-            },
-            sections = {
-                lualine_a = {
-                    {
-                        'mode',
-                        fmt = function(str)
-                            return str:sub(1, 1)
-                        end,
+        opts = function()
+            local modes = require('modes')
+
+            local function get_custom_global_modes()
+                return table.concat(modes.get_active_modes_icons('*'), '│')
+            end
+
+            local function get_custom_buffer_modes()
+                return table.concat(
+                    modes.get_active_modes_icons(vim.api.nvim_get_current_buf()),
+                    '│'
+                )
+            end
+
+            return {
+                options = {
+                    theme = 'auto',
+                    component_separators = { left = '', right = '' },
+                    section_separators = { left = '', right = '' },
+                },
+                sections = {
+                    lualine_a = {
+                        {
+                            'mode',
+                            fmt = function(str)
+                                return str:sub(1, 1)
+                            end,
+                        },
+                    },
+                    lualine_b = { 'branch', 'diff' },
+                    lualine_c = { 'diagnostics' },
+                    lualine_x = { 'searchcount', 'selectioncount', 'filetype' },
+                    lualine_y = { 'progress' },
+                    lualine_z = { 'location' },
+                },
+                tabline = {
+                    lualine_a = {
+                        {
+                            'tabs',
+                            tab_max_length = 15,
+                            mode = 1,
+                            path = 1,
+                            max_length = vim.o.columns,
+                        },
+                    },
+                    lualine_y = {
+                        {
+                            get_custom_buffer_modes,
+                        },
+                    },
+                    lualine_z = {
+                        {
+                            get_custom_global_modes,
+                        },
                     },
                 },
-                lualine_b = { 'branch', 'diff' },
-                lualine_c = { 'diagnostics' },
-                lualine_x = { 'searchcount', 'selectioncount', 'filetype' },
-                lualine_y = { 'progress' },
-                lualine_z = { 'location' },
-            },
-            tabline = {
-                lualine_a = {
-                    {
-                        'tabs',
-                        tab_max_length = 15,
-                        mode = 1,
-                        path = 1,
-                        max_length = vim.o.columns,
-                    },
-                },
-                lualine_y = {
-                    {
-                        "require('config.utils').get_custom_buffer_modes('│')",
-                    },
-                },
-                lualine_z = {
-                    {
-                        "require('config.utils').get_custom_global_modes('│')",
-                    },
-                },
-            },
-        },
+            }
+        end,
     },
     {
         url = 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
@@ -324,5 +339,42 @@ return {
             timeout = 300,
         },
         config = true,
+    },
+    {
+        'folke/trouble.nvim',
+        cmd = 'Trouble',
+        config = true,
+        keys = {
+            {
+                '<leader>tD',
+                '<cmd>Trouble diagnostics toggle<cr>',
+                desc = 'Diagnostics (Trouble)',
+            },
+            {
+                '<leader>td',
+                '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+                desc = 'Buffer Diagnostics (Trouble)',
+            },
+            {
+                '<leader>ts',
+                '<cmd>Trouble symbols toggle focus=true<cr>',
+                desc = 'Symbols (Trouble)',
+            },
+            {
+                '<leader>tr',
+                '<cmd>Trouble lsp toggle focus=true win.position=right<cr>',
+                desc = 'LSP Definitions / references / ... (Trouble)',
+            },
+            {
+                '<leader>tl',
+                '<cmd>Trouble loclist toggle<cr>',
+                desc = 'Location List (Trouble)',
+            },
+            {
+                '<leader>tq',
+                '<cmd>Trouble qflist toggle<cr>',
+                desc = 'Quickfix List (Trouble)',
+            },
+        },
     },
 }

@@ -17,6 +17,7 @@ return {
                 notify = true,
                 mason = true,
                 cmp = true,
+                lsp_trouble = true,
             },
         },
         init = function()
