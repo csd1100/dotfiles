@@ -2,12 +2,12 @@ return {
     {
         'mbbill/undotree',
         keys = {
-            {'<leader>u', vim.cmd.UndotreeToggle, desc = 'Toggle UndoTree'}
+            { '<leader>u', vim.cmd.UndotreeToggle, desc = 'Toggle UndoTree' },
         },
     },
     {
-        "folke/persistence.nvim",
-        event = "BufReadPre",
-        opts = { },
-    }
+        'folke/persistence.nvim',
+        event = 'BufReadPre',
+        opts = {},
+    },
 }

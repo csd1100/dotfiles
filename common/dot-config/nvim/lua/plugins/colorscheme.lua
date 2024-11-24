@@ -1,10 +1,10 @@
 return {
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
+        'catppuccin/nvim',
+        name = 'catppuccin',
         priority = 1000,
         opts = {
-            flavour = "frappe",
+            flavour = 'frappe',
             transparent_background = true,
             show_end_of_buffer = true,
             default_integrations = true,
@@ -19,24 +19,24 @@ return {
             -- TODO: integrations: cmp, mason
         },
         init = function()
-            -- vim.cmd.colorscheme "catppuccin"
+            vim.cmd.colorscheme('catppuccin')
         end,
     },
     {
-        "loctvl842/monokai-pro.nvim",
+        'loctvl842/monokai-pro.nvim',
         priority = 1000,
         opts = {
-            filter = "spectrum",
+            filter = 'spectrum',
             transparent_background = false,
             background_clear = {
-                "float_win",
-                "which-key",
-                "notify",
+                'float_win',
+                'which-key',
+                'notify',
             },
             -- TODO: integrations: cmp, mason
         },
         init = function()
-            vim.cmd.colorscheme "monokai-pro"
+            -- vim.cmd.colorscheme "monokai-pro"
         end,
     },
 }
