@@ -16,8 +16,8 @@ return {
                 rainbow_delimiters = false,
                 notify = true,
                 mason = true,
+                cmp = true,
             },
-            -- TODO: integrations: cmp, mason
         },
         init = function()
             vim.cmd.colorscheme('catppuccin')
@@ -34,7 +34,6 @@ return {
                 'which-key',
                 'notify',
             },
-            -- TODO: integrations: cmp, mason
         },
         init = function()
             -- vim.cmd.colorscheme('monokai-pro')

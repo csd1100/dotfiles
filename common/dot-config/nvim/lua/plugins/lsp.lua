@@ -134,4 +134,100 @@ return {
             require('lspconfig').lua_ls.setup(lua_opts)
         end,
     },
+
+    -- Autocompletion
+    {
+        'hrsh7th/nvim-cmp',
+        event = 'VeryLazy',
+        dependencies = {
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'hrsh7th/cmp-cmdline' },
+            { 'hrsh7th/cmp-cmdline' },
+            { 'hrsh7th/cmp-nvim-lua' },
+            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+            { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
+            { 'L3MON4D3/LuaSnip' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'rafamadriz/friendly-snippets' },
+            { 'onsails/lspkind.nvim' },
+        },
+        config = function()
+            local cmp = require('cmp')
+            local lsp_zero = require('lsp-zero')
+
+            require('luasnip.loaders.from_vscode').lazy_load()
+
+            cmp.setup({
+                sources = {
+                    { name = 'nvim_lsp' },
+                    { name = 'buffer' },
+                    { name = 'path' },
+                    { name = 'luasnip' },
+                    { name = 'nvim_lua' },
+                    { name = 'nvim_lsp_signature_help' },
+                },
+                formatting = {
+                    format = require('lspkind').cmp_format({
+                        mode = 'symbol',
+                        maxwidth = 50,
+                        ellipsis_char = '...',
+                    }),
+                },
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
+                snippet = {
+                    expand = function(args)
+                        vim.snippet.expand(args.body)
+                    end,
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+                    ['<C-f>'] = lsp_zero.cmp_action().luasnip_jump_forward(),
+                    ['<C-b>'] = lsp_zero.cmp_action().luasnip_jump_backward(),
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                    ['<C-c>'] = cmp.mapping.abort(),
+                    ['<Up>'] = cmp.mapping.select_prev_item({
+                        behavior = 'select',
+                    }),
+                    ['<Down>'] = cmp.mapping.select_next_item({
+                        behavior = 'select',
+                    }),
+                    ['<Tab>'] = cmp.mapping.select_next_item({
+                        behavior = 'select',
+                    }),
+                    ['<S-Tab>'] = cmp.mapping.select_prev_item({
+                        behavior = 'select',
+                    }),
+                }),
+            })
+
+            require('cmp').setup.cmdline('/', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    -- NOTE: triggers on '/@'
+                    { name = 'nvim_lsp_document_symbol' },
+                }, {
+                    { name = 'buffer' },
+                }),
+            })
+
+            cmp.setup.cmdline(':', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = 'path' },
+                }, {
+                    {
+                        name = 'cmdline',
+                        option = {
+                            ignore_cmds = { 'Man', '!' },
+                        },
+                    },
+                }),
+            })
+        end,
+    },
 }
