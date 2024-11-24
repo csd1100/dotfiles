@@ -144,6 +144,9 @@ return {
     },
     {
         'nvim-lualine/lualine.nvim',
+        dependencies = {
+            'csd1100/modes.nvim',
+        },
         event = 'BufEnter',
         opts = {
             options = {
@@ -174,6 +177,16 @@ return {
                         mode = 1,
                         path = 1,
                         max_length = vim.o.columns,
+                    },
+                },
+                lualine_y = {
+                    {
+                        "require('config.utils').get_custom_buffer_modes('│')",
+                    },
+                },
+                lualine_z = {
+                    {
+                        "require('config.utils').get_custom_global_modes('│')",
                     },
                 },
             },

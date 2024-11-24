@@ -3,4 +3,4 @@ cmp - lsp, treesitter, snippets, buffer, path, commands, search
 trouble
 noice
 refactoring
-csd - modes, snippets
+csd - snippets
