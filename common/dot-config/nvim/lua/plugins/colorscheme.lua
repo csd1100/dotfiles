@@ -42,4 +42,24 @@ return {
             -- vim.cmd.colorscheme('monokai-pro')
         end,
     },
+    {
+        'projekt0n/github-nvim-theme',
+        name = 'github-theme',
+        build = ':GithubThemeCompile',
+        priority = 1000,
+        opts = {
+            options = {
+                terminal_colors = true,
+                dim_inactive = true,
+                styles = {
+                    comments = 'italic',
+                    keywords = 'bold',
+                    types = 'italic,bold',
+                }
+            },
+        },
+        init = function()
+            -- vim.cmd.colorscheme('github_dark')
+        end,
+    },
 }
