@@ -24,6 +24,7 @@ return {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-live-grep-args.nvim',
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+            'nvim-treesitter/nvim-treesitter',
         },
         opts = {
             defaults = {
@@ -85,6 +86,7 @@ return {
             ku.map('n', '<leader>fr', builtin.resume, { desc = 'Telescope resume' })
             ku.map('n', '<leader>b', builtin.buffers, { desc = 'Telescope buffers' })
             ku.map('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tags' })
+            ku.map('n', '<leader>o', builtin.treesitter, { desc = 'Telescope treesitter symbols' })
             ku.map('n', '<leader>cs', builtin.colorscheme, { desc = 'Telescope colorschemes' })
             ku.map('n', '<leader>n', telescope.extensions.notify.notify, { desc = 'Telescope Notifications' })
 

@@ -16,10 +16,10 @@ return {
                 rainbow_delimiters = false,
                 notify = true,
             },
-            -- TODO: integrations: cmp, nvim-notify, mason
+            -- TODO: integrations: cmp, mason
         },
         init = function()
-            --vim.cmd.colorscheme "catppuccin"
+            -- vim.cmd.colorscheme "catppuccin"
         end,
     },
     {
@@ -33,7 +33,7 @@ return {
                 "which-key",
                 "notify",
             },
-            -- TODO: integrations: cmp, nvim-notify, mason
+            -- TODO: integrations: cmp, mason
         },
         init = function()
             vim.cmd.colorscheme "monokai-pro"
