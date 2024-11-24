@@ -22,6 +22,8 @@ return {
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
             {
+                -- NOTE: there are couple of things that do not work on nvim v0.11
+                -- ui.float_border, format_mapping does not work on v0.11
                 'VonHeikemen/lsp-zero.nvim',
                 branch = 'v4.x',
                 cmd = { 'LspInfo', 'LspInstall', 'LspStart' },

@@ -1,4 +1,4 @@
-gitsigns
 refactoring
 csd - snippets
 noice
+null-ls

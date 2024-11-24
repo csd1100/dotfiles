@@ -377,4 +377,141 @@ return {
             },
         },
     },
+    {
+        'lewis6991/gitsigns.nvim',
+        event = 'VeryLazy',
+        dependencies = {
+            'csd1100/modes.nvim',
+        },
+        opts = {
+            numhl = true,
+            signs_staged = {
+                add = { text = ' ' },
+                change = { text = ' ' },
+                delete = { text = ' ' },
+                untracked = { text = '┆' },
+            },
+            signs = {
+                add = { text = ' ' },
+                change = { text = ' ' },
+                delete = { text = ' ' },
+                untracked = { text = '┆' },
+            },
+        },
+        init = function()
+            ku.map(
+                { 'n', 'v' },
+                '<leader>v[',
+                ":lua require('gitsigns').prev_hunk()<CR>",
+                { desc = 'Previous Hunk (GIT)' }
+            )
+            ku.map(
+                { 'n', 'v' },
+                '<leader>v]',
+                ":lua require('gitsigns').next_hunk()<CR>",
+                { desc = 'Next Hunk (GIT)' }
+            )
+            -- -- git splkey: v --
+            local gitModeMaps = {
+                ['n'] = {
+                    ['<leader>vs'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').stage_hunk()
+                        end,
+                        ['opts'] = { desc = 'Stage Hunk' },
+                    },
+                    ['<leader>vu'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').undo_stage_hunk()
+                        end,
+                        ['opts'] = { desc = 'Undo Stage Hunk' },
+                    },
+                    ['<leader>vr'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').reset_hunk()
+                        end,
+                        ['opts'] = { desc = 'Reset Hunk' },
+                    },
+                    ['<leader>vp'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').preview_hunk()
+                        end,
+                        ['opts'] = { desc = 'Preview Hunk' },
+                    },
+                    ['<leader>vbf'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').blame_line({
+                                full = true,
+                            })
+                        end,
+                        ['opts'] = { desc = 'Blame File' },
+                    },
+                    ['<leader>vbc'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').toggle_current_line_blame()
+                        end,
+                        ['opts'] = { desc = 'Toggle Blame Current Line' },
+                    },
+                    ['<leader>vd'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').diffthis()
+                        end,
+                        ['opts'] = { desc = 'Diff' },
+                    },
+                    ['<leader>vtd'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').toggle_deleted()
+                        end,
+                        ['opts'] = { desc = 'Show Deleted Lines' },
+                    },
+                    ['<leader>vS'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').stage_hunk()
+                        end,
+                        ['opts'] = { desc = 'Stage Buffer' },
+                    },
+                    ['<leader>vR'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').reset_buffer()
+                        end,
+                        ['opts'] = { desc = 'Reset Buffer' },
+                    },
+                },
+                ['v'] = {
+                    ['<leader>vs'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').stage_hunk()
+                        end,
+                        ['opts'] = { desc = 'Stage Hunk' },
+                    },
+                    ['<leader>vr'] = {
+                        ['rhs'] = function()
+                            require('gitsigns').reset_hunk()
+                        end,
+                        ['opts'] = { desc = 'Reset Hunk' },
+                    },
+                },
+            }
+            local modes = require('modes')
+            modes.create_if_not_present(
+                'GIT',
+                function() end,
+                function() end,
+                '  '
+            )
+            modes.add_maps('GIT', gitModeMaps)
+            ku.map(
+                'n',
+                '<leader>vg',
+                ":lua require('modes').toggle_mode('GIT')<CR>",
+                { desc = 'Toggle GIT Mode' }
+            )
+            ku.map(
+                'n',
+                '<leader>vb',
+                ":lua require('modes').toggle_mode('GIT',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
+                { desc = 'Toggle GIT Mode for Current Buffer' }
+            )
+        end,
+    },
 }

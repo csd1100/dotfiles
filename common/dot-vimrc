@@ -148,7 +148,7 @@ set spell
 set list
 set listchars=eol:↴,tab:│>,trail:-
 ",multispace:---+
-set signcolumn=yes
+set signcolumn=yes:2
 set backup
 " here // is added at end to add entire file path for backups
 set backupdir=~/.nvim/backups//

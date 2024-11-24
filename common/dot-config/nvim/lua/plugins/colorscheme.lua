@@ -12,6 +12,7 @@ return {
                 telescope = {
                     enabled = true,
                 },
+                gitsigns = true,
                 which_key = true,
                 rainbow_delimiters = false,
                 notify = true,
