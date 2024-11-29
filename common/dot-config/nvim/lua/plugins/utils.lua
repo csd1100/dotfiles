@@ -85,4 +85,30 @@ return {
             )
         end,
     },
+    {
+        'laytan/cloak.nvim',
+        opts = {
+            enabled = true,
+        },
+        init = function()
+            ku.map(
+                'n',
+                '<leader>ce',
+                ':CloakEnable<CR>',
+                { desc = 'Cloak Enable' }
+            )
+            ku.map(
+                'n',
+                '<leader>cd',
+                ':CloakDisable<CR>',
+                { desc = 'Cloak Disable' }
+            )
+            ku.map(
+                'n',
+                '<leader>ct',
+                ':CloakToggle<CR>',
+                { desc = 'Cloak Toggle' }
+            )
+        end,
+    },
 }
