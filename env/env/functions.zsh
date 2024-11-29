@@ -3,8 +3,8 @@ function zshedit() {
     pushd ~/dotfiles || exit
     nvim ~/dotfiles/common/dot-zshrc
     env_compile
-    exec zsh
     popd || exit
+    exec zsh
 }
 
 # make directory and change current directory to created directory
