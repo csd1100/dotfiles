@@ -13,6 +13,7 @@ return {
     },
     {
         'numToStr/Comment.nvim',
+        event = { 'BufEnter' },
         keys = { '<leader>/' },
         opts = {
             ---LHS of toggle mappings in NORMAL mode
@@ -141,7 +142,7 @@ return {
                     },
                     selection_modes = {
                         ['@parameter.outer'] = 'v', -- charwise
-                        ['@function.outer'] = 'V', -- linewise
+                        ['@function.outer'] = 'V',  -- linewise
                         ['@class.outer'] = '<c-v>', -- blockwise
                     },
                     include_surrounding_whitespace = true,
