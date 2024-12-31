@@ -521,4 +521,18 @@ return {
       },
     },
   },
+  {
+    'norcalli/nvim-colorizer.lua',
+    ft = { 'css', 'html', 'javascript', 'typescript', 'lua', 'json', 'xml' },
+    opts = {
+      'css',
+      'html',
+      'javascript',
+      'typescript',
+      'lua',
+      'json',
+      'xml',
+    },
+    config = true,
+  },
 }
