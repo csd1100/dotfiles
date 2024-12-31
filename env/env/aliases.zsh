@@ -39,12 +39,21 @@ alias glog="git log --graph"
 
 # docker
 alias dps="docker ps --format=\$DOCKER_FORMAT"
-alias dc="docker-compose"
-alias dcps="docker-compose ps"
-alias dcup="docker-compose up -d"
-alias dcdn="docker-compose down -v"
-alias dcst="docker-compose start"
-alias dcstp="docker-compose stop"
+alias dc="docker compose"
+alias dcps="docker compose ps"
+alias dcup="docker compose up -d"
+alias dcdn="docker compose down -v"
+alias dcst="docker compose start"
+alias dcstp="docker compose stop"
+
+#podman
+alias pps="podman ps --format=\$DOCKER_FORMAT"
+alias pc="podman compose"
+alias pcps="podman compose ps"
+alias pcup="podman compose up -d"
+alias pcdn="podman compose down -v"
+alias pcst="podman compose start"
+alias pcstp="podman compose stop"
 
 # kitty kittens
 alias s="kitten ssh"
