@@ -78,6 +78,6 @@ for util in "${config[@]}"; do
     stower "${DOTFILES}" "${util}" "$HOME" "$2"
 done
 
-echo "$ARG setup" >/tmp/dotfiles-setup
+echo "$ARG setup" >>/tmp/dotfiles-setup
 
 popd >/dev/null
