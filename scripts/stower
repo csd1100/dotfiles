@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-if [ -z "$2" ]; then
-	echo "Stowing $1"
-	stow -R --dotfiles "$1"
-else
-	echo "Stowing $1 -> $2"
-	stow -R --dotfiles "$1" -t "$2"
-fi

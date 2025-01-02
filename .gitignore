@@ -3,15 +3,3 @@
 *.zwc
 .vscode/*
 .DS_Store
-env/env/*
-!env/env/env-vars.zsh
-!env/env/aliases.zsh
-!env/env/functions.zsh
-!env/env/misc.zsh
-!env/env/completions
-bin/bin/*
-!bin/bin/helpers
-kitty/.config/kitty/current-theme.conf
-nvim/.config/nvim/plugin/*
-nvim/.config/nvim/.luarc.json
-yabai/.config/yabai/rules

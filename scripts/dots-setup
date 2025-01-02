@@ -1,62 +1,83 @@
 #!/usr/bin/env bash
 set -e
 
+R='\033[31m'
+G='\033[32m'
+NOCOLOR='\033[0m'
+
+help=$(
+    cat <<'EOF'
+dots-setup OPTIONS [-n | --no | --simulate]
+
+    --linux                 - Setup Linux dotfiles
+    --darwin                - Setup Darwin dotfiles
+    --common                - Setup Common dotfiles
+    -n | --no | --simulate  - Simulte Creating Symlinks
+    -h | --help             - Print help(this) message.
+
+EOF
+)
+
+stower() {
+    DOTFILE_DIR=$1
+    PACKAGE_TO_STOW=$2
+    TARGET_DIR=$3
+
+    if [ -n "${4}" ]; then
+        DRY_RUN="--simulate -v 2"
+    fi
+
+    if [ ! -e "${DOTFILE_DIR}/${PACKAGE_TO_STOW}" ]; then
+        echo -e "${R}${DOTFILE_DIR}/${PACKAGE_TO_STOW} does not exists.${NOCOLOR}"
+    else
+        echo "Stowing ${DOTFILE_DIR}/${PACKAGE_TO_STOW} -> ${TARGET_DIR}"
+        echo -e "${G}Running:${NOCOLOR} stow --dotfiles --no-folding ${DRY_RUN} -R -d \"${DOTFILE_DIR}\" -t \"${TARGET_DIR}\" \"${PACKAGE_TO_STOW}\""
+        stow --dotfiles --no-folding ${DRY_RUN} -R -d "${DOTFILE_DIR}" -t "${TARGET_DIR}" "${PACKAGE_TO_STOW}"
+    fi
+
+}
+
+ARG=$1
+case "$ARG" in
+--darwin)
+    declare -a config=("darwin")
+    ;;
+--linux)
+    declare -a config=("linux")
+    ;;
+--common)
+    declare -a config=("bin" "env" "common")
+    ;;
+--help)
+    echo "$help"
+    exit 0
+    ;;
+*)
+    echo -e "${R}invalid argument '${ARG}'${NOCOLOR}."
+    echo "$help"
+    exit 1
+    ;;
+esac
+
 # get script dir https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script
 SOURCE=${BASH_SOURCE[0]}
 while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-	DIR=$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)
-	SOURCE=$(readlink "$SOURCE")
-	[[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    DIR=$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)
+    SOURCE=$(readlink "$SOURCE")
+    [[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink,
+    # we need to resolve it relative to the path where the symlink file was located
 done
 DIR=$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)
 DOTFILES="$(dirname "$DIR")"
 
-ARG=$1
-
 touch /tmp/dotfiles-setup
-
-case "$ARG" in
-darwin)
-	declare -a config=("darwin")
-	;;
-linux)
-	declare -a config=("linux" "private-scripts/systemd")
-	;;
-common)
-	declare -a config=("bin" "env" "common")
-	;;
---single)
-	config=("$2")
-	;;
-*)
-	echo "Invalid argument; expected arguments: darwin/linux/common"
-	exit 1
-	;;
-esac
 
 pushd "$DOTFILES" >/dev/null
 
 for util in "${config[@]}"; do
-	if echo "$util" | grep -q "private-scripts"; then
-		echo "going to private-scripts/directory"
-		pushd "$DOTFILES/private-scripts" >/dev/null
-		PRIVATE_SCRIPT=true
-		util=$(echo "$util" | sed 's/private-scripts\///')
-		target="$HOME"
-	fi
-
-	"$DOTFILES/scripts/stower" "$util" "$target"
-
-	if [ "$PRIVATE_SCRIPT" = "true" ]; then
-		echo "going back to $DOTFILES"
-		popd >/dev/null
-	fi
+    stower "${DOTFILES}" "${util}" "$HOME" "$2"
 done
 
-if [ "$ARG" = "--single" ]; then
-	echo "$2 setup" >>/tmp/dotfiles-setup
-else
-	echo "$ARG setup" >>/tmp/dotfiles-setup
-fi
+echo "$ARG setup" >/tmp/dotfiles-setup
 
 popd >/dev/null

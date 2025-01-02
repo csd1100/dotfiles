@@ -37,7 +37,9 @@ fi
 function env_compile() {
   zcompile-many ~/env/*.zsh
   zcompile-many ~/env/completions/^*.zwc
-  zcompile-many ~/env/overrides/*.zsh
+  if [ -e ~/env/overrides/ ]; then
+      zcompile-many ~/env/overrides/*.zsh
+  fi
 }
 
 if [[ ! -e ~/env/functions.zsh.zwc ]]; then
