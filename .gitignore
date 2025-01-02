@@ -1,5 +1,4 @@
 *~
 *.bak
-*.zwc
 .vscode/*
 .DS_Store

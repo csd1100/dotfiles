@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+install_extensions() {
+    while IFS= read -r line; do
+        echo "Installing $line"
+        $1 --install-extension "$line"
+    done <"$HOME/dotfiles/configs/Code/User/extensions"
+}
+
+if type code &>/dev/null; then
+    install_extensions code
+fi
+
+if type codium &>/dev/null; then
+    install_extensions codium
+fi
