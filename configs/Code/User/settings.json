@@ -1,2 +1,69 @@
 {
+    "gitlens.telemetry.enabled": false,
+    "redhat.telemetry.enabled": false,
+    "window.restoreWindows": "none",
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 18,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'CommitMono Nerd Font', 'JetbrainsMono Nerd Font Mono', 'VictorMono Nerd Font Mono', monospace",
+    "workbench.colorTheme": "Vitesse Dark",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.productIconTheme": "fluent-icons",
+    "vim.leader": "<space>",
+    "vim.vimrc.enable": true,
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
+    "vim.easymotion": true,
+    "vim.camelCaseMotion.enable": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "after": [
+                "d",
+                "d"
+            ]
+        },
+        {
+            "before": [
+                "<C-n>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "commands": [
+                "lineBreakInsert"
+            ],
+            "silent": true
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    // To improve performance
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
