@@ -1,48 +1,254 @@
 Shortcuts:
+  Namespaces:
+    Side Bar and Panels:
+      VSCode: Ctrl-Shift-{E,X,T,D}
+      Vim: Ctrl-Shift-{E,X,T,D}
+
+    Windows:
+      VSCode: Ctrl-{h,j,k,l}
+      Vim: Ctrl-{h,j,k,l}
+
+    Tabs:
+      VSCode: Ctrl-<arrow keys>
+      Vim: Ctrl-<arrow keys>
+
+    Search File:
+      VSCode: Ctrl-f
+      Vim: /
+
+    Search Project:
+      VSCode: Ctrl-Shift-F
+      Vim: Ctrl-Shift-F
+
+    Navigation:
+      VSCode: Ctrl-{o,p}
+      Vim: Ctrl-{o,p}
+
+    LSP Go To:
+      VSCode: Ctrl-g
+      Vim: g
+
+    LSP Code Actions:
+      VSCode: Ctrl-q
+      Vim: Ctrl-q
+
+    LSP Refactoring:
+      VSCode: Ctrl-{e,r}
+      Vim: <leader>{e,r}
+
+    Format:
+      VSCode: Alt-Shift-f {l, f}
+      Vim: Alt-Shift-f {l, f}
+
+    Debug:
+      VSCode: Fn keys
+      Vim: Fn keys
+
+    Test:
+      VSCode: Ctrl-t {.,s,f}
+      Vim: Ctrl-t {.,s,f}
+
   General:
-    Search: <Ctrl + F>
-    Replace: <Ctrl + Shift + H>
-    Search String in Files: <Ctrl+Shift+F>
-    Search Files: <Space> <Space>
-    Settings: <Ctrl+,>
-    Files Explorer: <Ctrl+Shift+E>
-    Debug Menu: <Ctrl+Shift+D>
-    Extensions: <Ctrl+Shift+X>
-    Test: <Ctrl+Shift+T>
-    Panel: <Ctrl+Shift+O>
+    Leader:
+      VSCode: / (chording, without vim mode)
+      Vim: <Space>
+
+    Search:
+      VSCode: <Ctrl-f>
+      Vim: /
+
+    Replace:
+      VSCode: <Ctrl-Shift-H>
+      Vim: :s//
+
+    Search String in Files:
+      VSCode: <Ctrl-Shift-F>
+      Vim: <Ctrl-Shift-F>
+
+    Search word under Cursor:
+      VSCode: "?"
+      Vim: "?"
+
+    Find Files:
+      VSCode: <Shift> <Shift>
+      Vim: <leader> <leader>
+
+    Editor Commands:
+      VSCode: <Ctrl-Shift-P>
+      Vim: ":"
+
+    Settings:
+      VSCode: <Ctrl-,>
+      Vim: <Ctrl-,> # open ~/.vimrc, ~/.config/nvim/init.lua, ~/.ideavimrc
+
+    Files Explorer Toggle:
+      VSCode: <Ctrl-Shift-E>
+      Vim: <Ctrl-Shift-E>
+
+    Debug Menu Toggle:
+      VSCode: <Ctrl-Shift-D>
+      Vim: <Ctrl-Shift-D> # dap-ui, jetbrains debug config
+
+    Extensions:
+      VSCode: <Ctrl-Shift-X>
+      Vim: <Ctrl-Shift-X> # lazy, jetbrains plugins
+
+    Test:
+      VSCode: <Ctrl-Shift-T>
+      Vim: <Ctrl-Shift-T> # neotest or equivalent if installed, jetbrains test config
+
+    Panel:
+      VSCode: <Ctrl-Shift-Up>
+      Vim: <Ctrl-Shift-Up>
+
+    Terminal:
+      VSCode: <Ctrl-Shift-\>
+      Vim: <Ctrl-Shift-\>
+
+    Zen Mode:
+      VSCode: Ctrl-F11
+      Vim: Ctrl-F11
 
   VS CODE:
-    Activity Bar: <Ctrl+Shift+A>
-    Hide Primary Side Bar: <Ctrl+Shift+K>
+    Activity Bar: <Ctrl-Shift-A>
+    Hide Primary Side Bar: <Ctrl-Shift-Right>
 
   Editor:
-    # leader for nvim instead of alt
-    Navigate Forward: <Ctrl+O>
-    Navigate Backward: n<Tab>
-    All Symbols in file: <Ctrl+G>
-    Go to Definitions: <Ctrl+D>
-    Implementations: <Ctrl+I>
-    Peek Definitions: <Ctrl+Shift+O>
-    References of Symbol: <Ctrl+Shift+U>
-    Formatting Selection: v<Leader>lf
-    Formatting File: <Leader>lf
-    Incoming calls:
-    Outgoing calls:
+    Navigate Forward:
+      VSCode: <Ctrl-o>
+      Vim: <Ctrl-o>
+
+    Navigate Backward:
+      VSCode: <Ctrl-p>
+      Vim: <Ctrl-p>
+
+    Fold All Toggle:
+      VSCode: <Ctrl-Shift-]>
+      Vim: <Ctrl-Shift-]>
+
+    Fold under cursor Toggle:
+      VSCode: <Ctrl-Shift-[>
+      Vim: <Ctrl-Shift-[>
+
+    Hover:
+      VSCode: <Shift-K>
+      Vim: <Shift-K>
+
+    All Symbols in file:
+      VSCode: <Ctrl-g> o
+      Vim: <Ctrl-g> o
+
+    Go to Definitions:
+      VSCode: <Ctrl-g> d
+      Vim: gd
+
+    Implementations:
+      VSCode: <Ctrl-g> i
+      Vim: gi
+
+    References of Symbol:
+      VSCode: <Ctrl-g> r
+      Vim: gr
+
+    Peek Definitions:
+      VSCode: <Ctrl-Shift-O>
+      Vim: <Ctrl-Shift-O>
+
+    Formatting Selection:
+      VSCode: <Alt-Shift-F> l
+      Vim: <Alt-Shift-F> l
+
+    Formatting file:
+      VSCode: <Alt-Shift-F> f
+      Vim: <Alt-Shift-F> f
+
+    Quick Fix:
+      VSCode: <Ctrl-q>
+      Vim: <Ctrl-q>
+
+    Context Menu / Code Actions:
+      VSCode: <Ctrl-Shift-Q>
+      Vim: <Ctrl-Shift-Q>
+
+    Incremental Selection:
+      VSCode: <Ctrl-Space>
+      Vim: <Ctrl-Space>
+
+    Decremental Selection:
+      VSCode: <Ctrl-Shift-Space>
+      Vim: <Ctrl-Shift-Space>
 
   Refactoring:
-    Extract Method: v<leader>lem
-    Extract Class: v<leader>leC
-    Introduce Variable: v<leader>lev
-    Introduce Field: v<leader>lec
-    Rename: v<leader>lrn
-    Change Signature: v<leader>lcs
+    Introduce Const:
+      VSCode: <Ctrl-e> c
+      Vim: <leader>e c
+
+    Introduce Variable:
+      VSCode: <Ctrl-e> v
+      Vim: <leader>e v
+
+    Introduce Field:
+      VSCode: <Ctrl-e> f
+      Vim: <leader>e f
+
+    Extract Method:
+      VSCode: <Ctrl-e> m
+      Vim: <leader>e m
+
+    Extract Class:
+      VSCode: <Ctrl-e> <Shift-C>
+      Vim: <leader>r <Shift-C>
+
+    Rename:
+      VSCode: <Ctrl-r> n
+      Vim: <leader>rn
+
+    Change Signature:
+      VSCode: <Ctrl-r> m
+      Vim: <leader>r m
 
   Debug:
-    # leader for nvim
-    Start Debug: <Leader> <Shift+D>
-    Add breakpoint: <Leader> <b>
-    Step Into: <Leader> <Down>
-    Step Over: <Leader> <Right>
-    Step Out: <Leader> <Left>
-    Let it go: <Leader> <Shift+s>
-    Stop: <Leader> <Shift+x>
+    Add breakpoint:
+      VSCode: <Ctrl-b>
+      Vim: <leader> <b>
+
+    Start Debug:
+      VSCode: F5
+      Vim: F5
+
+    Step Into:
+      VSCode: F6
+      Vim: F6
+
+    Step Over:
+      VSCode: F7
+      Vim: F7
+
+    Step Out:
+      VSCode: F8
+      Vim: F8
+
+    Continue:
+      VSCode: F5
+      Vim: F5
+
+    Stop:
+      VSCode: <Shift-F5>
+      Vim: <Shift-F5>
+
+    Evaluate:
+      VSCode: <Ctrl-.>
+      Vim: <Ctrl-.>
+
+  Test:
+    Test under Cursor:
+      VSCode: <Ctrl-t> .
+      Vim: <Ctrl-t> .
+
+    Test Suite:
+      VSCode: <Ctrl-t> s
+      Vim: <Ctrl-t> s
+
+    Test File:
+      VSCode: <Ctrl-t> f
+      Vim: <Ctrl-t> f
