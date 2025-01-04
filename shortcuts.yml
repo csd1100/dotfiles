@@ -110,7 +110,6 @@ Shortcuts:
       Vim: Ctrl-F11
 
   VS CODE:
-    Activity Bar: <Ctrl-Shift-A>
     Hide Primary Side Bar: <Ctrl-Shift-Right>
 
   Editor:
@@ -122,11 +121,11 @@ Shortcuts:
       VSCode: <Ctrl-p>
       Vim: <Ctrl-p>
 
-    Fold All Toggle:
+    UnFold All:
       VSCode: <Ctrl-Shift-]>
       Vim: <Ctrl-Shift-]>
 
-    Fold under cursor Toggle:
+    Toggle Fold:
       VSCode: <Ctrl-Shift-[>
       Vim: <Ctrl-Shift-[>
 
@@ -179,6 +178,10 @@ Shortcuts:
       Vim: <Ctrl-Shift-Space>
 
   Refactoring:
+    Show Menu:
+      VSCode: <Ctrl-e> o
+      Vim: <leader>e o
+
     Introduce Const:
       VSCode: <Ctrl-e> c
       Vim: <leader>e c
@@ -200,12 +203,12 @@ Shortcuts:
       Vim: <leader>r <Shift-C>
 
     Rename:
-      VSCode: <Ctrl-r> n
-      Vim: <leader>rn
+      VSCode: <Ctrl-e> r
+      Vim: <leader>er
 
     Change Signature:
-      VSCode: <Ctrl-r> m
-      Vim: <leader>r m
+      VSCode: <Ctrl-e> s
+      Vim: <leader>e s
 
   Debug:
     Add breakpoint:
@@ -220,17 +223,21 @@ Shortcuts:
       VSCode: F6
       Vim: F6
 
-    Step Over:
+    Step Out:
       VSCode: F7
       Vim: F7
 
-    Step Out:
+    Step Over:
       VSCode: F8
       Vim: F8
 
     Continue:
       VSCode: F5
       Vim: F5
+
+    Pause:
+      VSCode: F9
+      Vim: F9
 
     Stop:
       VSCode: <Shift-F5>

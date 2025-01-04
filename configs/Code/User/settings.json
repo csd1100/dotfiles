@@ -1,69 +1,76 @@
 {
-    "gitlens.telemetry.enabled": false,
-    "redhat.telemetry.enabled": false,
-    "window.restoreWindows": "none",
-    "files.autoSave": "afterDelay",
-    "editor.fontSize": 18,
-    "editor.fontLigatures": true,
-    "editor.fontFamily": "'CommitMono Nerd Font', 'JetbrainsMono Nerd Font Mono', 'VictorMono Nerd Font Mono', monospace",
-    "workbench.colorTheme": "Vitesse Dark",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.productIconTheme": "fluent-icons",
-    "vim.leader": "<space>",
-    "vim.vimrc.enable": true,
-    "vim.incsearch": true,
-    "vim.hlsearch": true,
-    "vim.easymotion": true,
-    "vim.camelCaseMotion.enable": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": [
-                "j",
-                "j"
-            ],
-            "after": [
-                "<Esc>"
-            ]
-        }
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "<leader>",
-                "d"
-            ],
-            "after": [
-                "d",
-                "d"
-            ]
-        },
-        {
-            "before": [
-                "<C-n>"
-            ],
-            "commands": [
-                ":nohl"
-            ]
-        },
-        {
-            "before": [
-                "K"
-            ],
-            "commands": [
-                "lineBreakInsert"
-            ],
-            "silent": true
-        }
-    ],
-    "vim.handleKeys": {
-        "<C-a>": false,
-        "<C-f>": false
+  "workbench.colorTheme": "Vitesse Dark",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.productIconTheme": "fluent-icons",
+
+  "telemetry.telemetryLevel": "off",
+  "gitlens.telemetry.enabled": false,
+  "redhat.telemetry.enabled": false,
+
+  "window.restoreWindows": "none",
+  "files.autoSave": "afterDelay",
+  "editor.fontSize": 18,
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "'CommitMono Nerd Font', 'JetbrainsMono Nerd Font Mono', 'VictorMono Nerd Font Mono', monospace",
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "editor.renderWhitespace": "all",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.rulers": [80, 120, 140],
+  "editor.stickyScroll.enabled": true,
+
+  "vim.leader": "<space>",
+  "vim.vimrc.enable": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": false,
+  "vim.hlsearch": true,
+  "vim.easymotion": true,
+  "vim.camelCaseMotion.enable": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<ESC>"]
     },
-    // To improve performance
-    "extensions.experimental.affinity": {
-        "vscodevim.vim": 1
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    {
+      "before": ["k", "k"],
+      "after": ["<ESC>"]
     }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["K"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    },
+    {
+      "before": ["J"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    }
+  ],
+  "vim.handleKeys": {
+    "<C-f>": false,
+    "<C-right>": false,
+    "<C-left>": false
+  },
+  // To improve performance
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["**/terrain.toml"],
+      "url": "https://raw.githubusercontent.com/csd1100/terrainium/refs/heads/main/schema/terrain-schema.json"
+    }
+  ]
 }

@@ -1,12 +1,400 @@
 // Place your key bindings in this file to override the defaults
 [
-    {
-        "key": "shift shift",
-        "command": "workbench.action.quickOpen"
+  // Show all VSCode Commands
+  {
+    "key": "ctrl+shift+p",
+    "command": "workbench.action.showCommands"
+  },
+  // Copy
+  {
+    "key": "alt+c",
+    "command": "editor.action.clipboardCopyAction"
+  },
+  // Paste
+  {
+    "key": "alt+v",
+    "command": "editor.action.clipboardPasteAction"
+  },
+  // Find Files
+  {
+    "command": "workbench.action.quickOpen",
+    "key": "shift shift"
+  },
+  // Comment Line
+  {
+    "command": "editor.action.commentLine",
+    "key": "ctrl+/",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  // Files Explorer Toggle
+  {
+    "command": "workbench.view.explorer",
+    "key": "ctrl+shift+e",
+    "when": "editorFocus"
+  },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+shift+e",
+    "when": "explorerViewletVisible"
+  },
+  // Debug Menu Toggle
+  {
+    "command": "workbench.view.debug",
+    "key": "ctrl+shift+d",
+    "when": "editorFocus"
+  },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+shift+d",
+    "when": "sideBarVisible"
+  },
+  // Extensions Toggle
+  {
+    "command": "workbench.view.extensions",
+    "key": "ctrl+shift+x",
+    "when": "editorFocus"
+  },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+shift+x",
+    "when": "sideBarVisible"
+  },
+  // Test Menu Toggle
+  {
+    "command": "workbench.view.extension.test",
+    "key": "ctrl+shift+t",
+    "when": "editorFocus"
+  },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+shift+t",
+    "when": "sideBarVisible"
+  },
+  // Toggle Panel
+  {
+    "command": "workbench.action.togglePanel",
+    "key": "ctrl+shift+up"
+  },
+  // Toggle Terminal Panel
+  {
+    "command": "workbench.action.terminal.toggleTerminal",
+    "key": "ctrl+shift+\\",
+    "when": "terminal.active"
+  },
+  // Toggle Zen Mode
+  {
+    "command": "workbench.action.toggleZenMode",
+    "key": "ctrl+f11",
+    "when": "!isAuxiliaryWindowFocusedContext"
+  },
+  // Toggle Side Bar
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+shift+right"
+  },
+  // Find
+  {
+    "command": "actions.find",
+    "key": "ctrl+f",
+    "when": "editorFocus || editorIsOpen"
+  },
+  {
+    "command": "closeFindWidget",
+    "key": "ctrl+f",
+    "when": "findWidgetVisible"
+  },
+  // Replace
+  {
+    "command": "editor.action.startFindReplaceAction",
+    "key": "ctrl+h",
+    "when": "editorFocus || editorIsOpen"
+  },
+  {
+    "command": "closeFindWidget",
+    "key": "ctrl+h",
+    "when": "findWidgetVisible"
+  },
+  // Search In Project
+  {
+    "command": "workbench.action.findInFiles",
+    "key": "ctrl+shift+f"
+  },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "escape",
+    "when": "searchViewletVisible"
+  },
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+shift+f",
+    "when": "searchViewletVisible"
+  },
+  // Replace
+  {
+    "command": "workbench.action.replaceInFiles",
+    "key": "ctrl+shift+h"
+  },
+  // Navigate Forward
+  {
+    "command": "workbench.action.navigateForward",
+    "key": "ctrl+p",
+    "when": "canNavigateForward"
+  },
+  // Navigate Backword
+  {
+    "command": "workbench.action.navigateBack",
+    "key": "ctrl+o",
+    "when": "canNavigateBack"
+  },
+  // Next Tab
+  {
+    "command": "workbench.action.nextEditor",
+    "key": "ctrl+right"
+  },
+  // Previous Tab
+  {
+    "command": "workbench.action.previousEditor",
+    "key": "ctrl+left"
+  },
+  // Toggle Fold under cursor
+  {
+    "command": "editor.toggleFold",
+    "key": "ctrl+shift+[",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  // Unfold All
+  {
+    "command": "editor.unfoldAll",
+    "key": "ctrl+shift+]",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  // Show Hover
+  {
+    "command": "editor.action.showDefinitionPreviewHover",
+    "key": "shift+k",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  },
+  // Symbols in File
+  {
+    "command": "workbench.action.gotoSymbol",
+    "key": "ctrl+g o",
+    "when": "!accessibilityHelpIsShown && !accessibleViewIsShown"
+  },
+  // Go To Definition
+  {
+    "command": "editor.action.revealDefinition",
+    "key": "ctrl+g d",
+    "when": "editorHasDefinitionProvider && editorTextFocus"
+  },
+  // Go To Implementation
+  {
+    "command": "editor.action.goToImplementation",
+    "key": "ctrl+g i",
+    "when": "editorHasImplementationProvider && editorTextFocus"
+  },
+  // Go To References
+  {
+    "command": "editor.action.goToReferences",
+    "key": "ctrl+g r",
+    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+  },
+  // Peek Definition
+  {
+    "command": "editor.action.peekDefinition",
+    "key": "ctrl+shift+o",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+  },
+  // Format Selection
+  {
+    "command": "editor.action.formatSelection",
+    "key": "shift+alt+f l",
+    "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly"
+  },
+  // Format Document
+  {
+    "command": "editor.action.formatDocument",
+    "key": "shift+alt+f f",
+    "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+  },
+  // Quick Fix
+  {
+    "command": "editor.action.quickFix",
+    "key": "ctrl+q",
+    "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+  },
+  // Show Context Menu
+  {
+    "command": "editor.action.showHover",
+    "key": "ctrl+shift+q",
+    "when": "editorTextFocus"
+  },
+  // Incremental Selection
+  {
+    "command": "editor.action.smartSelect.expand",
+    "key": "ctrl+space",
+    "when": "editorTextFocus"
+  },
+  // Decremental Selection
+  {
+    "command": "editor.action.smartSelect.shrink",
+    "key": "ctrl+shift+space",
+    "when": "editorTextFocus"
+  },
+  // Refactoring Menu
+  {
+    "key": "ctrl+e o",
+    "command": "editor.action.refactor",
+    "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+  },
+  // Introduce Const
+  {
+    "args": {
+      "kind": "refactor.extract.constant"
     },
-    {
-        "key": "ctrl+/",
-        "command": "editor.action.commentLine",
-        "when": "editorTextFocus && !editorReadonly"
+    "command": "editor.action.codeAction",
+    "key": "ctrl+e c"
+  },
+  // Extract Method
+  {
+    "args": {
+      "kind": "refactor.extract.function"
+    },
+    "command": "editor.action.codeAction",
+    "key": "ctrl+e m"
+  },
+  // Rename Symbol
+  {
+    "command": "editor.action.rename",
+    "key": "ctrl+e n",
+    "when": "editorHasRenameProvider && editorTextFocus && !editorReadonly"
+  },
+  // Toggle break point
+  {
+    "key": "ctrl+b",
+    "command": "editor.debug.action.toggleBreakpoint",
+    "when": "editorTextFocus"
+  },
+  // Start Debug
+  {
+    "key": "f5",
+    "command": "workbench.action.debug.start",
+    "when": "debuggersAvailable && debugState == 'inactive'"
+  },
+  // Continue
+  {
+    "key": "f5",
+    "command": "workbench.action.debug.continue",
+    "when": "debugState == 'stopped'"
+  },
+  // Pause
+  {
+    "key": "f9",
+    "command": "workbench.action.debug.pause",
+    "when": "debugState == 'running'"
+  },
+  {
+    "key": "f9",
+    "command": "-editor.debug.action.toggleBreakpoint",
+    "when": "debuggersAvailable && disassemblyViewFocus || debuggersAvailable && editorTextFocus"
+  },
+  // Step Into
+  {
+    "key": "f6",
+    "command": "workbench.action.debug.stepInto",
+    "when": "debugState != 'inactive'"
+  },
+  {
+    "key": "f6",
+    "command": "-workbench.action.debug.pause",
+    "when": "debugState == 'running'"
+  },
+  // Step Out
+  {
+    "key": "f7",
+    "command": "workbench.action.debug.stepOut",
+    "when": "debugState == 'stopped'"
+  },
+  // Step Over
+  {
+    "key": "f8",
+    "command": "workbench.action.debug.stepOver",
+    "when": "debugState == 'stopped'"
+  },
+  // Debug Stop
+  {
+    "key": "shift+f5",
+    "command": "workbench.action.debug.disconnect",
+    "when": "focusedSessionIsAttach && inDebugMode"
+  },
+  {
+    "key": "shift+f5",
+    "command": "workbench.action.debug.stop",
+    "when": "inDebugMode && !focusedSessionIsAttach"
+  },
+  // Evaluate statement Debug
+  {
+    "key": "ctrl+.",
+    "command": "editor.debug.action.selectionToRepl"
+  },
+  // Run Test: Under Cursor
+  {
+    "key": "ctrl+t .",
+    "command": "testing.runAtCursor",
+    "when": "editorTextFocus"
+  },
+  // Run Tests: Current File
+  {
+    "key": "ctrl+t f",
+    "command": "testing.runCurrentFile",
+    "when": "editorTextFocus"
+  },
+  // Surround
+  {
+    "key": "'",
+    "command": "editor.action.insertSnippet",
+    "when": "editorHasSelection",
+    "args": {
+      "snippet": "'${TM_SELECTED_TEXT}'"
     }
+  },
+  {
+    "key": "\"",
+    "command": "editor.action.insertSnippet",
+    "when": "editorHasSelection",
+    "args": {
+      "snippet": "\"${TM_SELECTED_TEXT}\""
+    }
+  },
+  {
+    "key": "shift+9",
+    "command": "editor.action.insertSnippet",
+    "when": "editorHasSelection",
+    "args": {
+      "snippet": "(${TM_SELECTED_TEXT})"
+    }
+  },
+  {
+    "key": "shift+[",
+    "command": "editor.action.insertSnippet",
+    "when": "editorHasSelection",
+    "args": {
+      "snippet": "{${TM_SELECTED_TEXT}}"
+    }
+  },
+  {
+    "key": "[",
+    "command": "editor.action.insertSnippet",
+    "when": "editorHasSelection",
+    "args": {
+      "snippet": "[${TM_SELECTED_TEXT}]"
+    }
+  },
+  {
+    "key": "space shift+,",
+    "command": "editor.action.insertSnippet",
+    "when": "editorHasSelection",
+    "args": {
+      "snippet": "<${TM_SELECTED_TEXT}>"
+    }
+  }
 ]
