@@ -58,6 +58,21 @@
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
   },
+
+  "json.schemas": [
+    {
+      "fileMatch": ["**/terrain.toml"],
+      "url": "https://raw.githubusercontent.com/csd1100/terrainium/refs/heads/main/schema/terrain-schema.json"
+    }
+  ],
+
+  "eslint.validate": [
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact"
+  ],
+
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -67,10 +82,7 @@
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "json.schemas": [
-    {
-      "fileMatch": ["**/terrain.toml"],
-      "url": "https://raw.githubusercontent.com/csd1100/terrainium/refs/heads/main/schema/terrain-schema.json"
-    }
-  ]
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
