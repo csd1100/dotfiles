@@ -20,6 +20,7 @@
   "editor.formatOnSaveMode": "modifications",
   "editor.rulers": [80, 120, 140],
   "editor.stickyScroll.enabled": true,
+  "editor.linkedEditing": true,
 
   "vim.leader": "<space>",
   "vim.vimrc.enable": true,
