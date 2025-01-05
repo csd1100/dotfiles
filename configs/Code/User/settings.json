@@ -9,6 +9,8 @@
 
   "window.restoreWindows": "none",
   "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1500,
+  "files.autoSaveWhenNoErrors": true,
   "editor.fontSize": 18,
   "editor.fontLigatures": true,
   "editor.fontFamily": "'CommitMono Nerd Font', 'JetbrainsMono Nerd Font Mono', 'VictorMono Nerd Font Mono', monospace",
@@ -21,6 +23,9 @@
   "editor.rulers": [80, 120, 140],
   "editor.stickyScroll.enabled": true,
   "editor.linkedEditing": true,
+  "editor.acceptSuggestionOnEnter": "smart",
+  "editor.guides.bracketPairs": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
 
   "vim.leader": "<space>",
   "vim.vimrc.enable": true,
@@ -74,6 +79,7 @@
     "javascriptreact"
   ],
 
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -85,5 +91,5 @@
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
 }
