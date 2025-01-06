@@ -21,17 +21,23 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSaveMode": "modifications",
   "editor.rulers": [80, 120, 140],
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 100,
   "editor.stickyScroll.enabled": true,
+  "editor.stickyTabStops": true,
   "editor.linkedEditing": true,
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.guides.bracketPairs": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+
+  "editor.cursorSmoothCaretAnimation": "on",
 
   "vim.leader": "<space>",
   "vim.vimrc.enable": true,
   "vim.incsearch": true,
   "vim.useSystemClipboard": false,
   "vim.hlsearch": true,
+  "vim.highlightedyank.enable": true,
   "vim.easymotion": true,
   "vim.camelCaseMotion.enable": true,
   "vim.insertModeKeyBindings": [

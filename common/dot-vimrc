@@ -1,7 +1,6 @@
 set nocp
 
 colorscheme habamax
-nnoremap <Space> <nop>
 let mapleader = " "
 let maplocalleader = "\\"
 
