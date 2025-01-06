@@ -114,12 +114,12 @@ Shortcuts:
 
   Editor:
     Navigate Forward:
-      VSCode: <Ctrl-o>
-      Vim: <Ctrl-o>
-
-    Navigate Backward:
       VSCode: <Ctrl-p>
       Vim: <Ctrl-p>
+
+    Navigate Backward:
+      VSCode: <Ctrl-o>
+      Vim: <Ctrl-o>
 
     UnFold All:
       VSCode: <Ctrl-Shift-]>

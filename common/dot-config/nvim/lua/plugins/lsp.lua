@@ -58,7 +58,7 @@ return {
             ['rhs'] = vim.lsp.buf.implementation,
             ['opts'] = { desc = 'Go To Implementation' },
           },
-          ['go'] = {
+          ['gt'] = {
             ['rhs'] = vim.lsp.buf.type_definition,
             ['opts'] = { desc = 'Go To Type Definition' },
           },
@@ -72,13 +72,13 @@ return {
             end,
             ['opts'] = { desc = 'Go To Signature Help' },
           },
-          ['grn'] = {
+          ['<C-e>n'] = {
             ['rhs'] = vim.lsp.buf.rename,
             ['opts'] = { desc = 'Rename' },
           },
           -- TODO: use https://lsp-zero.netlify.app/docs/reference/lua-api.html#format-mapping-key-opts
           -- if necessary
-          ['<leader>lf'] = {
+          ['<A-S-f>f'] = {
             ['rhs'] = function()
               vim.lsp.buf.format({ async = true })
             end,
@@ -92,7 +92,7 @@ return {
         ['x'] = {
           -- TODO: use https://lsp-zero.netlify.app/docs/reference/lua-api.html#format-mapping-key-opts
           -- if necessary
-          ['<leader>lf'] = {
+          ['<A-S-f>l'] = {
             ['rhs'] = function()
               vim.lsp.buf.format({ async = true })
             end,

@@ -17,47 +17,77 @@ vnoremap { <ESC>`>a}<ESC>`<i{
 
 nmap <C-,> <Action>(ShowSettings)<ESC>
 
-nmap <leader><leader> <Action>(GotoFile)<ESC>
+nmap <Shift><Shift> <Action>(GotoFile)<ESC>
 "nmap <C-S-f> <Action>(SearchEverywhere)<ESC>
-nmap <C-f> <Action>(Find)<ESC>
+nmap <C-f> <Action>(FindModal)<ESC>
 nmap <C-S-h> <Action>(Replace)<ESC>
 nmap <C-S-f> <Action>(FindInPath)<ESC>
 
-nmap <Tab> <Action>(Forward)<ESC>
+nmap <C-p> <Action>(Forward)<ESC>
 nmap <C-o> <Action>(Back)<ESC>
-nmap <leader>v[ <Action>(VcsShowPrevChangeMarker)<ESC>
-nmap <leader>v] <Action>(VcsShowNextChangeMarker)<ESC>
 nmap <C-Left> <Action>(PreviousTab)<ESC>
 nmap <C-Right> <Action>(NextTab)<ESC>
+nmap <leader>v[ <Action>(VcsShowPrevChangeMarker)<ESC>
+nmap <leader>v] <Action>(VcsShowNextChangeMarker)<ESC>
 
+nmap <C-[> <Action>(CollapseRegion)<ESC>
+nmap <C-]> <Action>(ExpandRegion)<ESC>
+nmap <C-S-[> <Action>(CollapseAllRegions)<ESC>
+nmap <C-S-]> <Action>(ExpandAllRegions)<ESC>
+
+nmap <C-/> <Action>(CommentByLineComment)<ESC>
+vmap <C-/>/ <Action>(CommentByLineComment)<ESC>
 nmap <leader>/ <Action>(CommentByLineComment)<ESC>
 vmap <leader>/ <Action>(CommentByLineComment)<ESC>
 vmap <S-j> <Action>(MoveLineDown)
 vmap <S-k> <Action>(MoveLineUp)
 
-nmap <leader>z <Action>(HideAllWindows)<ESC>
+nmap <C-S-a> <Action>(HideAllWindows)<ESC>
 nmap <C-S-e> <Action>(ActivateProjectToolWindow)<ESC>
 nmap <C-S-d> <Action>(ActivateDebugToolWindow)<ESC>
 nmap <C-S-l> <Action>(ActivateTODOToolWindow)<ESC>
+nmap <C-S-\> <Action>(ActivateTerminalToolWindow)<ESC>
+nmap <C-S-t> <Action>(TestTreePopupMenu)<ESC>
+nmap <C-F11> <Action>(ToggleDistractionFreeMode)<ESC>
 
-nmap <C-g> <Action>(FileStructurePopup)<ESC>
-nmap <C-i> <Action>(GotoImplementation)<ESC>
-nmap <C-S-u> <Action>(FindUsages)<ESC>
+nmap K <Action>(QuickJavaDoc)<ESC>
+nmap <C-g>o <Action>(FileStructurePopup)<ESC>
+nmap <C-g>d <Action>(GotoImplementation)<ESC>
+nmap <C-g>i <Action>(GotoImplementation)<ESC>
+nmap <C-g>r <Action>(ShowUsages)<ESC>
+nmap <C-s-o> <Action>(QuickImplementations)<ESC>
 
-nmap <leader>rm <Action>(RefactoringMenu)<ESC>
-vmap <leader>rm <Action>(RefactoringMenu)<ESC>
-vmap <leader>em <Action>(ExtractMethod)<ESC>
-vmap <leader>leC <Action>(ExtractClass)<ESC>
-nmap <leader>ev <Action>(IntroduceVariable)<ESC>
-nmap <leader>ec <Action>(IntroduceConstant)<ESC>
-nmap <leader>ef <Action>(IntroduceField)<ESC>
-nmap <leader>rn <Action>(RenameElement)<ESC>
-nmap <leader>cs <Action>(ChangeSignature)<ESC>
+nmap <C-q> <Action>(ShowIntentionActions)<ESC>
 
-nmap <leader>lf <Action>(ReformatCode)<ESC>
-vmap <leader>lf <Action>(ReformatCode)<ESC>
+"nmap <C-Space> <Action>(SmartSelect)<ESC>
+"nmap <C-S-Space> <Action>(SmartUnselect)<ESC>
+
+nmap <C-e>o <Action>(RefactoringMenu)<ESC>
+vmap <C-e>o <Action>(RefactoringMenu)<ESC>
+vmap <C-e>m <Action>(ExtractMethod)<ESC>
+vmap <C-e>C <Action>(ExtractClass)<ESC>
+nmap <C-e>v <Action>(IntroduceVariable)<ESC>
+nmap <C-e>c <Action>(IntroduceConstant)<ESC>
+nmap <C-e>f <Action>(IntroduceField)<ESC>
+nmap <C-e>n <Action>(RenameElement)<ESC>
+nmap <C-e>s <Action>(ChangeSignature)<ESC>
+
+nmap <A-S-f>l <Action>(ReformatCode)<ESC>
+vmap <A-S-f>l <Action>(ReformatCode)<ESC>
+nmap <A-S-f>f <Action>(ReformatCode)<ESC>
 
 nmap <leader><right> <Action>(NextProjectWindow)<ESC>
 nmap <leader><left> <Action>(PreviousProjectWindow)<ESC>
 
-nmap <S-q> <Action>(ShowIntentionActions)<ESC>
+nmap <C-b> <Action>(ToggleLineBreakpoint)<ESC>
+nmap <F5> <Action>(Debug)<ESC>
+nmap <F9> <Action>(Pause)<ESC>
+nmap <F6> <Action>(StepInto)<ESC>
+nmap <F7> <Action>(StepOut)<ESC>
+nmap <F8> <Action>(StepOver)<ESC>
+nmap <S-F5> <Action>(Stop)<ESC>
+nmap <C-.> <Action>(EvaluateExpression)<ESC>
+
+nmap <C-t>. <Action>(ContextRun)<ESC>
+" Following doesn't work Runs single test under cursor"
+nmap <C-t>f <Action>(RunClass)<ESC>

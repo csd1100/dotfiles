@@ -158,8 +158,20 @@
   },
   // Toggle Fold under cursor
   {
-    "command": "editor.toggleFold",
+    "command": "editor.fold",
+    "key": "ctrl+[",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  // Toggle Fold under cursor
+  {
+    "command": "editor.foldAll",
     "key": "ctrl+shift+[",
+    "when": "editorTextFocus && foldingEnabled"
+  },
+  // Unfold
+  {
+    "command": "editor.unfold",
+    "key": "ctrl+]",
     "when": "editorTextFocus && foldingEnabled"
   },
   // Unfold All

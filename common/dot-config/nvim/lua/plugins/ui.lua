@@ -104,7 +104,7 @@ return {
       )
       ku.map(
         'n',
-        '<leader>o',
+        'go',
         builtin.treesitter,
         { desc = 'Telescope treesitter symbols' }
       )
