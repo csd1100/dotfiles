@@ -360,7 +360,7 @@
     "command": "testing.runCurrentFile",
     "when": "editorTextFocus"
   },
-  // Surround
+  // Surround Selection with ''
   {
     "key": "'",
     "command": "editor.action.insertSnippet",
@@ -369,6 +369,7 @@
       "snippet": "'${TM_SELECTED_TEXT}'"
     }
   },
+  // Surround Selection with ""
   {
     "key": "\"",
     "command": "editor.action.insertSnippet",
@@ -377,6 +378,16 @@
       "snippet": "\"${TM_SELECTED_TEXT}\""
     }
   },
+  // Surround Selection with ''
+  {
+    "key": "`",
+    "command": "editor.action.insertSnippet",
+    "when": "editorHasSelection",
+    "args": {
+      "snippet": "`${TM_SELECTED_TEXT}`"
+    }
+  },
+  // Surround Selection with ()
   {
     "key": "shift+9",
     "command": "editor.action.insertSnippet",
@@ -385,6 +396,7 @@
       "snippet": "(${TM_SELECTED_TEXT})"
     }
   },
+  // Surround Selection with {}
   {
     "key": "shift+[",
     "command": "editor.action.insertSnippet",
@@ -393,6 +405,7 @@
       "snippet": "{${TM_SELECTED_TEXT}}"
     }
   },
+  // Surround Selection with []
   {
     "key": "[",
     "command": "editor.action.insertSnippet",
@@ -401,6 +414,7 @@
       "snippet": "[${TM_SELECTED_TEXT}]"
     }
   },
+  // Surround Selection with <>
   {
     "key": "space shift+,",
     "command": "editor.action.insertSnippet",
