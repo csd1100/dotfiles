@@ -14,21 +14,21 @@ return {
   {
     'numToStr/Comment.nvim',
     event = { 'BufEnter' },
-    keys = { '<leader>/' },
+    keys = { '<C-/>' },
     opts = {
       ---LHS of toggle mappings in NORMAL mode
       toggler = {
         ---Line-comment toggle keymap
-        line = '<leader>/',
+        line = '<C-/>',
         ---Block-comment toggle keymap
-        block = 'gbc',
+        block = '<C-S-/>',
       },
       ---LHS of operator-pending mappings in NORMAL and VISUAL mode
       opleader = {
         ---Line-comment keymap
-        line = '<leader>/',
+        line = '<C-/>',
         ---Block-comment keymap
-        block = 'gb',
+        block = '<C-S-/>',
       },
       ---LHS of extra mappings
       extra = {
