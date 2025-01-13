@@ -371,7 +371,7 @@
   },
   // Surround Selection with ""
   {
-    "key": "\"",
+    "key": "shift+'",
     "command": "editor.action.insertSnippet",
     "when": "editorHasSelection",
     "args": {
