@@ -1,7 +1,9 @@
 {
   "workbench.colorTheme": "Vitesse Dark",
+  "workbench.preferredDarkColorTheme": "Vitesse Dark",
+  "workbench.preferredLightColorTheme": "Vitesse Light",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.productIconTheme": "fluent-icons",
+  "workbench.productIconTheme": "icons-carbon",
 
   "telemetry.telemetryLevel": "off",
   "gitlens.telemetry.enabled": false,
@@ -29,8 +31,8 @@
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.guides.bracketPairs": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-
   "editor.cursorSmoothCaretAnimation": "on",
+  "debug.toolBarLocation": "commandCenter",
 
   "vim.leader": "<space>",
   "vim.vimrc.enable": true,
