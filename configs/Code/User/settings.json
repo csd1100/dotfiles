@@ -61,6 +61,14 @@
     {
       "before": ["J"],
       "commands": ["editor.action.moveLinesDownAction"]
+    },
+    {
+      "before": ["<leader>y"],
+      "commands": ["\"+y"]
+    },
+    {
+      "before": ["<leader>p"],
+      "commands": ["\"+p"]
     }
   ],
   "vim.handleKeys": {
