@@ -2,9 +2,9 @@
 
 download_vsix() {
     data=$(jq -r --arg extension "$1" '.[$extension]' "$HOME/bin/helpers/vscode-vsix.json")
-    publisher=$(jq -r ".publisher" <<< $data)
-    extension=$(jq -r ".extension" <<< $data)
-    repo_url=$(jq -r ".repo_url" <<< $data)
+    publisher=$(jq -r ".publisher" <<< "$data")
+    extension=$(jq -r ".extension" <<< "$data")
+    repo_url=$(jq -r ".repo_url" <<< "$data")
     echo "Downloading VSIX for $1..."
     echo "Publisher: $publisher"
     echo "Extension: $extension"
@@ -21,8 +21,7 @@ VSIX_EXTENSIONS=("antfu.theme-vitesse")
 install_extensions() {
     while IFS= read -r line; do
         echo "Installing $line"
-        if [[ ${VSIX_EXTENSIONS[@]} =~ "$line" ]]
-        then
+        if [ "$1" != "code" ] && [[ ${VSIX_EXTENSIONS[*]} =~ $line ]]; then
             download_vsix "$line"
             line="/tmp/$line.vsix"
         fi
