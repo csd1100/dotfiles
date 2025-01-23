@@ -15,8 +15,7 @@ nnoremap <C-S-e> :Ex<CR>
 " display lines based movement
 nnoremap j gj
 nnoremap k gk
-nnoremap gj j
-nnoremap gk k
+nnoremap $ g$
 
 " move selected block
 vnoremap J :m '>+1<CR>gv=gv
