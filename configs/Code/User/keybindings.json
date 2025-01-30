@@ -10,6 +10,14 @@
     "key": "alt+c",
     "command": "editor.action.clipboardCopyAction"
   },
+  {
+    "key": "space y",
+    "command": "vim.remap",
+    "when": "vim.mode == 'Visual' || vim.mode == 'VisualBlock' || vim.mode == 'VisualLine'",
+    "args": {
+      "after": ["<leader>", "y"]
+    }
+  },
   // Paste
   {
     "key": "alt+v",

@@ -62,14 +62,6 @@
       "before": ["J"],
       "commands": ["editor.action.moveLinesDownAction"]
     },
-    {
-      "before": ["<leader>y"],
-      "commands": ["\"+y"]
-    },
-    {
-      "before": ["<leader>p"],
-      "commands": ["\"+p"]
-    }
   ],
   "vim.handleKeys": {
     "<C-f>": false,
@@ -110,5 +102,5 @@
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
-  },
+  }
 }
