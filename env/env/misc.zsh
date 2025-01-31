@@ -25,9 +25,6 @@ bindkey -M vicmd 'j' history-substring-search-down
 # completions
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 
-# terrainium integration
-source "$HOME/.config/terrainium/terrainium_init"
-
 # kitty integration
 if test -n "$KITTY_INSTALLATION_DIR"; then
     export KITTY_SHELL_INTEGRATION="enabled"
@@ -41,3 +38,6 @@ if [ -f "$HOME/env/overrides/misc.zsh" ]
 then
     source "$HOME/env/overrides/misc.zsh"
 fi
+
+# terrainium integration
+source "$HOME/.config/terrainium/shell_integration/terrainium_init.zsh"

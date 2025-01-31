@@ -1664,7 +1664,8 @@
   # terrainium
   function prompt_terrainium() {
     if [ "$TERRAIN_ENABLED" = "true" ]; then
-        p10k segment -f 2 -i '󰛍' -t "$TERRAIN_NAME:$TERRAIN_SELECTED_BIOME"
+        terrain_prompt=$(__terrain_prompt)
+        p10k segment -f 2 -i '󰛍' -t "$terrain_prompt"
     fi
   }
 
