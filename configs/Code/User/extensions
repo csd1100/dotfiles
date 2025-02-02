@@ -8,13 +8,16 @@ dart-code.flutter
 dbaeumer.vscode-eslint
 eamodio.gitlens
 esbenp.prettier-vscode
+foxundermoon.shell-format
 golang.go
 gruntfuggly.todo-tree
 miguelsolorio.fluent-icons
 ms-azuretools.vscode-docker
 ms-playwright.playwright
+ms-python.black-formatter
 ms-python.debugpy
 ms-python.python
+ms-vscode.powershell
 pkief.material-icon-theme
 redhat.ansible
 redhat.java
