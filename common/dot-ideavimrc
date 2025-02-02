@@ -59,8 +59,10 @@ nmap <C-s-o> <Action>(QuickImplementations)<ESC>
 
 nmap <C-q> <Action>(ShowIntentionActions)<ESC>
 
-"nmap <C-Space> <Action>(SmartSelect)<ESC>
-"nmap <C-S-Space> <Action>(SmartUnselect)<ESC>
+nmap <C-Space> :action EditorSelectWord<CR>
+nmap <C-S-Space> :action EditorUnSelectWord<CR>
+vmap <C-Space> :action EditorSelectWord<CR>
+vmap <C-S-Space> :action EditorUnSelectWord<CR>
 
 nmap <C-e>o <Action>(RefactoringMenu)<ESC>
 vmap <C-e>o <Action>(RefactoringMenu)<ESC>
