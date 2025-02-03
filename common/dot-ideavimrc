@@ -36,7 +36,7 @@ nmap <C-S-[> <Action>(CollapseAllRegions)<ESC>
 nmap <C-S-]> <Action>(ExpandAllRegions)<ESC>
 
 nmap <C-/> <Action>(CommentByLineComment)<ESC>
-vmap <C-/>/ <Action>(CommentByLineComment)<ESC>
+vmap <C-/> <Action>(CommentByLineComment)<ESC>
 nmap <leader>/ <Action>(CommentByLineComment)<ESC>
 vmap <leader>/ <Action>(CommentByLineComment)<ESC>
 vmap <S-j> <Action>(MoveLineDown)
