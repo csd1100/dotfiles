@@ -3,5 +3,10 @@
         "repo_url": "https://api.github.com/repos/antfu/vscode-theme-vitesse/releases/latest",
         "publisher": "antfu",
         "extension": "theme-vitesse"
+    },
+    "ms-vscode.cpptools": {
+        "repo_url": "https://api.github.com/repos/microsoft/vscode-cpptools/releases/latest",
+        "publisher": "ms-vscode",
+        "extension": "cpptools"
     }
 }

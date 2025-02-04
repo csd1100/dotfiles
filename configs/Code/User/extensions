@@ -18,6 +18,7 @@ ms-python.black-formatter
 ms-python.debugpy
 ms-python.python
 ms-vscode.powershell
+ms-vscode.cpptools
 pkief.material-icon-theme
 redhat.ansible
 redhat.java

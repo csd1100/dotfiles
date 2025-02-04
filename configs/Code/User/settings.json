@@ -103,6 +103,7 @@
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
+  "rust-analyzer.testExplorer": true,
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   }

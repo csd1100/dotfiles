@@ -5,14 +5,16 @@ download_vsix() {
     publisher=$(jq -r ".publisher" <<< "$data")
     extension=$(jq -r ".extension" <<< "$data")
     repo_url=$(jq -r ".repo_url" <<< "$data")
+    echo "Fetching version from: $repo_url"
+    version=$(curl -s "$repo_url" | jq -r '.tag_name' | sed -e 's/^v//')
+    vsix_url="https://marketplace.visualstudio.com/_apis/public/gallery/publishers/${publisher}/vsextensions/${extension}/${version}/vspackage"
+
     echo "Downloading VSIX for $1..."
     echo "Publisher: $publisher"
     echo "Extension: $extension"
-    echo "Fetching version from: $repo_url"
-    version=$(curl -s "$repo_url" | jq -r '.tag_name' | sed -e 's/^v//')
     echo "Version: $version"
-    vsix_url="https://marketplace.visualstudio.com/_apis/public/gallery/publishers/${publisher}/vsextensions/${extension}/${version}/vspackage"
     echo "Getting VSIX from URL: ${vsix_url}"
+
     wget2 "$vsix_url" -O "/tmp/$1.vsix"
 }
 
