@@ -44,6 +44,7 @@
                 - ubuntu
               ansible.builtin.package:
                 name:
+                  # FIXME: fails on ubuntu 24.04
                   - xev
                   - wev
                   - wofi

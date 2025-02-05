@@ -193,6 +193,7 @@
                 dest: /tmp/{{ go_version }}.linux-amd64.tar.gz
                 mode: '644'
 
+            # FIXME: do not install go if latest version is installed
             - name: Remove previous go
               become: true
               ansible.builtin.file:
@@ -370,6 +371,7 @@
           tags:
             - darwin
 
+    # TODO: setup extensions using vscode-extensions-setup script
     - name: Install VSCodium
       block:
         - name: Install VSCodium on Fedora

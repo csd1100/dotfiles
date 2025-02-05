@@ -102,6 +102,7 @@
             remote_src: true
           with_items: "{{ wallpapers.files }}"
 
+    # FIXME: fails when app-icons submodule not present
     - name: Linux Link Icons
       when: ansible_system == "Linux"
       tags:
