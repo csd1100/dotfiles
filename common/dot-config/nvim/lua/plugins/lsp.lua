@@ -88,6 +88,14 @@ return {
             ['rhs'] = vim.lsp.buf.code_action,
             ['opts'] = { desc = 'Code Actions' },
           },
+          [']e]'] = {
+            ['rhs'] = vim.lsp.diagnostic.goto_next,
+            ['opts'] = { desc = 'Go to Next Diagnostic Message' },
+          },
+          ['[e]'] = {
+            ['rhs'] = vim.lsp.diagnostic.goto_prev,
+            ['opts'] = { desc = 'Go to Previous Diagnostic Message' },
+          },
         },
         ['x'] = {
           -- TODO: use https://lsp-zero.netlify.app/docs/reference/lua-api.html#format-mapping-key-opts

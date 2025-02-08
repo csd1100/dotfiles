@@ -430,5 +430,15 @@
     "args": {
       "snippet": "<${TM_SELECTED_TEXT}>"
     }
-  }
+  },
+  {
+    "key": "] e",
+    "command": "editor.action.marker.next",
+    "when": "editorFocus"
+  },
+  {
+    "key": "[ e",
+    "command": "editor.action.marker.prev",
+    "when": "editorFocus"
+  },
 ]

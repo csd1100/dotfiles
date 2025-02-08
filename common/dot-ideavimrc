@@ -93,3 +93,6 @@ nmap <C-.> <Action>(EvaluateExpression)<ESC>
 nmap <C-t>. <Action>(ContextRun)<ESC>
 " Following doesn't work Runs single test under cursor"
 nmap <C-t>f <Action>(RunClass)<ESC>
+
+nmap [e <Action>(GotoPreviousError)<ESC>
+nmap ]e <Action>(GotoNextError)<ESC>
