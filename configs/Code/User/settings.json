@@ -33,6 +33,7 @@
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "debug.toolBarLocation": "commandCenter",
+  "debug.allowBreakpointsEverywhere": true,
 
   "vim.leader": "<space>",
   "vim.vimrc.enable": true,
@@ -103,6 +104,7 @@
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
+  "rust-analyzer.check.command": "clippy",
   "rust-analyzer.testExplorer": true,
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
