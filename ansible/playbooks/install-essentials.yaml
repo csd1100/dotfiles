@@ -51,8 +51,6 @@
           - nnn
           - cmus
           - btop
-          # FIXME: build instead of install from package manager
-          - stow
           - unrar
           - ripgrep
           - neofetch
@@ -86,11 +84,33 @@
         - ubuntu
         - linux
 
+    - name: Debian Install Stow Latest
+      when: ansible_os_family == 'Debian'
+      block:
+        - name: Download source code
+          ansible.builtin.get_url:
+            url: https://ftp.gnu.org/gnu/stow/stow-latest.tar.gz
+            dest: /tmp/stow.tar.gz
+
+        - name: Extract source code
+          ansible.builtin.unarchive:
+            src: /tmp/stow.tar.gz
+            dest: /tmp/stow
+            remote_src: yes
+
+        - name: Install stow
+          become: true
+          ansible.builtin.command:
+            cmd: ./configure && make install
+            chdir: /tmp/stow
+            creates: /usr/bin/stow
+
     - name: Redhat essentials
       become: true
       when: ansible_os_family == 'RedHat'
       ansible.builtin.dnf:
         name:
+          - stow
           - vim-X11
           - kernel-devel
           - dnf-plugins-core
@@ -104,6 +124,7 @@
         name:
           - fd
           - vim
+          - stow
           - coreutils
       tags:
         - cli
