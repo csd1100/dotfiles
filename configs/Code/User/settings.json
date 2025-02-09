@@ -4,6 +4,20 @@
   "workbench.preferredLightColorTheme": "Vitesse Light",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "icons-carbon",
+  // color customization for Dark Modern
+  // "workbench.colorCustomizations": {
+  //   "tab.activeBackground": "#111",
+  //   "tab.inactiveBackground": "#000",
+  //   "editorGroupHeader.tabsBackground": "#000",
+  //   "titleBar.activeBackground": "#000",
+  //   "titleBar.inactiveBackground": "#010101",
+  //   "activityBar.background": "#000",
+  //   "sideBar.background": "#010101",
+  //   "sideBarSectionHeader.background": "#111",
+  //   "statusBar.background": "#111",
+  //   "editor.background": "#111",
+  //   "terminal.background": "#111"
+  // },
 
   "telemetry.telemetryLevel": "off",
   "gitlens.telemetry.enabled": false,
@@ -62,7 +76,7 @@
     {
       "before": ["J"],
       "commands": ["editor.action.moveLinesDownAction"]
-    },
+    }
   ],
   "vim.handleKeys": {
     "<C-f>": false,
