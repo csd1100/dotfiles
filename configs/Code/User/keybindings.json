@@ -432,13 +432,13 @@
     }
   },
   {
-    "key": "] e",
+    "key": "t ]",
     "command": "editor.action.marker.next",
-    "when": "editorFocus"
+    "when": "editorTextFocus && vim.mode == 'Normal'",
   },
   {
-    "key": "[ e",
+    "key": "t [",
     "command": "editor.action.marker.prev",
-    "when": "editorFocus"
+    "when": "editorTextFocus && vim.mode == 'Normal'",
   },
 ]
