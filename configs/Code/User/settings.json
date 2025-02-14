@@ -35,7 +35,7 @@
   "editor.renderWhitespace": "all",
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "editor.formatOnSaveMode": "modifications",
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.rulers": [80, 120, 140],
   "editor.wordWrap": "wordWrapColumn",
   "editor.wordWrapColumn": 100,
