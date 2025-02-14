@@ -23,6 +23,15 @@
     "key": "alt+v",
     "command": "editor.action.clipboardPasteAction"
   },
+  // replace word with current register vim
+  {
+    "key": "ctrl+alt+p",
+    "command": "vim.remap",
+    "when": "vim.mode == 'Normal'",
+    "args": {
+      "after": ["\"", "_", "d", "e", "P"]
+    }
+  },
   // Find Files
   {
     "command": "workbench.action.quickOpen",
@@ -434,11 +443,11 @@
   {
     "key": "t ]",
     "command": "editor.action.marker.next",
-    "when": "editorTextFocus && vim.mode == 'Normal'",
+    "when": "editorTextFocus && vim.mode == 'Normal'"
   },
   {
     "key": "t [",
     "command": "editor.action.marker.prev",
-    "when": "editorTextFocus && vim.mode == 'Normal'",
-  },
+    "when": "editorTextFocus && vim.mode == 'Normal'"
+  }
 ]
