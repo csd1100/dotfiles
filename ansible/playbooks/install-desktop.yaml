@@ -178,6 +178,7 @@
           community.general.homebrew:
             name:
               - yabai
+              - borders
               - skhd
               - sketchybar
 
