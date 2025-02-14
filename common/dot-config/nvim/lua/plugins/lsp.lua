@@ -88,11 +88,11 @@ return {
             ['rhs'] = vim.lsp.buf.code_action,
             ['opts'] = { desc = 'Code Actions' },
           },
-          [']e'] = {
+          ['t]'] = {
             ['rhs'] = vim.diagnostic.goto_next,
             ['opts'] = { desc = 'Go to Next Diagnostic Message' },
           },
-          ['[e'] = {
+          ['t['] = {
             ['rhs'] = vim.diagnostic.goto_prev,
             ['opts'] = { desc = 'Go to Previous Diagnostic Message' },
           },
