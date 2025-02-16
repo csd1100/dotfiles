@@ -4,31 +4,34 @@
   "workbench.preferredLightColorTheme": "Vitesse Light",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.productIconTheme": "icons-carbon",
-  // color customization for Dark Modern
-  // "workbench.colorCustomizations": {
-  //   "tab.activeBackground": "#111",
-  //   "tab.inactiveBackground": "#000",
-  //   "editorGroupHeader.tabsBackground": "#000",
-  //   "titleBar.activeBackground": "#000",
-  //   "titleBar.inactiveBackground": "#010101",
-  //   "activityBar.background": "#000",
-  //   "sideBar.background": "#010101",
-  //   "sideBarSectionHeader.background": "#111",
-  //   "statusBar.background": "#111",
-  //   "editor.background": "#111",
-  //   "terminal.background": "#111"
-  // },
+  "workbench.colorCustomizations": {
+    // color customization for Dark Modern
+    //   "tab.activeBackground": "#111",
+    //   "tab.inactiveBackground": "#000",
+    //   "editorGroupHeader.tabsBackground": "#000",
+    //   "titleBar.activeBackground": "#000",
+    //   "titleBar.inactiveBackground": "#010101",
+    //   "activityBar.background": "#000",
+    //   "sideBar.background": "#010101",
+    //   "sideBarSectionHeader.background": "#111",
+    //   "statusBar.background": "#111",
+    //   "editor.background": "#111",
+    //   "terminal.background": "#111"
+    // remove error indicators in case they are irritating
+    //   "editorError.foreground": "#00000000",
+    //   "editorWarning.foreground": "#00000000",
+    //   "editorInfo.foreground": "#00000000"
+  },
 
   "telemetry.telemetryLevel": "off",
   "gitlens.telemetry.enabled": false,
   "redhat.telemetry.enabled": false,
-
   "window.restoreWindows": "none",
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1500,
   "files.autoSaveWhenNoErrors": true,
   "editor.fontSize": 18,
-  "editor.fontLigatures": true,
+  "editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'cv02','cv06', 'cv08'", //aefgy
   "editor.fontFamily": "'CommitMono Nerd Font', 'JetbrainsMono Nerd Font Mono', 'VictorMono Nerd Font Mono', monospace",
   "editor.tabSize": 4,
   "editor.insertSpaces": true,
@@ -46,6 +49,7 @@
   "editor.guides.bracketPairs": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
   "editor.cursorSmoothCaretAnimation": "on",
+  "editor.inlayHints.enabled": "off",
   "debug.toolBarLocation": "commandCenter",
   "debug.allowBreakpointsEverywhere": true,
 
@@ -67,7 +71,25 @@
       "after": ["<ESC>"]
     }
   ],
-  "vim.normalModeKeyBindingsNonRecursive": [],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // change focus between splits
+    {
+      "before": ["<leader>", "h"],
+      "commands": ["workbench.action.navigateLeft"]
+    },
+    {
+      "before": ["<leader>", "j"],
+      "commands": ["workbench.action.navigateDown"]
+    },
+    {
+      "before": ["<leader>", "k"],
+      "commands": ["workbench.action.navigateUp"]
+    },
+    {
+      "before": ["<leader>", "l"],
+      "commands": ["workbench.action.navigateRight"]
+    }
+  ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
       "before": ["K"],
@@ -76,6 +98,90 @@
     {
       "before": ["J"],
       "commands": ["editor.action.moveLinesDownAction"]
+    },
+    // Surround Selection with <>
+    {
+      "before": ["<leader>", "<"],
+      "commands": [
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            "snippet": "<${TM_SELECTED_TEXT}>"
+          }
+        }
+      ]
+    },
+    // Surround Selection with ''
+    {
+      "before": ["'"],
+      "commands": [
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            "snippet": "'${TM_SELECTED_TEXT}'"
+          }
+        }
+      ]
+    },
+    // Surround Selection with ""
+    {
+      "before": ["\""],
+      "commands": [
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            "snippet": "\"${TM_SELECTED_TEXT}\""
+          }
+        }
+      ]
+    },
+    // Surround Selection with ''
+    {
+      "before": ["`"],
+      "commands": [
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            "snippet": "`${TM_SELECTED_TEXT}`"
+          }
+        }
+      ]
+    },
+    // Surround Selection with ()
+    {
+      "before": ["("],
+      "commands": [
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            "snippet": "(${TM_SELECTED_TEXT})"
+          }
+        }
+      ]
+    },
+    // Surround Selection with {}
+    {
+      "before": ["{"],
+      "commands": [
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            "snippet": "{${TM_SELECTED_TEXT}}"
+          }
+        }
+      ]
+    },
+    // Surround Selection with []
+    {
+      "before": ["["],
+      "commands": [
+        {
+          "command": "editor.action.insertSnippet",
+          "args": {
+            "snippet": "[${TM_SELECTED_TEXT}]"
+          }
+        }
+      ]
     }
   ],
   "vim.handleKeys": {

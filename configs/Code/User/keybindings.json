@@ -10,14 +10,6 @@
     "key": "alt+c",
     "command": "editor.action.clipboardCopyAction"
   },
-  {
-    "key": "space y",
-    "command": "vim.remap",
-    "when": "vim.mode == 'Visual' || vim.mode == 'VisualBlock' || vim.mode == 'VisualLine'",
-    "args": {
-      "after": ["<leader>", "y"]
-    }
-  },
   // Paste
   {
     "key": "alt+v",
@@ -376,69 +368,6 @@
     "key": "ctrl+t f",
     "command": "testing.runCurrentFile",
     "when": "editorTextFocus"
-  },
-  // Surround Selection with ''
-  {
-    "key": "'",
-    "command": "editor.action.insertSnippet",
-    "when": "editorHasSelection",
-    "args": {
-      "snippet": "'${TM_SELECTED_TEXT}'"
-    }
-  },
-  // Surround Selection with ""
-  {
-    "key": "shift+'",
-    "command": "editor.action.insertSnippet",
-    "when": "editorHasSelection",
-    "args": {
-      "snippet": "\"${TM_SELECTED_TEXT}\""
-    }
-  },
-  // Surround Selection with ''
-  {
-    "key": "`",
-    "command": "editor.action.insertSnippet",
-    "when": "editorHasSelection",
-    "args": {
-      "snippet": "`${TM_SELECTED_TEXT}`"
-    }
-  },
-  // Surround Selection with ()
-  {
-    "key": "shift+9",
-    "command": "editor.action.insertSnippet",
-    "when": "editorHasSelection",
-    "args": {
-      "snippet": "(${TM_SELECTED_TEXT})"
-    }
-  },
-  // Surround Selection with {}
-  {
-    "key": "shift+[",
-    "command": "editor.action.insertSnippet",
-    "when": "editorHasSelection",
-    "args": {
-      "snippet": "{${TM_SELECTED_TEXT}}"
-    }
-  },
-  // Surround Selection with []
-  {
-    "key": "[",
-    "command": "editor.action.insertSnippet",
-    "when": "editorHasSelection",
-    "args": {
-      "snippet": "[${TM_SELECTED_TEXT}]"
-    }
-  },
-  // Surround Selection with <>
-  {
-    "key": "space shift+,",
-    "command": "editor.action.insertSnippet",
-    "when": "editorHasSelection",
-    "args": {
-      "snippet": "<${TM_SELECTED_TEXT}>"
-    }
   },
   {
     "key": "t ]",
