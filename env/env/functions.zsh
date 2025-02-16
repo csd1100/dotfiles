@@ -1,7 +1,7 @@
 # zsh
 function zshedit() {
     pushd ~/dotfiles || exit
-    nvim ~/dotfiles/common/dot-zshrc
+    nvim -p ~/dotfiles/common/dot-zshrc ~/env/overrides/*.zsh
     env_compile
     popd || exit
     exec zsh
