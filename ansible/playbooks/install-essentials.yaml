@@ -1,4 +1,14 @@
 ---
+  # TODO: ubuntu cli
+  # TODO: remove de from ubuntu
+  # TODO: jdk only 21
+  # TODO: ansible in base venv using pipx with latest python
+  # TODO: pyenv python latest
+  # TODO: node latest lts and electron node
+  # TODO: go only when specified
+  # TODO: rust only when specified
+  # TODO: run-ansible script profiles work/local
+  # TODO: tagging
 - name: Install Essentials
   hosts: localhost
   connection: local
