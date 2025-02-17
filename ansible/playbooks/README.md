@@ -4,7 +4,7 @@
 
 1. Needs ssh installed if not using localhost with local connection
 2. Needs python3 installed on all
-3. Fedora might need python3-libdnf5
+3. Fedora might need python3-libdnf5, python3-dnf
 
 ## To Use ansible on macOS machines
 

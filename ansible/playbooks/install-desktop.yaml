@@ -20,7 +20,6 @@
             name:
               - i3
               - feh
-              - xev
               - rofi
               - picom
               - scrot
@@ -37,7 +36,6 @@
               become: true
               ansible.builtin.package:
                 name:
-                  # FIXME: fails on ubuntu 24.04
                   - wev
                   - wofi
                   - wlr-randr

@@ -94,6 +94,15 @@
           with_items: "{{ wallpapers.files }}"
 
     # FIXME: fails when app-icons submodule not present
+    - name: Create icons directory
+      when: ansible_system == "Linux"
+      tags:
+        - icons
+      ansible.builtin.file:
+        path: "~/.local/share/icons/"
+        recurse: true
+        state: directory
+
     - name: Linux Link Icons
       when: ansible_system == "Linux"
       tags:

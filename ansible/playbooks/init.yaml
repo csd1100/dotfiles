@@ -18,17 +18,22 @@
     - name: Dnf Update
       become: true
       when: (ansible_os_family == 'RedHat')
+      tags:
+        - always
       ansible.builtin.dnf:
         autoremove: true
         update_cache: true
-      tags:
-        - always
 
-    - name: Dnf add distribution gpg
+    - name: Dnf dependencies
       become: true
       when: (ansible_os_family == 'RedHat')
+      tags:
+        - always
       ansible.builtin.dnf:
-        name: distribution-gpg-keys
+        name:
+          - distribution-gpg-keys
+          - python3-dnf
+          - python3-libdnf5
         state: present
 
     - name: Apt Update
