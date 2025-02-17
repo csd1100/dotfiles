@@ -1,12 +1,20 @@
 {
-    "antfu.theme-vitesse": {
-        "repo_url": "https://api.github.com/repos/antfu/vscode-theme-vitesse/releases/latest",
-        "publisher": "antfu",
-        "extension": "theme-vitesse"
-    },
-    "ms-vscode.cpptools": {
-        "repo_url": "https://api.github.com/repos/microsoft/vscode-cpptools/releases/latest",
-        "publisher": "ms-vscode",
-        "extension": "cpptools"
-    }
+  "antfu.theme-vitesse": {
+    "repo_url": "https://api.github.com/repos/antfu/vscode-theme-vitesse/releases/latest",
+    "publisher": "antfu",
+    "extension": "theme-vitesse",
+    "version": null
+  },
+  "ms-vscode.cpptools": {
+    "repo_url": "https://api.github.com/repos/microsoft/vscode-cpptools/releases/latest",
+    "publisher": "ms-vscode",
+    "extension": "cpptools",
+    "version": null
+  },
+  "sallar.vscode-duotone-dark": {
+    "repo_url": null,
+    "publisher": "sallar",
+    "extension": "vscode-duotone-dark",
+    "version": "0.3.3"
+  }
 }

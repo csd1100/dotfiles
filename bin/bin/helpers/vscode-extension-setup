@@ -5,8 +5,14 @@ download_vsix() {
     publisher=$(jq -r ".publisher" <<< "$data")
     extension=$(jq -r ".extension" <<< "$data")
     repo_url=$(jq -r ".repo_url" <<< "$data")
-    echo "Fetching version from: $repo_url"
-    version=$(curl -s "$repo_url" | jq -r '.tag_name' | sed -e 's/^v//')
+
+    if [ $repo_url = "null" ]; then
+        version=$(jq -r ".version" <<< "$data")
+    else
+        echo "Fetching version from: $repo_url"
+        version=$(curl -s "$repo_url" | jq -r '.tag_name' | sed -e 's/^v//')
+    fi
+
     vsix_url="https://marketplace.visualstudio.com/_apis/public/gallery/publishers/${publisher}/vsextensions/${extension}/${version}/vspackage"
 
     echo "Downloading VSIX for $1..."
@@ -18,7 +24,7 @@ download_vsix() {
     wget2 "$vsix_url" -O "/tmp/$1.vsix"
 }
 
-VSIX_EXTENSIONS=("antfu.theme-vitesse")
+VSIX_EXTENSIONS=("antfu.theme-vitesse", "sallar.vscode-duotone-dark")
 
 install_extensions() {
     while IFS= read -r line; do
