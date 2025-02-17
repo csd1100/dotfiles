@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-pushd ~/dotfiles/ || exit
+pushd "$HOME/dotfiles/" || exit
 ./scripts/helpers/ansible-setup
 source "$HOME/py3-ansible/bin/activate"
-ansible-playbook -i localhost, -u "$1" ./ansible/playbooks/main.yaml -K "${@:2}"
+ansible-playbook -i ./ansible/inventory.yml -u "$1" ./ansible/playbooks/main.yaml -kK "${@:2}"
 popd || exit

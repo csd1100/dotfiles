@@ -1,6 +1,6 @@
 ---
 - name: Install Desktop Environment
-  hosts: localhost
+  hosts: all
   connection: local
   tags:
     - de
@@ -9,10 +9,6 @@
     the_user: "{{ ansible_user_id }}"
   tasks:
     - name: Linux desktop environment
-      tags:
-        - linux
-        - fedora
-        - ubuntu
       when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
       block:
         - name: Xorg desktop environment (i3, polybar, rofi, picom)
@@ -36,12 +32,9 @@
         - name: Wayland desktop environment
           tags:
             - wayland
-            - fedora
           block:
             - name: Wayland dependencies
               become: true
-              tags:
-                - ubuntu
               ansible.builtin.package:
                 name:
                   # FIXME: fails on ubuntu 24.04
@@ -56,14 +49,12 @@
             - name: Fedora hyprland setup
               when: ansible_distribution == "Fedora" and
                 ansible_distribution_version | int > 38
-              tags:
-                - fedora
               block:
                 - name: Create git-clones directory for building
                   ansible.builtin.file:
                     path: ~/work/git-clones/
                     state: directory
-                    mode: "766"
+                    mode: "0766"
 
                 - name: Add hyprland dnf copr
                   become: true
@@ -114,8 +105,6 @@
                       - xdg-desktop-portal-hyprland
 
             - name: Wayland clipboard
-              tags:
-                - ubuntu
               block:
                 - name: Install wl-clipboard
                   become: true
@@ -146,7 +135,8 @@
                       ansible.builtin.get_url:
                         url: "{{ cliphist_url }}"
                         dest: /usr/bin/cliphist
-                        mode: "544"
+                        timeout: 120
+                        mode: "0544"
 
         - name: Common Linux desktop utilities
           become: true
@@ -158,12 +148,8 @@
           tags:
             - x11
             - wayland
-            - ubuntu
-            - fedora
 
     - name: Darwin desktop environment
-      tags:
-        - darwin
       environment:
         PATH: /usr/local/bin:/opt/homebrew/path:{{ ansible_env.PATH }}
       when: ansible_os_family == "Darwin"
@@ -185,10 +171,12 @@
         - name: Get yabai path
           ansible.builtin.command: which yabai
           register: yabai_path
+          changed_when: yabai_path.rc != 0
 
         - name: Run visudo checksum to start yabai with script-additions
           ansible.builtin.command: /usr/bin/shasum -a 256 {{ yabai_path.stdout }}
           register: shasum_yabai
+          changed_when: shasum_yabai.rc != 0
 
         - name: Create sudoers file
           become: true
@@ -196,4 +184,4 @@
             path: /private/etc/sudoers.d/yabai
             line: "{{ ansible_user_id }} ALL=(root) NOPASSWD: sha256:{{ shasum_yabai.stdout }} --load-sa"
             create: true
-            mode: "440"
+            mode: "0440"

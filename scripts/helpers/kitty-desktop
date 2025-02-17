@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+mkdir -p ~/.local/bin
+mkdir -p ~/.local/kitty.app/share/applications/
 # Create a symbolic link to add kitty to PATH (assuming ~/.local/bin is in
 # your system-wide PATH)
 ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/

@@ -9,13 +9,15 @@ install_pip() {
 	case "${unameOut}" in
 	Linux*)
 		if grep "NAME=\"Ubuntu\"" /etc/os-release &>/dev/null; then
-			sudo apt install python3-venv
+			sudo apt install python3-venv sshpass
 		else
 			python3 -m ensurepip --upgrade
+			sudo dnf install sshpass
 		fi
 		;;
 	Darwin*)
 		python3 -m ensurepip --upgrade
+		brew install sshpass
 		;;
 	*) MACHINE="UNKNOWN:${unameOut}" ;;
 	esac
@@ -25,11 +27,11 @@ if [ $RESULT == 0 ]; then
 	echo "ansible already installed"
 else
 	install_pip
-	python3 -m venv "$HOME/py3-ansible"
-	source "$HOME/py3-ansible/bin/activate"
+	python3 -m venv "$HOME/.py3-ansible"
+	source "$HOME/.py3-ansible/bin/activate"
 	pip3 install pipx
 	pipx ensurepath
 	pipx install --include-deps ansible
 	# needed for json querying
-	pipx inject ansible jmespath
+	pipx inject --include-deps ansible jmespath ansible-lint
 fi

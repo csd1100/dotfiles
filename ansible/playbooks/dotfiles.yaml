@@ -1,7 +1,6 @@
 ---
 - name: Dotfiles
-  hosts: localhost
-  connection: local
+  hosts: all
   become: false
   environment:
     DOTFILES: "{{ ansible_env.HOME }}/dotfiles/"
@@ -10,45 +9,43 @@
     - dotfiles
   tasks:
     - name: Stow Dotfiles
+      tags:
+        - link
+        - work
       block:
         - name: Stow dotfiles linux
           when: ansible_system == 'Linux'
           ansible.builtin.command: ./scripts/dots-setup --linux
           args:
             chdir: ~/dotfiles/
-          tags:
-            - linux
-            - fedora
-            - ubuntu
+            creates: "/tmp/dotfiles-setup--linux"
+          register: linux
+          changed_when: linux.rc != 0
 
         - name: Stow dotfiles Darwin
           when: ansible_os_family == 'Darwin'
           ansible.builtin.command: ./scripts/dots-setup --darwin
           args:
             chdir: ~/dotfiles/
-          tags:
-            - darwin
+            creates: "/tmp/dotfiles-setup--darwin"
+          register: darwin
+          changed_when: darwin.rc != 0
 
         - name: Stow dotfiles common
           ansible.builtin.command: ./scripts/dots-setup --common
           args:
             chdir: ~/dotfiles/
-          tags:
-            - darwin
-            - linux
-            - fedora
-            - ubuntu
+            creates: "/tmp/dotfiles-setup--common"
+          register: common
+          changed_when: common.rc != 0
 
     - name: Setup Fonts
       tags:
         - fonts
+        - work
       block:
         - name: Linux fonts setup
           when: ansible_system == 'Linux'
-          tags:
-            - linux
-            - fedora
-            - ubuntu
           block:
             - name: Create a fonts directory if it does not exist (Linux)
               ansible.builtin.file:
@@ -65,8 +62,6 @@
 
         - name: Darwin fonts setup
           when: ansible_os_family == 'Darwin'
-          tags:
-            - darwin
           block:
             - name: Create a fonts directory if it does not exist (Darwin)
               ansible.builtin.file:
@@ -84,10 +79,6 @@
     - name: Copy Wallpapers
       tags:
         - wallpaper
-        - linux
-        - darwin
-        - fedora
-        - ubuntu
       block:
         - name: Get all files from ~/dotfiles/wallpapers/
           ansible.builtin.find:
@@ -98,7 +89,7 @@
           ansible.builtin.copy:
             src: "{{ item.path }}"
             dest: ~/Pictures/Wallpapers/
-            mode: '666'
+            mode: '0666'
             remote_src: true
           with_items: "{{ wallpapers.files }}"
 
@@ -107,21 +98,15 @@
       when: ansible_system == "Linux"
       tags:
         - icons
-        - linux
-        - fedora
-        - ubuntu
       ansible.builtin.file:
-        src: "~/dotfiles/app-icons/"
+        src: "~/dotfiles/app-icons"
         dest: "~/.local/share/icons/app-icons"
         state: link
 
     - name: Zsh setup
       tags:
         - zsh
-        - linux
-        - fedora
-        - ubuntu
-        - darwin
+        - work
       block:
         - name: Change shell to zsh (shell)
           become: true
@@ -129,86 +114,30 @@
             name: "{{ ansible_user_id }}"
             shell: /bin/zsh
 
-        - name: Install oh-my-zsh (git)
-          ansible.builtin.shell:
-            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-          args:
-            creates: "~/.oh-my-zsh/"
-
-        - name: Install zsh-autosuggestions (git)
-          ansible.builtin.git:
-            repo: 'https://github.com/zsh-users/zsh-autosuggestions'
-            dest: "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
-            version: master
-
-        - name: Install zsh-completions (git)
-          ansible.builtin.git:
-            repo: 'https://github.com/zsh-users/zsh-completions'
-            dest: "~/.oh-my-zsh/custom/plugins/zsh-completions"
-            version: master
-
-        - name: Install zsh-syntax-highlighting (git)
-          ansible.builtin.git:
-            repo: 'https://github.com/zsh-users/zsh-syntax-highlighting'
-            dest: "~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-            version: master
-
-        - name: Install zsh-history-substring-search (git)
-          ansible.builtin.git:
-            repo: 'https://github.com/zsh-users/zsh-history-substring-search'
-            dest: "~/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
-            version: master
-
-        - name: Install starship prompt
-          args:
-            creates: ~/.cargo/bin/starship
-          ansible.builtin.shell: ~/.cargo/bin/cargo install starship --locked
-
     - name: Create a work directory if it does not exist
       tags:
-        - linux
-        - fedora
-        - ubuntu
-        - darwin
+        - work
       ansible.builtin.file:
         path: ~/work
         state: directory
-        mode: '755'
-
-    - name: Run updatedb for locate
-      block:
-        - name: Run updatedb for locate linux
-          become: true
-          when: ansible_system == "Linux"
-          ansible.builtin.command:
-            updatedb
-          tags:
-            - linux
-            - fedora
-            - ubuntu
-
-        - name: Run updatedb for locate Darwin
-          become: true
-          when: ansible_os_family == "Darwin"
-          ansible.builtin.command:
-            /usr/libexec/locate.updatedb
-          tags:
-            - darwin
+        mode: '0755'
 
     - name: Darwin start yabai, skhd, sketchybar
       when: ansible_os_family == "Darwin"
       tags:
-        - darwin
+        - de
       block:
         - name: Enable skhd
           ansible.builtin.command: skhd --start-service
-
-        - name: Enable yabai script-additions
-          become: true
-          ansible.builtin.command: yabai --load-sa
+          args:
+            creates: ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
 
         - name: Enable yabai
           ansible.builtin.command: yabai --start-service
+          args:
+            creates: ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
 
         - name: Enable sketchybar
           ansible.builtin.command: brew services start sketchybar
+          args:
+            creates: ~/Library/LaunchAgents/homebrew.mxcl.sketchybar.plist

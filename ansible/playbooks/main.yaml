@@ -1,6 +1,6 @@
 ---
 - name: Gather facts
-  hosts: localhost
+  hosts: all
   tags: always
   become: false
   connection: local

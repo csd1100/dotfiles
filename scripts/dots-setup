@@ -12,7 +12,7 @@ dots-setup OPTIONS [-n | --no | --simulate]
     --linux                 - Setup Linux dotfiles
     --darwin                - Setup Darwin dotfiles
     --common                - Setup Common dotfiles
-    -n | --no | --simulate  - Simulte Creating Symlinks
+    -n | --no | --simulate  - Simulate Creating Symlinks
     -h | --help             - Print help(this) message.
 
 EOF
@@ -38,6 +38,7 @@ stower() {
 }
 
 ARG=$1
+SIMULATE=$2
 case "$ARG" in
 --darwin)
     declare -a config=("darwin")
@@ -70,14 +71,12 @@ done
 DIR=$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)
 DOTFILES="$(dirname "$DIR")"
 
-touch /tmp/dotfiles-setup
-
 pushd "$DOTFILES" >/dev/null
 
 for util in "${config[@]}"; do
-    stower "${DOTFILES}" "${util}" "$HOME" "$2"
+    stower "${DOTFILES}" "${util}" "$HOME" "$SIMULATE"
 done
 
-echo "$ARG setup" >>/tmp/dotfiles-setup
-
 popd >/dev/null
+
+touch "/tmp/dotfiles-setup${ARG}"

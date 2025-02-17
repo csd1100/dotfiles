@@ -1,0 +1,24 @@
+ungrouped:
+  hosts:
+    localhost: 
+      ansible_connection: local
+      ansible_host: 127.0.0.1
+      ansible_port: 22
+test:
+  hosts:
+    ubuntu:
+      ansible_connection: ssh
+      ansible_host: 127.0.0.1
+      ansible_port: 8022
+      ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    fedora:
+      ansible_connection: ssh
+      ansible_host: 127.0.0.1
+      ansible_port: 5022
+      ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    debian:
+      ansible_connection: ssh
+      ansible_host: 127.0.0.1
+      ansible_port: 9022
+      ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+    

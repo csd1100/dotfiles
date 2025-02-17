@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 download_vsix() {
     data=$(jq -r --arg extension "$1" '.[$extension]' "$HOME/bin/helpers/vscode-vsix.json")
@@ -44,3 +45,5 @@ fi
 if type codium &>/dev/null; then
     install_extensions codium
 fi
+
+touch /tmp/vscode-setup

@@ -1,10 +1,11 @@
 ---
 - name: Init
-  hosts: localhost
+  hosts: all
   connection: local
   become: false
   tags:
     - init
+    - work
   tasks:
     - name: Brew Update
       when: (ansible_os_family == 'Darwin')
@@ -13,7 +14,6 @@
         upgrade_all: true
       tags:
         - always
-        - darwin
 
     - name: Dnf Update
       become: true
@@ -23,8 +23,6 @@
         update_cache: true
       tags:
         - always
-        - fedora
-        - linux
 
     - name: Dnf add distribution gpg
       become: true
@@ -32,10 +30,6 @@
       ansible.builtin.dnf:
         name: distribution-gpg-keys
         state: present
-      tags:
-        - essentials
-        - fedora
-        - linux
 
     - name: Apt Update
       become: true
@@ -46,5 +40,3 @@
         update_cache: true
       tags:
         - always
-        - ubuntu
-        - linux

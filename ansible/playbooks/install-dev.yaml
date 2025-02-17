@@ -1,6 +1,6 @@
 ---
 - name: Dev Setup
-  hosts: localhost
+  hosts: all
   connection: local
   become: false
   vars:
@@ -15,21 +15,17 @@
           when: ansible_system == "Linux"
           ansible.builtin.set_fact:
             become_value: true
-          tags:
-            - linux
-            - fedora
-            - ubuntu
 
         - name: Set become to false for darwin
           when: ansible_system == "Darwin"
           ansible.builtin.set_fact:
             become_value: false
-          tags:
-            - darwin
 
     - name: Install kitty
       tags:
         - kitty
+        - gui
+        - work
       block:
         - name: Install ImageMagick dependency
           block:
@@ -39,10 +35,6 @@
               ansible.builtin.package:
                 name: imagemagick
                 state: present
-              tags:
-                - darwin
-                - ubuntu
-                - linux
 
             - name: Install ImageMagick on Fedora
               become: true
@@ -50,25 +42,16 @@
               ansible.builtin.dnf:
                 name: ImageMagick
                 state: present
-              tags:
-                - fedora
-                - linux
 
         - name: Set kitty installation directory for linux
           when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
           ansible.builtin.set_fact:
             kitty_installation_dir: "{{ kitty_linux_installation_dir }}"
-          tags:
-            - fedora
-            - ubuntu
-            - linux
 
         - name: Set kitty installation directory for macos
           when: (ansible_os_family == "Darwin")
           ansible.builtin.set_fact:
             kitty_installation_dir: "{{ kitty_macos_installation_dir }}"
-          tags:
-            - darwin
 
         - name: Install kitty
           ansible.builtin.shell: |
@@ -77,54 +60,37 @@
           args:
             creates: "{{ kitty_installation_dir }}"
             executable: /bin/bash
-          tags:
-            - fedora
-            - ubuntu
-            - darwin
-            - linux
 
         - name: Create kitty desktop file
           ansible.builtin.shell: cd ~/dotfiles/scripts/helpers && ./kitty-desktop
           when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
           args:
             creates: ~/.local/share/applications/kitty.desktop
-          tags:
-            - fedora
-            - ubuntu
-            - linux
 
     - name: Install jdk
       tags:
         - jdk
+        - work
       block:
-        - name: Debian install jdk 11, 21
+        - name: Debian install jdk 21
           become: true
-          when: ansible_os_family == 'Debian'
+          when: ansible_distribution == 'Ubuntu'
           ansible.builtin.apt:
             name:
-              - openjdk-11-jdk
-              - openjdk-21-jdk
-          tags:
-            - ubuntu
+              - openjdk-21-jdk # FIXME: not available debian
 
-        - name: RedHat install jdk 11, 21
+        - name: RedHat install jdk 21
           become: true
           when: ansible_os_family == 'RedHat'
           ansible.builtin.dnf:
             name:
-              - java-11-openjdk
               - java-21-openjdk
-          tags:
-            - fedora
 
-        - name: Darwin install jdk 11, 21
+        - name: Darwin install jdk 21
           when: ansible_os_family == 'Darwin'
           community.general.homebrew:
             name:
-              - openjdk@11
               - openjdk@21
-          tags:
-            - darwin
 
         - name: Darwin link brew jdk
           when: ansible_os_family == 'Darwin'
@@ -133,16 +99,11 @@
             src: "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk"
             dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
             state: link
-          tags:
-            - darwin
 
     - name: Install node 20
       tags:
         - node
-        - darwin
-        - linux
-        - fedora
-        - ubuntu
+        - work
       block:
         - name: Install volta
           ansible.builtin.shell: |
@@ -157,13 +118,7 @@
             $HOME/.volta/bin/volta install node@20
           args:
             executable: /bin/bash
-
-        - name: Validate node is installed
-          ansible.builtin.shell: |
-            PATH="$HOME/.volta/bin/:$PATH"
-            node --version | grep "v20"
-          args:
-            executable: /bin/bash
+            creates: ~/.volta/bin/node
 
     - name: Install golang
       tags:
@@ -171,11 +126,6 @@
       block:
         - name: Install golang linux
           when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
-          tags:
-            - golang
-            - linux
-            - fedora
-            - ubuntu
           block:
             - name: Fetch latest go version
               ansible.builtin.uri:
@@ -187,47 +137,44 @@
               ansible.builtin.set_fact:
                 go_version: "{{ go_version_op.content | regex_search('^.*') }}"
 
-            - name: Download go
-              ansible.builtin.get_url:
-                url: https://go.dev/dl/{{ go_version }}.linux-amd64.tar.gz
-                dest: /tmp/{{ go_version }}.linux-amd64.tar.gz
-                mode: '644'
+            - name: Download and Install go if not latest
+              block:
+                - name: Validate go is installed
+                  ansible.builtin.shell: |
+                    set -o pipefail
+                    /usr/local/go/bin/go version | grep "{{ go_version }}" && touch /tmp/go-version
+                  args:
+                    executable: /bin/bash
+                    creates: /tmp/go-version
+              rescue:
+                - name: Download go
+                  ansible.builtin.get_url:
+                    url: https://go.dev/dl/{{ go_version }}.linux-amd64.tar.gz
+                    dest: /tmp/{{ go_version }}.linux-amd64.tar.gz
+                    timeout: 120
+                    mode: '0644'
 
-            # FIXME: do not install go if latest version is installed
-            - name: Remove previous go
-              become: true
-              ansible.builtin.file:
-                state: absent
-                path: /usr/local/go/
+                - name: Remove previous go
+                  become: true
+                  ansible.builtin.file:
+                    state: absent
+                    path: /usr/local/go/
 
-            - name: Linux install go
-              become: true
-              ansible.builtin.unarchive:
-                src: /tmp/{{ go_version }}.linux-amd64.tar.gz
-                dest: /usr/local/
-                remote_src: true
-
-            - name: Validate go is installed
-              ansible.builtin.shell: |
-                set -o pipefail
-                /usr/local/go/bin/go version | grep "{{ go_version }}"
-              args:
-                executable: /bin/bash
+                - name: Linux install go
+                  become: true
+                  ansible.builtin.unarchive:
+                    src: /tmp/{{ go_version }}.linux-amd64.tar.gz
+                    dest: /usr/local/
+                    remote_src: true
 
         - name: Install golang mac
           when: ansible_os_family == 'Darwin'
           community.general.homebrew:
             name: golang
-          tags:
-            - darwin
 
     - name: Install rust
       tags:
         - rust
-        - darwin
-        - linux
-        - fedora
-        - ubuntu
       block:
         - name: Install rust using rustup
           ansible.builtin.shell: |
@@ -237,21 +184,15 @@
             executable: /bin/bash
             creates: ~/.rustup/
 
-        - name: Validate rust is installed
-          ansible.builtin.command:
-            ~/.cargo/bin/rustc --version
-
     - name: Install docker linux
       when: ansible_system == "Linux"
       tags:
         - docker
-        - linux
+        - work
       block:
         - name: Ubuntu Docker Setup
           become: true
           when: ansible_distribution == 'Ubuntu'
-          tags:
-            - ubuntu
           block:
             - name: Add apt docker gpg key
               ansible.builtin.apt_key:
@@ -265,12 +206,11 @@
         - name: Fedora docker setup
           become: true
           when: ansible_distribution == 'Fedora'
-          tags:
-            - fedora
           ansible.builtin.get_url:
             url: https://download.docker.com/linux/fedora/docker-ce.repo
             dest: /etc/yum.repos.d/docer-ce.repo
-            mode: '644'
+            timeout: 120
+            mode: '0644'
 
         - name: Install docker
           become: true
@@ -281,9 +221,6 @@
               - containerd.io
               - docker-buildx-plugin
               - docker-compose-plugin
-          tags:
-            - fedora
-            - ubuntu
 
         - name: Add docker usergroup
           become: true
@@ -291,9 +228,6 @@
             name: docker
             state: present
             gid: 1750
-          tags:
-            - fedora
-            - ubuntu
 
         - name: Add user to docker group
           become: true
@@ -301,9 +235,6 @@
             name: "{{ ansible_user_id }}"
             append: true
             groups: docker
-          tags:
-            - fedora
-            - ubuntu
 
         - name: Enable docker service
           become: true
@@ -311,13 +242,11 @@
             name: docker
             state: started
             enabled: true
-          tags:
-            - fedora
-            - ubuntu
 
     - name: Install neovim nightly
       tags:
         - nvim
+        - work
       block:
         - name: Nvim dependencies
           become: "{{ become_value }}"
@@ -325,33 +254,21 @@
             name:
               - luajit
               - luarocks
-          tags:
-            - nvim-deps
-            - linux
-            - darwin
-            - fedora
-            - ubuntu
 
         - name: Install neovim linux
           when: ansible_system == "Linux"
-          tags:
-            - linux
           block:
             - name: Add neovim apt ppa
               become: true
-              when: ansible_os_family == 'Debian'
+              when: ansible_distribution == 'Ubuntu' # FIXME: does not work on debian
               ansible.builtin.apt_repository:
                 repo: ppa:neovim-ppa/unstable
-              tags:
-                - ubuntu
 
             - name: Add neovim dnf copr
               become: true
               when: ansible_os_family == 'RedHat'
               community.general.copr:
                 name: agriffis/neovim-nightly
-              tags:
-                - fedora
 
             - name: Install neovim Linux
               become: true
@@ -359,26 +276,21 @@
                 name:
                   - neovim
                   - python3-neovim
-              tags:
-                - fedora
-                - ubuntu
 
         - name: Install neovim Darwin
           when: ansible_system == "Darwin"
           community.general.homebrew:
             name: nvim
             state: head
-          tags:
-            - darwin
 
-    # TODO: setup extensions using vscode-extensions-setup script
     - name: Install VSCodium
+      tags:
+        - vscodium
+        - gui
+        - work
       block:
         - name: Install VSCodium on Fedora
           when: ansible_os_family == "RedHat"
-          tags:
-            - fedora
-            - linux
           block:
             - name: Add GPG key of VSCodium
               become: "{{ become_value }}"
@@ -399,13 +311,10 @@
                   gpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
                   metadata_expire=1h
                 dest: /etc/yum.repos.d/vscodium.repo
-                mode: '644'
+                mode: '0644'
 
         - name: Install VSCodium on Ubuntu
           when: ansible_os_family == "Debian"
-          tags:
-            - ubuntu
-            - linux
           block:
             - name: Add GPG key of VSCodium
               become: "{{ become_value }}"
@@ -419,23 +328,22 @@
                 content: |
                   deb https://download.vscodium.com/debs vscodium main
                 dest: /etc/apt/sources.list.d/vscodium.list
-                mode: '644'
+                mode: '0644'
 
         - name: Install VSCodium
           become: "{{ become_value }}"
           when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
           ansible.builtin.package:
-            update_cache: yes
+            update_cache: true
             name:
               - codium
-          tags:
-            - fedora
-            - ubuntu
-            - linux
 
         - name: Install VSCodium Darwin
           when: ansible_system == "Darwin"
           community.general.homebrew:
             name: vscodium
-          tags:
-            - darwin
+
+        - name: Install VSCodium Extensions
+          ansible.builtin.command: ~/dotfiles/bin/bin/helpers/vscode-extension-setup
+          args:
+            creates: /tmp/vscode-setup

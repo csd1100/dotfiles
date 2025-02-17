@@ -10,11 +10,12 @@
   # TODO: run-ansible script profiles work/local
   # TODO: tagging
 - name: Install Essentials
-  hosts: localhost
+  hosts: all
   connection: local
   become: false
   tags:
     - essentials
+    - work
   tasks:
     - name: Set fact to become or not
       block:
@@ -22,15 +23,11 @@
           when: ansible_system == "Linux"
           ansible.builtin.set_fact:
             become_value: true
-          tags:
-            - linux
 
         - name: Set become to false for darwin
           when: ansible_system == "Darwin"
           ansible.builtin.set_fact:
             become_value: false
-          tags:
-            - darwin
 
     - name: Essential packages
       become: "{{ become_value }}"
@@ -46,9 +43,6 @@
           - unzip
           - gnupg
           - ca-certificates
-      tags:
-        - darwin
-        - linux
 
     - name: Common cli tools
       become: "{{ become_value }}"
@@ -59,15 +53,51 @@
           - bat
           - grc
           - nnn
-          - cmus
           - btop
-          - unrar
+          - p7zip
           - ripgrep
-          - neofetch
+
+    - name: Build and Install Stow Latest
       tags:
-        - cli
-        - darwin
-        - linux
+        - stow
+      block:
+        - name: Download and Install stow if not latest
+          block:
+            - name: Validate stow is installed
+              ansible.builtin.shell: |
+                set -o pipefail
+                /usr/local/bin/stow --version | grep "2.4.1" && touch /tmp/stow-version
+              args:
+                executable: /bin/bash
+                creates: /tmp/stow-version
+          rescue:
+            - name: Download source code
+              ansible.builtin.get_url:
+                url: https://ftp.gnu.org/gnu/stow/stow-2.4.1.tar.gz
+                dest: /tmp/stow.tar.gz
+                timeout: 120
+                mode: '0744'
+
+            - name: Extract source code
+              ansible.builtin.unarchive:
+                src: /tmp/stow.tar.gz
+                dest: /tmp/
+                remote_src: true
+
+            - name: Configure stow project
+              become: true
+              ansible.builtin.command:
+                cmd: ./configure
+                chdir: /tmp/stow-2.4.1
+              register: configure_stow
+              changed_when: configure_stow.rc != 0
+
+            - name: Install stow
+              become: true
+              ansible.builtin.command:
+                cmd: make install
+                chdir: /tmp/stow-2.4.1
+                creates: /usr/local/bin/stow
 
     - name: Linux common cli tools
       become: true
@@ -77,9 +107,6 @@
           - g++
           - plocate
           - fd-find
-      tags:
-        - cli
-        - linux
 
     - name: Debian essentials
       become: true
@@ -90,43 +117,18 @@
           - build-essential
           - software-properties-common
           - libreadline-dev
-      tags:
-        - ubuntu
-        - linux
-
-    - name: Debian Install Stow Latest
-      when: ansible_os_family == 'Debian'
-      block:
-        - name: Download source code
-          ansible.builtin.get_url:
-            url: https://ftp.gnu.org/gnu/stow/stow-latest.tar.gz
-            dest: /tmp/stow.tar.gz
-
-        - name: Extract source code
-          ansible.builtin.unarchive:
-            src: /tmp/stow.tar.gz
-            dest: /tmp/stow
-            remote_src: yes
-
-        - name: Install stow
-          become: true
-          ansible.builtin.command:
-            cmd: ./configure && make install
-            chdir: /tmp/stow
-            creates: /usr/bin/stow
+          - libssl-dev
+          - libbz2-dev
+          - libffi-dev
 
     - name: Redhat essentials
       become: true
       when: ansible_os_family == 'RedHat'
       ansible.builtin.dnf:
         name:
-          - stow
-          - vim-X11
+          - vim-enhanced
           - kernel-devel
           - dnf-plugins-core
-      tags:
-        - fedora
-        - linux
 
     - name: Darwin essentials
       when: (ansible_os_family == 'Darwin')
@@ -134,8 +136,12 @@
         name:
           - fd
           - vim
-          - stow
           - coreutils
-      tags:
-        - cli
-        - darwin
+
+    - name: Clone dotfiles if not present # noqa: latest
+      ansible.builtin.git:
+        repo: https://github.com/csd1100/dotfiles.git
+        dest: ~/dotfiles
+        clone: true
+        update: false
+        recursive: false
