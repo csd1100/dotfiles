@@ -6,17 +6,19 @@
   "workbench.productIconTheme": "icons-carbon",
   "workbench.colorCustomizations": {
     // color customization for Dark Modern
-    //   "tab.activeBackground": "#111",
-    //   "tab.inactiveBackground": "#000",
-    //   "editorGroupHeader.tabsBackground": "#000",
-    //   "titleBar.activeBackground": "#000",
-    //   "titleBar.inactiveBackground": "#010101",
-    //   "activityBar.background": "#000",
-    //   "sideBar.background": "#010101",
-    //   "sideBarSectionHeader.background": "#111",
-    //   "statusBar.background": "#111",
-    //   "editor.background": "#111",
-    //   "terminal.background": "#111"
+    "[Default Dark Modern]": {
+      "tab.activeBackground": "#111",
+      "tab.inactiveBackground": "#000",
+      "editorGroupHeader.tabsBackground": "#000",
+      "titleBar.activeBackground": "#000",
+      "titleBar.inactiveBackground": "#010101",
+      "activityBar.background": "#000",
+      "sideBar.background": "#010101",
+      "sideBarSectionHeader.background": "#111",
+      "statusBar.background": "#111",
+      "editor.background": "#111",
+      "terminal.background": "#111"
+    }
     // remove error indicators in case they are irritating
     //   "editorError.foreground": "#00000000",
     //   "editorWarning.foreground": "#00000000",
@@ -194,6 +196,9 @@
     "vscodevim.vim": 1
   },
 
+  "path-intellisense.autoTriggerNextSuggestion": true,
+  "path-intellisense.showHiddenFiles": true,
+
   "json.schemas": [
     {
       "fileMatch": ["**/terrain.toml"],
@@ -233,6 +238,7 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "black-formatter.args": ["--line-length", "120"],
-  "path-intellisense.autoTriggerNextSuggestion": true,
-  "path-intellisense.showHiddenFiles": true
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  }
 }
