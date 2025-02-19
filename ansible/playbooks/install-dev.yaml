@@ -62,10 +62,18 @@
             executable: /bin/bash
 
         - name: Create kitty desktop file
-          ansible.builtin.shell: cd ~/dotfiles/scripts/helpers && ./kitty-desktop
-          when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
-          args:
-            creates: ~/.local/share/applications/kitty.desktop
+          block:
+            - name: Create necessary directories
+              ansible.builtin.file:
+                path: ~/.local/share/applications/
+                state: "directory"
+                recurse: true
+
+            - name: Create kitty desktop file
+              ansible.builtin.shell: cd ~/dotfiles/scripts/helpers && ./kitty-desktop
+              when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
+              args:
+                creates: ~/.local/share/applications/kitty.desktop
 
     - name: Install jdk
       tags:
@@ -183,6 +191,30 @@
           args:
             executable: /bin/bash
             creates: ~/.rustup/
+
+    - name: Install python
+      tags:
+        - python
+        - work
+      block:
+        - name: Install pyenv
+          ansible.builtin.shell: |
+            set -o pipefail
+            curl -fsSL https://pyenv.run | bash
+          args:
+            executable: /bin/bash
+            creates: ~/.pyenv/
+
+        - name: Install python 3.13
+          ansible.builtin.shell: |
+            export PYENV_ROOT="$HOME/.pyenv"
+            [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+            eval "$(pyenv init - bash)"
+            pyenv install 3.13.2
+            pyenv global 3.13.2
+          args:
+            executable: /bin/bash
+            creates: ~/.pyenv/versions/3.13.2
 
     - name: Install docker linux
       when: ansible_system == "Linux"

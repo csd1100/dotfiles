@@ -131,6 +131,12 @@
           - libssl-dev
           - libbz2-dev
           - libffi-dev
+          - zlib1g-dev
+          - liblzma-dev
+          - python3-tk
+          - tk-dev
+          - sqlite3
+          - libsqlite3-dev
 
     - name: Redhat essentials
       become: true
