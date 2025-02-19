@@ -1,5 +1,2 @@
-Get-Content -Path ".\packages" | ForEach-Object {
-    # Process each line
-    Write-Output $_
-    winget install --id $_
-}
+$packages = Get-Content -Path ".\packages"
+winget install $packages

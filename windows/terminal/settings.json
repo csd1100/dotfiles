@@ -1,7 +1,14 @@
 {
   "$help": "https://aka.ms/terminal-documentation",
-  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "$schema": "https://aka.ms/terminal-profiles-schema-preview",
   "actions": [
+    {
+      "command": {
+        "action": "switchToTab",
+        "index": 4
+      },
+      "id": "User.switchToTab.F747588A"
+    },
     {
       "command": {
         "action": "scrollToMark",
@@ -18,24 +25,10 @@
     },
     {
       "command": {
-        "action": "switchToTab",
-        "index": 4
-      },
-      "id": "User.switchToTab.F747588A"
-    },
-    {
-      "command": {
-        "action": "selectCommand",
+        "action": "selectOutput",
         "direction": "prev"
       },
-      "id": "User.selectCommand.D3F0B923"
-    },
-    {
-      "command": {
-        "action": "selectCommand",
-        "direction": "next"
-      },
-      "id": "User.selectCommand.2A0DA8E0"
+      "id": "User.selectOutput.D3F0B923"
     },
     {
       "command": {
@@ -46,20 +39,27 @@
     },
     {
       "command": {
-        "action": "selectOutput",
-        "direction": "prev"
+        "action": "selectCommand",
+        "direction": "next"
       },
-      "id": "User.selectOutput.D3F0B923"
+      "id": "User.selectCommand.2A0DA8E0"
     },
     {
-      "command": "paste",
-      "id": "User.paste"
+      "command": {
+        "action": "selectCommand",
+        "direction": "prev"
+      },
+      "id": "User.selectCommand.D3F0B923"
     },
     {
       "command": {
         "action": "newTab"
       },
       "id": "User.newTab.5DEADB41"
+    },
+    {
+      "command": "paste",
+      "id": "User.paste"
     },
     {
       "command": {
@@ -72,16 +72,16 @@
     {
       "command": {
         "action": "switchToTab",
-        "index": 0
+        "index": 1
       },
-      "id": "User.switchToTab.D3F0B923"
+      "id": "User.switchToTab.2A0DA8E0"
     },
     {
       "command": {
         "action": "switchToTab",
-        "index": 1
+        "index": 0
       },
-      "id": "User.switchToTab.2A0DA8E0"
+      "id": "User.switchToTab.D3F0B923"
     },
     {
       "command": {
@@ -167,13 +167,13 @@
     }
   ],
   "alwaysShowTabs": true,
-  "confirmCloseAllTabs": true,
   "copyFormatting": "none",
-  "copyOnSelect": false,
-  "defaultProfile": "{4d96aaba-f377-4180-8843-a5613b79ba12}",
+  "copyOnSelect": true,
+  "defaultProfile": "{2789402b-b27b-4bce-99a0-0156c4886397}",
   "disabledProfileSources": [
     "Windows.Terminal.Wsl",
     "Windows.Terminal.Azure",
+    "Windows.Terminal.VisualStudio",
     "Windows.Terminal.PowershellCore"
   ],
   "keybindings": [
@@ -190,16 +190,16 @@
       "keys": "ctrl+up"
     },
     {
+      "id": "Terminal.DuplicateTab",
+      "keys": "alt+t"
+    },
+    {
       "id": "User.scrollToMark.2A0DA8E0",
       "keys": "ctrl+down"
     },
     {
       "id": "User.switchToTab.D7681B66",
       "keys": "alt+8"
-    },
-    {
-      "id": "User.newTab.5DEADB41",
-      "keys": "alt+t"
     },
     {
       "id": "User.switchToTab.2A0DA8E0",
@@ -242,12 +242,12 @@
       "keys": "alt+right"
     },
     {
-      "id": "User.prevTab.0",
-      "keys": "alt+left"
-    },
-    {
       "id": "User.switchToTab.87C324ED",
       "keys": "alt+3"
+    },
+    {
+      "id": "User.prevTab.0",
+      "keys": "alt+left"
     },
     {
       "id": "User.switchToTab.D3F0B923",
@@ -260,6 +260,10 @@
     {
       "id": "User.switchToTab.787314EB",
       "keys": "alt+7"
+    },
+    {
+      "id": "Terminal.OpenNewTab",
+      "keys": "alt+shift+t"
     }
   ],
   "newTabMenu": [
@@ -275,9 +279,8 @@
       "colorScheme": "Colors",
       "cursorShape": "vintage",
       "experimental.retroTerminalEffect": false,
-      "experimental.rightClickContextMenu": true,
       "font": {
-        "face": "CommitMono Nerd Font Mono",
+        "face": "CommitMono Nerd Font",
         "features": {
           "cv01": 1,
           "cv02": 1,
@@ -295,24 +298,24 @@
         "weight": "normal"
       },
       "opacity": 60,
+      "rightClickContextMenu": true,
       "showMarksOnScrollbar": true,
       "useAcrylic": true
     },
     "list": [
       {
-        "commandline": "ubuntu.exe",
-        "guid": "{4d96aaba-f377-4180-8843-a5613b79ba12}",
-        "hidden": false,
-        "icon": "https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png",
-        "name": "Ubuntu",
-        "tabTitle": "Ubuntu"
-      },
-      {
-        "colorScheme": "Campbell",
         "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
         "hidden": false,
         "name": "Windows PowerShell"
+      },
+      {
+        "commandline": "\"C:\\Windows\\System32\\wsl.exe\" -d Ubuntu-24.04",
+        "guid": "{2789402b-b27b-4bce-99a0-0156c4886397}",
+        "hidden": false,
+        "icon": "https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png",
+        "name": "Ubuntu-24.04",
+        "startingDirectory": "~"
       },
       {
         "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
@@ -359,5 +362,6 @@
   "themes": [],
   "trimBlockSelection": true,
   "trimPaste": true,
-  "useAcrylicInTabRow": false
+  "useAcrylicInTabRow": false,
+  "warning.confirmCloseAllTabs": true
 }

@@ -1,3 +1,17 @@
+[Console]::OutputEncoding = [Text.Encoding]::UTF8
+Set-PSReadLineOption -EditMode Vi
+Set-PSReadLineOption -ViModeIndicator Cursor
+Set-PSReadLineOption -HistoryNoDuplicates
+Set-PSReadLineOption -HistorySaveStyle SaveIncrementally
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineOption -MaximumHistoryCount 8096
+Set-PSReadLineOption -ContinuationPrompt ">"
+Set-PSReadLineOption -BellStyle Visual
+. $env:USERPROFILE\Documents\PowerShell\env\env-vars.ps1
+. $env:USERPROFILE\Documents\PowerShell\env\aliases.ps1
+oh-my-posh init pwsh --config ~/dotfiles/windows/powershell/omp/config.omp.json | Invoke-Expression
+$Global:__OriginalPrompt = $function:Prompt
+
 function Global:__Terminal-Get-LastExitCode {
   if ($? -eq $True) { return 0 }
   $LastHistoryEntry = $(Get-History -Count 1)
@@ -26,17 +40,3 @@ function prompt {
   $Global:__LastHistoryId = $LastHistoryEntry.Id
   return $out
 }
-
-[Console]::OutputEncoding = [Text.Encoding]::UTF8
-oh-my-posh init pwsh --config ~/dotfiles/windows/powershell/omp/config.omp.json | Invoke-Expression
-Set-PSReadLineOption -EditMode Vi
-Set-PSReadLineOption -ViModeIndicator Cursor
-Set-PSReadLineOption -HistoryNoDuplicates
-Set-PSReadLineOption -HistorySaveStyle SaveIncrementally
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-Set-PSReadLineOption -MaximumHistoryCount 8096
-Set-PSReadLineOption -ContinuationPrompt ">"
-Set-PSReadLineOption -BellStyle Visual
-$Global:__OriginalPrompt = $function:Prompt
-. $env:USERPROFILE\Documents\PowerShell\env\env-vars.ps1
-. $env:USERPROFILE\Documents\PowerShell\env\aliases.ps1

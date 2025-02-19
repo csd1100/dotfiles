@@ -4,6 +4,10 @@ Git.Git
 7zip.7zip
 JanDeDobbeleer.OhMyPosh
 junegunn.fzf
+BurntSushi.ripgrep.MSVC
+jqlang.jq
+sharkdp.bat
+sharkdp.fd
 Microsoft.WSL
 Canonical.Ubuntu.2404
 SlackTechnologies.Slack
