@@ -10,6 +10,8 @@
     - dev
   tasks:
     - name: Set fact to become or not
+      tags:
+        - kitty
       block:
         - name: Set become to true for linux
           when: ansible_system == "Linux"
