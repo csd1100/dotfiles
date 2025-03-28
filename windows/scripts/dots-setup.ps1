@@ -10,6 +10,8 @@ New-Item -Path $env:USERPROFILE/Documents/WindowsPowerShell/env/env-vars.ps1 -It
 New-Item -Path $env:USERPROFILE/Documents/WindowsPowerShell/env/aliases.ps1 -ItemType SymbolicLink -Value $env:USERPROFILE/dotfiles/windows/powershell/env/aliases.ps1 -Force
 # .vimrc
 New-Item -Path $env:USERPROFILE/.vimrc -ItemType SymbolicLink -Value $env:USERPROFILE/dotfiles/common/dot-vimrc -Force
+# .ideavimrc
+New-Item -Path $env:USERPROFILE/.ideavimrc -ItemType SymbolicLink -Value $env:USERPROFILE/dotfiles/common/dot-ideavimrc -Force
 # neovim
 New-Item -Path $env:USERPROFILE/AppData/Local/nvim -ItemType SymbolicLink -Value $env:USERPROFILE/dotfiles/common/dot-config/nvim -Force
 # vscode
