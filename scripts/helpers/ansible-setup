@@ -9,6 +9,7 @@ install_pip() {
 	case "${unameOut}" in
 	Linux*)
 		if grep "NAME=\"Ubuntu\"" /etc/os-release &>/dev/null; then
+			sudo apt update
 			sudo apt install python3-venv sshpass
 		else
 			python3 -m ensurepip --upgrade
