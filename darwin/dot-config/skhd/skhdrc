@@ -23,10 +23,10 @@ cmd - j : yabai -m window --focus south
 cmd - k : yabai -m window --focus north
 cmd - l : yabai -m window --focus east
 
-cmd - left : yabai -m window --focus stack.recent
-cmd - down : yabai -m window --focus stack.next
-cmd - up : yabai -m window --focus stack.prev
-cmd - right : yabai -m window --focus stack.recent
+cmd - up : yabai -m window --focus stack.recent
+cmd - left : yabai -m window --focus stack.next
+cmd - right : yabai -m window --focus stack.prev
+cmd - down : yabai -m window --focus stack.recent
 # Navigate workspaces
 cmd - 1 : yabai -m space --focus 1
 cmd - 2 : yabai -m space --focus 2
