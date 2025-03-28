@@ -25,7 +25,7 @@ download_vsix() {
     wget2 "$vsix_url" -O "/tmp/$1.vsix"
 }
 
-VSIX_EXTENSIONS=("antfu.theme-vitesse", "sallar.vscode-duotone-dark")
+VSIX_EXTENSIONS=("antfu.theme-vitesse", "sallar.vscode-duotone-dark", "ms-vscode.cpptools")
 
 install_extensions() {
     while IFS= read -r line; do

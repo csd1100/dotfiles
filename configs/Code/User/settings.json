@@ -1,5 +1,5 @@
 {
-  "workbench.colorTheme": "Vitesse Dark",
+  "workbench.colorTheme": "Vitesse Light",
   "workbench.preferredDarkColorTheme": "Vitesse Dark",
   "workbench.preferredLightColorTheme": "Vitesse Light",
   "workbench.iconTheme": "material-icon-theme",
@@ -238,7 +238,11 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "black-formatter.args": ["--line-length", "120"],
+  "shellformat.path": "/usr/local/bin/shfmt",
   "[powershell]": {
     "editor.defaultFormatter": "ms-vscode.powershell"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
   }
 }
