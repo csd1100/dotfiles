@@ -40,6 +40,7 @@
     terrainium
     # =========================[ Line #2 ]=========================
     newline                 # \n
+    sudo
     prompt_char             # prompt symbol
   )
 
@@ -1666,6 +1667,13 @@
     if [ "$TERRAIN_ENABLED" = "true" ]; then
         terrain_prompt=$(__terrain_prompt)
         p10k segment -f 2 -i '󰛍' -t "$terrain_prompt"
+    fi
+  }
+
+  # sudo
+  function prompt_sudo() {
+    if sudo -n true &> /dev/null; then
+        p10k segment -f 12 -i '#'
     fi
   }
 
