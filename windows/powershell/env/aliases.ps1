@@ -1,10 +1,10 @@
 function gst() {
     git status $args
 }
-function gll() {
+function gpl() {
     git pull $args
 }
-function gp() {
+function gph() {
     git push $args
 }
 function gsta() {

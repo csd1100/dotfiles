@@ -27,8 +27,8 @@ alias gcav="git commit --amend -v"
 alias gsta="git stash push"
 alias gstp="git stash pop"
 alias gstd="git stash drop"
-alias gp="git push"
-alias gl="git pull"
+alias gph="git push"
+alias gpl="git pull"
 alias gh="git log --oneline --graph"
 alias glog="git log --graph"
 
@@ -62,7 +62,6 @@ alias d="kitten diff"
 # unaliase for bin overrides
 
 # source overrides
-if [ -f "$HOME/env/overrides/aliases.zsh" ]
-then
+if [ -f "$HOME/env/overrides/aliases.zsh" ]; then
     source "$HOME/env/overrides/aliases.zsh"
 fi
