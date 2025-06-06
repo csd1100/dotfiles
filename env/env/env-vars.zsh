@@ -26,10 +26,10 @@ path=(
     ~/.local/bin
     $GOBIN
     ~/.volta/bin
-    ~/.cargo/bin
     $PNPM_HOME
     /usr/local/go/bin
     $path
+    ~/.cargo/bin
 )
 
 # CONFIG

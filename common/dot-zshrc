@@ -1,6 +1,10 @@
 function zcompile-many() {
   local f
-  for f; do zcompile -R -- "$f".zwc "$f"; done
+  for f; do
+      if ! [[ "$f" =~ "\.zwc$" ]]; then
+          zcompile -R -- "$f".zwc "$f"
+      fi
+  done
 }
 
 # Clone and compile to wordcode missing plugins.
