@@ -72,6 +72,8 @@ return {
           ['<Down>'] = cmp.mapping.select_next_item({
             behavior = 'select',
           }),
+          ['<Right>'] = cmp.mapping.confirm({ select = true }),
+          ['<Left>'] = cmp.mapping.abort(),
           ['<Tab>'] = cmp.mapping.confirm({ select = true }),
           ['<C-c>'] = cmp.mapping.abort(),
         }),
@@ -270,7 +272,7 @@ return {
         },
       })
       require('mason-lspconfig').setup({
-        ensure_installed = { 'lua_ls' },
+        ensure_installed = { 'lua_ls', 'taplo' },
         automatic_enable = {
           exclude = {
             'lua_ls',
