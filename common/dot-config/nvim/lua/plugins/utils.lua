@@ -89,6 +89,7 @@ return {
     'laytan/cloak.nvim',
     opts = {
       enabled = true,
+      file_pattern = { '.env*' },
     },
     init = function()
       ku.map('n', '<leader>ce', ':CloakEnable<CR>', { desc = 'Cloak Enable' })
@@ -96,4 +97,19 @@ return {
       ku.map('n', '<leader>ct', ':CloakToggle<CR>', { desc = 'Cloak Toggle' })
     end,
   },
+  -- markdown preview
+  {
+    'toppair/peek.nvim',
+    event = { 'VeryLazy' },
+    build = 'deno task --quiet build:fast',
+    config = function()
+      require('peek').setup({
+        filetype = { 'markdown', 'conf' },
+      })
+      vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
+      vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
+    end,
+  },
+  -- game
+  { 'vuciv/golf' },
 }

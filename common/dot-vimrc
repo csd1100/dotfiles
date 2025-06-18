@@ -130,7 +130,8 @@ command Q q
 set number
 set relativenumber
 set expandtab
-set hlsearch
+set nohlsearch
+set incsearch
 set showcmd
 set smartindent
 set timeoutlen=1500
@@ -158,9 +159,12 @@ set backupcopy=yes
 set undofile
 set undodir=~/.nvim/undos//
 set cursorline
-set updatetime=500
+set updatetime=50
+set isfname+=@-@
 
 filetype plugin on
 
 let g:netrw_banner=0
 let g:netrw_preview=1
+let g:netrw_browse_split=0
+let g:netrw_winsize=15
