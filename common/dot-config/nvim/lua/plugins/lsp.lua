@@ -1,7 +1,7 @@
 return {
   -- Package Manager
   {
-    'williamboman/mason.nvim',
+    'mason-org/mason.nvim',
     lazy = false,
     opts = {
       ui = {
@@ -14,28 +14,155 @@ return {
       },
     },
   },
+  -- Autocompletion
+  {
+    'hrsh7th/nvim-cmp',
+    event = 'VeryLazy',
+    dependencies = {
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-cmdline' },
+      { 'hrsh7th/cmp-cmdline' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+      { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
+      { 'L3MON4D3/LuaSnip' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'rafamadriz/friendly-snippets' },
+      { 'onsails/lspkind.nvim' },
+    },
+    config = function()
+      local cmp = require('cmp')
 
+      require('luasnip.loaders.from_vscode').lazy_load()
+
+      cmp.setup({
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'buffer' },
+          { name = 'path' },
+          { name = 'luasnip' },
+          { name = 'nvim_lua' },
+          { name = 'nvim_lsp_signature_help' },
+        },
+        formatting = {
+          format = require('lspkind').cmp_format({
+            mode = 'symbol',
+            maxwidth = 50,
+            ellipsis_char = '...',
+          }),
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        snippet = {
+          expand = function(args)
+            vim.snippet.expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-d>'] = cmp.mapping.scroll_docs(4),
+          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+          ['<Up>'] = cmp.mapping.select_prev_item({
+            behavior = 'select',
+          }),
+          ['<Down>'] = cmp.mapping.select_next_item({
+            behavior = 'select',
+          }),
+          ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+          ['<C-c>'] = cmp.mapping.abort(),
+        }),
+      })
+
+      require('cmp').setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          -- NOTE: triggers on '/@'
+          { name = 'nvim_lsp_document_symbol' },
+        }, {
+          { name = 'buffer' },
+        }),
+      })
+
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' },
+            },
+          },
+        }),
+      })
+    end,
+  },
+  -- formatter
+  {
+    'stevearc/conform.nvim',
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo' },
+    opts = {
+      -- Define your formatters
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        go = { 'gofmt' },
+        rust = { 'rustfmt' },
+        javascript = { 'prettier' },
+        bash = { 'shfmt' },
+        zsh = { 'shfmt' },
+      },
+      -- Set default options
+      default_format_opts = {
+        lsp_format = 'fallback',
+      },
+      -- Set up format-on-save
+      format_on_save = { timeout_ms = 500 },
+      -- Customize formatters
+      formatters = {
+        shfmt = {
+          prepend_args = { '-i', '2' },
+        },
+      },
+    },
+    init = function()
+      vim.api.nvim_create_user_command('Format', function(args)
+        local range = nil
+        if args.count ~= -1 then
+          local end_line =
+            vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+          range = {
+            ['start'] = { args.line1, 0 },
+            ['end'] = { args.line2, end_line:len() },
+          }
+        end
+        require('conform').format({
+          lsp_format = 'fallback',
+          range = range,
+        })
+      end, { range = true })
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    end,
+  },
   -- LSP
   {
     'neovim/nvim-lspconfig',
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      {
-        -- NOTE: there are couple of things that do not work on nvim v0.11
-        -- ui.float_border, format_mapping does not work on v0.11
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v4.x',
-        cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
-        event = { 'BufReadPre', 'BufNewFile' },
-      },
-      { 'csd1100/modes.nvim' },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
+      'csd1100/modes.nvim',
+      'mason-org/mason.nvim',
+      'mason-org/mason-lspconfig.nvim',
+      'hrsh7th/cmp-nvim-lsp',
+      'stevearc/conform.nvim',
     },
     config = function()
-      local lsp_zero = require('lsp-zero')
-
+      -- formatter
       local modes = require('modes')
       modes.create_if_not_present('LSP', function() end, function() end, '{}')
       local maps = {
@@ -76,12 +203,8 @@ return {
             ['rhs'] = vim.lsp.buf.rename,
             ['opts'] = { desc = 'Rename' },
           },
-          -- TODO: use https://lsp-zero.netlify.app/docs/reference/lua-api.html#format-mapping-key-opts
-          -- if necessary
           ['<A-S-f>f'] = {
-            ['rhs'] = function()
-              vim.lsp.buf.format({ async = true })
-            end,
+            ['rhs'] = '<cmd>Format<CR>',
             ['opts'] = { desc = 'Format' },
           },
           ['<leader>lca'] = {
@@ -89,163 +212,81 @@ return {
             ['opts'] = { desc = 'Code Actions' },
           },
           ['t]'] = {
-            ['rhs'] = vim.diagnostic.goto_next,
+            ['rhs'] = function()
+              vim.diagnostic.jump({ count = 1, float = true })
+            end,
             ['opts'] = { desc = 'Go to Next Diagnostic Message' },
           },
           ['t['] = {
-            ['rhs'] = vim.diagnostic.goto_prev,
+            ['rhs'] = function()
+              vim.diagnostic.jump({ count = -1, float = true })
+            end,
             ['opts'] = { desc = 'Go to Previous Diagnostic Message' },
           },
         },
         ['x'] = {
-          -- TODO: use https://lsp-zero.netlify.app/docs/reference/lua-api.html#format-mapping-key-opts
-          -- if necessary
           ['<A-S-f>l'] = {
-            ['rhs'] = function()
-              vim.lsp.buf.format({ async = true })
-            end,
+            ['rhs'] = vim.lsp.buf.format,
             ['opts'] = { desc = 'Format Selection' },
           },
         },
       }
       modes.add_maps('LSP', maps)
 
-      local lsp_attach = function(client, bufnr)
-        modes.enable_mode('LSP', { buffer = bufnr })
-        lsp_zero.highlight_symbol(client, bufnr)
-      end
+      local cmp_lsp = require('cmp_nvim_lsp')
+      local capabilities = vim.tbl_deep_extend(
+        'force',
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        cmp_lsp.default_capabilities()
+      )
 
-      lsp_zero.extend_lspconfig({
-        lsp_attach = lsp_attach,
-        sign_text = {
-          error = '✘',
-          warn = '▲',
-          hint = '⚑',
-          info = 'i',
-        },
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(ev)
+          modes.enable_mode('LSP', { buffer = ev.buf })
+        end,
       })
 
-      require('mason-lspconfig').setup({
-        ensure_installed = { 'lua_ls' },
-        handlers = {
-          function(server_name)
-            require('lspconfig')[server_name].setup({})
-          end,
-          lua_ls = lsp_zero.noop,
-        },
+      vim.lsp.config('*', {
+        capabilities = capabilities,
       })
 
-      local lua_opts = lsp_zero.nvim_lua_ls()
-      require('lspconfig').lua_ls.setup(lua_opts)
-    end,
-  },
-
-  -- Autocompletion
-  {
-    'hrsh7th/nvim-cmp',
-    event = 'VeryLazy',
-    dependencies = {
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'hrsh7th/cmp-cmdline' },
-      { 'hrsh7th/cmp-cmdline' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-      { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
-      { 'L3MON4D3/LuaSnip' },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'rafamadriz/friendly-snippets' },
-      { 'onsails/lspkind.nvim' },
-    },
-    config = function()
-      local cmp = require('cmp')
-      local lsp_zero = require('lsp-zero')
-
-      require('luasnip.loaders.from_vscode').lazy_load()
-
-      cmp.setup({
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'buffer' },
-          { name = 'path' },
-          { name = 'luasnip' },
-          { name = 'nvim_lua' },
-          { name = 'nvim_lsp_signature_help' },
-        },
-        formatting = {
-          format = require('lspkind').cmp_format({
-            mode = 'symbol',
-            maxwidth = 50,
-            ellipsis_char = '...',
-          }),
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        snippet = {
-          expand = function(args)
-            vim.snippet.expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-f>'] = lsp_zero.cmp_action().luasnip_jump_forward(),
-          ['<C-b>'] = lsp_zero.cmp_action().luasnip_jump_backward(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
-          ['<C-c>'] = cmp.mapping.abort(),
-          ['<Up>'] = cmp.mapping.select_prev_item({
-            behavior = 'select',
-          }),
-          ['<Down>'] = cmp.mapping.select_next_item({
-            behavior = 'select',
-          }),
-          ['<Tab>'] = cmp.mapping.select_next_item({
-            behavior = 'select',
-          }),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item({
-            behavior = 'select',
-          }),
-        }),
-      })
-
-      require('cmp').setup.cmdline('/', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          -- NOTE: triggers on '/@'
-          { name = 'nvim_lsp_document_symbol' },
-        }, {
-          { name = 'buffer' },
-        }),
-      })
-
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = 'path' },
-        }, {
-          {
-            name = 'cmdline',
-            option = {
-              ignore_cmds = { 'Man', '!' },
+      local lspconfig = require('lspconfig')
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = { globals = { 'vim' } },
+            format = {
+              enable = true,
+              -- Put format options here
+              -- NOTE: the value should be STRING!!
+              defaultConfig = {
+                indent_style = 'space',
+                indent_size = '2',
+              },
             },
           },
-        }),
+        },
       })
-    end,
-  },
-  {
-    'nvimtools/none-ls.nvim',
-    config = function()
-      local null_ls = require('null-ls')
+      require('mason-lspconfig').setup({
+        ensure_installed = { 'lua_ls' },
+        automatic_enable = {
+          exclude = {
+            'lua_ls',
+          },
+        },
+      })
 
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.shfmt,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.prettier,
+      vim.diagnostic.config({
+        -- update_in_insert = true,
+        float = {
+          focusable = false,
+          style = 'minimal',
+          border = 'rounded',
+          source = 'always',
+          header = '',
+          prefix = '',
         },
       })
     end,

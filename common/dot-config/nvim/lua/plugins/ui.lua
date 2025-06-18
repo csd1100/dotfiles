@@ -1,6 +1,6 @@
 local ku = require('config.keymap-utils')
 
-local highlight = {
+local rainbow_highlight = {
   'RainbowRed',
   'RainbowYellow',
   'RainbowBlue',
@@ -8,6 +8,16 @@ local highlight = {
   'RainbowGreen',
   'RainbowViolet',
   'RainbowCyan',
+}
+
+local highlight = {
+  'LineNr',
+  'LineNr',
+  'LineNr',
+  'LineNr',
+  'LineNr',
+  'LineNr',
+  'LineNr',
 }
 
 return {
@@ -203,7 +213,6 @@ return {
     init = function()
       local rainbow_delimiters = require('rainbow-delimiters')
 
-      ---@type rainbow_delimiters.config
       vim.g.rainbow_delimiters = {
         strategy = {
           [''] = rainbow_delimiters.strategy['global'],
@@ -217,7 +226,7 @@ return {
           [''] = 110,
           lua = 210,
         },
-        highlight = highlight,
+        highlight = rainbow_highlight,
       }
     end,
   },
@@ -337,33 +346,13 @@ return {
     keys = {
       {
         '<leader>tD',
-        '<cmd>Trouble diagnostics toggle<cr>',
+        '<cmd>Trouble diagnostics toggle focus=true<cr>',
         desc = 'Diagnostics (Trouble)',
       },
       {
         '<leader>td',
-        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        '<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>',
         desc = 'Buffer Diagnostics (Trouble)',
-      },
-      {
-        '<leader>ts',
-        '<cmd>Trouble symbols toggle focus=true<cr>',
-        desc = 'Symbols (Trouble)',
-      },
-      {
-        '<leader>tr',
-        '<cmd>Trouble lsp toggle focus=true win.position=right<cr>',
-        desc = 'LSP Definitions / references / ... (Trouble)',
-      },
-      {
-        '<leader>tl',
-        '<cmd>Trouble loclist toggle<cr>',
-        desc = 'Location List (Trouble)',
-      },
-      {
-        '<leader>tq',
-        '<cmd>Trouble qflist toggle<cr>',
-        desc = 'Quickfix List (Trouble)',
       },
     },
   },
@@ -374,17 +363,17 @@ return {
       'csd1100/modes.nvim',
     },
     opts = {
-      numhl = true,
+      numhl = false,
       signs_staged = {
-        add = { text = ' ' },
-        change = { text = ' ' },
-        delete = { text = ' ' },
+        add = { text = '┃' },
+        change = { text = '┃' },
+        delete = { text = '┃' },
         untracked = { text = '┆' },
       },
       signs = {
-        add = { text = ' ' },
-        change = { text = ' ' },
-        delete = { text = ' ' },
+        add = { text = '║' },
+        change = { text = '║' },
+        delete = { text = '║' },
         untracked = { text = '┆' },
       },
     },
@@ -523,7 +512,16 @@ return {
   },
   {
     'norcalli/nvim-colorizer.lua',
-    ft = { 'css', 'conf', 'html', 'javascript', 'typescript', 'lua', 'json', 'xml' },
+    ft = {
+      'css',
+      'conf',
+      'html',
+      'javascript',
+      'typescript',
+      'lua',
+      'json',
+      'xml',
+    },
     opts = {
       'css',
       'conf',
