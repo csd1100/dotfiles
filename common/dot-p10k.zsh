@@ -1664,7 +1664,7 @@
 
   # terrainium
   function prompt_terrainium() {
-    if [ "$TERRAIN_ENABLED" = "true" ]; then
+    if [ -n "$TERRAIN_SESSION_ID" ]; then
         terrain_prompt=$(__terrain_prompt)
         p10k segment -f 2 -i '󰛍' -t "$terrain_prompt"
     fi
