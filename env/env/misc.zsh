@@ -6,9 +6,10 @@ setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_all_dups
 setopt hist_find_no_dups
 setopt hist_save_no_dups
-setopt hist_ignore_space      # ignore commands that start with space
-setopt hist_verify            # show command with history expansion to user before running it
-setopt share_history          # share command history data
+setopt hist_ignore_space    # ignore commands that start with space
+setopt hist_verify          # show command with history expansion to user before running it
+setopt share_history        # share command history data
+setopt interactive_comments # treat `#` as comment in shell
 
 ## completions
 # always add files to completion options
@@ -19,7 +20,7 @@ compdef _add_files_to_completion -first-
 
 ## binds
 #vi mode
-bindkey  -v
+bindkey -v
 # history-substring
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -37,8 +38,7 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
 fi
 
 # source overrides
-if [ -f "$HOME/env/overrides/misc.zsh" ]
-then
+if [ -f "$HOME/env/overrides/misc.zsh" ]; then
     source "$HOME/env/overrides/misc.zsh"
 fi
 
