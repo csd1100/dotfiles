@@ -119,6 +119,7 @@ return {
         javascript = { 'prettier' },
         bash = { 'shfmt' },
         zsh = { 'shfmt' },
+        markdown = { 'prettier' },
       },
       -- Set default options
       default_format_opts = {
@@ -210,7 +211,7 @@ return {
             ['rhs'] = '<cmd>Format<CR>',
             ['opts'] = { desc = 'Format' },
           },
-          ['<leader>lca'] = {
+          ['<C-q>'] = {
             ['rhs'] = vim.lsp.buf.code_action,
             ['opts'] = { desc = 'Code Actions' },
           },
@@ -225,6 +226,12 @@ return {
               vim.diagnostic.jump({ count = -1, float = true })
             end,
             ['opts'] = { desc = 'Go to Previous Diagnostic Message' },
+          },
+          ['Q'] = {
+            ['rhs'] = function()
+              vim.diagnostic.open_float()
+            end,
+            ['opts'] = { desc = 'Show Diagnostic Message' },
           },
         },
         ['x'] = {
