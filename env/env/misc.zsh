@@ -12,11 +12,12 @@ setopt share_history        # share command history data
 setopt interactive_comments # treat `#` as comment in shell
 
 ## completions
+# broke every other completions
 # always add files to completion options
-function _add_files_to_completion() {
-    _files
-}
-compdef _add_files_to_completion -first-
+# function _add_files_to_completion() {
+#     _files
+# }
+# compdef _add_files_to_completion -first-
 
 ## binds
 #vi mode

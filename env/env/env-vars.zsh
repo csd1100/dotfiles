@@ -42,6 +42,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fpath=(
     ~/env/completions
     ~/zsh/zsh-completions/src
+    /opt/homebrew/completions/zsh
     $fpath
 )
 
@@ -57,7 +58,6 @@ export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 # export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 # source overrides
-if [ -f "$HOME/env/overrides/env-vars.zsh" ]
-then
+if [ -f "$HOME/env/overrides/env-vars.zsh" ]; then
     source "$HOME/env/overrides/env-vars.zsh"
 fi
