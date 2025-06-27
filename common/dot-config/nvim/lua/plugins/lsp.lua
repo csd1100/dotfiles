@@ -76,6 +76,7 @@ return {
           ['<Left>'] = cmp.mapping.abort(),
           ['<Tab>'] = cmp.mapping.confirm({ select = true }),
           ['<C-c>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = false }),
         }),
       })
 
