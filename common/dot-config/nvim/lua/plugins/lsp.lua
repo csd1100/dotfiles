@@ -132,6 +132,9 @@ return {
         shfmt = {
           prepend_args = { '-i', '4', '-ci', '-sr' },
         },
+        rustfmt = {
+          prepend_args = { '+nightly' },
+        },
       },
     },
     init = function()
