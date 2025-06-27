@@ -39,10 +39,23 @@ export CONFIG="$HOME/.config"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # custom completions
+if [ $(uname -s) = 'Darwin' ]; then
+    fpath=(
+        ~/.rustup/toolchains/stable-aarch64-apple-darwin/share/zsh/site-functions/
+        /opt/homebrew/completions/zsh/
+        /opt/homebrew/Cellar/git/*/share/zsh/site-functions/
+        /opt/homebrew/Cellar/ripgrep/*/share/zsh/site-functions/
+        /opt/homebrew/Cellar/mpv/*/share/zsh/site-functions/
+        /opt/homebrew/Cellar/curl/*/share/zsh/site-functions/
+        /opt/homebrew/Cellar/buf/*/share/zsh/site-functions/
+        /opt/homebrew/Cellar/fd/*/share/zsh/site-functions/
+        $fpath
+    )
+fi
+
 fpath=(
     ~/env/completions
     ~/zsh/zsh-completions/src
-    /opt/homebrew/completions/zsh
     $fpath
 )
 
