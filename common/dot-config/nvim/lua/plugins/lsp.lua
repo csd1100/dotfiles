@@ -72,9 +72,14 @@ return {
           ['<Down>'] = cmp.mapping.select_next_item({
             behavior = 'select',
           }),
-          ['<Right>'] = cmp.mapping.confirm({ select = true }),
+          ['<Tab>'] = cmp.mapping.select_next_item({
+            behavior = 'select',
+          }),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item({
+            behavior = 'select',
+          }),
+          ['<Right>'] = cmp.mapping.confirm({ select = false }),
           ['<Left>'] = cmp.mapping.abort(),
-          ['<Tab>'] = cmp.mapping.confirm({ select = true }),
           ['<C-c>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = false }),
         }),
