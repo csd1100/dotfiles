@@ -55,6 +55,6 @@ yabai -m space 8 --label browser
 yabai -m space 9 --label media
 yabai -m space 0 --label utils
 
-borders active_color=0xff606060 inactive_color=0xffD4D4D4 width=5.0 &
+borders active_color=0xffD4D4D4 inactive_color=0xff606060 width=5.0 &
 
 echo "yabai configuration loaded.."
