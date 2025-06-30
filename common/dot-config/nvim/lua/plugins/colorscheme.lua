@@ -1,5 +1,12 @@
 return {
   {
+    'EdenEast/nightfox.nvim',
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme('carbonfox')
+    end,
+  },
+  {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
@@ -39,7 +46,7 @@ return {
       },
     },
     init = function()
-      vim.cmd.colorscheme('monokai-pro')
+      -- vim.cmd.colorscheme('monokai-pro')
     end,
   },
   {

@@ -25,6 +25,5 @@ local maps = {
     },
   },
 }
-
-modes.add_maps(name, vim.tbl_extend('force', lsp_maps, maps))
+modes.add_maps(name, vim.tbl_deep_extend('force', lsp_maps, maps))
 modes.enable_mode(name, { buffer = vim.api.nvim_get_current_buf() })

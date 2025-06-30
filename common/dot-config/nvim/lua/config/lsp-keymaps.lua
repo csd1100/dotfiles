@@ -7,23 +7,33 @@ return {
       ['opts'] = { desc = 'Hover Info' },
     },
     ['gd'] = {
-      ['rhs'] = vim.lsp.buf.definition,
+      ['rhs'] = function()
+        vim.lsp.buf.definition()
+      end,
       ['opts'] = { desc = 'Go To Definition' },
     },
     ['gD'] = {
-      ['rhs'] = vim.lsp.buf.declaration,
+      ['rhs'] = function()
+        vim.lsp.buf.declaration()
+      end,
       ['opts'] = { desc = 'Go To Declaration' },
     },
     ['gi'] = {
-      ['rhs'] = vim.lsp.buf.implementation,
+      ['rhs'] = function()
+        vim.lsp.buf.implementation()
+      end,
       ['opts'] = { desc = 'Go To Implementation' },
     },
     ['gt'] = {
-      ['rhs'] = vim.lsp.buf.type_definition,
+      ['rhs'] = function()
+        vim.lsp.buf.type_definition()
+      end,
       ['opts'] = { desc = 'Go To Type Definition' },
     },
     ['gr'] = {
-      ['rhs'] = vim.lsp.buf.references,
+      ['rhs'] = function()
+        vim.lsp.buf.references()
+      end,
       ['opts'] = { desc = 'Go To References' },
     },
     ['gs'] = {
@@ -33,7 +43,9 @@ return {
       ['opts'] = { desc = 'Go To Signature Help' },
     },
     ['<C-e>n'] = {
-      ['rhs'] = vim.lsp.buf.rename,
+      ['rhs'] = function()
+        vim.lsp.buf.rename()
+      end,
       ['opts'] = { desc = 'Rename' },
     },
     ['<A-S-f>f'] = {
@@ -41,7 +53,9 @@ return {
       ['opts'] = { desc = 'Format' },
     },
     ['<C-q>'] = {
-      ['rhs'] = vim.lsp.buf.code_action,
+      ['rhs'] = function()
+        vim.lsp.buf.code_action()
+      end,
       ['opts'] = { desc = 'Code Actions' },
     },
     ['t]'] = {
@@ -65,7 +79,9 @@ return {
   },
   ['x'] = {
     ['<A-S-f>l'] = {
-      ['rhs'] = vim.lsp.buf.format,
+      ['rhs'] = function()
+        vim.lsp.buf.format()
+      end,
       ['opts'] = { desc = 'Format Selection' },
     },
   },
