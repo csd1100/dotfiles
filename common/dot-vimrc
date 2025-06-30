@@ -41,10 +41,10 @@ nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
 " quickfix navigtion
-nnoremap <C-[> :cprev<CR>zz
-nnoremap <C-]> :cnext<CR>zz
-nnoremap <C-S-[> :lprev<CR>zz
-nnoremap <C-S-]> :lnext<CR>zz
+" nnoremap <C-[> :cprev<CR>zz
+" nnoremap <C-]> :cnext<CR>zz
+" nnoremap <C-S-[> :lprev<CR>zz
+" nnoremap <C-S-]> :lnext<CR>zz
 
 " yank word in reg 6
 nnoremap "" ve"6y
@@ -86,7 +86,7 @@ nnoremap sw :w<CR>
 nnoremap qb :bd<CR>
 
 " quit all buffers except current along with empty buffer
-nnoremap qx :bd\|e#\|bd#<CR>
+nnoremap qx :bd\|e#<CR>
 
 " record everything in register 5
 nnoremap 55 q5
@@ -140,7 +140,7 @@ set showtabline=2
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set foldcolumn=1
+set foldcolumn=0
 set foldlevel=99
 set foldlevelstart=99
 set foldenable

@@ -472,25 +472,18 @@ return {
         },
       }
       local modes = require('modes')
-      modes.create_if_not_present(
-        'GIT',
-        function() end,
-        function() end,
-        '  '
-      )
-      modes.add_maps('GIT', gitModeMaps)
-      ku.map(
-        'n',
-        '<leader>vg',
-        ":lua require('modes').toggle_mode('GIT')<CR>",
-        { desc = 'Toggle GIT Mode' }
-      )
-      ku.map(
-        'n',
-        '<leader>vb',
-        ":lua require('modes').toggle_mode('GIT',{ buffer = vim.api.nvim_get_current_buf()})<CR>",
-        { desc = 'Toggle GIT Mode for Current Buffer' }
-      )
+      local name = 'GIT'
+      modes.create_if_not_present(name, function() end, function() end, '  ')
+      modes.add_maps(name, gitModeMaps)
+      ku.map('n', '<leader>tg', function()
+        require('modes').toggle_mode(name)
+      end, { desc = 'Toggle ' .. name .. ' Mode (Global)' })
+      ku.map('n', '<leader>tb', function()
+        require('modes').toggle_mode(
+          name,
+          { buffer = vim.api.nvim_set_current_buf() }
+        )
+      end, { desc = 'Toggle ' .. name .. ' Mode' })
     end,
   },
   {

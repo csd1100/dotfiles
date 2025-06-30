@@ -116,6 +116,7 @@ return {
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     opts = {
+      log_level = vim.log.levels.DEBUG,
       -- Define your formatters
       formatters_by_ft = {
         lua = { 'stylua' },
@@ -138,6 +139,9 @@ return {
           prepend_args = { '-i', '4', '-ci', '-sr' },
         },
         rustfmt = {
+          options = {
+            default_edition = '2024',
+          },
           prepend_args = { '+nightly' },
         },
       },
@@ -174,82 +178,9 @@ return {
       'stevearc/conform.nvim',
     },
     config = function()
-      -- formatter
       local modes = require('modes')
       modes.create_if_not_present('LSP', function() end, function() end, '{}')
-      local maps = {
-        ['n'] = {
-          ['K'] = {
-            ['rhs'] = function()
-              vim.lsp.buf.hover({ border = ui_borders })
-            end,
-            ['opts'] = { desc = 'Hover Info' },
-          },
-          ['gd'] = {
-            ['rhs'] = vim.lsp.buf.definition,
-            ['opts'] = { desc = 'Go To Definition' },
-          },
-          ['gD'] = {
-            ['rhs'] = vim.lsp.buf.declaration,
-            ['opts'] = { desc = 'Go To Declaration' },
-          },
-          ['gi'] = {
-            ['rhs'] = vim.lsp.buf.implementation,
-            ['opts'] = { desc = 'Go To Implementation' },
-          },
-          ['gt'] = {
-            ['rhs'] = vim.lsp.buf.type_definition,
-            ['opts'] = { desc = 'Go To Type Definition' },
-          },
-          ['gr'] = {
-            ['rhs'] = vim.lsp.buf.references,
-            ['opts'] = { desc = 'Go To References' },
-          },
-          ['gs'] = {
-            ['rhs'] = function()
-              vim.lsp.buf.signature_help({ border = ui_borders })
-            end,
-            ['opts'] = { desc = 'Go To Signature Help' },
-          },
-          ['<C-e>n'] = {
-            ['rhs'] = vim.lsp.buf.rename,
-            ['opts'] = { desc = 'Rename' },
-          },
-          ['<A-S-f>f'] = {
-            ['rhs'] = '<cmd>Format<CR>',
-            ['opts'] = { desc = 'Format' },
-          },
-          ['<C-q>'] = {
-            ['rhs'] = vim.lsp.buf.code_action,
-            ['opts'] = { desc = 'Code Actions' },
-          },
-          ['t]'] = {
-            ['rhs'] = function()
-              vim.diagnostic.jump({ count = 1, float = true })
-            end,
-            ['opts'] = { desc = 'Go to Next Diagnostic Message' },
-          },
-          ['t['] = {
-            ['rhs'] = function()
-              vim.diagnostic.jump({ count = -1, float = true })
-            end,
-            ['opts'] = { desc = 'Go to Previous Diagnostic Message' },
-          },
-          ['Q'] = {
-            ['rhs'] = function()
-              vim.diagnostic.open_float()
-            end,
-            ['opts'] = { desc = 'Show Diagnostic Message' },
-          },
-        },
-        ['x'] = {
-          ['<A-S-f>l'] = {
-            ['rhs'] = vim.lsp.buf.format,
-            ['opts'] = { desc = 'Format Selection' },
-          },
-        },
-      }
-      modes.add_maps('LSP', maps)
+      modes.add_maps('LSP', require('config.lsp-keymaps'))
 
       local cmp_lsp = require('cmp_nvim_lsp')
       local capabilities = vim.tbl_deep_extend(
@@ -261,7 +192,10 @@ return {
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(ev)
-          modes.enable_mode('LSP', { buffer = ev.buf })
+          local client = vim.lsp.get_client_by_id(ev.data.client_id)
+          if client.name ~= 'rust-analyzer' then
+            modes.enable_mode('LSP', { buffer = ev.buf })
+          end
         end,
       })
 
@@ -287,16 +221,26 @@ return {
           },
         },
       })
+
       require('mason-lspconfig').setup({
         ensure_installed = { 'lua_ls', 'taplo' },
         automatic_enable = {
           exclude = {
             'lua_ls',
+            'rust_analyzer',
           },
         },
       })
 
       vim.diagnostic.config({
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = 'E',
+            [vim.diagnostic.severity.WARN] = 'W',
+            [vim.diagnostic.severity.INFO] = 'I',
+            [vim.diagnostic.severity.HINT] = 'H',
+          },
+        },
         -- update_in_insert = true,
         float = {
           focusable = false,
@@ -308,5 +252,10 @@ return {
         },
       })
     end,
+  },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^6', -- Recommended
+    lazy = false, -- This plugin is already lazy
   },
 }
