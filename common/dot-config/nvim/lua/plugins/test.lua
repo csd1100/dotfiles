@@ -83,6 +83,7 @@ return {
           allow_file_types = { 'javascript' },
         }),
         require('rustaceanvim.neotest'),
+        require('neotest-golang'),
       },
     })
   end,
