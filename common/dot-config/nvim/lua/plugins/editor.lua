@@ -1,3 +1,4 @@
+local ku = require('config.keymap-utils')
 return {
   {
     'nkakouros-original/numbers.nvim',
@@ -83,7 +84,7 @@ return {
       highlight = {
         enable = true,
         -- to disable slow treesitter highlight for large files
-        disable = function(lang, buf)
+        disable = function(_, buf)
           local max_filesize = 100 * 1024 -- 100 KB
           local ok, stats =
             pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -164,5 +165,20 @@ return {
     opts = { max_lines = 2 },
     event = 'VeryLazy',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
+  {
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local todo = require('todo-comments')
+      todo.setup({})
+      ku.map('n', ']l', function()
+        todo.jump_next()
+      end, { desc = 'Next todo comment' })
+
+      ku.map('n', '[l', function()
+        todo.jump_prev()
+      end, { desc = 'Previous todo comment' })
+    end,
   },
 }
