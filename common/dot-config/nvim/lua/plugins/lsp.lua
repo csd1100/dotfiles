@@ -116,6 +116,9 @@ return {
         go = { 'gofmt' },
         rust = { 'rustfmt' },
         javascript = { 'prettier' },
+        typescript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescriptreact = { 'prettier' },
         bash = { 'shfmt' },
         zsh = { 'shfmt' },
         markdown = { 'prettier' },
@@ -182,6 +185,11 @@ return {
         vim.lsp.protocol.make_client_capabilities(),
         cmp_lsp.default_capabilities()
       )
+      -- nvim-ufo
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(ev)
@@ -250,5 +258,23 @@ return {
     'mrcjkb/rustaceanvim',
     version = '^6', -- Recommended
     lazy = false, -- This plugin is already lazy
+  },
+  {
+    'kevinhwang91/nvim-ufo',
+    dependencies = {
+      'kevinhwang91/promise-async',
+      'neovim/nvim-lspconfig',
+    },
+    config = function()
+      local ku = require('config.keymap-utils')
+      local ufo = require('ufo')
+      ku.map('n', 'zR', function()
+        ufo.openAllFolds()
+      end, { desc = 'Open All Folds' })
+      ku.map('n', 'zM', function()
+        ufo.closeAllFolds()
+      end, { desc = 'Open All Folds' })
+      ufo.setup()
+    end,
   },
 }
