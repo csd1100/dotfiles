@@ -4,7 +4,7 @@ function gst() {
 function gpl() {
     git pull $args
 }
-function gph() {
+function gpsh() {
     git push $args
 }
 function gsta() {
