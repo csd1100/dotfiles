@@ -38,6 +38,11 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
     unfunction kitty-integration
 fi
 
+# Java
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# TODO: source private scripts misc
+
 # source overrides
 if [ -f "$HOME/env/overrides/misc.zsh" ]; then
     source "$HOME/env/overrides/misc.zsh"

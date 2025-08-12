@@ -12,6 +12,9 @@ export EDITOR=nvim
 # DOCKER PS FORMAT
 export DOCKER_FORMAT="\\nID\\t{{.ID}}\\nIMAGE\\t{{.Image}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.RunningFor}}\\nSTATUS\\t{{.Status}}\\nPORTS\\t{{.Ports}}\\nNAMES\\t{{.Names}}\\n"
 
+# Java
+export SDKMAN_DIR="$HOME/.sdkman"
+
 # GO
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
@@ -39,25 +42,18 @@ export CONFIG="$HOME/.config"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # custom completions
-if [ $(uname -s) = 'Darwin' ]; then
-    fpath=(
-        ~/.rustup/toolchains/stable-aarch64-apple-darwin/share/zsh/site-functions/
-        /opt/homebrew/completions/zsh/
-        /opt/homebrew/Cellar/git/*/share/zsh/site-functions/
-        /opt/homebrew/Cellar/ripgrep/*/share/zsh/site-functions/
-        /opt/homebrew/Cellar/mpv/*/share/zsh/site-functions/
-        /opt/homebrew/Cellar/curl/*/share/zsh/site-functions/
-        /opt/homebrew/Cellar/buf/*/share/zsh/site-functions/
-        /opt/homebrew/Cellar/fd/*/share/zsh/site-functions/
-        $fpath
-    )
-fi
-
 fpath=(
     ~/env/completions
     ~/zsh/zsh-completions/src
+    ~/.rustup/toolchains/stable-*/share/zsh/site-functions
     $fpath
 )
+if [ $(uname -s) = 'Darwin' ]; then
+    fpath=(
+        /opt/homebrew/share/zsh/site-functions
+        $fpath
+    )
+fi
 
 # zsh vi-mode disable clipboard
 # export VI_MODE_DISABLE_CLIPBOARD="true"
@@ -70,6 +66,8 @@ export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 # zsh autosuggest
 # export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
+# TODO: source private scripts env vars
+#
 # source overrides
 if [ -f "$HOME/env/overrides/env-vars.zsh" ]; then
     source "$HOME/env/overrides/env-vars.zsh"

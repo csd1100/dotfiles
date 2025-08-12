@@ -61,6 +61,8 @@ alias d="kitten diff"
 
 # unaliase for bin overrides
 
+# TODO: source private scripts aliases
+
 # source overrides
 if [ -f "$HOME/env/overrides/aliases.zsh" ]; then
     source "$HOME/env/overrides/aliases.zsh"

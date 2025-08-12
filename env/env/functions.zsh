@@ -50,6 +50,8 @@ function _dl() {
 }
 compdef _dl dl
 
+# TODO: source private scripts functions
+
 # source overrides
 if [ -f "$HOME/env/overrides/functions" ]
 then

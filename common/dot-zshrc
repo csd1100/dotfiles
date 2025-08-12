@@ -1,3 +1,7 @@
+if [[ -n "$ZSH_DEBUGRC" ]]; then
+    zmodload zsh/zprof
+fi
+
 function zcompile-many() {
     local f
     for f; do
