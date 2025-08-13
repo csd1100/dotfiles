@@ -41,16 +41,13 @@ ARG=$1
 SIMULATE=$2
 case "$ARG" in
 --darwin)
-    # TODO: add private-scripts/dots/darwin directory to stow
-    declare -a config=("darwin")
+    declare -a config=("darwin" "private-scripts/dotfiles/darwin")
     ;;
 --linux)
-    # TODO: add private-scripts/dots/linux directory to stow
-    declare -a config=("linux")
+    declare -a config=("linux" "private-scripts/dotfiles/linux")
     ;;
 --common)
-    # TODO: add private-scripts/dots/common directory to stow
-    declare -a config=("bin" "env" "common")
+    declare -a config=("bin" "env" "common" "private-scripts/dotfiles/common")
     ;;
 --help)
     echo "$help"
@@ -74,10 +71,20 @@ done
 
 DIR=$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)
 DOTFILES="$(dirname "$DIR")"
+PRIVATE_DOTFILES="private-scripts/dotfiles"
 
 pushd "$DOTFILES" >/dev/null
 for util in "${config[@]}"; do
-    stower "${DOTFILES}" "${util}" "$HOME" "$SIMULATE"
+    SOURCE_DIR="$DOTFILES"
+    TARGET_DIR="$HOME"
+    PACKAGE_TO_STOW="$util"
+
+    if [[ "$util" == "$PRIVATE_DOTFILES"* ]]; then
+        SOURCE_DIR=$(dirname "$util")
+        PACKAGE_TO_STOW=$(basename "$util")
+    fi
+
+    stower "${SOURCE_DIR}" "${PACKAGE_TO_STOW}" "${TARGET_DIR}" "$SIMULATE"
 done
 popd >/dev/null
 
