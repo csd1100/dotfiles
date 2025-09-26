@@ -7,6 +7,7 @@ ORPHAN 4;3;37
 .class 37
 .log 3;37
 .bkp 37
+.lock 37
 *~ 37
 
 .sh 3;33
@@ -42,7 +43,19 @@ ORPHAN 4;3;37
 *Jenkinsfile 33
 *Dockerfile 33
 
-.text 95
-.txt 95
-.md 95
-.asciidoc 95
+.text 35
+.txt 35
+.md 35
+.asciidoc 35
+
+.rar 93
+.zip 93
+.7z 93
+.gz 93
+.xz 93
+
+.mp4 95
+.mkv 95
+.mp3 95
+.srt 95
+.vtt 95
