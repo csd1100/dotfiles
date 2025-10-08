@@ -9,6 +9,7 @@ Set-PSReadLineOption -ContinuationPrompt ">"
 Set-PSReadLineOption -BellStyle Visual
 . $env:USERPROFILE\Documents\PowerShell\env\env-vars.ps1
 . $env:USERPROFILE\Documents\PowerShell\env\aliases.ps1
+. $env:USERPROFILE\Documents\PowerShell\env\functions.ps1
 oh-my-posh init pwsh --config ~/dotfiles/windows/powershell/omp/config.omp.json | Invoke-Expression
 $Global:__OriginalPrompt = $function:Prompt
 

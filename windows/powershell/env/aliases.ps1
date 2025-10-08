@@ -1,3 +1,4 @@
+#git
 function gst() {
     git status $args
 }
@@ -13,17 +14,23 @@ function gsta() {
 function gstd() {
     git stash drop $args
 }
+function gsta() {
+    git stash apply $args
+}
 function gstp() {
     git stash pop $args
 }
 function gcl() {
     git clone $args
 }
-function gc() {
-    git checkout $args
+function gck() {
+    git checkout; git checkout $args
 }
 function gd() {
     git diff $args
+}
+function gdt() {
+    git difftool $args
 }
 function ga() {
     git add $args
@@ -44,15 +51,20 @@ function glog() {
     git log --graph $args
 }
 
+# exit
 function qq() {
     exit
 }
 
+# docker
 function dps() {
     docker ps --format="$env:DOCKER_FORMAT" $args
 }
 function dc() {
     docker compose $args
+}
+function dcps() {
+    docker compose ps $args
 }
 function dcup() {
     docker compose up -d $args
@@ -61,20 +73,13 @@ function dcdn() {
     docker compose down -v $args
 }
 function dcst() {
+    docker compose start $args
+}
+function dcstp() {
     docker compose stop $args
 }
 
+# linux compat
 function which {
     (Get-Command $args).Source
-}
-
-function finder {
-    param (
-        [string]$Pattern
-    )
-    $dir = fd -L --full-path --min-depth 1 -d 3 -t d ".*$Pattern.*" "$env:USERPROFILE/work" | fzf
-    if (-not [string]::IsNullOrWhiteSpace($dir)) {
-        echo "cd $dir"
-        cd $dir
-    }
 }

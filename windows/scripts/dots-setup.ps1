@@ -3,6 +3,7 @@ New-Item -Path $env:USERPROFILE/Documents/PowerShell/Microsoft.PowerShell_profil
 mkdir -Force $env:USERPROFILE/Documents/PowerShell/env
 New-Item -Path $env:USERPROFILE/Documents/PowerShell/env/env-vars.ps1 -ItemType SymbolicLink -Value $env:USERPROFILE/dotfiles/windows/powershell/env/env-vars.ps1 -Force
 New-Item -Path $env:USERPROFILE/Documents/PowerShell/env/aliases.ps1 -ItemType SymbolicLink -Value $env:USERPROFILE/dotfiles/windows/powershell/env/aliases.ps1 -Force
+New-Item -Path $env:USERPROFILE/Documents/PowerShell/env/functions.ps1 -ItemType SymbolicLink -Value $env:USERPROFILE/dotfiles/windows/powershell/env/functions.ps1 -Force
 # windows powershell
 New-Item -Path $env:USERPROFILE/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1 -ItemType SymbolicLink -Value $env:USERPROFILE/dotfiles/windows/powershell/Microsoft.PowerShell_profile.ps1 -Force
 mkdir -Force $env:USERPROFILE/Documents/WindowsPowerShell/env
