@@ -1,367 +1,367 @@
 {
-  "$help": "https://aka.ms/terminal-documentation",
-  "$schema": "https://aka.ms/terminal-profiles-schema-preview",
-  "actions": [
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 4
-      },
-      "id": "User.switchToTab.F747588A"
-    },
-    {
-      "command": {
-        "action": "scrollToMark",
-        "direction": "previous"
-      },
-      "id": "User.scrollToMark.D3F0B923"
-    },
-    {
-      "command": {
-        "action": "scrollToMark",
-        "direction": "next"
-      },
-      "id": "User.scrollToMark.2A0DA8E0"
-    },
-    {
-      "command": {
-        "action": "selectOutput",
-        "direction": "prev"
-      },
-      "id": "User.selectOutput.D3F0B923"
-    },
-    {
-      "command": {
-        "action": "selectOutput",
-        "direction": "next"
-      },
-      "id": "User.selectOutput.2A0DA8E0"
-    },
-    {
-      "command": {
-        "action": "selectCommand",
-        "direction": "next"
-      },
-      "id": "User.selectCommand.2A0DA8E0"
-    },
-    {
-      "command": {
-        "action": "selectCommand",
-        "direction": "prev"
-      },
-      "id": "User.selectCommand.D3F0B923"
-    },
-    {
-      "command": {
-        "action": "newTab"
-      },
-      "id": "User.newTab.5DEADB41"
-    },
-    {
-      "command": "paste",
-      "id": "User.paste"
-    },
-    {
-      "command": {
-        "action": "adjustOpacity",
-        "opacity": -25,
-        "relative": true
-      },
-      "id": "User.adjustOpacity.6DBF98E3"
-    },
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 1
-      },
-      "id": "User.switchToTab.2A0DA8E0"
-    },
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 0
-      },
-      "id": "User.switchToTab.D3F0B923"
-    },
-    {
-      "command": {
-        "action": "adjustOpacity",
-        "opacity": 100,
-        "relative": false
-      },
-      "id": "User.adjustOpacity.A7506725"
-    },
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 7
-      },
-      "id": "User.switchToTab.D7681B66"
-    },
-    {
-      "command": {
-        "action": "nextTab"
-      },
-      "id": "User.nextTab.0"
-    },
-    {
-      "command": {
-        "action": "adjustOpacity",
-        "opacity": 25,
-        "relative": true
-      },
-      "id": "User.adjustOpacity.D08B71C0"
-    },
-    {
-      "command": {
-        "action": "splitPane",
-        "split": "auto",
-        "splitMode": "duplicate"
-      },
-      "id": "User.splitPane.A6751878"
-    },
-    {
-      "command": "find",
-      "id": "User.find"
-    },
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 2
-      },
-      "id": "User.switchToTab.87C324ED"
-    },
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 5
-      },
-      "id": "User.switchToTab.75247157"
-    },
-    {
-      "command": {
-        "action": "prevTab"
-      },
-      "id": "User.prevTab.0"
-    },
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 3
-      },
-      "id": "User.switchToTab.6CD791B"
-    },
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 6
-      },
-      "id": "User.switchToTab.787314EB"
-    },
-    {
-      "command": {
-        "action": "switchToTab",
-        "index": 4294967295
-      },
-      "id": "User.switchToTab.9CB19EED"
-    }
-  ],
-  "alwaysShowTabs": true,
-  "copyFormatting": "none",
-  "copyOnSelect": true,
-  "defaultProfile": "{2789402b-b27b-4bce-99a0-0156c4886397}",
-  "disabledProfileSources": [
-    "Windows.Terminal.Wsl",
-    "Windows.Terminal.Azure",
-    "Windows.Terminal.VisualStudio",
-    "Windows.Terminal.PowershellCore"
-  ],
-  "keybindings": [
-    {
-      "id": "User.switchToTab.F747588A",
-      "keys": "alt+5"
-    },
-    {
-      "id": "User.switchToTab.75247157",
-      "keys": "alt+6"
-    },
-    {
-      "id": "User.scrollToMark.D3F0B923",
-      "keys": "ctrl+up"
-    },
-    {
-      "id": "Terminal.DuplicateTab",
-      "keys": "alt+t"
-    },
-    {
-      "id": "User.scrollToMark.2A0DA8E0",
-      "keys": "ctrl+down"
-    },
-    {
-      "id": "User.switchToTab.D7681B66",
-      "keys": "alt+8"
-    },
-    {
-      "id": "User.switchToTab.2A0DA8E0",
-      "keys": "alt+2"
-    },
-    {
-      "id": "User.adjustOpacity.A7506725",
-      "keys": "alt+9"
-    },
-    {
-      "id": "User.adjustOpacity.6DBF98E3",
-      "keys": "alt+shift+down"
-    },
-    {
-      "id": "Terminal.CopyToClipboard",
-      "keys": "ctrl+c"
-    },
-    {
-      "id": "User.adjustOpacity.D08B71C0",
-      "keys": "alt+shift+up"
-    },
-    {
-      "id": "Terminal.CopyToClipboard",
-      "keys": "alt+c"
-    },
-    {
-      "id": "User.paste",
-      "keys": "alt+v"
-    },
-    {
-      "id": "User.splitPane.A6751878",
-      "keys": "alt+shift+d"
-    },
-    {
-      "id": "User.find",
-      "keys": "f2"
-    },
-    {
-      "id": "User.nextTab.0",
-      "keys": "alt+right"
-    },
-    {
-      "id": "User.switchToTab.87C324ED",
-      "keys": "alt+3"
-    },
-    {
-      "id": "User.prevTab.0",
-      "keys": "alt+left"
-    },
-    {
-      "id": "User.switchToTab.D3F0B923",
-      "keys": "alt+1"
-    },
-    {
-      "id": "User.switchToTab.6CD791B",
-      "keys": "alt+4"
-    },
-    {
-      "id": "User.switchToTab.787314EB",
-      "keys": "alt+7"
-    },
-    {
-      "id": "Terminal.OpenNewTab",
-      "keys": "alt+shift+t"
-    }
-  ],
-  "newTabMenu": [
-    {
-      "type": "remainingProfiles"
-    }
-  ],
-  "newTabPosition": "afterCurrentTab",
-  "profiles": {
-    "defaults": {
-      "autoMarkPrompts": true,
-      "bellStyle": "taskbar",
-      "colorScheme": "Colors",
-      "cursorShape": "vintage",
-      "experimental.retroTerminalEffect": false,
-      "font": {
-        "face": "CommitMono Nerd Font",
-        "features": {
-          "cv01": 1,
-          "cv02": 1,
-          "cv06": 1,
-          "cv08": 1,
-          "cv11": 1,
-          "liga": 1,
-          "ss01": 1,
-          "ss02": 1,
-          "ss03": 1,
-          "ss04": 1,
-          "ss05": 1
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema-preview",
+    "actions": [
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 4
+            },
+            "id": "User.switchToTab.F747588A"
         },
-        "size": 16,
-        "weight": "normal"
-      },
-      "opacity": 60,
-      "rightClickContextMenu": true,
-      "showMarksOnScrollbar": true,
-      "useAcrylic": true
+        {
+            "command": {
+                "action": "scrollToMark",
+                "direction": "previous"
+            },
+            "id": "User.scrollToMark.D3F0B923"
+        },
+        {
+            "command": {
+                "action": "scrollToMark",
+                "direction": "next"
+            },
+            "id": "User.scrollToMark.2A0DA8E0"
+        },
+        {
+            "command": {
+                "action": "selectOutput",
+                "direction": "prev"
+            },
+            "id": "User.selectOutput.D3F0B923"
+        },
+        {
+            "command": {
+                "action": "selectOutput",
+                "direction": "next"
+            },
+            "id": "User.selectOutput.2A0DA8E0"
+        },
+        {
+            "command": {
+                "action": "selectCommand",
+                "direction": "next"
+            },
+            "id": "User.selectCommand.2A0DA8E0"
+        },
+        {
+            "command": {
+                "action": "selectCommand",
+                "direction": "prev"
+            },
+            "id": "User.selectCommand.D3F0B923"
+        },
+        {
+            "command": {
+                "action": "newTab"
+            },
+            "id": "User.newTab.5DEADB41"
+        },
+        {
+            "command": "paste",
+            "id": "User.paste"
+        },
+        {
+            "command": {
+                "action": "adjustOpacity",
+                "opacity": -25,
+                "relative": true
+            },
+            "id": "User.adjustOpacity.6DBF98E3"
+        },
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 1
+            },
+            "id": "User.switchToTab.2A0DA8E0"
+        },
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 0
+            },
+            "id": "User.switchToTab.D3F0B923"
+        },
+        {
+            "command": {
+                "action": "adjustOpacity",
+                "opacity": 100,
+                "relative": false
+            },
+            "id": "User.adjustOpacity.A7506725"
+        },
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 7
+            },
+            "id": "User.switchToTab.D7681B66"
+        },
+        {
+            "command": {
+                "action": "nextTab"
+            },
+            "id": "User.nextTab.0"
+        },
+        {
+            "command": {
+                "action": "adjustOpacity",
+                "opacity": 25,
+                "relative": true
+            },
+            "id": "User.adjustOpacity.D08B71C0"
+        },
+        {
+            "command": {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.A6751878"
+        },
+        {
+            "command": "find",
+            "id": "User.find"
+        },
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 2
+            },
+            "id": "User.switchToTab.87C324ED"
+        },
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 5
+            },
+            "id": "User.switchToTab.75247157"
+        },
+        {
+            "command": {
+                "action": "prevTab"
+            },
+            "id": "User.prevTab.0"
+        },
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 3
+            },
+            "id": "User.switchToTab.6CD791B"
+        },
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 6
+            },
+            "id": "User.switchToTab.787314EB"
+        },
+        {
+            "command": {
+                "action": "switchToTab",
+                "index": 4294967295
+            },
+            "id": "User.switchToTab.9CB19EED"
+        }
+    ],
+    "alwaysShowTabs": true,
+    "copyFormatting": "none",
+    "copyOnSelect": true,
+    "defaultProfile": "{2789402b-b27b-4bce-99a0-0156c4886397}",
+    "disabledProfileSources": [
+        "Windows.Terminal.Wsl",
+        "Windows.Terminal.Azure",
+        "Windows.Terminal.VisualStudio",
+        "Windows.Terminal.PowershellCore"
+    ],
+    "keybindings": [
+        {
+            "id": "User.switchToTab.F747588A",
+            "keys": "alt+5"
+        },
+        {
+            "id": "User.switchToTab.75247157",
+            "keys": "alt+6"
+        },
+        {
+            "id": "User.scrollToMark.D3F0B923",
+            "keys": "ctrl+up"
+        },
+        {
+            "id": "Terminal.DuplicateTab",
+            "keys": "alt+t"
+        },
+        {
+            "id": "User.scrollToMark.2A0DA8E0",
+            "keys": "ctrl+down"
+        },
+        {
+            "id": "User.switchToTab.D7681B66",
+            "keys": "alt+8"
+        },
+        {
+            "id": "User.switchToTab.2A0DA8E0",
+            "keys": "alt+2"
+        },
+        {
+            "id": "User.adjustOpacity.A7506725",
+            "keys": "alt+9"
+        },
+        {
+            "id": "User.adjustOpacity.6DBF98E3",
+            "keys": "alt+shift+down"
+        },
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+c"
+        },
+        {
+            "id": "User.adjustOpacity.D08B71C0",
+            "keys": "alt+shift+up"
+        },
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "alt+c"
+        },
+        {
+            "id": "User.paste",
+            "keys": "alt+v"
+        },
+        {
+            "id": "User.splitPane.A6751878",
+            "keys": "alt+shift+d"
+        },
+        {
+            "id": "User.find",
+            "keys": "f2"
+        },
+        {
+            "id": "User.nextTab.0",
+            "keys": "alt+right"
+        },
+        {
+            "id": "User.switchToTab.87C324ED",
+            "keys": "alt+3"
+        },
+        {
+            "id": "User.prevTab.0",
+            "keys": "alt+left"
+        },
+        {
+            "id": "User.switchToTab.D3F0B923",
+            "keys": "alt+1"
+        },
+        {
+            "id": "User.switchToTab.6CD791B",
+            "keys": "alt+4"
+        },
+        {
+            "id": "User.switchToTab.787314EB",
+            "keys": "alt+7"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "alt+shift+t"
+        }
+    ],
+    "newTabMenu": [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "newTabPosition": "afterCurrentTab",
+    "profiles": {
+        "defaults": {
+            "autoMarkPrompts": true,
+            "bellStyle": "taskbar",
+            "colorScheme": "Colors",
+            "cursorShape": "vintage",
+            "experimental.retroTerminalEffect": false,
+            "font": {
+                "face": "CommitMono",
+                "features": {
+                    "cv01": 1,
+                    "cv02": 1,
+                    "cv06": 1,
+                    "cv08": 1,
+                    "cv11": 1,
+                    "liga": 1,
+                    "ss01": 1,
+                    "ss02": 1,
+                    "ss03": 1,
+                    "ss04": 1,
+                    "ss05": 1
+                },
+                "size": 16,
+                "weight": "normal"
+            },
+            "opacity": 60,
+            "rightClickContextMenu": true,
+            "showMarksOnScrollbar": true,
+            "useAcrylic": true
+        },
+        "list": [
+            {
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell"
+            },
+            {
+                "commandline": "\"C:\\Windows\\System32\\wsl.exe\" -d Ubuntu-24.04",
+                "guid": "{2789402b-b27b-4bce-99a0-0156c4886397}",
+                "hidden": false,
+                "icon": "https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png",
+                "name": "Ubuntu-24.04",
+                "startingDirectory": "~"
+            },
+            {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": false,
+                "name": "Git Bash",
+                "source": "Git"
+            },
+            {
+                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+                "hidden": false,
+                "name": "Command Prompt"
+            }
+        ]
     },
-    "list": [
-      {
-        "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
-        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-        "hidden": false,
-        "name": "Windows PowerShell"
-      },
-      {
-        "commandline": "\"C:\\Windows\\System32\\wsl.exe\" -d Ubuntu-24.04",
-        "guid": "{2789402b-b27b-4bce-99a0-0156c4886397}",
-        "hidden": false,
-        "icon": "https://assets.ubuntu.com/v1/49a1a858-favicon-32x32.png",
-        "name": "Ubuntu-24.04",
-        "startingDirectory": "~"
-      },
-      {
-        "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-        "hidden": false,
-        "name": "Git Bash",
-        "source": "Git"
-      },
-      {
-        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-        "hidden": false,
-        "name": "Command Prompt"
-      }
-    ]
-  },
-  "schemes": [
-    {
-      "background": "#1D1D1D",
-      "black": "#24292E",
-      "blue": "#BD4802",
-      "brightBlack": "#5F717A",
-      "brightBlue": "#FD9353",
-      "brightCyan": "#00E5FF",
-      "brightGreen": "#1DE9B6",
-      "brightPurple": "#A888FF",
-      "brightRed": "#FC618D",
-      "brightWhite": "#F7F1FF",
-      "brightYellow": "#F3B100",
-      "cursorColor": "#E9FF5E",
-      "cyan": "#00BCD4",
-      "foreground": "#F7F1FF",
-      "green": "#47BC9B",
-      "name": "Colors",
-      "purple": "#AB9DF2",
-      "red": "#FB1E5C",
-      "selectionBackground": "#69676C",
-      "white": "#9E9E9E",
-      "yellow": "#C58F00"
-    }
-  ],
-  "showTabsInTitlebar": true,
-  "showTerminalTitleInTitlebar": true,
-  "tabSwitcherMode": "mru",
-  "tabWidthMode": "equal",
-  "themes": [],
-  "trimBlockSelection": true,
-  "trimPaste": true,
-  "useAcrylicInTabRow": false,
-  "warning.confirmCloseAllTabs": true
+    "schemes": [
+        {
+            "background": "#1D1D1D",
+            "black": "#24292E",
+            "blue": "#BD4802",
+            "brightBlack": "#5F717A",
+            "brightBlue": "#FD9353",
+            "brightCyan": "#00E5FF",
+            "brightGreen": "#1DE9B6",
+            "brightPurple": "#A888FF",
+            "brightRed": "#FC618D",
+            "brightWhite": "#F7F1FF",
+            "brightYellow": "#F3B100",
+            "cursorColor": "#E9FF5E",
+            "cyan": "#00BCD4",
+            "foreground": "#F7F1FF",
+            "green": "#47BC9B",
+            "name": "Colors",
+            "purple": "#AB9DF2",
+            "red": "#FB1E5C",
+            "selectionBackground": "#69676C",
+            "white": "#9E9E9E",
+            "yellow": "#C58F00"
+        }
+    ],
+    "showTabsInTitlebar": true,
+    "showTerminalTitleInTitlebar": true,
+    "tabSwitcherMode": "mru",
+    "tabWidthMode": "equal",
+    "themes": [],
+    "trimBlockSelection": true,
+    "trimPaste": true,
+    "useAcrylicInTabRow": false,
+    "warning.confirmCloseAllTabs": true
 }

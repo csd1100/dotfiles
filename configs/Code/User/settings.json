@@ -23,7 +23,6 @@
     //   "editorWarning.foreground": "#00000000",
     //   "editorInfo.foreground": "#00000000"
   },
-
   "telemetry.telemetryLevel": "off",
   "gitlens.telemetry.enabled": false,
   "redhat.telemetry.enabled": false,
@@ -32,8 +31,7 @@
   "files.autoSaveDelay": 1500,
   "files.autoSaveWhenNoErrors": true,
   "editor.fontSize": 18,
-  "editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'cv01', 'cv02','cv06', 'cv08'", //aefgy
-  "editor.fontFamily": "'CommitMono Nerd Font', 'JetbrainsMono Nerd Font Mono', 'VictorMono Nerd Font Mono', monospace",
+  "editor.fontFamily": "'CommitMono', 'Jetbrains Mono', 'Victor Mono', 'Symbols Nerd Font Mono', monospace",
   "editor.tabSize": 4,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "all",
@@ -53,7 +51,6 @@
   "editor.inlayHints.enabled": "off",
   "debug.toolBarLocation": "commandCenter",
   "debug.allowBreakpointsEverywhere": true,
-
   "vim.leader": "<space>",
   "vim.vimrc.enable": true,
   "vim.incsearch": true,
@@ -194,24 +191,20 @@
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
   },
-
   "path-intellisense.autoTriggerNextSuggestion": true,
   "path-intellisense.showHiddenFiles": true,
-
   "json.schemas": [
     {
       "fileMatch": ["**/terrain.toml"],
       "url": "https://raw.githubusercontent.com/csd1100/terrainium/refs/heads/main/schema/terrain-schema.json"
     }
   ],
-
   "eslint.validate": [
     "typescript",
     "typescriptreact",
     "javascript",
     "javascriptreact"
   ],
-
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
