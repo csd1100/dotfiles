@@ -19,8 +19,8 @@ nmap <C-,> <Action>(ShowSettings)<ESC>
 
 nmap <Shift><Shift> <Action>(GotoFile)<ESC>
 "nmap <C-S-f> <Action>(SearchEverywhere)<ESC>
-nmap <C-f> <Action>(FindModal)<ESC>
-nmap <C-S-h> <Action>(Replace)<ESC>
+nmap <C-f> <Action>(FindModal)
+nmap <C-S-h> <Action>(Replace)
 nmap <C-S-f> <Action>(FindInPath)<ESC>
 
 nmap <C-p> <Action>(Forward)<ESC>
