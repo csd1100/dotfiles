@@ -6,6 +6,7 @@ set showmode
 set which-key
 set easymotion
 set timeoutlen=3000
+set ideajoin
 let g:WhichKey_DefaultDelay = 1500
 
 vnoremap " <ESC>`>a"<ESC>`<i"
