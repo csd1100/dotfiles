@@ -1,8 +1,8 @@
 {
+  "workbench.activityBar.location": "top",
   "workbench.preferredDarkColorTheme": "Vitesse Dark",
   "workbench.preferredLightColorTheme": "Vitesse Light",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.productIconTheme": "icons-carbon",
   "workbench.colorCustomizations": {
     // color customization for Dark Modern
     "[Default Dark Modern]": {
@@ -217,6 +217,9 @@
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer"
