@@ -1,8 +1,9 @@
 {
   "workbench.activityBar.location": "top",
+  "workbench.productIconTheme": "fluent-icons",
   "workbench.preferredDarkColorTheme": "Vitesse Dark",
   "workbench.preferredLightColorTheme": "Vitesse Light",
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "symbols",
   "workbench.colorCustomizations": {
     // color customization for Dark Modern
     "[Default Dark Modern]": {
@@ -239,5 +240,6 @@
   },
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml"
-  }
+  },
+  "symbols.hidesExplorerArrows": true
 }

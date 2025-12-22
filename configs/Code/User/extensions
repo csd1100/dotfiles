@@ -1,19 +1,14 @@
-aaron-bond.better-comments
-antfu.icons-carbon
 antfu.theme-vitesse
 bradlc.vscode-tailwindcss
-christian-kohler.path-intellisense
-dart-code.dart-code
-dart-code.flutter
 dbaeumer.vscode-eslint
 eamodio.gitlens
 esbenp.prettier-vscode
 foxundermoon.shell-format
 golang.go
 gruntfuggly.todo-tree
-hbenl.vscode-mocha-test-adapter
-hbenl.vscode-test-explorer
+mechatroner.rainbow-csv
 miguelsolorio.fluent-icons
+ms-azuretools.vscode-containers
 ms-azuretools.vscode-docker
 ms-playwright.playwright
 ms-python.black-formatter
@@ -22,9 +17,7 @@ ms-python.python
 ms-vscode.cpptools
 ms-vscode.powershell
 ms-vscode.test-adapter-converter
-pkief.material-icon-theme
 prisma.prisma
-qwtel.sqlite-viewer
 redhat.ansible
 redhat.java
 redhat.vscode-xml
@@ -32,7 +25,6 @@ redhat.vscode-yaml
 rust-lang.rust-analyzer
 tamasfe.even-better-toml
 tauri-apps.tauri-vscode
-timonwong.shellcheck
 vadimcn.vscode-lldb
 vitest.explorer
 vscjava.vscode-gradle
@@ -42,3 +34,4 @@ vscjava.vscode-java-pack
 vscjava.vscode-java-test
 vscjava.vscode-maven
 vscodevim.vim
+wilfriedago.vscode-symbols-icon-theme
