@@ -156,30 +156,32 @@
           community.general.homebrew_tap:
             name:
               - FelixKratz/formulae
-              - koekeishiya/formulae
+              # - koekeishiya/formulae
+              - nikitabobko/tap
 
         - name: Install yabai, skhd, sketchybar
           community.general.homebrew:
             name:
-              - yabai
+              # - yabai
+              # - skhd
               - borders
-              - skhd
               - sketchybar
+              - aerospace
 
-        - name: Get yabai path
-          ansible.builtin.command: which yabai
-          register: yabai_path
-          changed_when: yabai_path.rc != 0
+        # - name: Get yabai path
+        #   ansible.builtin.command: which yabai
+        #   register: yabai_path
+        #   changed_when: yabai_path.rc != 0
 
-        - name: Run visudo checksum to start yabai with script-additions
-          ansible.builtin.command: /usr/bin/shasum -a 256 {{ yabai_path.stdout }}
-          register: shasum_yabai
-          changed_when: shasum_yabai.rc != 0
+        # - name: Run visudo checksum to start yabai with script-additions
+        #   ansible.builtin.command: /usr/bin/shasum -a 256 {{ yabai_path.stdout }}
+        #   register: shasum_yabai
+        #   changed_when: shasum_yabai.rc != 0
 
-        - name: Create sudoers file
-          become: true
-          ansible.builtin.lineinfile:
-            path: /private/etc/sudoers.d/yabai
-            line: "{{ ansible_user_id }} ALL=(root) NOPASSWD: sha256:{{ shasum_yabai.stdout }} --load-sa"
-            create: true
-            mode: "0440"
+        # - name: Create sudoers file
+        #   become: true
+        #   ansible.builtin.lineinfile:
+        #     path: /private/etc/sudoers.d/yabai
+        #     line: "{{ ansible_user_id }} ALL=(root) NOPASSWD: sha256:{{ shasum_yabai.stdout }} --load-sa"
+        #     create: true
+        #     mode: "0440"

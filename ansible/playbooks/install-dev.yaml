@@ -315,7 +315,6 @@
           when: ansible_system == "Darwin"
           community.general.homebrew:
             name: nvim
-            state: head
 
     - name: Install VSCodium
       tags:

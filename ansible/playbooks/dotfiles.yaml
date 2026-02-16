@@ -131,22 +131,22 @@
         state: directory
         mode: '0755'
 
-    - name: Darwin start yabai, skhd, sketchybar
-      when: ansible_os_family == "Darwin"
-      tags:
-        - de
-      block:
-        - name: Enable skhd
-          ansible.builtin.command: skhd --start-service
-          args:
-            creates: ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
+    # - name: Darwin start yabai, skhd, sketchybar
+    #   when: ansible_os_family == "Darwin"
+    #   tags:
+    #     - de
+    #   block:
+    #     - name: Enable skhd
+    #       ansible.builtin.command: skhd --start-service
+    #       args:
+    #         creates: ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
 
-        - name: Enable yabai
-          ansible.builtin.command: yabai --start-service
-          args:
-            creates: ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
+    #     - name: Enable yabai
+    #       ansible.builtin.command: yabai --start-service
+    #       args:
+    #         creates: ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
 
-        - name: Enable sketchybar
-          ansible.builtin.command: brew services start sketchybar
-          args:
-            creates: ~/Library/LaunchAgents/homebrew.mxcl.sketchybar.plist
+    #     - name: Enable sketchybar
+    #       ansible.builtin.command: brew services start sketchybar
+    #       args:
+    #         creates: ~/Library/LaunchAgents/homebrew.mxcl.sketchybar.plist
