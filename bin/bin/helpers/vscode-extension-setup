@@ -26,7 +26,7 @@ download_vsix() {
 }
 
 # VSIX_EXTENSIONS=("antfu.theme-vitesse", "sallar.vscode-duotone-dark", "ms-vscode.cpptools")
-VSIX_EXTENSIONS=()
+VSIX_EXTENSIONS=("antfu.theme-vitesse", "sallar.vscode-duotone-dark", "ms-vscode.cpptools")
 
 install_extensions() {
     while IFS= read -r line; do
