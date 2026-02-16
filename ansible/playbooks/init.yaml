@@ -15,6 +15,16 @@
       tags:
         - always
 
+    - name: Brew dependencies
+      become: false
+      when: (ansible_os_family == 'Darwin')
+      tags:
+        - always
+      community.general.homebrew:
+        name:
+          - gnu-tar
+        state: present
+
     - name: Dnf Update
       become: true
       when: (ansible_os_family == 'RedHat')

@@ -106,7 +106,7 @@
           when: ansible_os_family == 'Darwin'
           become: true
           ansible.builtin.file:
-            src: "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk"
+            src: "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk"
             dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
             state: link
 
