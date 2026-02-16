@@ -1,9 +1,10 @@
 {
   "workbench.activityBar.location": "top",
-  "workbench.productIconTheme": "fluent-icons",
-  "workbench.preferredDarkColorTheme": "Vitesse Dark",
+  "workbench.colorTheme": "DuoTone Dark Forest",
+  "workbench.preferredDarkColorTheme": "DuoTone Dark Forest",
   "workbench.preferredLightColorTheme": "Vitesse Light",
   "workbench.iconTheme": "symbols",
+  "workbench.productIconTheme": "fluent-icons",
   "workbench.colorCustomizations": {
     // color customization for Dark Modern
     "[Default Dark Modern]": {
@@ -17,8 +18,8 @@
       "sideBarSectionHeader.background": "#111",
       "statusBar.background": "#111",
       "editor.background": "#111",
-      "terminal.background": "#111"
-    }
+      "terminal.background": "#111",
+    },
     // remove error indicators in case they are irritating
     //   "editorError.foreground": "#00000000",
     //   "editorWarning.foreground": "#00000000",
@@ -36,7 +37,6 @@
   "editor.tabSize": 4,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "all",
-  "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.rulers": [80, 120, 140],
@@ -48,6 +48,7 @@
   "editor.acceptSuggestionOnEnter": "smart",
   "editor.guides.bracketPairs": true,
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.cursorBlinking": "solid",
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.inlayHints.enabled": "off",
   "debug.toolBarLocation": "commandCenter",
@@ -63,40 +64,40 @@
   "vim.insertModeKeyBindings": [
     {
       "before": ["j", "j"],
-      "after": ["<ESC>"]
+      "after": ["<ESC>"],
     },
     {
       "before": ["k", "k"],
-      "after": ["<ESC>"]
-    }
+      "after": ["<ESC>"],
+    },
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     // change focus between splits
     {
       "before": ["<leader>", "h"],
-      "commands": ["workbench.action.navigateLeft"]
+      "commands": ["workbench.action.navigateLeft"],
     },
     {
       "before": ["<leader>", "j"],
-      "commands": ["workbench.action.navigateDown"]
+      "commands": ["workbench.action.navigateDown"],
     },
     {
       "before": ["<leader>", "k"],
-      "commands": ["workbench.action.navigateUp"]
+      "commands": ["workbench.action.navigateUp"],
     },
     {
       "before": ["<leader>", "l"],
-      "commands": ["workbench.action.navigateRight"]
-    }
+      "commands": ["workbench.action.navigateRight"],
+    },
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
     {
       "before": ["K"],
-      "commands": ["editor.action.moveLinesUpAction"]
+      "commands": ["editor.action.moveLinesUpAction"],
     },
     {
       "before": ["J"],
-      "commands": ["editor.action.moveLinesDownAction"]
+      "commands": ["editor.action.moveLinesDownAction"],
     },
     // Surround Selection with <>
     {
@@ -105,10 +106,10 @@
         {
           "command": "editor.action.insertSnippet",
           "args": {
-            "snippet": "<${TM_SELECTED_TEXT}>"
-          }
-        }
-      ]
+            "snippet": "<${TM_SELECTED_TEXT}>",
+          },
+        },
+      ],
     },
     // Surround Selection with ''
     {
@@ -117,10 +118,10 @@
         {
           "command": "editor.action.insertSnippet",
           "args": {
-            "snippet": "'${TM_SELECTED_TEXT}'"
-          }
-        }
-      ]
+            "snippet": "'${TM_SELECTED_TEXT}'",
+          },
+        },
+      ],
     },
     // Surround Selection with ""
     {
@@ -129,10 +130,10 @@
         {
           "command": "editor.action.insertSnippet",
           "args": {
-            "snippet": "\"${TM_SELECTED_TEXT}\""
-          }
-        }
-      ]
+            "snippet": "\"${TM_SELECTED_TEXT}\"",
+          },
+        },
+      ],
     },
     // Surround Selection with ''
     {
@@ -141,10 +142,10 @@
         {
           "command": "editor.action.insertSnippet",
           "args": {
-            "snippet": "`${TM_SELECTED_TEXT}`"
-          }
-        }
-      ]
+            "snippet": "`${TM_SELECTED_TEXT}`",
+          },
+        },
+      ],
     },
     // Surround Selection with ()
     {
@@ -153,10 +154,10 @@
         {
           "command": "editor.action.insertSnippet",
           "args": {
-            "snippet": "(${TM_SELECTED_TEXT})"
-          }
-        }
-      ]
+            "snippet": "(${TM_SELECTED_TEXT})",
+          },
+        },
+      ],
     },
     // Surround Selection with {}
     {
@@ -165,10 +166,10 @@
         {
           "command": "editor.action.insertSnippet",
           "args": {
-            "snippet": "{${TM_SELECTED_TEXT}}"
-          }
-        }
-      ]
+            "snippet": "{${TM_SELECTED_TEXT}}",
+          },
+        },
+      ],
     },
     // Surround Selection with []
     {
@@ -177,69 +178,71 @@
         {
           "command": "editor.action.insertSnippet",
           "args": {
-            "snippet": "[${TM_SELECTED_TEXT}]"
-          }
-        }
-      ]
-    }
+            "snippet": "[${TM_SELECTED_TEXT}]",
+          },
+        },
+      ],
+    },
   ],
   "vim.handleKeys": {
     "<C-f>": false,
     "<C-right>": false,
-    "<C-left>": false
+    "<C-left>": false,
   },
   // To improve performance
   "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
+    "vscodevim.vim": 1,
   },
   "path-intellisense.autoTriggerNextSuggestion": true,
   "path-intellisense.showHiddenFiles": true,
   "json.schemas": [
     {
       "fileMatch": ["**/terrain.toml"],
-      "url": "https://raw.githubusercontent.com/csd1100/terrainium/refs/heads/main/schema/terrain-schema.json"
-    }
+      "url": "https://raw.githubusercontent.com/csd1100/terrainium/refs/heads/main/schema/terrain-schema.json",
+    },
   ],
   "eslint.validate": [
     "typescript",
     "typescriptreact",
     "javascript",
-    "javascriptreact"
+    "javascriptreact",
   ],
+  "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
   },
   "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
   },
   "rust-analyzer.check.command": "clippy",
   "rust-analyzer.testExplorer": true,
   "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+    "editor.defaultFormatter": "foxundermoon.shell-format",
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
   },
   "black-formatter.args": ["--line-length", "120"],
   "shellformat.path": "/usr/local/bin/shfmt",
   "[powershell]": {
-    "editor.defaultFormatter": "ms-vscode.powershell"
+    "editor.defaultFormatter": "ms-vscode.powershell",
   },
   "[toml]": {
-    "editor.defaultFormatter": "tamasfe.even-better-toml"
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
-  "symbols.hidesExplorerArrows": true
+  "symbols.hidesExplorerArrows": true,
+  "material-icon-theme.hidesExplorerArrows": true,
 }
