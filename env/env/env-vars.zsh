@@ -49,10 +49,7 @@ fpath=(
     $fpath
 )
 if [ $(uname -s) = 'Darwin' ]; then
-    fpath=(
-        /opt/homebrew/share/zsh/site-functions
-        $fpath
-    )
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # zsh vi-mode disable clipboard

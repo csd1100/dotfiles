@@ -1,6 +1,3 @@
-# neovim
-alias nv="nvim"
-
 # general
 alias l="ls -al"
 alias la="ls -a"
