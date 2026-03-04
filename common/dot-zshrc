@@ -53,7 +53,7 @@ fi
 source ~/env/env-vars.zsh
 zmodload zsh/complist
 zstyle ':completion:*' menu select
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -C
 
 # Load plugins.
 source ~/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
