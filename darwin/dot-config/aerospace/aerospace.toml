@@ -7,7 +7,9 @@ config-version = 2
 
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+    'exec-and-forget borders active_color=0xffD4D4D4 inactive_color=0xff606060 width=7.0',
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -39,7 +41,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
-automatically-unhide-macos-hidden-apps = false
+automatically-unhide-macos-hidden-apps = true
 
 # List of workspaces that should stay alive even when they contain no windows,
 # even when they are invisible.
@@ -73,12 +75,6 @@ outer.bottom = 10
 outer.top = 10
 outer.right = 10
 
-# 'main' binding mode declaration
-# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-# 'main' binding mode must be always presented
-# Fallback value (if you omit the key): mode.main.binding = {}
-[mode.main.binding]
-
 # All possible keys:
 # - Letters.        a, b, c, ..., z
 # - Numbers.        0, 1, 2, ..., 9
@@ -106,57 +102,70 @@ outer.right = 10
 # end tell'
 # '''
 
+# 'main' binding mode declaration
+# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+# 'main' binding mode must be always presented
+# Fallback value (if you omit the key): mode.main.binding = {}
+[mode.main.binding]
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-cmd-slash = 'layout tiles horizontal vertical'
-cmd-comma = 'layout accordion horizontal vertical'
-cmd-shift-space = 'layout floating tiling'
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+alt-shift-space = 'layout floating tiling'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-cmd-h = 'focus left'
-cmd-j = 'focus down'
-cmd-k = 'focus up'
-cmd-l = 'focus right'
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-cmd-shift-h = 'move left'
-cmd-shift-j = 'move down'
-cmd-shift-k = 'move up'
-cmd-shift-l = 'move right'
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-cmd-minus = 'resize smart -50'
-cmd-equal = 'resize smart +50'
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-cmd-1 = 'workspace 1'
-cmd-2 = 'workspace 2'
-cmd-3 = 'workspace 3'
-cmd-4 = 'workspace 4'
-cmd-5 = 'workspace 5'
-cmd-6 = 'workspace 6'
-cmd-7 = 'workspace 7'
-cmd-8 = 'workspace 8'
-cmd-9 = 'workspace 9'
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-cmd-shift-1 = 'move-node-to-workspace 1'
-cmd-shift-2 = 'move-node-to-workspace 2'
-cmd-shift-3 = 'move-node-to-workspace 3'
-cmd-shift-4 = 'move-node-to-workspace 4'
-cmd-shift-5 = 'move-node-to-workspace 5'
-cmd-shift-6 = 'move-node-to-workspace 6'
-cmd-shift-7 = 'move-node-to-workspace 7'
-cmd-shift-8 = 'move-node-to-workspace 8'
-cmd-shift-9 = 'move-node-to-workspace 9'
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-cmd-tab = 'workspace-back-and-forth'
+alt-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
-cmd-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# Disable "hide others"
+cmd-alt-h = []
+
+# Screenshot
+alt-shift-s = 'exec-and-forget screencapture -i -c'
+
+## Apps
+alt-enter = 'exec-and-forget open -a kitty.app'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-cmd-shift-semicolon = 'mode service'
-
+alt-shift-semicolon = 'mode service'
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
@@ -167,11 +176,194 @@ f = [
     'mode main',
 ] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
-
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-#s = ['layout sticky tiling', 'mode main']
-
+# s = ['layout sticky tiling', 'mode main']
 cmd-shift-h = ['join-with left', 'mode main']
 cmd-shift-j = ['join-with down', 'mode main']
 cmd-shift-k = ['join-with up', 'mode main']
 cmd-shift-l = ['join-with right', 'mode main']
+# layout of 2 windows on left and 1 on right
+3 = ['layout h_tiles', 'join-with left', 'layout accordion', 'mode main']
+
+# Rules
+# [[on-window-detected]]
+#     if.app-id = 'com.apple.systempreferences'
+#     if.app-name-regex-substring = 'settings'
+#     if.window-title-regex-substring = 'substring'
+#     if.workspace = 'workspace-name'
+#     if.during-aerospace-startup = true
+#     check-further-callbacks = true
+#     run = ['layout floating', 'move-node-to-workspace S']  # The callback itself
+# workspace 1
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+check-further-callbacks = true
+run = ['move-node-to-workspace 1'] # The callback itself
+
+# workspace 2
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+check-further-callbacks = true
+run = ['move-node-to-workspace 2'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+check-further-callbacks = true
+run = ['move-node-to-workspace 2'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'net.mullvad.mullvadbrowser'
+check-further-callbacks = true
+run = ['move-node-to-workspace 2']       # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+check-further-callbacks = true
+run = ['move-node-to-workspace 2'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+check-further-callbacks = true
+run = ['move-node-to-workspace 2'] # The callback itself
+
+# workspace 3
+[[on-window-detected]]
+if.app-id = 'com.colliderli.iina'
+check-further-callbacks = true
+run = ['move-node-to-workspace 3'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'org.videolan.vlc'
+check-further-callbacks = true
+run = ['move-node-to-workspace 3'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Music'
+check-further-callbacks = true
+run = ['move-node-to-workspace 3'] # The callback itself
+
+# workspace 4
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+check-further-callbacks = true
+run = ['move-node-to-workspace 4'] # The callback itself
+
+# workspace 5
+[[on-window-detected]]
+if.app-id = 'com.vscodium'
+check-further-callbacks = true
+run = ['move-node-to-workspace 5'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+check-further-callbacks = true
+run = ['move-node-to-workspace 5'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.todesktop.230313mzl4w4u92'
+check-further-callbacks = true
+run = ['move-node-to-workspace 5']          # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.RustRover'
+check-further-callbacks = true
+run = ['move-node-to-workspace 5']    # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij'
+check-further-callbacks = true
+run = ['move-node-to-workspace 5']   # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.intellij.ce'
+check-further-callbacks = true
+run = ['move-node-to-workspace 5']      # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.apple.dt.Xcode'
+check-further-callbacks = true
+run = ['move-node-to-workspace 5'] # The callback itself
+
+# workspace 6
+[[on-window-detected]]
+if.app-id = 'io.ganeshrvel.openmtp'
+check-further-callbacks = true
+run = ['move-node-to-workspace 6']  # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'org.freefilesync.FreeFileSync'
+check-further-callbacks = true
+run = ['move-node-to-workspace 6']          # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+check-further-callbacks = true
+run = ['move-node-to-workspace 6']      # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'us.zoom.xos'
+check-further-callbacks = true
+run = ['move-node-to-workspace 6'] # The callback itself
+
+# workspace 7
+[[on-window-detected]]
+if.app-id = 'com.apple.Preview'
+check-further-callbacks = true
+run = ['move-node-to-workspace 7'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.calibre'
+check-further-callbacks = true
+run = ['move-node-to-workspace 7']   # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.calibre-ebook.ebook-viewer'
+check-further-callbacks = true
+run = ['move-node-to-workspace 7']           # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+check-further-callbacks = true
+run = ['move-node-to-workspace 7'] # The callback itself
+
+# workspace 8
+[[on-window-detected]]
+if.app-id = 'com.usebruno.app'
+check-further-callbacks = true
+run = ['move-node-to-workspace 8'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.docker.docker'
+check-further-callbacks = true
+run = ['move-node-to-workspace 8'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'org.gnome.Meld'
+check-further-callbacks = true
+run = ['move-node-to-workspace 8'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.sublimemerge'
+check-further-callbacks = true
+run = ['move-node-to-workspace 8'] # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iphonesimulator'
+check-further-callbacks = true
+run = ['move-node-to-workspace 8']      # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.reactotron.app'
+check-further-callbacks = true
+run = ['move-node-to-workspace 8'] # The callback itself
+
+# floating
+[[on-window-detected]]
+if.app-id = 'com.bitwarden.desktop'
+check-further-callbacks = true
+run = ['layout floating']           # The callback itself
+
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+check-further-callbacks = true
+run = ['layout floating']             # The callback itself

@@ -42,7 +42,7 @@ return {
       end,
       ['opts'] = { desc = 'Go To Signature Help' },
     },
-    ['<C-e>n'] = {
+    ['<leader>rn'] = {
       ['rhs'] = function()
         vim.lsp.buf.rename()
       end,
@@ -52,7 +52,7 @@ return {
       ['rhs'] = '<cmd>Format<CR>',
       ['opts'] = { desc = 'Format' },
     },
-    ['<C-q>'] = {
+    ['<leader>ca'] = {
       ['rhs'] = function()
         vim.lsp.buf.code_action()
       end,

@@ -1,6 +1,5 @@
 # Open terminal
-cmd - return : /Applications/kitty.app/Contents/MacOS/kitty \
-                        -o allow_remote_control=yes --single-instance -d ~
+cmd - return : /Applications/kitty.app/Contents/MacOS/kitty -o allow_remote_control=yes --single-instance -d ~
 cmd + shift - return : /Applications/kitty.app/Contents/MacOS/kitty \
                             --single-instance -o allow_remote_control=yes -d ~ \
                             --session ~/.config/kitty/sessions/home.session
