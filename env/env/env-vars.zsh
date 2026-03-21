@@ -19,20 +19,15 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-
 # PATH
 path=(
     ~/bin/helpers
     ~/bin
     ~/.local/bin
     $GOBIN
-    ~/.volta/bin
-    $PNPM_HOME
     /usr/local/go/bin
-    $path
     ~/.cargo/bin
+    $path
 )
 
 # CONFIG

@@ -41,6 +41,9 @@ fi
 # Java
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+# dev
+eval "$(/home/user/.local/bin/mise activate zsh)"
+
 # TODO: source private scripts misc
 
 # source overrides
