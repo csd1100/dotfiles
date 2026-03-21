@@ -1,5 +1,6 @@
 {
-  "workbench.activityBar.location": "top",
+  "window.zoomLevel": 1,
+  "workbench.activityBar.location": "bottom",
   "workbench.colorTheme": "DuoTone Dark Forest",
   "workbench.preferredDarkColorTheme": "DuoTone Dark Forest",
   "workbench.preferredLightColorTheme": "Vitesse Light",
@@ -32,8 +33,10 @@
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1500,
   "files.autoSaveWhenNoErrors": true,
-  "editor.fontSize": 18,
+  "editor.fontSize": 20,
+  "editor.allowVariableFonts": false,
   "editor.fontFamily": "'CommitMono', 'Jetbrains Mono', 'Victor Mono', 'Symbols Nerd Font Mono', monospace",
+  "editor.fontLigatures": true,
   "editor.tabSize": 4,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "all",
@@ -222,7 +225,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[java]": {
-    "editor.defaultFormatter": "redhat.java"
+    "editor.defaultFormatter": "redhat.java",
   },
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer",
@@ -237,12 +240,8 @@
   },
   "black-formatter.args": ["--line-length", "120"],
   "shellformat.path": "/usr/local/bin/shfmt",
-  "[powershell]": {
-    "editor.defaultFormatter": "ms-vscode.powershell",
-  },
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
   "symbols.hidesExplorerArrows": true,
-  "material-icon-theme.hidesExplorerArrows": true,
 }

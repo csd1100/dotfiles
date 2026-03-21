@@ -26,15 +26,14 @@ download_vsix() {
 }
 
 # VSIX_EXTENSIONS=("antfu.theme-vitesse", "sallar.vscode-duotone-dark", "ms-vscode.cpptools")
-VSIX_EXTENSIONS=("antfu.theme-vitesse", "sallar.vscode-duotone-dark", "ms-vscode.cpptools")
 
 install_extensions() {
     while IFS= read -r line; do
         echo "Installing $line"
-        if [ "$1" != "code" ] && [[ ${VSIX_EXTENSIONS[*]} =~ $line ]]; then
-            download_vsix "$line"
-            line="/tmp/$line.vsix"
-        fi
+        # if [ "$1" != "code" ] && [[ ${VSIX_EXTENSIONS[*]} =~ $line ]]; then
+        #     download_vsix "$line"
+        #     line="/tmp/$line.vsix"
+        # fi
         "$1" --install-extension "$line"
     done <"$HOME/dotfiles/configs/Code/User/extensions"
 }
