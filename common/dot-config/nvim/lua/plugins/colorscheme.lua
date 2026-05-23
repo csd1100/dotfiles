@@ -1,40 +1,15 @@
 return {
   {
     'EdenEast/nightfox.nvim',
+    commit = '26b61b1f856ec37cae3cb64f5690adb955f246a1',
     priority = 1000,
     init = function()
       vim.cmd.colorscheme('carbonfox')
     end,
   },
   {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
-    opts = {
-      flavour = 'frappe',
-      transparent_background = true,
-      show_end_of_buffer = true,
-      default_integrations = true,
-      integrations = {
-        telescope = {
-          enabled = true,
-        },
-        gitsigns = true,
-        which_key = true,
-        rainbow_delimiters = false,
-        notify = true,
-        fidget = true,
-        mason = true,
-        cmp = true,
-        lsp_trouble = true,
-      },
-    },
-    init = function()
-      -- vim.cmd.colorscheme('catppuccin')
-    end,
-  },
-  {
     'loctvl842/monokai-pro.nvim',
+    commit = 'a68e38b8e55d69a215d0f02598900a79c356da9d',
     priority = 1000,
     opts = {
       filter = 'spectrum',
@@ -47,26 +22,6 @@ return {
     },
     init = function()
       -- vim.cmd.colorscheme('monokai-pro')
-    end,
-  },
-  {
-    'projekt0n/github-nvim-theme',
-    name = 'github-theme',
-    build = ':GithubThemeCompile',
-    priority = 1000,
-    opts = {
-      options = {
-        terminal_colors = true,
-        dim_inactive = true,
-        styles = {
-          comments = 'italic',
-          keywords = 'bold',
-          types = 'italic,bold',
-        },
-      },
-    },
-    init = function()
-      -- vim.cmd.colorscheme('github_dark')
     end,
   },
 }

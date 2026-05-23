@@ -1,40 +1,23 @@
 local ku = require('config.keymap-utils')
 
-local rainbow_highlight = {
-  'RainbowRed',
-  'RainbowYellow',
-  'RainbowBlue',
-  'RainbowOrange',
-  'RainbowGreen',
-  'RainbowViolet',
-  'RainbowCyan',
-}
-
-local highlight = {
-  'LineNr',
-  'LineNr',
-  'LineNr',
-  'LineNr',
-  'LineNr',
-  'LineNr',
-  'LineNr',
-}
-
 return {
   {
-    'nvim-tree/nvim-web-devicons',
-  },
-  {
-    'echasnovski/mini.icons',
-  },
-  {
     'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    commit = '5255aa27c422de944791318024167ad5d40aad20',
     dependencies = {
-      'nvim-lua/plenary.nvim',
+      {
+        'nvim-lua/plenary.nvim',
+        commit = '74b06c6c75e4eeb3108ec01852001636d85a932b',
+      },
+      {
       'nvim-telescope/telescope-live-grep-args.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      'nvim-treesitter/nvim-treesitter',
+      commit = '53e9df55b3651dd7cf77e172f1e8c9a17407acca',
+      },
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        commit = 'b25b749b9db64d375d782094e2b9dce53ad53a40',
+        build = 'make'
+      },
     },
     opts = {
       defaults = {
@@ -124,12 +107,6 @@ return {
         builtin.colorscheme,
         { desc = 'Telescope colorschemes' }
       )
-      ku.map(
-        'n',
-        '<leader>n',
-        telescope.extensions.notify.notify,
-        { desc = 'Telescope Notifications' }
-      )
 
       telescope.load_extension('fzf')
       telescope.load_extension('live_grep_args')
@@ -137,6 +114,7 @@ return {
   },
   {
     'folke/which-key.nvim',
+    commit = '3aab2147e74890957785941f0c1ad87d0a44c15a',
     event = 'VeryLazy',
     opts = {
       preset = 'modern',
@@ -144,6 +122,7 @@ return {
   },
   {
     'nvim-lualine/lualine.nvim',
+    commit = '131a558e13f9f28b15cd235557150ccb23f89286',
     dependencies = {
       'csd1100/modes.nvim',
     },
@@ -207,140 +186,9 @@ return {
       }
     end,
   },
-  -- {
-  --   url = 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git',
-  --   event = 'VeryLazy',
-  --   init = function()
-  --     local rainbow_delimiters = require('rainbow-delimiters')
-  --
-  --     vim.g.rainbow_delimiters = {
-  --       strategy = {
-  --         [''] = rainbow_delimiters.strategy['global'],
-  --         vim = rainbow_delimiters.strategy['local'],
-  --       },
-  --       query = {
-  --         [''] = 'rainbow-delimiters',
-  --         lua = 'rainbow-blocks',
-  --       },
-  --       priority = {
-  --         [''] = 110,
-  --         lua = 210,
-  --       },
-  --       highlight = rainbow_highlight,
-  --     }
-  --   end,
-  -- },
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    event = 'VeryLazy',
-    opts = {
-      indent = {},
-      scope = {},
-      exclude = { filetypes = { 'dashboard' } },
-    },
-    config = function(_, opts)
-      local hooks = require('ibl.hooks')
-      -- create the highlight groups in the highlight setup hook, so they are reset
-      -- every time the colorscheme changes
-      hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-        vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
-        vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
-        vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
-        vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
-        vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
-        vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
-        vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
-      end)
-      hooks.register(
-        hooks.type.SCOPE_HIGHLIGHT,
-        hooks.builtin.scope_highlight_from_extmark
-      )
-
-      opts.indent.highlight = highlight
-      opts.scope.highlight = highlight
-
-      require('ibl').setup(opts)
-    end,
-  },
-  {
-    'nvimdev/dashboard-nvim',
-    event = 'VimEnter',
-    opts = {
-      theme = 'doom',
-      hide = {
-        statusline = true,
-        tabline = true,
-        winbar = true,
-      },
-      config = {
-        header = {
-          [[]],
-          [[]],
-          [[                               __                ]],
-          [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-          [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-          [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-          [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-          [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-          [[]],
-          [[]],
-          [[]],
-        },
-        center = {
-          {
-            icon = '  ',
-            icon_hl = 'Title',
-            desc = 'Load Last Session of CWD ',
-            desc_hl = 'String',
-            key = 'l',
-            key_hl = 'Number',
-            action = "lua require('persistence').load()",
-          },
-          {
-            icon = '  ',
-            icon_hl = 'Title',
-            desc = 'Open Recently Opened File',
-            desc_hl = 'String',
-            key = 'h',
-            key_hl = 'Number',
-            action = 'Telescope oldfiles',
-          },
-          {
-            icon = '  ',
-            icon_hl = 'Title',
-            desc = 'Open a New File          ',
-            desc_hl = 'String',
-            key = 'n',
-            key_hl = 'Number',
-            action = 'enew',
-          },
-          {
-            icon = '  ',
-            icon_hl = 'Title',
-            desc = 'Open Explorer            ',
-            desc_hl = 'String',
-            key = 'e',
-            key_hl = 'Number',
-            action = 'Ex',
-          },
-        },
-        footer = {},
-      },
-    },
-  },
-  {
-    'rcarriga/nvim-notify',
-    init = function()
-      vim.notify = require('notify')
-    end,
-    opts = {
-      timeout = 300,
-    },
-    config = true,
-  },
   {
     'folke/trouble.nvim',
+    commit = 'bd67efe408d4816e25e8491cc5ad4088e708a69a',
     cmd = 'Trouble',
     config = true,
     keys = {
@@ -358,6 +206,7 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
+    commit = 'dd3f588bacbeb041be6facf1742e42097f62165d',
     event = 'VeryLazy',
     dependencies = {
       'csd1100/modes.nvim',
@@ -485,46 +334,5 @@ return {
         )
       end, { desc = 'Toggle ' .. name .. ' Mode' })
     end,
-  },
-  {
-    'j-hui/fidget.nvim',
-    event = 'VeryLazy',
-    opts = {
-      -- options
-      notification = {
-        window = {
-          winblend = 0,
-        },
-      },
-      progress = {
-        display = {
-          progress_ttl = 300,
-        },
-      },
-    },
-  },
-  {
-    'norcalli/nvim-colorizer.lua',
-    ft = {
-      'css',
-      'conf',
-      'html',
-      'javascript',
-      'typescript',
-      'lua',
-      'json',
-      'xml',
-    },
-    opts = {
-      'css',
-      'conf',
-      'html',
-      'javascript',
-      'typescript',
-      'lua',
-      'json',
-      'xml',
-    },
-    config = true,
-  },
+  }
 }

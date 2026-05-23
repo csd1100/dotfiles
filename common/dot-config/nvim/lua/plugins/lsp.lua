@@ -1,36 +1,42 @@
 return {
-  -- Package Manager
-  {
-    'mason-org/mason.nvim',
-    lazy = false,
-    opts = {
-      ui = {
-        border = ui_borders,
-        icons = {
-          package_installed = '✓',
-          package_pending = '➜',
-          package_uninstalled = '✗',
-        },
-      },
-    },
-  },
   -- Autocompletion
   {
     'hrsh7th/nvim-cmp',
+    commit = 'a1d504892f2bc56c2e79b65c6faded2fd21f3eca',
     event = 'VeryLazy',
     dependencies = {
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-path' },
-      { 'hrsh7th/cmp-cmdline' },
-      { 'hrsh7th/cmp-cmdline' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lua' },
-      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-      { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
-      { 'L3MON4D3/LuaSnip' },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'rafamadriz/friendly-snippets' },
-      { 'onsails/lspkind.nvim' },
+      {
+        'hrsh7th/cmp-buffer',
+        commit = 'b74fab3656eea9de20a9b8116afa3cfc4ec09657'
+      },
+      {
+        'hrsh7th/cmp-path',
+        commit = 'c642487086dbd9a93160e1679a1327be111cbc25'
+      },
+      {
+        'hrsh7th/cmp-cmdline',
+        commit = 'd126061b624e0af6c3a556428712dd4d4194ec6d'
+      },
+      {
+        'hrsh7th/cmp-nvim-lsp',
+        commit = 'cbc7b02bb99fae35cb42f514762b89b5126651ef'
+      },
+      {
+        'hrsh7th/cmp-nvim-lua',
+        commit = 'e3a22cb071eb9d6508a156306b102c45cd2d573d'
+      },
+      {
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        commit = 'fd3e882e56956675c620898bf1ffcf4fcbe7ec84'
+      },
+      {
+        'hrsh7th/cmp-nvim-lsp-document-symbol',
+        commit = 'hrsh7th/cmp-nvim-lsp-document-symbol'
+      },
+      {
+        'L3MON4D3/LuaSnip',
+        commit = '0abc8f390b278c3b4aabc4c004ac8a088b65cf24'
+      },
     },
     config = function()
       local cmp = require('cmp')
@@ -45,13 +51,6 @@ return {
           { name = 'luasnip' },
           { name = 'nvim_lua' },
           { name = 'nvim_lsp_signature_help' },
-        },
-        formatting = {
-          format = require('lspkind').cmp_format({
-            mode = 'symbol',
-            maxwidth = 50,
-            ellipsis_char = '...',
-          }),
         },
         window = {
           completion = cmp.config.window.bordered(),
@@ -103,64 +102,6 @@ return {
       })
     end,
   },
-  -- formatter
-  {
-    'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
-    cmd = { 'ConformInfo' },
-    opts = {
-      log_level = vim.log.levels.DEBUG,
-      -- Define your formatters
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        go = { 'gofmt' },
-        rust = { 'rustfmt' },
-        javascript = { 'prettier' },
-        typescript = { 'prettier' },
-        javascriptreact = { 'prettier' },
-        typescriptreact = { 'prettier' },
-        bash = { 'shfmt' },
-        zsh = { 'shfmt' },
-        markdown = { 'prettier' },
-      },
-      -- Set default options
-      default_format_opts = {
-        lsp_format = 'fallback',
-      },
-      -- Set up format-on-save
-      format_on_save = nil,
-      -- Customize formatters
-      formatters = {
-        shfmt = {
-          prepend_args = { '-i', '4', '-ci', '-sr' },
-        },
-        rustfmt = {
-          options = {
-            default_edition = '2024',
-          },
-          prepend_args = { '+nightly' },
-        },
-      },
-    },
-    init = function()
-      vim.api.nvim_create_user_command('Format', function(args)
-        local range = nil
-        if args.count ~= -1 then
-          local end_line =
-            vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-          range = {
-            ['start'] = { args.line1, 0 },
-            ['end'] = { args.line2, end_line:len() },
-          }
-        end
-        require('conform').format({
-          lsp_format = 'fallback',
-          range = range,
-        })
-      end, { range = true })
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-    end,
-  },
   -- LSP
   {
     'neovim/nvim-lspconfig',
@@ -168,10 +109,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       'csd1100/modes.nvim',
-      'mason-org/mason.nvim',
-      'mason-org/mason-lspconfig.nvim',
       'hrsh7th/cmp-nvim-lsp',
-      'stevearc/conform.nvim',
     },
     config = function()
       local modes = require('modes')
@@ -185,11 +123,6 @@ return {
         vim.lsp.protocol.make_client_capabilities(),
         cmp_lsp.default_capabilities()
       )
-      -- nvim-ufo
-      capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      }
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(ev)
@@ -222,16 +155,6 @@ return {
         },
       })
 
-      require('mason-lspconfig').setup({
-        ensure_installed = { 'lua_ls', 'taplo' },
-        automatic_enable = {
-          exclude = {
-            'lua_ls',
-            'rust_analyzer',
-          },
-        },
-      })
-
       vim.diagnostic.config({
         signs = {
           text = {
@@ -251,29 +174,6 @@ return {
           prefix = '',
         },
       })
-    end,
-  },
-  {
-    'mrcjkb/rustaceanvim',
-    version = '^6', -- Recommended
-    lazy = false, -- This plugin is already lazy
-  },
-  {
-    'kevinhwang91/nvim-ufo',
-    dependencies = {
-      'kevinhwang91/promise-async',
-      'neovim/nvim-lspconfig',
-    },
-    config = function()
-      local ku = require('config.keymap-utils')
-      local ufo = require('ufo')
-      ku.map('n', 'zR', function()
-        ufo.openAllFolds()
-      end, { desc = 'Open All Folds' })
-      ku.map('n', 'zM', function()
-        ufo.closeAllFolds()
-      end, { desc = 'Open All Folds' })
-      ufo.setup()
     end,
   },
 }

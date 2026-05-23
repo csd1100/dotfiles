@@ -2,14 +2,10 @@ local ku = require('config.keymap-utils')
 return {
   {
     'mbbill/undotree',
+    commit = '6fa6b57cda8459e1e4b2ca34df702f55242f4e4d',
     keys = {
       { '<leader>u', vim.cmd.UndotreeToggle, desc = 'Toggle UndoTree' },
     },
-  },
-  {
-    'folke/persistence.nvim',
-    event = 'BufReadPre',
-    opts = {},
   },
   {
     'csd1100/modes.nvim',
@@ -97,20 +93,4 @@ return {
       ku.map('n', '<leader>ct', ':CloakToggle<CR>', { desc = 'Cloak Toggle' })
     end,
   },
-  -- markdown preview
-  {
-    'toppair/peek.nvim',
-    event = { 'VeryLazy' },
-    build = 'deno task --quiet build:fast',
-    config = function()
-      require('peek').setup({
-        filetype = { 'markdown', 'conf' },
-        app = 'browser',
-      })
-      vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-      vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-    end,
-  },
-  -- game
-  { 'vuciv/golf' },
 }
