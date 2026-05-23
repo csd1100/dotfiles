@@ -27,7 +27,7 @@ alias ga="git add"
 alias gaa="git add -A"
 alias gcv="git commit -v"
 alias gcav="git commit --amend -v"
-alias gh="git log --oneline --graph"
+alias gl="git log --oneline --graph"
 alias glog="git log --graph"
 
 #tmux
