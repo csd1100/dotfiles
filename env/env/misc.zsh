@@ -22,6 +22,11 @@ setopt interactive_comments # treat `#` as comment in shell
 ## binds
 #vi mode
 bindkey -v
+# edit command
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
 # history-substring
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -37,9 +42,6 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
     kitty-integration
     unfunction kitty-integration
 fi
-
-# Java
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # dev
 eval "$($HOME/.local/bin/mise activate zsh)"

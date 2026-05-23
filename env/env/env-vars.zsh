@@ -12,21 +12,11 @@ export EDITOR=nvim
 # DOCKER PS FORMAT
 export DOCKER_FORMAT="\\nID\\t{{.ID}}\\nIMAGE\\t{{.Image}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.RunningFor}}\\nSTATUS\\t{{.Status}}\\nPORTS\\t{{.Ports}}\\nNAMES\\t{{.Names}}\\n"
 
-# Java
-export SDKMAN_DIR="$HOME/.sdkman"
-
-# GO
-export GOPATH="$HOME/go"
-export GOBIN="$GOPATH/bin"
-
 # PATH
 path=(
     ~/bin/helpers
     ~/bin
     ~/.local/bin
-    $GOBIN
-    /usr/local/go/bin
-    ~/.cargo/bin
     $path
 )
 
@@ -43,6 +33,7 @@ fpath=(
     ~/.rustup/toolchains/stable-*/share/zsh/site-functions
     $fpath
 )
+
 if [ $(uname -s) = 'Darwin' ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
