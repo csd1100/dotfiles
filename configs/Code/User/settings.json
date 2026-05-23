@@ -4,8 +4,6 @@
   "workbench.colorTheme": "DuoTone Dark Forest",
   "workbench.preferredDarkColorTheme": "DuoTone Dark Forest",
   "workbench.preferredLightColorTheme": "Vitesse Light",
-  "workbench.iconTheme": "symbols",
-  "workbench.productIconTheme": "fluent-icons",
   "workbench.colorCustomizations": {
     // color customization for Dark Modern
     "[Default Dark Modern]": {
@@ -245,4 +243,5 @@
     "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
   "symbols.hidesExplorerArrows": true,
+  "extensions.autoUpdate": false,
 }
