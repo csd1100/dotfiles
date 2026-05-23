@@ -43,9 +43,6 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
     unfunction kitty-integration
 fi
 
-# dev
-eval "$($HOME/.local/bin/mise activate zsh)"
-
 # TODO: source private scripts misc
 
 # source overrides
