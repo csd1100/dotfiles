@@ -17,7 +17,16 @@ function batman() { man $1 | bat --color always }
 compdef batman=man
 
 function finder() {
-    dir=$(fd -L --full-path --min-depth 1 -d 3 -t d ".*$1.*" ~ ~/work | fzf)
+    DIRS=("${HOME}" "${HOME}/work")
+    QUERY="$1"
+
+    if [ "$1" = "--current" ]; then
+        QUERY="$2"
+        DIRS=("$(pwd)")
+    fi
+
+    dir=$(fd -HIL --full-path --min-depth 1 -d 3 -t d -E node_modules -E .git -E dist ".*${QUERY}.*" "${DIRS[@]}" | fzf)
+
     if [ ! -z "$dir" ]; then
         echo "cd $dir"
         cd $dir
