@@ -1,6 +1,6 @@
 {
   "window.zoomLevel": 1,
-  "workbench.activityBar.location": "bottom",
+  "workbench.activityBar.location": "top",
   "workbench.colorTheme": "DuoTone Dark Forest",
   "workbench.preferredDarkColorTheme": "DuoTone Dark Forest",
   "workbench.preferredLightColorTheme": "Vitesse Light",
@@ -243,5 +243,15 @@
     "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
   "symbols.hidesExplorerArrows": true,
-  "extensions.autoUpdate": false,
+  "extensions.autoUpdate": "off",
+  "json.schemaDownload.trustedDomains": {
+    "https://schemastore.azurewebsites.net/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://www.schemastore.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://json-schema.org/": true,
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://biomejs.dev": true,
+  },
 }
