@@ -43,6 +43,10 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
     unfunction kitty-integration
 fi
 
+if [ -f "$HOME/.local/bin/mise" ]; then
+  eval "$($HOME/.local/bin/mise activate zsh)"
+fi
+
 # TODO: source private scripts misc
 
 # source overrides
