@@ -1,36 +1,38 @@
 #!/usr/bin/env bash
-
-which ansible
-RESULT=$?
+set -e
 
 install_pip() {
 	unameOut="$(uname -s)"
 
 	case "${unameOut}" in
 	Linux*)
-		if grep "NAME=\"Ubuntu\"" /etc/os-release &>/dev/null; then
+		if command -v apt-get &>/dev/null; then
 			sudo apt update
-			sudo apt install python3-venv sshpass
-		else
+			sudo apt install -y python3-venv sshpass
+		elif command -v dnf &>/dev/null; then
 			python3 -m ensurepip --upgrade
-			sudo dnf install sshpass
+			sudo dnf install -y sshpass
+		else
+			echo "Unsupported Linux package manager on ${unameOut}" >&2
+			exit 1
 		fi
 		;;
 	Darwin*)
 		python3 -m ensurepip --upgrade
 		brew install sshpass
 		;;
-	*) MACHINE="UNKNOWN:${unameOut}" ;;
+	*)
+		echo "Unsupported OS: ${unameOut}" >&2
+		exit 1
+		;;
 	esac
 }
 
-if [ $RESULT == 0 ]; then
+if command -v ansible &>/dev/null; then
 	echo "ansible already installed"
 else
 	install_pip
-	python3 -m venv "$HOME/.py3-ansible"
-	source "$HOME/.py3-ansible/bin/activate"
-	pip3 install pipx
+	python3 -m pip install --user pipx
 	pipx ensurepath
 	pipx install --include-deps ansible
 	# needed for json querying
