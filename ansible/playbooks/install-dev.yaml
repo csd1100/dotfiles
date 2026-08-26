@@ -46,7 +46,7 @@
                 state: present
 
         - name: Set kitty installation directory for linux
-          when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
+          when: ansible_system == "Linux"
           ansible.builtin.set_fact:
             kitty_installation_dir: "{{ kitty_linux_installation_dir }}"
 
@@ -73,7 +73,7 @@
 
             - name: Create kitty desktop file
               ansible.builtin.shell: cd ~/dotfiles/scripts/helpers && ./kitty-desktop
-              when: (ansible_os_family == "RedHat") or (ansible_os_family == "Debian")
+              when: ansible_system == "Linux"
               args:
                 creates: ~/.local/share/applications/kitty.desktop
 
@@ -110,77 +110,45 @@
             dest: "/Library/Java/JavaVirtualMachines/openjdk.jdk"
             state: link
 
-    - name: Install node 20
+    - name: Install mise
+      tags:
+        - mise
+        - node
+        - bun
+        - golang
+        - work
+      ansible.builtin.shell: |
+        set -o pipefail
+        curl https://mise.run | MISE_VERSION=v2026.8.10 sh
+      args:
+        creates: ~/.local/bin/mise
+        executable: /bin/bash
+
+    - name: Install node lts
       tags:
         - node
         - work
-      block:
-        - name: Install volta
-          ansible.builtin.shell: |
-            set -o pipefail
-            PROFILE=/dev/null curl https://get.volta.sh | /bin/bash
-          args:
-            creates: ~/.volta/
-            executable: /bin/bash
+      ansible.builtin.shell: ~/.local/bin/mise use --global node@lts
+      args:
+        executable: /bin/bash
+        creates: ~/.local/share/mise/shims/node
 
-        - name: Load volta and install 20
-          ansible.builtin.shell:
-            $HOME/.volta/bin/volta install node@20
-          args:
-            executable: /bin/bash
-            creates: ~/.volta/bin/node
+    - name: Install bun
+      tags:
+        - bun
+        - work
+      ansible.builtin.shell: ~/.local/bin/mise use --global bun@latest
+      args:
+        executable: /bin/bash
+        creates: ~/.local/share/mise/shims/bun
 
     - name: Install golang
       tags:
         - golang
-      block:
-        - name: Install golang linux
-          when: ansible_os_family == 'Debian' or ansible_os_family == 'RedHat'
-          block:
-            - name: Fetch latest go version
-              ansible.builtin.uri:
-                url: https://go.dev/VERSION?m=text
-                return_content: true
-              register: go_version_op
-
-            - name: Store go version
-              ansible.builtin.set_fact:
-                go_version: "{{ go_version_op.content | regex_search('^.*') }}"
-
-            - name: Download and Install go if not latest
-              block:
-                - name: Validate go is installed
-                  ansible.builtin.shell: |
-                    set -o pipefail
-                    /usr/local/go/bin/go version | grep "{{ go_version }}" && touch /tmp/go-version
-                  args:
-                    executable: /bin/bash
-                    creates: /tmp/go-version
-              rescue:
-                - name: Download go
-                  ansible.builtin.get_url:
-                    url: https://go.dev/dl/{{ go_version }}.linux-amd64.tar.gz
-                    dest: /tmp/{{ go_version }}.linux-amd64.tar.gz
-                    timeout: 120
-                    mode: '0644'
-
-                - name: Remove previous go
-                  become: true
-                  ansible.builtin.file:
-                    state: absent
-                    path: /usr/local/go/
-
-                - name: Linux install go
-                  become: true
-                  ansible.builtin.unarchive:
-                    src: /tmp/{{ go_version }}.linux-amd64.tar.gz
-                    dest: /usr/local/
-                    remote_src: true
-
-        - name: Install golang mac
-          when: ansible_os_family == 'Darwin'
-          community.general.homebrew:
-            name: golang
+      ansible.builtin.shell: ~/.local/bin/mise use --global go@latest
+      args:
+        executable: /bin/bash
+        creates: ~/.local/share/mise/shims/go
 
     - name: Install rust
       tags:

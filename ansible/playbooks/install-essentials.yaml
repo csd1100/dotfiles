@@ -101,7 +101,7 @@
                 cmd: ./configure
                 chdir: /tmp/stow-2.4.1
               register: configure_stow
-              changed_when: configure_stow.rc != 0
+              changed_when: true
 
             - name: Install stow
               become: true

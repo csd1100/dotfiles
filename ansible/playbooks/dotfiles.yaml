@@ -20,7 +20,6 @@
             chdir: ~/dotfiles/
             creates: "/tmp/dotfiles-setup--linux"
           register: linux
-          changed_when: linux.rc != 0
 
         - name: Stow dotfiles Darwin
           when: ansible_os_family == 'Darwin'
@@ -29,7 +28,6 @@
             chdir: ~/dotfiles/
             creates: "/tmp/dotfiles-setup--darwin"
           register: darwin
-          changed_when: darwin.rc != 0
 
         - name: Stow dotfiles common
           ansible.builtin.command: ./scripts/dots-setup --common
@@ -37,7 +35,6 @@
             chdir: ~/dotfiles/
             creates: "/tmp/dotfiles-setup--common"
           register: common
-          changed_when: common.rc != 0
 
     - name: Setup Fonts
       tags:

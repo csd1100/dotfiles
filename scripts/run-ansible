@@ -6,7 +6,15 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
+ask_pass_flags=("-k")
+for arg in "${@:2}"; do
+	if [ "$arg" = "localhost" ]; then
+		ask_pass_flags=()
+		break
+	fi
+done
+
 pushd "$HOME/dotfiles/" || exit
 ./scripts/helpers/ansible-setup
-ansible-playbook -i ./ansible/inventory.yml -u "$1" ./ansible/playbooks/main.yaml -kK "${@:2}"
+ansible-playbook -i ./ansible/inventory.yml -u "$1" ./ansible/playbooks/main.yaml "${ask_pass_flags[@]}" -K "${@:2}"
 popd || exit
