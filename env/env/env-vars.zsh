@@ -12,11 +12,22 @@ export EDITOR=nvim
 # DOCKER PS FORMAT
 export DOCKER_FORMAT="\\nID\\t{{.ID}}\\nIMAGE\\t{{.Image}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.RunningFor}}\\nSTATUS\\t{{.Status}}\\nPORTS\\t{{.Ports}}\\nNAMES\\t{{.Names}}\\n"
 
+
+# android studio
+if [ $(uname -s) = 'Darwin' ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ $(uname -s) = 'Linux' ]; then
+    export ANDROID_HOME="${HOME}/Android/sdk"
+fi
+
 # PATH
 path=(
     ~/bin/helpers
     ~/bin
     ~/.local/bin
+    ~/.bun/bin
+    "${ANDROID_HOME}/emulator"
+    "${ANDROID_HOME}/platform-tools"
     $path
 )
 
@@ -36,6 +47,11 @@ fpath=(
 
 if [ $(uname -s) = 'Darwin' ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
+    fpath=(
+        /opt/homebrew/share/zsh/site-functions/
+        /opt/homebrew/opt/zsh/share/zsh/functions
+        $fpath
+    )
 fi
 
 # zsh vi-mode disable clipboard
@@ -48,6 +64,15 @@ export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 
 # zsh autosuggest
 # export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# brew
+export HOMEBREW_NO_ANALYTICS=1
+
+# golang
+export PATH="$PATH:$(go env GOPATH)/bin"
+
+# expo
+export EXPO_NO_TELEMETRY=1
 
 if [ -f "$HOME/env/private-scripts/env-vars.zsh" ]; then
     source "$HOME/env/private-scripts/env-vars.zsh"

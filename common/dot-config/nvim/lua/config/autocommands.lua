@@ -13,7 +13,7 @@ local trim_trailing_whitespace =
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = trim_trailing_whitespace,
   callback = function()
-    if vim.bo.filetype == 'markdown' then
+    if vim.bo.filetype == 'markdown' or not vim.bo.modifiable then
       return
     end
     local view = vim.fn.winsaveview()

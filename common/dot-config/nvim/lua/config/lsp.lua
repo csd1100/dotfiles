@@ -79,9 +79,9 @@ vim.lsp.config('eslint', {
     '.eslintrc.json',
     'eslint.config.js',
     'eslint.config.mjs',
-    'eslint.config.cjs',
-    'package.json',
+    'eslint.config.cjs'
   },
+  workspace_required = true,
   settings = {
     workingDirectory = { mode = 'auto' },
   },
