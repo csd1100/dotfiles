@@ -49,8 +49,10 @@ export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 # zsh autosuggest
 # export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
-# TODO: source private scripts env vars
-#
+if [ -f "$HOME/env/private-scripts/env-vars.zsh" ]; then
+    source "$HOME/env/private-scripts/env-vars.zsh"
+fi
+
 # source overrides
 if [ -f "$HOME/env/overrides/env-vars.zsh" ]; then
     source "$HOME/env/overrides/env-vars.zsh"
