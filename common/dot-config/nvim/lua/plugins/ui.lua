@@ -3,7 +3,7 @@ local ku = require('config.keymap-utils')
 return {
   {
     'nvim-telescope/telescope.nvim',
-    commit = '5255aa27c422de944791318024167ad5d40aad20',
+    commit = '40aedd8a68c78a656a10a8d62d80c54af59420fb',
     dependencies = {
       {
         'nvim-lua/plenary.nvim',
@@ -122,7 +122,7 @@ return {
   },
   {
     'nvim-lualine/lualine.nvim',
-    commit = '131a558e13f9f28b15cd235557150ccb23f89286',
+    commit = '221ce6b2d999187044529f49da6554a92f740a96',
     dependencies = {
       'csd1100/modes.nvim',
     },
@@ -206,7 +206,7 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
-    commit = 'dd3f588bacbeb041be6facf1742e42097f62165d',
+    commit = '5be654f2232c10ddcad19c1607a67b6b4b78fc29',
     event = 'VeryLazy',
     dependencies = {
       'csd1100/modes.nvim',
