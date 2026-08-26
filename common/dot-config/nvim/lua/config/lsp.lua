@@ -99,6 +99,16 @@ vim.lsp.config('rust_analyzer', {
   root_markers = { 'Cargo.toml', 'rust-project.json' },
 })
 
+vim.lsp.config('ruby_lsp', {
+  cmd = { 'ruby-lsp' },
+  filetypes = { 'ruby', 'eruby' },
+  root_markers = { 'Gemfile', '.git' },
+  init_options = {
+    formatter = 'auto',
+    linters = { 'rubocop' },
+  },
+})
+
 vim.lsp.enable({
   'lua_ls',
   'ts_ls',
@@ -106,6 +116,7 @@ vim.lsp.enable({
   'eslint',
   'gopls',
   'rust_analyzer',
+  'ruby_lsp',
 })
 
 vim.diagnostic.config({
