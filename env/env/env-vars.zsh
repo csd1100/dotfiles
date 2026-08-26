@@ -13,9 +13,9 @@ export EDITOR=nvim
 export DOCKER_FORMAT="\\nID\\t{{.ID}}\\nIMAGE\\t{{.Image}}\\nCOMMAND\\t{{.Command}}\\nCREATED\\t{{.RunningFor}}\\nSTATUS\\t{{.Status}}\\nPORTS\\t{{.Ports}}\\nNAMES\\t{{.Names}}\\n"
 
 
-# android studio
+# android studio, golang
 if [ $(uname -s) = 'Darwin' ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    export ANDROID_HOME="${HOME}/Library/Android/sdk"
 elif [ $(uname -s) = 'Linux' ]; then
     export ANDROID_HOME="${HOME}/Android/sdk"
 fi
@@ -26,9 +26,17 @@ path=(
     ~/bin
     ~/.local/bin
     ~/.bun/bin
+    ~/.cargo/bin
     "${ANDROID_HOME}/emulator"
     "${ANDROID_HOME}/platform-tools"
+    /usr/local/go/bin
     $path
+)
+
+# gobin
+path=(
+  $path
+  "$(go env GOPATH)/bin"
 )
 
 # CONFIG
@@ -67,9 +75,6 @@ export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 
 # brew
 export HOMEBREW_NO_ANALYTICS=1
-
-# golang
-export PATH="$PATH:$(go env GOPATH)/bin"
 
 # expo
 export EXPO_NO_TELEMETRY=1
