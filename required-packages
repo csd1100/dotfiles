@@ -4,6 +4,13 @@
 - neofetch
 - nvim
     - node/npm - lsps
+        - typescript, typescript-language-server - ts_ls (npm i -g)
+        - @biomejs/biome - biome lsp (npm i -g)
+        - vscode-langservers-extracted - eslint lsp (npm i -g)
+        - prettier (npm i -g)
+    - lua-language-server
+    - gopls
+    - rust-analyzer
     - gcc, g++ - treesitter
     - xsel (linux) - copy to system clipboard
 - jq

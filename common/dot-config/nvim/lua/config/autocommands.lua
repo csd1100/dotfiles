@@ -7,3 +7,17 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.shiftwidth = 2
   end,
 })
+
+local trim_trailing_whitespace =
+  vim.api.nvim_create_augroup('TrimTrailingWhitespace', {})
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = trim_trailing_whitespace,
+  callback = function()
+    if vim.bo.filetype == 'markdown' then
+      return
+    end
+    local view = vim.fn.winsaveview()
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.fn.winrestview(view)
+  end,
+})

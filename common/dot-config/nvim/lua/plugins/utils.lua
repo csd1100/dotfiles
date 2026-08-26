@@ -9,6 +9,7 @@ return {
   },
   {
     'csd1100/modes.nvim',
+    commit = '39c758fcc2c9eb62727b7765f1d172fa65831501',
     -- dev = true,
     config = true,
     init = function()
@@ -83,6 +84,7 @@ return {
   },
   {
     'laytan/cloak.nvim',
+    commit = '648aca6d33ec011dc3166e7af3b38820d01a71e4',
     opts = {
       enabled = true,
       file_pattern = { '.env*' },
