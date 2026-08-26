@@ -47,7 +47,9 @@ if [ -f "$HOME/.local/bin/mise" ]; then
   eval "$($HOME/.local/bin/mise activate zsh)"
 fi
 
-# TODO: source private scripts misc
+if [ -f "$HOME/env/private-scripts/misc.zsh" ]; then
+    source "$HOME/env/private-scripts/misc.zsh"
+fi
 
 # source overrides
 if [ -f "$HOME/env/overrides/misc.zsh" ]; then
